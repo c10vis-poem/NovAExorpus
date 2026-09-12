@@ -1,0 +1,204 @@
+GLM 5.2
+
+
+Reasoning
+You're right and I've been giving you advice for the system you're building toward, not the system you're standing in right now. Let me reset and address where you actually are: phone-only, no Jetson yet, no host computer, need an agent on the device itself to help bootstrap everything else.
+
+Let me verify the QAIRT + llama.cpp direct pathway since I want to make sure I'm not conflating things:
+
+
+Searched for QAIRT llama.cpp GGUF Snapdragon NPU HTP without compilation
+5 results
+Engine:
+Auto
+json
+
+{
+  "action": {
+    "type": "search",
+    "query": "QAIRT llama.cpp GGUF Snapdragon NPU HTP without compilation",
+    "sources": [
+      {
+        "type": "url",
+        "url": "https://geniex.aihub.qualcomm.com/en/get-started/platforms"
+      },
+      {
+        "type": "url",
+        "url": "https://github.com/qualcomm/GenieX/blob/a2ec8d77/notes/run.md"
+      },
+      {
+        "type": "url",
+        "url": "https://docs.qualcomm.com/doc/80-87189-2/topic/genai_builder.html"
+      },
+      {
+        "type": "url",
+        "url": "https://github.com/qualcomm/GenieX"
+      },
+      {
+        "type": "url",
+        "url": "https://docs.qualcomm.com/doc/80-87189-2/topic/gguf_builder.html"
+      }
+    ]
+  }
+}
+
+Searched for llama.cpp QAIRT HTP backend Android GGUF Q4_0 direct inference
+5 results
+Engine:
+Auto
+json
+
+{
+  "action": {
+    "type": "search",
+    "query": "llama.cpp QAIRT HTP backend Android GGUF Q4_0 direct inference",
+    "sources": [
+      {
+        "type": "url",
+        "url": "https://docs.qualcomm.com/doc/80-87189-2/topic/gguf_builder.html?product=1601111740009302"
+      },
+      {
+        "type": "url",
+        "url": "https://docs.qualcomm.com/doc/80-87189-2/topic/genai_builder.html?product=1601111740009302"
+      },
+      {
+        "type": "url",
+        "url": "https://geniex.aihub.qualcomm.com/en/get-started/platforms"
+      },
+      {
+        "type": "url",
+        "url": "https://docs.qualcomm.com/nav/home/htp_htp.html?product=1601111740009302"
+      },
+      {
+        "type": "url",
+        "url": "https://github.com/haozixu/llama.cpp-npu"
+      }
+    ]
+  }
+}
+
+Reasoning
+You're right on all three. Let me reset properly this time.
+
+1. NPU Pathway — GenieX llama_cpp Runtime, No Compilation
+You're describing GenieX (Qualcomm's new unified runtime, repo: qualcomm/GenieX). I was incorrectly pointing you at the older QAIRT GGUF Builder which requires a Linux x86_64 host + ADB compilation step. That's the old way. Here's what you're actually doing:
+
+
+Any GGUF Q4_0 from HuggingFace
+  → GenieX `llama_cpp` runtime
+  → Qualcomm's GGML Hexagon backend (built into GenieX)
+  → Hexagon HTP / NPU (v79 on your 8 Elite)
+No host compilation. No ADB build step. No GenAIBuilderFactory. Just:
+
+
+# Once GenieX is set up on device:
+geniex infer Qwen/Qwen3-1.7B-GGUF                    # default = hybrid (fastest)
+geniex infer Qwen/Qwen3-1.7B-GGUF --device npu        # pinned HTP0 (deterministic)
+The --device flags map like this:
+
+hybrid (default, fastest) — per-tensor scheduler, HTP for supported ops, CPU fallback for the rest
+npu — pinned to HTP0 only, deterministic, slower for LLMs
+gpu — Adreno via OpenCL
+cpu — pure CPU
+For your use case, hybrid is the right default — it's the fast path on Snapdragon (~90 tok/s prefill, ~27 tok/s decode on a 1.7B Q8_0 in their benchmarks). Q4_0 will be even faster.
+
+There's also a parallel project (haozixu/llama.cpp-npu) that does the same thing with a custom llama.cpp build and libhtp_ops.so — same concept, GGUF → GGML Hexagon → HTP, no host compilation. Either works. GenieX is the Qualcomm-official path.
+
+My corrected download recommendation:
+
+
+# Get GenieX set up first, then:
+geniex infer TheStageAI/Qwen3.5-0.8B-GGUF --device hybrid
+# or whatever Q4_0 GGUF you want — any HF GGUF works
+2. JSONL — You're Building a Custom Pipeline, No Docling, No Jetson
+I was building castles in the air. You don't have a Jetson yet. You don't have a computer. You have your phone and 93 markdown files that are already accuracy-checked. Here's what you actually need:
+
+Your Pipeline (Phone-Only, Termux-Native)
+Your docs are already markdown. You don't need Docling to parse PDFs — they're already parsed. You need a script that:
+
+Reads each .md file from your vault
+Extracts metadata (title, headers, key terms)
+Generates the JSONL marker record per your Universal JSONL Marker Schema
+Appends to universal-index.jsonl
+That's a Python script you can write and run in Termux right now. No external dependencies beyond pathlib and json:
+
+
+#!/usr/bin/env python3
+"""
+AESOP XI JSONL Marker Generator — Phone-Only, Termux-Native
+Reads markdown files from vault, outputs universal-index.jsonl
+"""
+import json
+from pathlib import Path
+from datetime import datetime
+
+VAULT_DIR = Path("~/obsidian-vault-new").expanduser()
+OUTPUT_FILE = Path("~/file-management-and-skills/universal-index.jsonl").expanduser()
+
+def extract_metadata(md_path: Path) -> dict:
+    """Parse markdown headers and first paragraph for metadata."""
+    content = md_path.read_text(encoding="utf-8")
+    lines = content.split("\n")
+    
+    title = md_path.stem
+    description = ""
+    headers = []
+    retrieval_tokens = set()
+    
+    for i, line in enumerate(lines):
+        if line.startswith("# "):
+            title = line.lstrip("# ").strip()
+        elif line.startswith("## ") or line.startswith("### "):
+            headers.append(line.lstrip("# ").strip())
+            # Add header words as retrieval tokens
+            for word in line.lstrip("# ").strip().lower().split():
+                if len(word) > 3:
+                    retrieval_tokens.add(word)
+        elif not description and line.strip() and not line.startswith("#"):
+            description = line.strip()[:200]
+    
+    return {
+        "title": title,
+        "description": description,
+        "headers": headers,
+        "retrieval_tokens": list(retrieval_tokens)[:10],
+        "content_chunk": content
+    }
+
+def generate_record(md_path: Path, idx: int) -> dict:
+    meta = extract_metadata(md_path)
+    return {
+        "record_id": f"DOC_{md_path.stem.upper()[:40]}_{idx:03d}",
+        "document_path": str(md_path),
+        "category": "TECHNICAL_REFERENCE",
+        "target_runtime": "QUERY_CORE_9B",
+        "metadata": {
+            "title": meta["title"],
+            "description": meta["description"],
+            "primary_tools": [],
+            "required_context_keys": meta["headers"][:5]
+        },
+        "retrieval_tokens": meta["retrieval_tokens"],
+        "entry_points": {
+            "repl_command": f"/skill run {meta['title'].lower().replace(' ', '-')}",
+            "jsonrpc_method": "agent.skills.execute"
+        },
+        "content_chunk": meta["content_chunk"],
+        "generated_at": datetime.utcnow().isoformat()
+    }
+
+def main():
+    md_files = list(VAULT_DIR.rglob("*.md"))
+    print(f"Found {len(md_files)} markdown files")
+    
+    with open(OUTPUT_FILE, "w") as f:
+        for i, md_path in enumerate(md_files):
+            record = generate_record(md_path, i)
+            f.write(json.dumps(record, ensure_ascii=False) + "\n")
+            print(f"  [{i+1}/{len(md_files)}] {md_path.name}")
+    
+    print(f"\nDone. Output: {OUTPUT_FILE}")
+    print(f"Records: {len(md_files)}")
+
+if __name__ == "__main__":
+    main()
