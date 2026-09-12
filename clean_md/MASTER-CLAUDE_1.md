@@ -7,7 +7,7 @@ cleaner: tools/clean.py (mutool)
 
 # Master CLAUDE.md overview (auto-generated — do not hand-edit)
 
-Regenerated: 2026-08-31T20:44:49Z
+Regenerated: 2026-09-06T04:19:46Z
 Source: novae-xorpus/tools/regenerate_masters.sh
 
 One overview across every attached project. Edit each project's own
@@ -49,6 +49,22 @@ implying a handoff process was already in place.
   §4 (Declarative / Recall / Strategic / Working-Ephemeral) and `protocol/memory.md`.
   Product architecture spec, not a dev-process document.
 
+## Termux/Android platform gap — the general fix (2026-09-06)
+
+`bootstrap-stack.sh`'s Android failures (code-review-graph, notebooklm-py/Playwright,
+OmniRoute/libsql) share one root cause: those packages target **glibc Linux**;
+Termux is **Android/bionic**. `proot-distro login debian` (already installed on
+this phone) is genuine glibc aarch64 — route glibc-only pieces through it instead
+of patching each package individually. Use Termux's own native builds first where
+they already exist and are better (e.g. Postgres: Termux ships PG18 natively,
+faster and no proot needed — pgvector just needs building from source with
+`MKDIR_P`/`INSTALL`/`SHLIB_LINK` overridden, since Termux's own `pg_config` bakes
+in nonexistent `/usr/bin/*` paths and doesn't link `libm`). `proot-distro login`
+runs with `--kill-on-exit` — a persistent background process needs the *outer*
+`proot-distro login ...` command itself backgrounded, not just an inner
+`nohup`/`disown`, or it dies the instant the invoking shell returns. Full account:
+the "Bootstrap Triage" artifact from the 2026-09-06 session.
+
 ## Discovered assets (2026-08-30/31) — previously unused, now catalogued
 
 Found sitting unused in `~/downloads` or built during this session. Don't
@@ -84,6 +100,12 @@ re-discover these from scratch:
   Confirmed against `~/.claude/plugins/installed_plugins.json` (only 3 unrelated
   plugins listed). Deferred to a future flash session — see `unresolved.md` in
   novae-xorpus.
+
+## Git workflow — PR required, no direct pushes to main
+
+Push changes to a branch, open a PR, let the `CI` GitHub Action run, merge
+once it's green (`allow_auto_merge` is on, so this can auto-merge with no
+manual click). Do not `git push origin main` directly for code changes.
 
 ## Scoping note
 

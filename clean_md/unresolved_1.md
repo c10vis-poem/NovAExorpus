@@ -90,3 +90,23 @@ spans more than one.
     u0_a538@<phone-LAN-IP> `, then browse `http://127.0.0.1:3456` on the tablet
     while `npm run dashboard:web` runs on the phone) — never confirmed working.
     Phone's LAN IP (`172.20.20.20` as of this session) can change on reconnect.
+14. **[aesop-xi]** OmniRoute's dev server (:20128) still doesn't run on this phone —
+    proot-Debian's default Node (20.20.2) is missing `webidl.util.markAsUncloneable`,
+    which OmniRoute's `undici` dependency needs. Needs Node 22+ installed inside
+    proot-Debian (nvm or NodeSource); not attempted yet (2026-09-06).
+15. **[aesop-xi]** terrestrial-brain's Obsidian-plugin build fails with
+    `tsc: not found` — not root-caused (2026-09-06).
+16. **[global]** `code-review-graph` MCP connector's config (both `~/.claude.json`
+    and `NovA-terrestrial-brain/.mcp.json`) was repointed at a working proot-Debian
+    venv instead of the broken bare-Termux `uvx` path (2026-09-06), but not yet
+    confirmed connecting live — MCP servers only connect at session start, and this
+    session started before the fix. Check on next session start.
+17. **[happy-ending]** The `happy-ending@skills-for-ai-happy-ending` Claude Code
+    plugin was registered by hand-editing `known_marketplaces.json` /
+    `installed_plugins.json` / `settings.json` directly (2026-09-06) — the
+    interactive `/plugin marketplace add` flow is broken client-side on this
+    build. Not yet confirmed loading in a fresh session/restart.
+18. **[happy-ending]** `~/repos/happy-ending/.agents/skills/happy-ending.bak-preSymlink/`
+    — harmless leftover from replacing that dir with a symlink (2026-09-06); user
+    said they'd delete it themselves since directory deletion is gated on this
+    device regardless of how it's framed.
