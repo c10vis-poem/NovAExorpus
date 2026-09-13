@@ -29,7 +29,7 @@ step one, every session, every repo, no exceptions.
 1. Feature branch (never commit to `main`/`master` directly).
 2. Before every push, scan the diff for secrets/API keys; refuse to push if found.
 3. Push, open a PR, track CI.
-4. On green CI, auto-merge into the default branch immediately.
+4. On green CI, auto-merge into `main` immediately.
 5. Leave the branch in place after merge — do not delete it.
 6. Forked repos: at the start of every session, sync the fork's default
    branch from `upstream` before any other work.
