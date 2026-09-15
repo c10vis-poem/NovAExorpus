@@ -1,0 +1,18 @@
+{
+  "mcpServers": {
+    "mem0": {
+      "type": "http",
+      "url": "${MEM0_MCP_URL}",
+      "headers": {
+        "Authorization": "Bearer ${MEM0_MCP_TOKEN}"
+      }
+    },
+    "terrestrial-brain": {
+      "type": "http",
+      "url": "${TB_MCP_URL}",
+      "headers": {
+        "x-brain-key": "${TB_MCP_KEY}"
+      }
+    }
+  }
+}

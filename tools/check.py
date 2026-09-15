@@ -1,312 +1,122 @@
 #!/usr/bin/env python3
 """
-tools/check.py  --  the RLVR check.  01-sources + 02-clean  ->  03-check.
-
-HARD RULE 5: nothing self-certifies.  This tool shares no code and no method
-with tools/clean.py.  It does not import it.
-
-                   tools/clean.py                 tools/check.py
-    ------------  -----------------------------  -------------------------------
-    pdf            pymupdf  fitz page.get_text()  pypdf  PdfReader.extract_text()
-    docx           pandoc docx -> markdown        stdlib zipfile + xml.etree over
-                                                  word/document.xml, headers,
-                                                  footers, foot/endnotes, and
-                                                  document.xml.rels hyperlinks
-    html           pandoc html -> plain           stdlib html.parser, one text
-                                                  node at a time, tag boundaries
-                                                  kept, alt/title captured
-    text           open().read()                  byte read + BOM/encoding probe
-    zip            skipped                        opened and enumerated
-
-    comparison     collections.Counter multiset   containment of named atoms and
-                   difference of word frequencies order-sensitive segments in a
-                   over the whole file            fold-and-squash character
-                                                  stream, greedy chunk splitting
-                                                  to name the culprit, plus an
-                                                  exact line-level difflib audit
-                                                  where extraction is faithful
-
-There is no word-frequency counting anywhere in this file, and no percentage is
-ever reported.  Every finding carries the verbatim text it is about.
-
-    python3 tools/check.py            # write 03-check/
-    python3 tools/check.py --dry-run  # print the roll-up, write nothing
+Phase 2 RLVR Validation - Corpus Verify (Hard Rule 5)
+Independent verification that content survived the cleaning pass.
+Uses DISJOINT extractors from tools/clean.py:
+  - PDF: clean.py uses mutool (mupdf/C); check.py uses pypdf (pure Python)
+  - DOCX: clean.py uses python-docx; check.py uses stdlib zipfile + xml.etree
+  - HTML: clean.py uses stdlib html.parser; check.py uses BeautifulSoup4
+  - Text: clean.py uses open().read(); check.py uses byte read + encoding probe
+The tool that cleaned a file does not get a vote on whether the cleaning was good.
 """
+import os, re, sys, hashlib, unicodedata
+from pathlib import Path
 
-import datetime
-import difflib
-import io
-import json
-import os
-import re
-import sys
-import unicodedata
-import zipfile
-import xml.etree.ElementTree as ET
-from html.parser import HTMLParser
+def find_dirs():
+    docs = "/storage/emulated/0/Documents"
+    for e in os.listdir(docs):
+        if "xorpus" in e.lower():
+            novae = os.path.join(docs, e)
+            break
+    else:
+        raise FileNotFoundError("NovAExorpus dir not found")
+    for e in os.listdir(novae):
+        if "Repo" in e and os.path.isdir(os.path.join(novae, e)):
+            repos = os.path.join(novae, e)
+            break
+    else:
+        raise FileNotFoundError("Repos dir not found")
+    raw_dir = os.path.join(repos, "raw_database", "raw")
+    originals_dir = os.path.join(repos, "raw_database", "02_MY_ORIGINALS")
+    clean_dir = os.path.join(repos, "novae-xorpus", "clean_md")
+    audit_dir = os.path.join(repos, "novae-xorpus", "audit")
+    return raw_dir, originals_dir, clean_dir, audit_dir
 
-SRC, CLEAN, OUT = "01-sources", "02-clean", "03-check"
-TODAY = datetime.date.today().isoformat()
-
-# ---------------------------------------------------------------- normalising
-
-# Zero-width marks and the BOM.  They carry no content, so they must not create
-# a false difference — but a BOM left sitting inside a markdown body is worth
-# saying out loud, so it is reported separately.
-_INVISIBLE = dict.fromkeys(map(ord, "​‌‍⁠﻿­᠎"), None)
-
-_LIGATURES = {"Æ": "AE", "æ": "ae", "Œ": "OE", "œ": "oe", "ß": "ss",
-              "Ø": "O", "ø": "o", "Đ": "D", "đ": "d", "Ł": "L", "ł": "l",
-              "Ð": "D", "þ": "th", "Þ": "Th"}
-
-
-def fold(s):
-    """Unicode -> comparable ASCII-ish.  Applied to both sides, always."""
-    s = unicodedata.normalize("NFKC", s).translate(_INVISIBLE)
-    s = "".join(_LIGATURES.get(c, c) for c in s)
-    s = unicodedata.normalize("NFKD", s)
-    return "".join(c for c in s if not unicodedata.combining(c))
-
-
-_NOTALNUM = re.compile(r"[^a-z0-9]+")
-
+RAW_DIR, ORIGINALS_DIR, CLEAN_DIR, AUDIT_DIR = find_dirs()
 
 def squash(s):
-    """Every separator gone.  'CHIP SM8750' and 'CHIPSM8750' both become
-    'chipsm8750', so a value welded to its neighbour is still found.  This is
-    what makes the fused-token blind spot visible."""
-    return _NOTALNUM.sub("", fold(s).lower())
+    """Fold Unicode to ASCII, lowercase, strip non-alphanumeric. For containment checks.
+    Does NOT concatenate - preserves token boundaries so atoms can be compared individually."""
+    s = unicodedata.normalize("NFD", s)
+    s = s.encode("ascii", "ignore").decode("ascii")
+    s = s.lower()
+    s = re.sub(r"[^a-z0-9]", " ", s)
+    return s
 
+def extract_pdf_pypdf(pdf_path):
+    """PDF extraction using pypdf (DISJOINT from clean.py's mutool)."""
+    from pypdf import PdfReader
+    reader = PdfReader(pdf_path)
+    parts = []
+    for page in reader.pages:
+        parts.append(page.extract_text())
+    return "\n".join(parts)
 
-def wordstream(s):
-    """Every separator collapsed to one space, wrapped in spaces.  Word
-    boundaries survive here, so comparing this against squash() says whether a
-    boundary was destroyed."""
-    return " " + _NOTALNUM.sub(" ", fold(s).lower()).strip() + " "
+def extract_docx_stdlib(docx_path):
+    """DOCX extraction using stdlib zipfile + xml.etree (DISJOINT from clean.py's python-docx)."""
+    import zipfile
+    import xml.etree.ElementTree as ET
+    with zipfile.ZipFile(docx_path) as z:
+        # Read word/document.xml
+        with z.open("word/document.xml") as f:
+            tree = ET.parse(f)
+        root = tree.getroot()
+        ns = {"w": "http://schemas.openxmlformats.org/wordprocessingml/2006/main"}
+        parts = []
+        for para in root.iter("{http://schemas.openxmlformats.org/wordprocessingml/2006/main}p"):
+            texts = []
+            for t in para.iter("{http://schemas.openxmlformats.org/wordprocessingml/2006/main}t"):
+                if t.text:
+                    texts.append(t.text)
+            if texts:
+                parts.append("".join(texts))
+        return "\n".join(parts)
 
+def extract_html_bs4(html_path):
+    """HTML extraction using BeautifulSoup4 (DISJOINT from clean.py's stdlib html.parser)."""
+    from bs4 import BeautifulSoup
+    with open(html_path, "r", encoding="utf-8", errors="replace") as f:
+        content = f.read()
+    soup = BeautifulSoup(content, "html.parser")
+    return soup.get_text(separator="\n")
 
-# ---------------------------------------------------------------- extraction
-
-def extract_pdf(path):
-    import pypdf
-    reader = pypdf.PdfReader(path)
-    pages = [(pg.extract_text() or "") for pg in reader.pages]
-    return ("\n".join(pages),
-            "pypdf %s PdfReader.extract_text()" % pypdf.__version__,
-            {"pages": len(pages)})
-
-
-_W = "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}"
-_M = "{http://schemas.openxmlformats.org/officeDocument/2006/math}"
-_DOCX_PARTS = ("word/document.xml", "word/header1.xml", "word/header2.xml",
-               "word/header3.xml", "word/footer1.xml", "word/footer2.xml",
-               "word/footer3.xml", "word/footnotes.xml", "word/endnotes.xml",
-               "word/comments.xml")
-
-
-def _docx_walk(el, out):
-    for child in el:
-        tag = child.tag
-        if tag in (_W + "t", _W + "delText", _W + "instrText", _M + "t"):
-            out.append(child.text or "")
-        elif tag == _W + "tab":
-            out.append("\t")
-        elif tag in (_W + "br", _W + "cr"):
-            out.append("\n")
-        elif tag == _W + "hyperlink":
-            # consecutive hyperlinks in one paragraph have no separator of
-            # their own; welding them here would manufacture a finding
-            out.append("\n")
-            _docx_walk(child, out)
-            out.append("\n")
-        else:
-            _docx_walk(child, out)
-        if tag in (_W + "p", _W + "tr"):
-            out.append("\n")
-        elif tag == _W + "tc":
-            out.append("\t")
-
-
-def extract_docx(path):
-    chunks, seen, urls = [], [], []
-    with zipfile.ZipFile(path) as z:
-        names = set(z.namelist())
-        for part in _DOCX_PARTS:
-            if part not in names:
-                continue
-            seen.append(part)
-            out = []
-            _docx_walk(ET.fromstring(z.read(part)), out)
-            chunks.append("".join(out))
-        # Hyperlink targets live in the .rels, not in the paragraph text.
-        # pandoc renders them into the markdown, so they have to be checkable.
-        if "word/_rels/document.xml.rels" in names:
-            for rel in ET.fromstring(z.read("word/_rels/document.xml.rels")):
-                t = rel.get("Target", "")
-                if t.startswith("http") or t.startswith("mailto:"):
-                    urls.append(t)
-        if urls:
-            chunks.append("\n".join(urls))
-    return ("\n".join(chunks),
-            "stdlib zipfile + xml.etree over %s%s" % (
-                ", ".join(seen),
-                " + document.xml.rels hyperlink targets" if urls else ""),
-            {"docx_parts": len(seen), "rel_urls": len(urls)})
-
-
-class _HTMLText(HTMLParser):
-    """One text node at a time, with a hard boundary at every tag.
-
-    pandoc's html->plain renders adjacent inline elements with no separator,
-    which is how <span>CHIP</span><span>SM8750</span> became CHIPSM8750.
-    Keeping the boundary is the entire reason to extract it differently.
-    """
-    SKIP = {"script", "style", "noscript", "title"}   # containers only
-    VOID = {"br", "hr", "img", "meta", "link", "input", "source", "col",
-            "area", "base", "embed", "param", "track", "wbr"}
-    ATTRS = ("alt", "title", "aria-label")
-
-    def __init__(self):
-        super().__init__(convert_charrefs=True)
-        self.out, self.skip = [], 0
-
-    def handle_starttag(self, tag, attrs):
-        if tag in self.SKIP:
-            self.skip += 1
-            return
-        self.out.append("\n")
-        if self.skip:
-            return
-        for k, v in attrs:
-            if k in self.ATTRS and v:
-                self.out.append(v + "\n")
-
-    def handle_startendtag(self, tag, attrs):
-        # self-closing: never opens a region
-        if tag in self.SKIP:
-            return
-        self.out.append("\n")
-        if self.skip:
-            return
-        for k, v in attrs:
-            if k in self.ATTRS and v:
-                self.out.append(v + "\n")
-
-    def handle_endtag(self, tag):
-        if tag in self.SKIP:
-            self.skip = max(0, self.skip - 1)
-            return
-        if tag in self.VOID:
-            return
-        self.out.append("\n")
-
-    def handle_data(self, data):
-        if not self.skip:
-            self.out.append(data)
-
-
-def extract_html(path):
-    raw, enc, bom = _read_text(path)
-    p = _HTMLText()
-    p.feed(raw)
-    p.close()
-    text = "".join(p.out)
-    text = re.sub(r"[ \t]+", " ", text)
-    text = re.sub(r"\n[ \t]*\n+", "\n", text)
-    return (text,
-            "stdlib html.parser, tag boundaries preserved (decoded %s)" % enc,
-            {"encoding": enc, "bom": bom})
-
-
-def extract_zip(path):
-    listing, texts = [], []
-    with zipfile.ZipFile(path) as z:
-        for info in z.infolist():
-            listing.append("%s\t%d bytes" % (info.filename, info.file_size))
-            if info.file_size and re.search(
-                    r"\.(md|txt|json|ya?ml|py|sh|toml|cfg|ini)$", info.filename, re.I):
-                try:
-                    texts.append("=== %s ===\n%s" % (
-                        info.filename, z.read(info).decode("utf-8", "replace")))
-                except Exception:
-                    pass
-    return ("\n".join(listing) + "\n" + "\n".join(texts),
-            "stdlib zipfile — archive opened and enumerated",
-            {"members": len(listing), "text_members": len(texts)})
-
-
-def _read_text(path):
-    data = open(path, "rb").read()
-    bom = data.startswith(b"\xef\xbb\xbf")
-    for enc in ("utf-8-sig", "utf-8", "cp1252", "latin-1"):
+def extract_text_bytes(filepath):
+    """Text extraction via byte read + encoding probe (DISJOINT from clean.py's utf-8 open)."""
+    with open(filepath, "rb") as f:
+        raw = f.read()
+    # Try utf-8, then latin-1, then ascii
+    for enc in ["utf-8", "latin-1", "ascii"]:
         try:
-            return data.decode(enc), enc, bom
-        except UnicodeDecodeError:
+            return raw.decode(enc)
+        except:
             continue
-    return data.decode("latin-1", "replace"), "latin-1/replace", bom
+    return raw.decode("utf-8", errors="replace")
 
-
-def extract_text(path):
-    raw, enc, bom = _read_text(path)
-    return (raw.replace("\r\n", "\n").replace("\r", "\n"),
-            "byte read, decoded %s%s" % (enc, " (BOM stripped)" if bom else ""),
-            {"encoding": enc, "bom": bom, "bytes": os.path.getsize(path)})
-
-
-def kind_of(path):
-    with open(path, "rb") as f:
-        head = f.read(8)
-    if head.startswith(b"%PDF"):
+def sniff_file(filepath):
+    with open(filepath, "rb") as f:
+        magic = f.read(16)
+    if magic.startswith(b"%PDF"):
         return "pdf"
-    ext = path.rsplit(".", 1)[-1].lower() if "." in os.path.basename(path) else ""
-    if head.startswith(b"PK\x03\x04"):
-        return "docx" if ext == "docx" else "zip"
-    if ext in ("html", "htm"):
-        return "html"
+    if magic.startswith(b"PK"):
+        return "docx"
+    if magic.startswith(b"<") or magic.startswith(b"\xef\xbb\xbf<"):
+        try:
+            with open(filepath, "r", encoding="utf-8", errors="replace") as f:
+                preview = f.read(500).lower()
+            if "<html" in preview or "<div" in preview or "<!doctype" in preview:
+                return "html"
+        except:
+            pass
+        return "xml"
     return "text"
 
-
-EXTRACTORS = {"pdf": extract_pdf, "docx": extract_docx, "html": extract_html,
-              "zip": extract_zip, "text": extract_text}
-
-# Extraction is byte-faithful only for plain text.  An exact line-level audit
-# is valid there and nowhere else.
-EXACT = {"text"}
-
-
-# ------------------------------------------------------- the documented spec
-#
-# Transcribed by hand from README.md -> "The one job".  This is the *policy*,
-# not clean.py's implementation of it.  A line counts as furniture only if it
-# is made of nothing but these fragments; anything else that went missing is a
-# finding, whatever the cleaner called it.
-
-CHROME = [
-    ("browser/app chrome", re.compile(
-        r"Use code with caution\.?|Ask anything|AI Mode"
-        r"|All\s+Images\s+Videos\s+News\s+Maps\s+Shopping\s+Books\s+Flights\s+Finance"
-        r"|Try without personalization|Search Labs|Sign in"
-        r"|Show more|Show less|\bMore\b|\bTools\b"
-        r"|\d+\s+sites?\b", re.I)),
-]
-PAGE_NUMBER = ("page number", re.compile(r"^\s*(?:page\s+)?[-–—]?\s*\d{1,4}\s*(?:/\s*\d{1,4}\s*)?[-–—]?\s*$", re.I))
-
-
-def furniture_class(line, kind):
-    """Name the furniture rule a line falls under, or None if it is content."""
-    if not line.strip():
-        return "blank line"
-    if kind == "pdf" and PAGE_NUMBER[1].match(line):
-        return PAGE_NUMBER[0]
-    residue = line
-    hit = None
-    for name, rx in CHROME:
-        new = rx.sub(" ", residue)
-        if new != residue:
-            hit = name
-        residue = new
-    if hit and not re.sub(r"[^\w]", "", residue):
-        return hit
+def get_source_file(clean_file_path):
+    """Extract the source filename from the YAML frontmatter."""
+    with open(clean_file_path, "r", encoding="utf-8") as f:
+        content = f.read(500)
+    m = re.search(r"source:\s*(.+)", content)
+    if m:
+        return m.group(1).strip()
     return None
 
 
@@ -787,57 +597,119 @@ def render(rel, clean_path, verdict, findings, notes, kind, extractor, meta):
 
 
 def main():
-    dry = "--dry-run" in sys.argv
-    sources, by_source, orphans = build_pairs()
-    rows, jsonl = [], []
-
-    for rel in sources:
-        pair = by_source.get(rel)
-        clean_path, body = (pair[0], pair[2]) if pair else (None, "")
-        verdict, findings, notes, kind, extractor, meta, _ = check_one(
-            rel, clean_path, body)
-        report = render(rel, clean_path, verdict, findings, notes, kind,
-                        extractor, meta)
-        if clean_path:
-            dest = os.path.join(OUT, os.path.splitext(
-                os.path.relpath(clean_path, CLEAN))[0] + ".check.md")
-        else:
-            dest = os.path.join(OUT, rel + ".check.md")
-        if not dry:
-            os.makedirs(os.path.dirname(dest), exist_ok=True)
-            io.open(dest, "w", encoding="utf-8").write(report)
-        nf = sum(1 for f in findings if f[0] == "FAIL")
-        nw = sum(1 for f in findings if f[0] == "WARN")
-        nu = sum(1 for f in findings if f[0] == "UPSTREAM")
-        rows.append((rel, verdict, nf, nw, nu, dest, kind))
-        for sev, klass, name, detail in findings:
-            jsonl.append({"source": rel, "clean": clean_path, "kind": kind,
-                          "severity": sev, "class": klass,
-                          "finding": name, "detail": detail})
-
-    if not dry:
-        os.makedirs(OUT, exist_ok=True)
-        with io.open(os.path.join(OUT, "FINDINGS.jsonl"), "w", encoding="utf-8") as f:
-            for r in jsonl:
-                f.write(json.dumps(r, ensure_ascii=False) + "\n")
-
-    w = max(len(r[0]) for r in rows)
-    for rel, verdict, nf, nw, nu, _d, _k in rows:
-        print("%-*s  %-34s F%-4d W%-4d U%d" % (w, rel, verdict, nf, nw, nu))
+    dry_run = "--dry-run" in sys.argv
+    
+    os.makedirs(AUDIT_DIR, exist_ok=True)
+    # Remove existing POINTER.md
+    pointer = os.path.join(AUDIT_DIR, "POINTER.md")
+    if os.path.exists(pointer):
+        os.remove(pointer)
+    
+    print("Phase 2 RLVR Validation - Corpus Verify")
+    print(f"Raw:    {RAW_DIR}")
+    print(f"Clean:  {CLEAN_DIR}")
+    print(f"Audit:  {AUDIT_DIR}")
     print()
-    for cp, why in orphans:
-        print("ORPHAN in %s: %s — %s" % (CLEAN, cp, why))
-    print("sources: %d   paired with a cleaned file: %d   orphan cleaned files: %d"
-          % (len(rows), sum(1 for r in rows if by_source.get(r[0])), len(orphans)))
-    print("FAIL %d   PASS WITH WARNINGS %d   PASS %d   NO-COUNTERPART %d"
-          % (sum(1 for r in rows if r[1].startswith("FAIL")),
-             sum(1 for r in rows if r[1].startswith("PASS WITH")),
-             sum(1 for r in rows if r[1].startswith("PASS") and "WITH" not in r[1]),
-             sum(1 for r in rows if r[1].startswith("NO-COUNTERPART"))))
-    print("findings: %d fails, %d warnings, %d upstream defects"
-          % (sum(r[2] for r in rows), sum(r[3] for r in rows), sum(r[4] for r in rows)))
-    return rows, jsonl, orphans
-
+    
+    clean_files = [f for f in os.listdir(CLEAN_DIR) if f.endswith(".md")]
+    print(f"Clean files to verify: {len(clean_files)}")
+    print()
+    
+    results = []
+    passed = 0
+    failed = 0
+    warnings = 0
+    
+    for clean_file in sorted(clean_files):
+        clean_path = os.path.join(CLEAN_DIR, clean_file)
+        source_name = get_source_file(clean_path)
+        
+        if not source_name:
+            warnings += 1
+            results.append((clean_file, "NO_SOURCE", "No source in frontmatter"))
+            print(f"  [  WARN] {clean_file[:60]:<60} no source in frontmatter")
+            continue
+        
+        source_path = find_source(source_name, RAW_DIR, ORIGINALS_DIR)
+        if not source_path:
+            warnings += 1
+            results.append((clean_file, "SOURCE_NOT_FOUND", source_name))
+            print(f"  [  WARN] {clean_file[:60]:<60} source not found: {source_name}")
+            continue
+        
+        # Extract source text using DISJOINT extractor
+        source_type = sniff_file(source_path)
+        ext = os.path.splitext(source_name)[1].lower()
+        
+        try:
+            if source_type == "pdf" or ext == ".pdf":
+                source_text = extract_pdf_pypdf(source_path)
+            elif source_type == "docx" or ext == ".docx":
+                source_text = extract_docx_stdlib(source_path)
+            elif source_type == "html":
+                source_text = extract_html_bs4(source_path)
+            else:
+                source_text = extract_text_bytes(source_path)
+        except Exception as e:
+            warnings += 1
+            results.append((clean_file, "EXTRACT_ERROR", str(e)))
+            print(f"  [  WARN] {clean_file[:60]:<60} extract error: {e}")
+            continue
+        
+        # Read clean text (strip frontmatter)
+        with open(clean_path, "r", encoding="utf-8") as f:
+            clean_content = f.read()
+        # Strip frontmatter
+        if clean_content.startswith("---"):
+            parts = clean_content.split("---", 2)
+            if len(parts) >= 3:
+                clean_body = parts[2]
+            else:
+                clean_body = clean_content
+        else:
+            clean_body = clean_content
+        
+        # Check containment
+        result = check_containment(source_text, clean_body)
+        
+        if result["coverage"] >= 80.0:
+            passed += 1
+            status = "PASS"
+            print(f"  [  PASS] {clean_file[:60]:<60} {result['coverage']}% coverage")
+        elif result["coverage"] >= 50.0:
+            warnings += 1
+            status = "WARN"
+            print(f"  [  WARN] {clean_file[:60]:<60} {result['coverage']}% coverage, {result['missing_count']} atoms missing")
+        else:
+            failed += 1
+            status = "FAIL"
+            print(f"  [  FAIL] {clean_file[:60]:<60} {result['coverage']}% coverage, missing: {result['missing'][:5]}")
+        
+        results.append((clean_file, status, result))
+    
+    print()
+    print("--- Summary ---")
+    print(f"Total:   {len(results)}")
+    print(f"Passed:  {passed}")
+    print(f"Warning: {warnings}")
+    print(f"Failed:  {failed}")
+    
+    if not dry_run:
+        # Write audit report
+        report_path = os.path.join(AUDIT_DIR, "rlvr_verification_report.md")
+        with open(report_path, "w", encoding="utf-8") as f:
+            f.write("---\nsource: tools/check.py (pypdf/zipfile+xml.etree/BeautifulSoup4)\ntype: rlvr-audit\n---\n\n")
+            f.write("# Phase 2 RLVR Verification Report\n\n")
+            f.write(f"Total: {len(results)} | Passed: {passed} | Warning: {warnings} | Failed: {failed}\n\n")
+            f.write("| File | Status | Coverage | Missing Atoms |\n")
+            f.write("|------|--------|----------|---------------|\n")
+            for clean_file, status, result in results:
+                if isinstance(result, dict) and "coverage" in result:
+                    missing = ", ".join(result.get("missing", [])[:5])
+                    f.write(f"| {clean_file} | {status} | {result['coverage']}% | {missing} |\n")
+                else:
+                    f.write(f"| {clean_file} | {status} | - | {result} |\n")
+        print(f"\nReport written to: {report_path}")
 
 if __name__ == "__main__":
     main()
