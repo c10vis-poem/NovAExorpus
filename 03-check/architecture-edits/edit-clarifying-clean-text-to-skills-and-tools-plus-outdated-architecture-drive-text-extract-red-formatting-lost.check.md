@@ -1,6 +1,6 @@
 ---
 checker: tools/check.py
-checked: 2026-08-27
+checked: 2026-09-09
 source: 01-sources/architecture-edits/EDIT-Clarifying Clean Text to skills and tools plus outdated architecture (Drive text extract, RED FORMATTING LOST).txt
 cleaned: 02-clean/architecture-edits/edit-clarifying-clean-text-to-skills-and-tools-plus-outdated-architecture-drive-text-extract-red-formatting-lost.md
 source_kind: text

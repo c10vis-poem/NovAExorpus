@@ -1,6 +1,6 @@
 ---
 checker: tools/check.py
-checked: 2026-08-27
+checked: 2026-09-09
 source: 01-sources/universal-memory/Mapping Runtimes and CLIs -!DOCTYPE.txt
 cleaned: 02-clean/universal-memory/mapping-runtimes-and-clis-doctype.md
 source_kind: text

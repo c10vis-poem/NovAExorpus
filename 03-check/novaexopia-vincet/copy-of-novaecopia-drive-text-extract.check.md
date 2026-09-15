@@ -1,6 +1,6 @@
 ---
 checker: tools/check.py
-checked: 2026-08-27
+checked: 2026-09-09
 source: 01-sources/novaexopia-vincet/Copy of NovAEcopia (Drive text extract).txt
 cleaned: 02-clean/novaexopia-vincet/copy-of-novaecopia-drive-text-extract.md
 source_kind: text

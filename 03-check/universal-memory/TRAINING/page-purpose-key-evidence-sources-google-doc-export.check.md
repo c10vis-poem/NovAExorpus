@@ -1,6 +1,6 @@
 ---
 checker: tools/check.py
-checked: 2026-08-27
+checked: 2026-09-09
 source: 01-sources/universal-memory/TRAINING/Page - Purpose - Key evidence sources (Google Doc export).txt
 cleaned: 02-clean/universal-memory/TRAINING/page-purpose-key-evidence-sources-google-doc-export.md
 source_kind: text

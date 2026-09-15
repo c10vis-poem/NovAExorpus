@@ -1,10 +1,10 @@
 ---
 checker: tools/check.py
-checked: 2026-08-27
+checked: 2026-09-09
 source: 01-sources/universal-memory/TRAINING/failure_log_template.md.pdf
 cleaned: 02-clean/universal-memory/TRAINING/failure-log-template-md.md
 source_kind: pdf
-extractor: pypdf 6.16.2 PdfReader.extract_text()
+extractor: pypdf 6.14.2 PdfReader.extract_text()
 independent_of: tools/clean.py — different extractor, different comparison method, no shared code
 verdict: PASS
 fails: 0
@@ -23,7 +23,7 @@ Every named detail an independent extractor found in the source was found again 
 | pages | 2 |
 | atoms judged | 7 |
 | atoms set aside (fused by the checker's own extractor) | 2 |
-| segments checked | 0 |
+| segments checked | 10 |
 | furniture lines found by the checker | 0 |
 | end of source survives | yes |
 | start of source survives | yes |

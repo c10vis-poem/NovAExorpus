@@ -1,6 +1,6 @@
 ---
 checker: tools/check.py
-checked: 2026-08-27
+checked: 2026-09-09
 source: 01-sources/SKILLS.md/horizons-wiki-SKILL.md
 cleaned: 02-clean/SKILLS.md/horizons-wiki-skill.md
 source_kind: text

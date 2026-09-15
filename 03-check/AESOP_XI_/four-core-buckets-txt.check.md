@@ -1,6 +1,6 @@
 ---
 checker: tools/check.py
-checked: 2026-08-27
+checked: 2026-09-09
 source: 01-sources/AESOP_XI_/Four Core Buckets.txt.txt
 cleaned: 02-clean/AESOP_XI_/four-core-buckets-txt.md
 source_kind: text

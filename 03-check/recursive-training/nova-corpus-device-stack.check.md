@@ -1,10 +1,10 @@
 ---
 checker: tools/check.py
-checked: 2026-08-27
+checked: 2026-09-09
 source: 01-sources/recursive-training/Nova Corpus — Device Stack.pdf
 cleaned: 02-clean/recursive-training/nova-corpus-device-stack.md
 source_kind: pdf
-extractor: pypdf 6.16.2 PdfReader.extract_text()
+extractor: pypdf 6.14.2 PdfReader.extract_text()
 independent_of: tools/clean.py — different extractor, different comparison method, no shared code
 verdict: PASS WITH WARNINGS
 fails: 0

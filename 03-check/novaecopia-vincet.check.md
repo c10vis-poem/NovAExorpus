@@ -1,6 +1,6 @@
 ---
 checker: tools/check.py
-checked: 2026-08-27
+checked: 2026-09-09
 source: 01-sources/NovÆcopia Vincet.docx
 cleaned: 02-clean/novaecopia-vincet.md
 source_kind: docx

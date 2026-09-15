@@ -1,6 +1,6 @@
 ---
 checker: tools/check.py
-checked: 2026-08-27
+checked: 2026-09-09
 source: 01-sources/universal-memory/URL's-MEMORY LAYER .docx
 cleaned: 02-clean/universal-memory/url-s-memory-layer.md
 source_kind: docx

@@ -1,6 +1,6 @@
 ---
 checker: tools/check.py
-checked: 2026-08-27
+checked: 2026-09-09
 source: 01-sources/part1-lex/## Part 1- Lex (1) (Drive text extract, truncated).txt
 cleaned: 02-clean/part1-lex/part-1-lex-1-drive-text-extract-truncated.md
 source_kind: text

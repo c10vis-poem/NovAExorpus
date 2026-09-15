@@ -1,6 +1,6 @@
 ---
 checker: tools/check.py
-checked: 2026-08-27
+checked: 2026-09-09
 source: 01-sources/whyyoucodevoicelikeass/no shit Sherlock..txt
 cleaned: 02-clean/whyyoucodevoicelikeass/no-shit-sherlock.md
 source_kind: text

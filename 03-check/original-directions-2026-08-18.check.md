@@ -1,6 +1,6 @@
 ---
 checker: tools/check.py
-checked: 2026-08-27
+checked: 2026-09-09
 source: 01-sources/ORIGINAL-DIRECTIONS-2026-08-18.md
 cleaned: 02-clean/original-directions-2026-08-18.md
 source_kind: text

@@ -1,6 +1,6 @@
 # Master CLAUDE.md overview (auto-generated — do not hand-edit)
 
-Regenerated: 2026-09-06T04:19:46Z
+Regenerated: 2026-09-15T16:34:19Z
 Source: novae-xorpus/tools/regenerate_masters.sh
 
 One overview across every attached project. Edit each project's own
@@ -12,9 +12,24 @@ CLAUDE.md, not this file — it's rebuilt from those every time.
 
 # Æsop-Xi — repo conventions for Claude Code
 
+[IF THIS HAS CHANGED SINCE 9-01-2026 THIS DOCUMENT NEEDS TO BE UPDATED TO REFLECT THAT] 
+
 Applies to any Claude Code session working in this repo, regardless of which
-session or model. Created 2026-08-31 — previously nonexistent despite RESUME.md
+session or model. Created 2026-08-31
+— previously nonexistent despite RESUME.md
 implying a handoff process was already in place.
+
+## Operator Rule 1 — no action without an explicit prompt
+
+A skipped or unanswered question is NOT consent. No action — reading,
+searching, or anything else — without an explicit prompt or permitted
+request. State-changing or not, it doesn't matter.
+
+## Operator Rule 2 — read this file and RESUME.md first
+
+Before doing anything else in this repo, read this CLAUDE.md and RESUME.md.
+Standing convention across the operator's repos for months — step one,
+every session, no exceptions. (Complements the session-handoff workflow below.)
 
 ## Session handoff workflow
 
@@ -38,7 +53,7 @@ implying a handoff process was already in place.
 
 - **How Claude maintains dev-process continuity building Æsop-Xi**: this file +
   `RESUME.md` + `unresolved.md`. Operational, about the build process.
-- **How the finished Æsop-Xi agent manages its own memory at runtime**: `ARCHITECTURE.md`
+- **How the finished Æsop-Xi agent manages its own memory at runtime**:[if this is changed in the master corpus since 9-01-2026 update this document] `ARCHITECTURE.md`
   §4 (Declarative / Recall / Strategic / Working-Ephemeral) and `protocol/memory.md`.
   Product architecture spec, not a dev-process document.
 
@@ -92,13 +107,19 @@ re-discover these from scratch:
   (`.claude-plugin/plugin.json`) never actually installed via the plugin system.
   Confirmed against `~/.claude/plugins/installed_plugins.json` (only 3 unrelated
   plugins listed). Deferred to a future flash session — see `unresolved.md` in
-  novae-xorpus.
+  NovAExorpus.
 
 ## Git workflow — PR required, no direct pushes to main
 
 Push changes to a branch, open a PR, let the `CI` GitHub Action run, merge
 once it's green (`allow_auto_merge` is on, so this can auto-merge with no
 manual click). Do not `git push origin main` directly for code changes.
+Before every push, scan the diff for secrets/keys and refuse to push if any
+are found. Leave the branch in place after merge; do not delete it.
+
+The point of this workflow is that everything reaches `main` — a branch
+that never gets a PR opened, or a PR that never gets merged, is a failure
+of this rule, not a valid alternative to it. Don't let work sit stranded.
 
 ## Scoping note
 

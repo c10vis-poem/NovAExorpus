@@ -1,6 +1,6 @@
 ---
 checker: tools/check.py
-checked: 2026-08-27
+checked: 2026-09-09
 source: 01-sources/CCConvo/This is Horizons now .txt
 cleaned: 02-clean/CCConvo/this-is-horizons-now.md
 source_kind: text

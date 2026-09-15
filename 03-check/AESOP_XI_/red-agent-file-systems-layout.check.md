@@ -1,6 +1,6 @@
 ---
 checker: tools/check.py
-checked: 2026-08-27
+checked: 2026-09-09
 source: 01-sources/AESOP_XI_/Red Agent file systems layout..txt
 cleaned: 02-clean/AESOP_XI_/red-agent-file-systems-layout.md
 source_kind: text

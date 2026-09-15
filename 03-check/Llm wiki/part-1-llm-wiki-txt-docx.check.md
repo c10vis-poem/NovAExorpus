@@ -1,6 +1,6 @@
 ---
 checker: tools/check.py
-checked: 2026-08-27
+checked: 2026-09-09
 source: 01-sources/Llm wiki/## Part 1 Llm Wiki.txt.docx.txt
 cleaned: 02-clean/Llm wiki/part-1-llm-wiki-txt-docx.md
 source_kind: text

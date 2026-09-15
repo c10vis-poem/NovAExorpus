@@ -514,12 +514,22 @@ def build_pairs():
             key = fm.get("source", "")
             if not key:
                 orphans.append((cp, "no `source:` line in frontmatter"))
-            elif key in by_source:
+                continue
+            # Some producers declare source relative to the repo root (e.g.
+            # "raw/README.md"); this checker computes sources relative to SRC
+            # itself (e.g. "README.md"). Fall back to stripping one leading
+            # path segment before giving up on a match.
+            resolved = key if key in sources else None
+            if resolved is None and "/" in key:
+                stripped = key.split("/", 1)[1]
+                if stripped in sources:
+                    resolved = stripped
+            if resolved in by_source:
                 orphans.append((cp, "second file claiming source %r" % key))
-            elif key not in sources:
+            elif resolved is None:
                 orphans.append((cp, "claims source %r, which is not in %s/" % (key, SRC)))
             else:
-                by_source[key] = (cp, fm, body)
+                by_source[resolved] = (cp, fm, body)
     return sources, by_source, orphans
 
 

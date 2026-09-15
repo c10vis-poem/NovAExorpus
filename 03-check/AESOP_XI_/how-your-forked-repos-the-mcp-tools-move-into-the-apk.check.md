@@ -1,6 +1,6 @@
 ---
 checker: tools/check.py
-checked: 2026-08-27
+checked: 2026-09-09
 source: 01-sources/AESOP_XI_/How Your Forked Repos (The MCP Tools) Move into the APK.txt
 cleaned: 02-clean/AESOP_XI_/how-your-forked-repos-the-mcp-tools-move-into-the-apk.md
 source_kind: text

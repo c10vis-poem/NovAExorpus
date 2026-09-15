@@ -1,6 +1,6 @@
 ---
 checker: tools/check.py
-checked: 2026-08-27
+checked: 2026-09-09
 source: 01-sources/SKILLS.md/GitHub_Docs_SKILL.txt
 cleaned: 02-clean/SKILLS.md/github-docs-skill.md
 source_kind: text
