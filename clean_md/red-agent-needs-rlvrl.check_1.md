@@ -1,8 +1,15 @@
 ---
-source: red-agent-needs-rlvrl.check (1).md
-type: markdown
-cleaned: 2026-09-11
-cleaner: tools/clean.py (mutool)
+checker: tools/check.py
+checked: 2026-09-09
+source: 01-sources/AESOP_XI_/Red agent needs RLVRl.docx
+cleaned: 02-clean/AESOP_XI_/red-agent-needs-rlvrl.md
+source_kind: docx
+extractor: stdlib zipfile + xml.etree over word/document.xml
+independent_of: tools/clean.py — different extractor, different comparison method, no shared code
+verdict: PASS
+fails: 0
+warnings: 0
+upstream_defects: 0
 ---
 
 # Check — AESOP_XI_/Red agent needs RLVRl.docx

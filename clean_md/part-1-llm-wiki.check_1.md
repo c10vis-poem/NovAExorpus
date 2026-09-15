@@ -1,8 +1,15 @@
 ---
-source: part-1-llm-wiki.check (1).md
-type: markdown
-cleaned: 2026-09-11
-cleaner: tools/clean.py (mutool)
+checker: tools/check.py
+checked: 2026-09-09
+source: 01-sources/Llm wiki/## Part 1꞉ Llm Wiki.txt
+cleaned: 02-clean/Llm wiki/part-1-llm-wiki.md
+source_kind: text
+extractor: byte read, decoded utf-8-sig
+independent_of: tools/clean.py — different extractor, different comparison method, no shared code
+verdict: PASS
+fails: 0
+warnings: 0
+upstream_defects: 0
 ---
 
 # Check — Llm wiki/## Part 1꞉ Llm Wiki.txt

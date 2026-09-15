@@ -1,8 +1,15 @@
 ---
-source: continual-harness-online-adaptation-for-self-improving-foundation-agents-2605-09998v1.check (1).md
-type: markdown
-cleaned: 2026-09-11
-cleaner: tools/clean.py (mutool)
+checker: tools/check.py
+checked: 2026-09-09
+source: 01-sources/continual-harness/Continual Harness- Online Adaptation for Self-Improving Foundation Agents 2605.09998v1.pdf
+cleaned: 02-clean/continual-harness/continual-harness-online-adaptation-for-self-improving-foundation-agents-2605-09998v1.md
+source_kind: pdf
+extractor: pypdf 6.14.2 PdfReader.extract_text()
+independent_of: tools/clean.py — different extractor, different comparison method, no shared code
+verdict: PASS WITH WARNINGS
+fails: 0
+warnings: 59
+upstream_defects: 0
 ---
 
 # Check — continual-harness/Continual Harness- Online Adaptation for Self-Improving Foundation Agents 2605.09998v1.pdf
@@ -97,91 +104,91 @@ source line 734
 
 ### RESPACED VALUE — the number `2510` survives with its internal spacing changed
 
-source line 753
+source line 752
 
 ### RESPACED VALUE — the number `5312` survives with its internal spacing changed
 
-source line 753
+source line 752
 
 ### RESPACED VALUE — the number `4217` survives with its internal spacing changed
 
-source line 753
+source line 752
 
 ### RESPACED VALUE — the identifier `calledfly_menu_navigator` survives with its internal spacing changed
 
-source line 922
+source line 921
 
 ### RESPACED VALUE — the identifier `itsautopress_buttons` survives with its internal spacing changed
 
-source line 922
+source line 921
 
 ### RESPACED VALUE — the identifier `thefly_menu_navigatortool` survives with its internal spacing changed
 
-source line 924
+source line 923
 
 ### RESPACED VALUE — the identifier `Theget_next_pokemon_press` survives with its internal spacing changed
 
-source line 925
+source line 924
 
 ### RESPACED VALUE — the identifier `withautopress_buttons` survives with its internal spacing changed
 
-source line 930
+source line 929
 
 ### RESPACED VALUE — the identifier `thebuttons_to_press` survives with its internal spacing changed
 
-source line 931
+source line 930
 
 ### RESPACED VALUE — the identifier `thetools_to_call` survives with its internal spacing changed
 
-source line 933
+source line 932
 
 ### RESPACED VALUE — the identifier `thefly_menu_navigator` survives with its internal spacing changed
 
-source line 946
+source line 945
 
 ### RESPACED VALUE — the path `markeda1/b1/c1/d1on` survives with its internal spacing changed
 
-source line 1055
+source line 1054
 
 ### RESPACED VALUE — the identifier `skill_0038skill_0037skill_0034smart_navskill_0013skill_0031skill_0020skill_0027skill_0029skill_0028skill_0019skill_0015skill_0012skill_0007skill_0005skill_0008skill_0004r…` survives with its internal spacing changed
 
-source line 1599
+source line 1598
 
 ### RESPACED VALUE — the identifier `therun_skill` survives with its internal spacing changed
 
-source line 1705
+source line 1704
 
 ### RESPACED VALUE — the identifier `oneskills_updated` survives with its internal spacing changed
 
-source line 1709
+source line 1708
 
 ### RESPACED VALUE — the identifier `175cumulative` survives with its internal spacing changed
 
-source line 1749
+source line 1748
 
 ### RESPACED VALUE — the identifier `Cumulativeexecute_custom_subagent` survives with its internal spacing changed
 
-source line 1768
+source line 1767
 
 ### RESPACED VALUE — the identifier `viareturn_to_orchestrator` survives with its internal spacing changed
 
-source line 1769
+source line 1768
 
 ### RESPACED VALUE — the identifier `viaprocess_memory` survives with its internal spacing changed
 
-source line 1789
+source line 1788
 
 ### RESPACED VALUE — the identifier `aprocess_memory` survives with its internal spacing changed
 
-source line 1828
+source line 1827
 
 ### RESPACED VALUE — the identifier `rate2` survives with its internal spacing changed
 
-source line 1881
+source line 1880
 
 ### RESPACED VALUE — the identifier `4candidate` survives with its internal spacing changed
 
-source line 1884
+source line 1883
 
 _… and 19 more of the same kind. All of them are in `03-check/FINDINGS.jsonl`._
 

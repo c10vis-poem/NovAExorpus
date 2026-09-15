@@ -1,8 +1,15 @@
 ---
-source: nova-corpus-device-stack.check (2).md
-type: markdown
-cleaned: 2026-09-11
-cleaner: tools/clean.py (mutool)
+checker: tools/check.py
+checked: 2026-09-09
+source: 01-sources/Nova Corpus — Device Stack.html
+cleaned: 02-clean/nova-corpus-device-stack.md
+source_kind: html
+extractor: stdlib html.parser, tag boundaries preserved (decoded utf-8-sig)
+independent_of: tools/clean.py — different extractor, different comparison method, no shared code
+verdict: FAIL
+fails: 7
+warnings: 0
+upstream_defects: 0
 ---
 
 # Check — Nova Corpus — Device Stack.html

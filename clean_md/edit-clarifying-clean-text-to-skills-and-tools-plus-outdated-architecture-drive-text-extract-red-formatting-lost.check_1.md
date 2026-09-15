@@ -1,8 +1,15 @@
 ---
-source: edit-clarifying-clean-text-to-skills-and-tools-plus-outdated-architecture-drive-text-extract-red-formatting-lost.check (1).md
-type: markdown
-cleaned: 2026-09-11
-cleaner: tools/clean.py (mutool)
+checker: tools/check.py
+checked: 2026-09-09
+source: 01-sources/architecture-edits/EDIT-Clarifying Clean Text to skills and tools plus outdated architecture (Drive text extract, RED FORMATTING LOST).txt
+cleaned: 02-clean/architecture-edits/edit-clarifying-clean-text-to-skills-and-tools-plus-outdated-architecture-drive-text-extract-red-formatting-lost.md
+source_kind: text
+extractor: byte read, decoded utf-8-sig
+independent_of: tools/clean.py — different extractor, different comparison method, no shared code
+verdict: PASS + UPSTREAM DEFECT
+fails: 0
+warnings: 0
+upstream_defects: 1
 ---
 
 # Check — architecture-edits/EDIT-Clarifying Clean Text to skills and tools plus outdated architecture (Drive text extract, RED FORMATTING LOST).txt

@@ -1,8 +1,15 @@
 ---
-source: github-docs-skill.check (1).md
-type: markdown
-cleaned: 2026-09-11
-cleaner: tools/clean.py (mutool)
+checker: tools/check.py
+checked: 2026-09-09
+source: 01-sources/SKILLS.md/GitHub_Docs_SKILL.txt
+cleaned: 02-clean/SKILLS.md/github-docs-skill.md
+source_kind: text
+extractor: byte read, decoded utf-8-sig (BOM stripped)
+independent_of: tools/clean.py — different extractor, different comparison method, no shared code
+verdict: PASS WITH WARNINGS
+fails: 0
+warnings: 1
+upstream_defects: 0
 ---
 
 # Check — SKILLS.md/GitHub_Docs_SKILL.txt
