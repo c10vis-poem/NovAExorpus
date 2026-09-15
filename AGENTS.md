@@ -4,18 +4,13 @@ Repository: `novae-xorpus`
 
 Authority: NovÆxorpus Master Canon Specifications
 
-## RULE 0 — TAKE NO ACTION WITHOUT AN EXPLICIT ORDER
+## RULE 1 — NO ACTION WITHOUT AN EXPLICIT PROMPT
 
-A skipped or unanswered question is NOT consent. Before any state-changing
-action — writing or editing a file, `git clone`, `chmod`, creating config,
-committing, pushing, anything beyond read-only investigation (reading files,
-`gh`/API GETs, searches) — state the concrete plan and get an explicit go-ahead.
+A skipped or unanswered question is NOT consent. No action — reading,
+searching, or anything else — without an explicit prompt or permitted
+request. State-changing or not, it doesn't matter.
 
-This holds even when the action is local and easily reversible. "It's just a
-local file, I can undo it" is not a license to skip asking — do the
-investigation, lay out exactly what you're about to do, then wait.
-
-## RULE 1 — READ THE REPO'S OWN CLAUDE.MD AND RESUME.MD FIRST
+## RULE 2 — READ THE REPO'S OWN CLAUDE.MD AND RESUME.MD FIRST
 
 Before doing anything else in any of the operator's repos — before
 investigating, before answering a question about that project's state —
@@ -36,3 +31,20 @@ step one, every session, every repo, no exceptions.
 
 Source: operator-confirmed 2026-09-13, cross-linked in `~/.claude/CLAUDE.md`
 on the operator's device and in the `gh-workflow-convention` memory entry.
+
+## Cross-engine compatibility (this file only — tool-agnostic)
+
+This file is read by any agent, not just Claude Code. Two rules that follow
+directly from testing across engines:
+
+- **Honey for Devs applies universally** — natively in Claude Code, as a
+  text-strip layer in Codex, as a Cordis plugin in DeepSeek Harness (dsh).
+  Apply its rules regardless of which engine is running.
+- **task-observer / GSD-style skill scaffolding is Claude-Code-only.** Codex
+  cannot parse markdown skill wrappers or the dual-layer activation protocol;
+  dsh's sandboxed plugin layer blocks task-observer's observation-log writes
+  entirely. Do not expect either to work, or try to force them, under Codex
+  or dsh — that's the `.claude/` directory's job, not this file's.
+- Claude Code and any local engine (Prime Agent, Codex, dsh) are never active
+  in the same repo directory at the same time — running two simultaneously
+  causes git-lock and file-write races.
