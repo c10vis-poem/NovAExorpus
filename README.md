@@ -38,7 +38,7 @@ Step 3. Start the next session:
 
 ## WHAT IS LEFT
 
-- 6 other repos still have stubs: novus-aexenti novaexopia aesop-xi horizons-ui novus-aesc novus-aeyre
+- 6 other repos still have stubs: novus-aexenti NovAExopia aesop-xi horizons-ui novus-aesc novus-aeyre
 - QNN-QAIRT 3035 files not ingested
 - canvas-ui 416 files not ingested
 - LlmWiki 259 files not ingested

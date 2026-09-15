@@ -21,11 +21,11 @@ All files currently staged in Google Drive (`__NÆX-Review-OUTPUT/`); **will be 
 4. **5+1 tier vault structure confirmed** — raw sources → wiki → recall cache → skills runtime → episodic logs, plus ephemeral working state
 5. **POCKET-35B dropped** — too large for on-device constraints, replaced by Gemma 4 12B on roster
 6. **Gemma 4 12B multimodal on model roster** — `gemma-4-12B-it-qat-UD-Q4_K_XL.gguf` confirmed in `~/downloads/`, audio branch available
-7. **Spelling: novaexopia (no ligature in URL)** — NOT `novaæxopia`, consistent with novae-xorpus/aesop-xi pattern
+7. **Spelling: NovAExopia (no ligature in URL)** — NOT `novaæxopia`, consistent with NovAExorpus/aesop-xi pattern
 8. **README pattern for vendor folders** — include projects, credentials, expirations, TODOs, human accessibility (not just "kid accessibility")
 9. **Vendor-workspace derive-from-function design** — each vendor gets its own folder shape derived from what that vendor IS in the stack, not templated; Qualcomm reference implementation locked (workbenches/sdks/runtimes/hardware/models/deploy-per-repo)
 10. **Google visibility proliferated** — Google gets first-class status in vendor folders (accounts/credits/services), not buried
-11. **Hybrid structure locked** — 12 top-level: aesop-xi/, novus-aexenti/, novaexopia/, skills-and-capabilities/, data_vault/, google/, qualcomm/, nvidia/, github/, anthropic/, primeintellect/, deepseek/, tools/
+11. **Hybrid structure locked** — 12 top-level: aesop-xi/, novus-aexenti/, NovAExopia/, skills-and-capabilities/, data_vault/, google/, qualcomm/, nvidia/, github/, anthropic/, primeintellect/, deepseek/, tools/
 
 ## BUILDERS_GUIDE corpus status
 
@@ -42,7 +42,7 @@ Remaining corpus sufficient for archive; no action needed.
 - **MAP.md** — human nav index (wikilinks, structure)
 - **manifest.jsonl** — machine RAG stream (never load whole, JSONL format)
 - **Wiki interior structure (proposed)** — vendors/, weights/, runtimes/, engines/, harnesses/, agents/, protocols/, scripts/, tools/, skills/, memory-subsystem/, projects/, entities/, architectures/, runbooks/, references/, operator-log/, indexes/
-- **Qualcomm vendor shape (reference)** — workbenches/{qairt-hexagon-htp, geniex-llamacpp-hexagon, litert-android, qat-training}, sdks/{qairt, litert, qai-hub-cli}, runtimes/, hardware/{per-chip-profiles}, models/, deploy-per-repo/{aesc, novaexopia, novus-aexenti}, raw/, clean/, notebook/, runbooks/
+- **Qualcomm vendor shape (reference)** — workbenches/{qairt-hexagon-htp, geniex-llamacpp-hexagon, litert-android, qat-training}, sdks/{qairt, litert, qai-hub-cli}, runtimes/, hardware/{per-chip-profiles}, models/, deploy-per-repo/{aesc, NovAExopia, novus-aexenti}, raw/, clean/, notebook/, runbooks/
 - **4 agent operating modes** — Dev-Terminal (ECC only) / Sovereign-Edge (Prime Agent only) / Prime-with-Claude-as-Query (Prime calls Claude subprocess) / Hybrid-Auditor (cross-auditor over combined traces)
 - **Modular hot-swap for harnesses** — 4 well-defined interfaces: model via OmniRoute, memory via MCPs, tools via MCPs, output to trajectories
 
@@ -59,7 +59,7 @@ Do NOT start post-tonight targets until these are complete:
 - Grill session with docs
 - New repo build-out (Hybrid 12-top-level structure)
 - Œræcle on-device oracle wiring
-- Model weights into novaexopia
+- Model weights into NovAExopia
 - DeepSeek harness spec
 - vendor-workspace skill implementation
 
@@ -97,12 +97,12 @@ All audit/review/proposal docs staged at `__NÆX-Review-OUTPUT/`:
 - MASTER-COPIES/ folder (S6/F6 reconciliation + 13 appendices)
 - Reference docs from background agent (LIVING_MASTER_CANON output)
 
-**Action for next session**: Move all to novae-xorpus/ (likely `/REVIEW/` subfolder or root level, TBD with operator).
+**Action for next session**: Move all to NovAExorpus/ (likely `/REVIEW/` subfolder or root level, TBD with operator).
 
 ## Trigger for next session
 
 Pick up exactly where this ended:
-1. Confirm which deliverables to move from Drive to novae-xorpus (all of them? prioritize?)
+1. Confirm which deliverables to move from Drive to NovAExorpus (all of them? prioritize?)
 2. If moving all: organize structure in repo (root-level REVIEW/ subfolder? merge into wiki/?))
 3. Continue with Immediate Next Targets (DroidDesk, Æsc, Termux fold-in) — these are operator-declared priority, sequenced
 4. For each deliverable moved: confirm operator review + lock in any new decisions before downstream builds

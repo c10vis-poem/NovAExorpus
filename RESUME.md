@@ -1,5 +1,5 @@
 # RESUME.md — Session Ledger
-Repository: novae-xorpus
+Repository: NovAExorpus
 Last session: 2026-09-15
 
 ## CORRECTION TO PRIOR SESSION'S CLAIM
@@ -16,11 +16,11 @@ total, not "done," until the whole corpus is ingested.
 
 Read, not summarized from memory — full source list at the bottom.
 
-- **All 7 base repos pulled current** (aesop-xi, novae-xorpus, novus-aexenti,
-  novaexopia, novus-aesc, novus-aeyre, horizons-ui) — local clones were 6-9
+- **All 7 base repos pulled current** (aesop-xi, NovAExorpus, novus-aexenti,
+  NovAExopia, novus-aesc, novus-aeyre, horizons-ui) — local clones were 6-9
   days stale, on an abandoned `restructure/drive-file-tree` branch never
   merged (never even pushed, for this repo). `main` on GitHub was already
-  far ahead (operating-rules PRs, full wiki population here on novae-xorpus).
+  far ahead (operating-rules PRs, full wiki population here on NovAExorpus).
 - **RFMC located and fully read** — `Drive_sync/LlmWiki/Repo-Files-Map-core/`,
   7 files, existed for weeks (not "today" — a file-mtime misread corrected
   mid-session). Internally consistent: 8 canonical repos (flat, not nested),
@@ -51,7 +51,7 @@ Read, not summarized from memory — full source list at the bottom.
   `raw-databank/README-SALVAGE.md` (real post-mortem on what went wrong,
   worth reading before rebuilding: half-finished GenieX migration, four
   separate silently-swallowed exceptions that hid it for months).
-- **`novaexopia/horizons-ui/` subfolder flagged, not yet resolved** — built
+- **`NovAExopia/horizons-ui/` subfolder flagged, not yet resolved** — built
   from the now-superseded Document 05 nested model, duplicates the fresh
   standalone repo above.
 - **Obsidian**: live vault confirmed = `Documents/NovAExorpus/` (NOT the old

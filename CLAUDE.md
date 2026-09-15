@@ -1,6 +1,6 @@
-# CLAUDE.md — novae-xorpus (Claude Code only)
+# CLAUDE.md — NovAExorpus (Claude Code only)
 
-Repository: `novae-xorpus` — NovÆxorpus Federated Master Corpus Root.
+Repository: `NovAExorpus` — NovÆxorpus Federated Master Corpus Root.
 
 Tool-agnostic rules (apply to every engine, not just Claude Code) live in
 `AGENTS.md` — read that first, every session.
