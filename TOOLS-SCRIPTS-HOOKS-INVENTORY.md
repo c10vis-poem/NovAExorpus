@@ -13,7 +13,7 @@ and reality disagrees, reality wins and the doc claim is noted as stale.
 | Skill | Where | Status |
 |---|---|---|
 | `honey` + 13 satellites (`honey-ccr`, `honey-chat`, `honey-compress`, `honey-debt`, `honey-design`, `honey-eco`, `honey-gain`, `honey-hive`, `honey-loop`, `honey-memory`, `honey-px`, `honey-review`, `honey-superpowers`) | `~/.claude/skills/honey*` | Active, plugin installed |
-| `code-review-graph` (MCP, 30 tools) | MCP connector | Connected. Registered repos: `aesop-xi`, `NovA-terrestrial-brain` only — **not** `novae-xorpus` |
+| `code-review-graph` (MCP, 30 tools) | MCP connector | Connected. Registered repos: `aesop-xi`, `NovA-terrestrial-brain` only — **not** `NovAExorpus` |
 | `mem0` (MCP + plugin) | MCP connector + `~/.claude/skills/` | Connected. Live entities incl. `novaexorpus-corpus`, `novaexorpus-test` (created 2026-09-09) |
 | `reverse-skill` / your fork `NoVa-reverse-skill` | `~/repos/NoVa-reverse-skill` | Not a Claude skill/MCP — a routing repo read via its own `AGENTS.md`/`RULES.md` when a reverse-engineering task starts |
 
@@ -30,16 +30,16 @@ and reality disagrees, reality wins and the doc claim is noted as stale.
 
 ### False leads — ruled out, don't re-chase
 - `technical-builder-style` — real, but a Claude writing-style skill unrelated to this project. Canonical copy: `/storage/emulated/0/archive/technical-builder-style.SKILL.md`.
-- `~/repos/novae-xorpus/skills-and-capabilities/{code-review-graph,notebook-lmpy,obsidian-skills}` — empty directories, placeholder only.
+- `~/repos/NovAExorpus/skills-and-capabilities/{code-review-graph,notebook-lmpy,obsidian-skills}` — empty directories, placeholder only.
 - ECC (`ecc:code-reviewer`, `ecc:planner`, etc.) — **intentionally uninstalled by the operator 2026-09-09.** Plugin removed, hooks stripped from `~/.claude/settings.json`, marketplace deregistered. Do not re-raise as a gap.
 
 ---
 
 ## 2. Tools / Scripts (25 total, confirmed by opening each file)
 
-### `aesop-xi/tools/` + `novaexopia/tools/` (6 scripts — real, but **uncommitted**, SD-card only)
-Not present in `~/repos/aesop-xi` or `~/repos/novaexopia` — only in the SD-card mirror
-`/storage/emulated/0/Documents/NovÆxorpus/NovÆxorpus_Repo's/{aesop-xi,novaexopia}/tools/`.
+### `aesop-xi/tools/` + `NovAExopia/tools/` (6 scripts — real, but **uncommitted**, SD-card only)
+Not present in `~/repos/aesop-xi` or `~/repos/NovAExopia` — only in the SD-card mirror
+`/storage/emulated/0/Documents/NovÆxorpus/NovÆxorpus_Repo's/{aesop-xi,NovAExopia}/tools/`.
 
 | Script | What it does |
 |---|---|
@@ -63,22 +63,22 @@ Not present in `~/repos/aesop-xi` or `~/repos/novaexopia` — only in the SD-car
 pipeline the `drive-to-obsidian-migration` skill documents.
 
 ### Placed this session
-- `~/repos/novaexopia/aesc/scripts/agent_panel.sh` — mobile workspace control panel (sync/log/grep menu). Pulled from Drive `3-FILES-MGMT16-SCRIPTS-(16-files)/`, placed 2026-09-10. Repo was genuinely empty before this.
+- `~/repos/NovAExopia/aesc/scripts/agent_panel.sh` — mobile workspace control panel (sync/log/grep menu). Pulled from Drive `3-FILES-MGMT16-SCRIPTS-(16-files)/`, placed 2026-09-10. Repo was genuinely empty before this.
 
 ### Known real gap — not yet found anywhere
-- `system_housekeeper.sh` (named in `05_FEDERATED_FILE_TREE_TOPOLOGY_MASTER.md` as belonging in `novaexopia/aesc/scripts/`) — only a *patch fragment* to append to it was found (the Obsidian-vault-sweeper addendum, in Drive `OBSIDIAN /MARKOR-SWEEPER PATCH.TXT`). The base script itself has not been located. Don't assume it doesn't exist — check Drive/SD-card more before concluding that.
+- `system_housekeeper.sh` (named in `05_FEDERATED_FILE_TREE_TOPOLOGY_MASTER.md` as belonging in `NovAExopia/aesc/scripts/`) — only a *patch fragment* to append to it was found (the Obsidian-vault-sweeper addendum, in Drive `OBSIDIAN /MARKOR-SWEEPER PATCH.TXT`). The base script itself has not been located. Don't assume it doesn't exist — check Drive/SD-card more before concluding that.
 
 ---
 
 ## 3. Hooks
 
 **Every `hooks/` folder in all 8 federated repos is an empty `POINTER.md` stub** — confirmed by
-`find` across the whole SD-card mirror (aesop-xi, horizons-ui, novae-xorpus, novaexopia,
+`find` across the whole SD-card mirror (aesop-xi, horizons-ui, NovAExorpus, NovAExopia,
 novus-aesc, novus-aexenti, novus-aeyre, raw_database). This is real, not a placeholder-only
 appearance — but a POINTER.md pointing to "Authority: 00-05" is a lead to follow, not a dead end:
 
 - **The real git post-commit hook already exists and works**: `~/repos/aesop-xi/.git/hooks/post-commit`
-  calls `~/novae-xorpus/tools/regenerate_masters.sh` after every commit. Functionally equivalent
+  calls `~/NovAExorpus/tools/regenerate_masters.sh` after every commit. Functionally equivalent
   to (simpler than) the version `02_DUMBASS_UNIVERSAL_MEMORY_SPEC.md` §4 describes. Don't overwrite it.
 - Installed Claude Code plugin hooks (the only other real hooks on this device): `honey` (active),
   `mem0` (active), `claude-video/watch` (installed). `ecc`'s cached hooks are stale/inert since
@@ -103,9 +103,9 @@ Only these 2 of the ~200+ uploaded files were checked. Treat the rest as unverif
 
 ## 5. Where the real corpora actually live (don't re-derive this either)
 
-- `~/repos/novae-xorpus` — **the real git repo**, canonical root, has docs 00-05 + `AGENTS.md`/`CLAUDE.md`/`NAMING-CANON.md`/`RESUME.md`.
-- `~/novae-xorpus` — a **separate, diverged checkout** (different HEAD). Has its own `MASTER-CLAUDE.md`/`MASTER-RESUME.md`/`GRILL-MANIFEST.md`. Not reconciled with `~/repos/novae-xorpus` — flag to the operator before treating either as sole truth.
-- `~/repos/novae-xorpus`'s own corpus pipeline: `01-sources/` → `02-clean/` → `03-check/`, via `tools/clean.py` + `tools/check.py`.
+- `~/repos/NovAExorpus` — **the real git repo**, canonical root, has docs 00-05 + `AGENTS.md`/`CLAUDE.md`/`NAMING-CANON.md`/`RESUME.md`.
+- `~/NovAExorpus` — a **separate, diverged checkout** (different HEAD). Has its own `MASTER-CLAUDE.md`/`MASTER-RESUME.md`/`GRILL-MANIFEST.md`. Not reconciled with `~/repos/NovAExorpus` — flag to the operator before treating either as sole truth.
+- `~/repos/NovAExorpus`'s own corpus pipeline: `01-sources/` → `02-clean/` → `03-check/`, via `tools/clean.py` + `tools/check.py`.
 - SD-card `raw_database` (`/storage/emulated/0/Documents/NovÆxorpus/NovÆxorpus_Repo's/raw_database/`) — a **separate** corpus, `raw/` → `clean_md/`, 106→97 files as of last check. Different numbers from the repo's own pipeline — don't conflate the two.
 - SD-card `NovÆxorpus_Repo's/` folder itself is a one-way content mirror (no `.git`) of the real repos, for apps (Obsidian, Gemini) that can't reach Termux's private storage. Last full local→Drive sync: 2026-09-10, this session (see §4 above for fidelity caveats).
 </content>
