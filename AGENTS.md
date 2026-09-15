@@ -29,6 +29,10 @@ step one, every session, every repo, no exceptions.
 6. Forked repos: at the start of every session, sync the fork's default
    branch from `upstream` before any other work.
 
+The point of this workflow is that everything reaches `main` — a branch
+that never gets a PR opened, or a PR that never gets merged, is a failure
+of this rule, not a valid alternative to it. Don't let work sit stranded.
+
 Source: operator-confirmed 2026-09-13, cross-linked in `~/.claude/CLAUDE.md`
 on the operator's device and in the `gh-workflow-convention` memory entry.
 
