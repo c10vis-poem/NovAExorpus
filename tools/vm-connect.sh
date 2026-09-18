@@ -86,10 +86,47 @@ cmd_start() {
   esac
 }
 
+cmd_up() {
+  echo "[vm] Starting VM..."
+  if command -v gcloud >/dev/null 2>&1; then
+    gcloud compute instances start novae-vm --zone=us-central1-a --quiet
+  else
+    echo "ERROR: gcloud not installed. Install it or start from GCP console."
+    echo "  https://console.cloud.google.com/compute/instances"
+    return 1
+  fi
+  echo "[vm] Waiting for services..."
+  local tries=0
+  while [ $tries -lt 30 ]; do
+    if curl -sf --connect-timeout 3 "http://$VM_IP:20128/api/monitoring/health" >/dev/null 2>&1; then
+      echo "[vm] OmniRoute UP — VM ready"
+      cmd_status
+      return 0
+    fi
+    tries=$((tries + 1))
+    sleep 2
+  done
+  echo "[vm] Timeout waiting for OmniRoute after 60s"
+  return 1
+}
+
+cmd_down() {
+  echo "[vm] Stopping VM..."
+  if command -v gcloud >/dev/null 2>&1; then
+    gcloud compute instances stop novae-vm --zone=us-central1-a --quiet
+  else
+    echo "ERROR: gcloud not installed. Stop from GCP console."
+    return 1
+  fi
+  echo "[vm] Stopped. No compute charges while off."
+}
+
 case "${1:-status}" in
   status) cmd_status ;;
   ssh)    shift; cmd_ssh "$@" ;;
   open)   shift; cmd_open "$@" ;;
   start)  shift; cmd_start "$@" ;;
-  *)      echo "Usage: vm-connect.sh {status|ssh|open <svc>|start <svc>}"; exit 1 ;;
+  up)     cmd_up ;;
+  down)   cmd_down ;;
+  *)      echo "Usage: vm-connect.sh {status|ssh|open <svc>|start <svc>|up|down}"; exit 1 ;;
 esac

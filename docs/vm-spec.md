@@ -16,19 +16,32 @@ VM exists and what it runs.
 
 Health check: `curl -sf http://34.31.112.77:20128/api/monitoring/health`
 
-## Available ports (not yet allocated)
+## Planned services (install via `tools/vm-install.sh`)
 
-These ports are available for additional services. Each needs a GCP
-firewall rule before it's reachable externally.
+| Port | Service | Purpose |
+|------|---------|---------|
+| 8080 | code-server | VS Code in browser — full IDE from phone |
+| 7681 | ttyd | Terminal in browser — shell access from any device |
+| 8001 | dsh | DeepSeek harness — cloud inference via OpenRouter |
 
-| Port | Intended use | Service |
-|------|-------------|---------|
-| 8080 | VS Code in browser | code-server |
-| 8888 | Jupyter / notebook | jupyter-lab |
-| 3000 | Desktop in browser | noVNC + Xvfb |
-| 7681 | Terminal in browser | ttyd (WebSocket shell) |
-| 11434 | Large model inference | ollama |
-| 8001 | DeepSeek harness | dsh web UI |
+## Architecture split
+
+- **Phone (Snapdragon NPU)** — local model inference via QAIR/T + HTP
+  SDK + GenieX. Qwen Coder and other models run on-device weights.
+- **VM (GCP)** — cloud dev environment (code-server, dsh), infrastructure
+  services (OmniRoute, TB), and DeepSeek via OpenRouter.
+- **OmniRoute** — bridges both. Phone agents hit OmniRoute for routing,
+  memory retrieval, and cloud model calls.
+
+## VM lifecycle
+
+Auto-shutdown after 60 minutes idle (cron on VM). Start/stop from phone:
+```bash
+bash tools/vm-connect.sh up     # start VM, wait for health
+bash tools/vm-connect.sh down   # stop VM (no compute charges)
+bash tools/vm-connect.sh status # check all services
+```
+Requires gcloud CLI on the phone (`pip install google-cloud-sdk`).
 
 ## Access patterns
 
