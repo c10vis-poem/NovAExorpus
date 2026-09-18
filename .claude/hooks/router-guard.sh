@@ -55,4 +55,18 @@ else
 fi
 
 echo "[router-guard] $CHECKS_PASSED/$CHECKS_TOTAL layers verified" >&2
+
+# Output instructions to stdout — these become agent context
+cat <<'INSTRUCTIONS'
+[ROUTER-GUARD SESSION START — MANDATORY ACTIONS]
+
+Before your FIRST tool call, do these in order:
+1. Invoke the task-observer skill (Skill tool, skill: "task-observer")
+2. Search mem0 for prior context about the user's task (mcp__mem0-mcp__search_memories)
+3. Check terrestrial-brain for open thoughts/tasks if relevant
+4. Read RESUME.md in this repo
+
+Honey mode is ACTIVE. Minimum code, minimum words. Do not skip these steps.
+INSTRUCTIONS
+
 exit 0

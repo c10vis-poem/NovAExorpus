@@ -1,7 +1,7 @@
 # RESUME.md — Session Ledger
 
 Repository: NovAExorpus (renamed from `novae-xorpus` 2026-09-15)
-Last session: 2026-09-15
+Last session: 2026-09-18
 
 ## REPO WAS RENAMED THIS SESSION
 
@@ -60,14 +60,25 @@ that repo is the RUNTIME.
 - **novus-aexenti** = cognitive plane (MoE brain)
 - **NovAExopia** = execution plane (harnesses + tools)
 
-## RUNTIME INFRA VERIFIED LIVE
+## RUNTIME INFRA VERIFIED LIVE (updated 2026-09-18)
 
-- Postgres 18.2 on `localhost:5432` (data: `~/pgdata/`)
+- **Terrestrial Brain**: running on GCP VM 34.31.112.77:8000, systemd-managed.
+  Full round-trip proven 2026-09-18: phone→TB→OpenRouter→Postgres→vault markdown.
+  Verification code LUNAR-42-DELTA in DB (id `8c79f79f`) and vault file
+  `memories/2026-09-18-The-NovAExorpus-vault-verification-code.md`.
+  Auth: `x-brain-key` header, key in `$PREFIX/etc/secrets.env` as `TB_MCP_KEY`.
+- **mem0**: cloud MCP at `mcp.mem0.ai`, search + write verified 2026-09-18.
+  Plugin `mem0@mem0-plugins v0.3.0` installed, doctor passes, auth connected.
+- **code-review-graph**: 2 repos indexed (NovA-terrestrial-brain, aesop-xi).
+  Runs via proot-distro debian.
+- **OmniRoute**: running on VM port 20128, has dashboard UI. Not yet wired
+  as MCP (placeholder in `.mcp.json`).
+- Postgres 18.2 on VM `127.0.0.1:5432` (DB: `terrestrial_brain`, role: `brain_app`)
 - pgvector v0.8.6 available
-- mem0 hosted MCP round-trip verified with `~/.mem0/.env`
-  (`MEM0_API_KEY` + `MEM0_MCP_TOKEN`, chmod 600, auto-loaded by ~/.zshrc)
-- `mem0@mem0-plugins v0.3.0` plugin already installed (2026-09-09)
+- Obsidian vault at `~/storage/shared/Documents/NovAExorpus/` — TB writes
+  to `memories/` subfolder automatically on every thought/task/project insert.
 - `memory-triage` skill symlinked into `~/.claude/skills/`
+- task-observer: 2 observations recorded, working
 
 ## CORRECTION TO PRIOR "PHASE 1-4 COMPLETE" CLAIM
 
@@ -87,15 +98,46 @@ files in vault total). Not "complete" — a fraction. See PENDING.md #2.
    corpus.
 5. **15-20 tools/skills/scripts** build-out.
 
+## WHAT LANDED 2026-09-18
+
+- **TB round-trip proven end-to-end** — LUNAR-42-DELTA fact written through
+  full chain: phone → TB MCP → OpenRouter (split + embed) → Postgres insert
+  → vault markdown file with YAML frontmatter
+- **TB MCP auth fixed** in `~/.claude.json` — placeholder `REPLACE_WITH_MCP_ACCESS_KEY`
+  replaced with actual key from `$PREFIX/etc/secrets.env`
+- **NovAExorpus repo**: committed router-guard output style, MCP config
+  (`.mcp.json`), agents (corpus-architect, builder), pipeline wiring,
+  hooks, settings (16 files, commit `55ca7fc` / cherry-picked to `f31cdb3`)
+- **TB schema fixes on VM** (not in repo migrations):
+  `thoughts.reliability` changed double precision→text, added columns
+  `reference_id`, `note_snapshot_id`, `metadata`, granted `brain_app` access
+- **Launch script**: `tools/launch.sh` — sources secrets, starts Claude Code
+  with router-guard output style in corpus root
+- **Stale branches identified** — 6 local branches from merged PRs,
+  `master` remote branch 6 ahead / 23 behind (superseded content)
+
+## WHAT'S NOT DONE
+
+- Push `feat/pipeline-wiring-2026-09-18` branch + PR (credential classifier
+  blocked earlier push; may need manual push or history rewrite)
+- Delete stale remote branches (master, claude/*, happy-ending-*, session-close-*)
+- Close draft PR #7 (`restructure/drive-file-tree`) if superseded
+- OmniRoute MCP wiring (placeholder in `.mcp.json`, needs API key)
+- mem0 vault export (write mem0 memories to vault markdown like TB does)
+- Vault git remote not added, Obsidian Git plugin not configured
+- Shell alias `cc` in `.zshrc`
+- Global `~/.claude/CLAUDE.md` rewrite (deferred per memory)
+- Reasoning Bank / Continual Harness (spec-only, not on disk)
+
 ## FIRST ACTION NEXT SESSION
 
 ```bash
 cd ~/repos/NovAExorpus
-bash tools/bootstrap.sh
+bash tools/launch.sh
 ```
 
-Then read `aesop-xi/CLAUDE.md §Runtime memory stack` for the architecture,
-and pick the OmniRoute deploy target.
+The CLAUDE.md session start protocol auto-fires: searches mem0, checks TB
+for open tasks, reads this RESUME.md. No manual prompt needed.
 
 ## Sources actually read this session (not from memory/summary)
 
