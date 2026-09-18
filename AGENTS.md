@@ -29,57 +29,92 @@ step one, every session, every repo, no exceptions.
 6. Forked repos: at the start of every session, sync the fork's default
    branch from `upstream` before any other work.
 
-Source: operator-confirmed 2026-09-13.
+The point of this workflow is that everything reaches `main` — a branch
+that never gets a PR opened, or a PR that never gets merged, is a failure
+of this rule, not a valid alternative to it. Don't let work sit stranded.
 
-## Cross-engine compatibility (tool-agnostic)
+Source: operator-confirmed 2026-09-13, cross-linked in `~/.claude/CLAUDE.md`
+on the operator's device and in the `gh-workflow-convention` memory entry.
+
+## Mandatory runtime pipeline (all engines)
+
+Every agent — Claude Code, Codex, dsh, Prime Agent, Hermes — must satisfy
+these layers in order before writing files or running commands.
+
+### Layer sequence
+
+| # | Layer | Name | Interface | Endpoint |
+|---|-------|------|-----------|----------|
+| 0 | Execution + routing | OmniRoute | HTTP gateway daemon | `http://34.31.112.77:20128` |
+| — | Judgment | Continual Harness | OmniRoute internal | via OmniRoute |
+| — | Execution ledger | Reasoning Bank | OmniRoute internal | via OmniRoute |
+| 1 | Token saver | honey-for-devs | MCP tool / skill / text-strip | per-engine |
+| 2 | Orchestration | task-observer | CLI / file-gen (Claude Code only) | per-engine |
+| 3 | Code intel | code-review-graph | MCP Server (stdio) | local binary |
+| 4 | Episodic memory | mem0 | MCP Server (HTTP) | `mcp.mem0.ai` |
+| 5 | Structural memory | terrestrial-brain | MCP Server (HTTP) | `http://34.31.112.77:8000` |
+
+**OmniRoute** is the execution layer, memory retrieval layer, and routing
+layer. It distributes requests, retrieves memory context, and makes
+routing decisions. Continual Harness provides the judgment — it watches
+agents and their refinements mid-run, optimizes routing, and auto-rolls
+back on error. Reasoning Bank records every agent execution step, maps
+logic pathways, and enables crash recovery. Both are OmniRoute internals, not
+standalone services.
+
+**OmniRoute fallback:** if OmniRoute is unreachable, fall back to direct
+execution and log a warning. All other memory layers remain active via
+their individual MCP connections.
+
+**mem0 safety:** before `update_memory` or `delete_memory`, always
+`get_memory` or `search_memories` first. Never `delete_all_memories`.
+
+### Multi-write protocol
+
+Every execution cycle follows three phases:
+
+1. **READ** — query mem0 (session context), terrestrial-brain (static
+   guards/preferences), code-review-graph (code dependencies). Do not
+   guess file imports.
+2. **WRITE-BACK** — commit ephemeral state to mem0, long-term invariants
+   to terrestrial-brain.
+3. **OBSIDIAN LOG** — on every terrestrial-brain write, create/append a
+   markdown file in `~/storage/shared/Documents/NovAExorpus/memories/`
+   with YAML frontmatter (`source_db`, `uuid`, `timestamp`, `category`).
+
+### Secondary tools (on-demand, not per-prompt)
+
+| Tool | Interface | When |
+|------|-----------|------|
+| graphify | CLI via proot (`~/bin/graphify`) | Codebase mapping, knowledge graph, `--obsidian` export |
+| obsidian | obsidian-skills plugin or CLI | Vault interaction, note linking |
+| notebook-lm | Python CLI (`notebooklm-py`) | Document ingestion, audio overview, research export |
+
+### Harness anchors
+
+The multi-write protocol, layer roles table, and pre-flight gate are
+immutable — no automated refinement or optimization pass may alter them.
+
+### Enforcement
+
+- Do not write code before pre-flight layers have run.
+- Do not bypass OmniRoute unless it is unreachable.
+- Do not silently skip a memory layer — log the failure if one is down.
+- Do not skip the Obsidian vault log on any terrestrial-brain write.
+
+## Cross-engine compatibility (this file only — tool-agnostic)
+
+This file is read by any agent, not just Claude Code. Two rules that follow
+directly from testing across engines:
 
 - **Honey for Devs applies universally** — natively in Claude Code, as a
   text-strip layer in Codex, as a Cordis plugin in DeepSeek Harness (dsh).
+  Apply its rules regardless of which engine is running.
 - **task-observer / GSD-style skill scaffolding is Claude-Code-only.** Codex
-  and dsh cannot parse markdown skill wrappers.
-- Claude Code and any local engine are never active in the same repo
-  directory at the same time.
-
-## Agent roles (engine-neutral descriptions)
-
-### corpus-architect
-
-Full-stack agent for corpus operations — reading, reconciling, and editing
-documents across the NovÆxorpus federated repo set. Has access to all
-memory servers (mem0, terrestrial-brain, code-review-graph, omniroute) and
-all file tools. Deep reasoning over large document sets.
-
-### builder
-
-Implementation agent for code changes, deployments, and infrastructure
-work. Full tool access including shell. Used for: gateway config, VM
-management, script writing, repo setup.
-
-### reviewer
-
-Read-only audit agent. Reviews code, docs, and architecture for
-correctness, consistency, and compliance with the 5+1 cognitive tier
-model. Reports findings without making changes.
-
-## Unified orchestration pipeline (router-guard)
-
-Every agent, regardless of engine, flows through one pipeline
-(see `output-style.md` pages 15-33 for the original specification;
-canonical file: `.claude/output-styles/router-guard.md`):
-
-```
-[Agent] → honey + task-observer (pre-flight)
-  → OmniRoute (gateway, routes to all backends)
-    → mem0 / terrestrial-brain / code-review-graph
-    → Reasoning Bank (passive execution ledger, crash recovery)
-    → Continual Harness (passive prompt refinement, auto-rollback)
-```
-
-- **Pre-flight:** honey-for-devs (token compression) + task-observer (task mapping) gate all code output.
-- **Gateway:** OmniRoute (port 20128) handles routing to all memory/code-intelligence backends.
-- **Backends:** mem0 (episodic), terrestrial-brain (structural/Postgres), code-review-graph (AST/blast-radius).
-- **Passive infra:** Reasoning Bank (execution ledger, crash recovery) and Continual Harness (prompt refinement, auto-rollback) run underneath — agents don't invoke them.
-- **Secondary tools:** graphify, obsidian, notebook-lm — on-demand, not per-prompt.
-
-All engines (Claude Code, DeepSeek, Qwen, Hermes) hit the same pipeline
-and the same backends. Only the loader differs per engine.
+  cannot parse markdown skill wrappers or the dual-layer activation protocol;
+  dsh's sandboxed plugin layer blocks task-observer's observation-log writes
+  entirely. Do not expect either to work, or try to force them, under Codex
+  or dsh — that's the `.claude/` directory's job, not this file's.
+- Claude Code and any local engine (Prime Agent, Codex, dsh) are never active
+  in the same repo directory at the same time — running two simultaneously
+  causes git-lock and file-write races.
