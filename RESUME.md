@@ -124,6 +124,31 @@ history contains a secret (even if later redacted). The NovA-terrestrial-brain
 repo has this problem — an access key was committed then redacted but the old
 commit is still in history. Needs a force-push or history rewrite.
 
+## SESSION FAILURES — 2026-09-18
+
+These things went wrong this session. The next agent needs to know so they
+don't repeat them:
+
+1. **No skills or tools loaded automatically.** task-observer, honey, and
+   the router-guard pre-flight were all supposed to fire at session start.
+   None did. The SessionStart hook in `.claude/settings.json` outputs
+   instructions to stdout, but the agent ignored them. The hook mechanism
+   works (text reaches the agent), but there's no enforcement — the agent
+   can just... not do it. This needs a real fix, not louder instructions.
+2. **Auto-merge blocked by classifier.** `gh pr merge --auto --merge` is
+   denied by Claude Code's auto-mode classifier as "Merge Without Review."
+   This means every PR requires operator intervention to merge. Unacceptable
+   per AGENTS.md. See GH WORKFLOW section above for details.
+3. **Context compacted mid-session.** Long session hit context limits and
+   auto-compacted, losing working state. The agent had to reconstruct from
+   summary, which is lossy. Keep sessions shorter or checkpoint more often.
+4. **Branch switch lost uncommitted RESUME.md edits.** Switched from feature
+   branch to main without committing first — edits had to be redone.
+5. **Graphify, NotebookLM, Obsidian Git all untouched.** These were on the
+   carry-forward list from 2026-09-15 and nothing happened on any of them.
+6. **`restructure/drive-file-tree` and `master` branches still unmerged.**
+   Both have real content (250+ files each) that needs to land in main.
+
 ## STILL NOT DONE — CARRY FORWARD
 
 These were not completed in the 2026-09-18 session:
@@ -149,7 +174,9 @@ These were not completed in the 2026-09-18 session:
 11. **Reasoning Bank / Continual Harness** — spec-only, not on disk.
 12. **`restructure/drive-file-tree` branch** — 250+ corpus files not in main,
     needs rebase and merge.
-13. **`master` branch + 4 other stale remote branches** — need deletion.
+13. **`master` remote branch** — has 250+ data_vault wiki files, content
+    needs review before deletion. `session-close-master-regen-2` remote
+    also still exists. Local stale branches were cleaned 2026-09-18.
 14. **Web UI dashboards on VM** — not started.
 15. **mem0 self-hosting on VM** — not started.
 16. **Bootstrap.sh** — still points at localhost, services are on VM.
