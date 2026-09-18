@@ -14,23 +14,17 @@ trigger.
 
 ## MCP servers
 
-Defined in `.mcp.json` at repo root: `mem0` (memory) and `terrestrial-brain`
-(corpus knowledge base). Both take their endpoint/credentials from env vars
-— see `.mcp.json` for the exact variable names. Set them locally; never
-commit values.
+Defined in `.mcp.json` at repo root: `omniroute` (gateway),  `mem0`
+(episodic memory), and `terrestrial-brain` (structural memory). All take
+endpoint/credentials from env vars — see `.mcp.json` for the exact
+variable names. Set them locally; never commit values.
 
-## Memory — runtime infrastructure (references aesop-xi)
+## Mandatory pipeline
 
-The whole stack's runtime memory infrastructure (mem0, terrestrial-brain,
-OmniRoute, reasoning-bank, continual-harness) lives canonically in
-**aesop-xi** — see `~/repos/aesop-xi/CLAUDE.md` §Runtime memory stack.
-Not duplicated here.
+The 6-layer pipeline, multi-write protocol, secondary tools, and
+enforcement rules are in `AGENTS.md` §Mandatory runtime pipeline — that's
+the canonical, engine-agnostic version. This file does not duplicate them.
 
-Every agent in this repo — regardless of harness (Claude Code, Codex, dsh,
-Prime Agent, Hermes) — reaches memory via one MCP endpoint:
-`http://localhost:20128/mcp` (OmniRoute). Never call mem0 or
-terrestrial-brain directly; that bypasses OmniRoute's async memory tap
-and the observation layer.
-
-**Bootstrap this repo**: `bash tools/bootstrap.sh` — thin wrapper that
-calls aesop-xi's canonical bootstrap first.
+**Launch**: `bash tools/launch.sh` (aliased as `cc`) — sources secrets,
+runs pre-flight health checks, starts Claude Code with the `router-guard`
+output style.

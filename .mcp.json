@@ -1,5 +1,12 @@
 {
   "mcpServers": {
+    "omniroute": {
+      "type": "http",
+      "url": "${OMNIROUTE_MCP_URL}",
+      "headers": {
+        "Authorization": "Bearer ${OMNIROUTE_API_KEY}"
+      }
+    },
     "mem0": {
       "type": "http",
       "url": "${MEM0_MCP_URL}",

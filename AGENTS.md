@@ -36,6 +36,72 @@ of this rule, not a valid alternative to it. Don't let work sit stranded.
 Source: operator-confirmed 2026-09-13, cross-linked in `~/.claude/CLAUDE.md`
 on the operator's device and in the `gh-workflow-convention` memory entry.
 
+## Mandatory runtime pipeline (all engines)
+
+Every agent — Claude Code, Codex, dsh, Prime Agent, Hermes — must satisfy
+these layers in order before writing files or running commands.
+
+### Layer sequence
+
+| # | Layer | Name | Interface | Endpoint |
+|---|-------|------|-----------|----------|
+| 0 | Execution + routing | OmniRoute | HTTP gateway daemon | `http://34.31.112.77:20128` |
+| — | Judgment | Continual Harness | OmniRoute internal | via OmniRoute |
+| — | Execution ledger | Reasoning Bank | OmniRoute internal | via OmniRoute |
+| 1 | Token saver | honey-for-devs | MCP tool / skill / text-strip | per-engine |
+| 2 | Orchestration | task-observer | CLI / file-gen (Claude Code only) | per-engine |
+| 3 | Code intel | code-review-graph | MCP Server (stdio) | local binary |
+| 4 | Episodic memory | mem0 | MCP Server (HTTP) | `mcp.mem0.ai` |
+| 5 | Structural memory | terrestrial-brain | MCP Server (HTTP) | `http://34.31.112.77:8000` |
+
+**OmniRoute** is the execution layer, memory retrieval layer, and routing
+layer. It distributes requests, retrieves memory context, and makes
+routing decisions. Continual Harness provides the judgment — it watches
+agents and their refinements mid-run, optimizes routing, and auto-rolls
+back on error. Reasoning Bank records every agent execution step, maps
+logic pathways, and enables crash recovery. Both are OmniRoute internals, not
+standalone services.
+
+**OmniRoute fallback:** if OmniRoute is unreachable, fall back to direct
+execution and log a warning. All other memory layers remain active via
+their individual MCP connections.
+
+**mem0 safety:** before `update_memory` or `delete_memory`, always
+`get_memory` or `search_memories` first. Never `delete_all_memories`.
+
+### Multi-write protocol
+
+Every execution cycle follows three phases:
+
+1. **READ** — query mem0 (session context), terrestrial-brain (static
+   guards/preferences), code-review-graph (code dependencies). Do not
+   guess file imports.
+2. **WRITE-BACK** — commit ephemeral state to mem0, long-term invariants
+   to terrestrial-brain.
+3. **OBSIDIAN LOG** — on every terrestrial-brain write, create/append a
+   markdown file in `~/storage/shared/Documents/NovAExorpus/memories/`
+   with YAML frontmatter (`source_db`, `uuid`, `timestamp`, `category`).
+
+### Secondary tools (on-demand, not per-prompt)
+
+| Tool | Interface | When |
+|------|-----------|------|
+| graphify | CLI via proot (`~/bin/graphify`) | Codebase mapping, knowledge graph, `--obsidian` export |
+| obsidian | obsidian-skills plugin or CLI | Vault interaction, note linking |
+| notebook-lm | Python CLI (`notebooklm-py`) | Document ingestion, audio overview, research export |
+
+### Harness anchors
+
+The multi-write protocol, layer roles table, and pre-flight gate are
+immutable — no automated refinement or optimization pass may alter them.
+
+### Enforcement
+
+- Do not write code before pre-flight layers have run.
+- Do not bypass OmniRoute unless it is unreachable.
+- Do not silently skip a memory layer — log the failure if one is down.
+- Do not skip the Obsidian vault log on any terrestrial-brain write.
+
 ## Cross-engine compatibility (this file only — tool-agnostic)
 
 This file is read by any agent, not just Claude Code. Two rules that follow
