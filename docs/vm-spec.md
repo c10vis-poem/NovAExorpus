@@ -48,7 +48,7 @@ Requires gcloud CLI on the phone (`pip install google-cloud-sdk`).
 ### From this phone (Termux)
 ```bash
 # SSH (requires gcloud auth or SSH key)
-gcloud compute ssh novae-vm --zone=us-central1-a
+gcloud compute ssh omniroute-brain --zone=us-central1-a
 
 # Or direct SSH if key is configured
 ssh user@34.31.112.77
@@ -146,7 +146,7 @@ To open a new port:
 ```bash
 gcloud compute firewall-rules create allow-<service> \
   --allow tcp:<port> \
-  --target-tags=novae-vm \
+  --target-tags=omniroute-brain \
   --source-ranges=0.0.0.0/0 \
   --description="<service> for NovAExorpus"
 ```
@@ -155,7 +155,7 @@ Replace `0.0.0.0/0` with your IP range for restricted access.
 
 ## VM specs
 
-- **Project**: (check `gcloud config get-value project` on VM)
+- **Project**: Project Alchemist
 - **Zone**: us-central1-a (verify with `gcloud compute instances list`)
 - **OS**: Debian or Ubuntu (verify with `cat /etc/os-release` on VM)
 - **Managed by**: systemd units for OmniRoute and TB

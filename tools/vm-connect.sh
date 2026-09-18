@@ -41,7 +41,7 @@ cmd_status() {
 
 cmd_ssh() {
   if command -v gcloud >/dev/null 2>&1; then
-    exec gcloud compute ssh novae-vm --zone=us-central1-a -- "$@"
+    exec gcloud compute ssh omniroute-brain --zone=us-central1-a -- "$@"
   else
     exec ssh "user@$VM_IP" "$@"
   fi
@@ -89,7 +89,7 @@ cmd_start() {
 cmd_up() {
   echo "[vm] Starting VM..."
   if command -v gcloud >/dev/null 2>&1; then
-    gcloud compute instances start novae-vm --zone=us-central1-a --quiet
+    gcloud compute instances start omniroute-brain --zone=us-central1-a --quiet
   else
     echo "ERROR: gcloud not installed. Install it or start from GCP console."
     echo "  https://console.cloud.google.com/compute/instances"
@@ -113,7 +113,7 @@ cmd_up() {
 cmd_down() {
   echo "[vm] Stopping VM..."
   if command -v gcloud >/dev/null 2>&1; then
-    gcloud compute instances stop novae-vm --zone=us-central1-a --quiet
+    gcloud compute instances stop omniroute-brain --zone=us-central1-a --quiet
   else
     echo "ERROR: gcloud not installed. Stop from GCP console."
     return 1

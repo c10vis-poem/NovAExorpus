@@ -142,7 +142,7 @@ cat <<MSG
 Open these ports in GCP if not already:
   gcloud compute firewall-rules create allow-dev-services \\
     --allow tcp:$CODESERVER_PORT,tcp:$TTYD_PORT,tcp:$DSH_PORT \\
-    --target-tags=novae-vm \\
+    --target-tags=omniroute-brain \\
     --description="Dev services for NovAExorpus"
 MSG
 
