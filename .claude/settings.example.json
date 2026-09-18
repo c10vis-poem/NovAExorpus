@@ -1,0 +1,25 @@
+{
+  "hooks": {
+    "PostToolUse": [],
+    "Stop": [
+      {
+        "_comment": "CRG auto-update after AI turn — PID-guarded, no pile-up",
+        "hooks": [{
+          "type": "command",
+          "command": "command -v code-review-graph >/dev/null 2>&1 && [ -d .code-review-graph ] && [ ! -f /tmp/crg-updating.pid ] && { echo $$ > /tmp/crg-updating.pid; code-review-graph update --skip-flows; rm -f /tmp/crg-updating.pid; } || true",
+          "timeout": 5
+        }]
+      }
+    ],
+    "SessionStart": [
+      {
+        "_comment": "CRG graph status on session open",
+        "hooks": [{
+          "type": "command",
+          "command": "command -v code-review-graph >/dev/null 2>&1 && code-review-graph status 2>/dev/null || true",
+          "timeout": 10
+        }]
+      }
+    ]
+  }
+}
