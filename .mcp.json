@@ -13,6 +13,23 @@
       "headers": {
         "x-brain-key": "${TB_MCP_KEY}"
       }
+    },
+    "omniroute": {
+      "type": "http",
+      "url": "${OMNIROUTE_MCP_URL}",
+      "headers": {
+        "Authorization": "Bearer ${OMNIROUTE_API_KEY}"
+      }
+    },
+    "code-review-graph": {
+      "command": "proot-distro",
+      "args": [
+        "login", "debian", "--",
+        "${HOME}/repos/NovA-code-review-graph/.venv-debian/bin/code-review-graph",
+        "serve"
+      ],
+      "cwd": "${HOME}/repos/NovAExorpus",
+      "type": "stdio"
     }
   }
 }

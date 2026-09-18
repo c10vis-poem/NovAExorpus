@@ -1,3 +1,6 @@
 .obsidian/
 .trash/
 *.tmp
+graphify-out/
+.code-review-graph/
+.claude/settings.local.json

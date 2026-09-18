@@ -29,26 +29,57 @@ step one, every session, every repo, no exceptions.
 6. Forked repos: at the start of every session, sync the fork's default
    branch from `upstream` before any other work.
 
-The point of this workflow is that everything reaches `main` — a branch
-that never gets a PR opened, or a PR that never gets merged, is a failure
-of this rule, not a valid alternative to it. Don't let work sit stranded.
+Source: operator-confirmed 2026-09-13.
 
-Source: operator-confirmed 2026-09-13, cross-linked in `~/.claude/CLAUDE.md`
-on the operator's device and in the `gh-workflow-convention` memory entry.
-
-## Cross-engine compatibility (this file only — tool-agnostic)
-
-This file is read by any agent, not just Claude Code. Two rules that follow
-directly from testing across engines:
+## Cross-engine compatibility (tool-agnostic)
 
 - **Honey for Devs applies universally** — natively in Claude Code, as a
   text-strip layer in Codex, as a Cordis plugin in DeepSeek Harness (dsh).
-  Apply its rules regardless of which engine is running.
 - **task-observer / GSD-style skill scaffolding is Claude-Code-only.** Codex
-  cannot parse markdown skill wrappers or the dual-layer activation protocol;
-  dsh's sandboxed plugin layer blocks task-observer's observation-log writes
-  entirely. Do not expect either to work, or try to force them, under Codex
-  or dsh — that's the `.claude/` directory's job, not this file's.
-- Claude Code and any local engine (Prime Agent, Codex, dsh) are never active
-  in the same repo directory at the same time — running two simultaneously
-  causes git-lock and file-write races.
+  and dsh cannot parse markdown skill wrappers.
+- Claude Code and any local engine are never active in the same repo
+  directory at the same time.
+
+## Agent roles (engine-neutral descriptions)
+
+### corpus-architect
+
+Full-stack agent for corpus operations — reading, reconciling, and editing
+documents across the NovÆxorpus federated repo set. Has access to all
+memory servers (mem0, terrestrial-brain, code-review-graph, omniroute) and
+all file tools. Deep reasoning over large document sets.
+
+### builder
+
+Implementation agent for code changes, deployments, and infrastructure
+work. Full tool access including shell. Used for: gateway config, VM
+management, script writing, repo setup.
+
+### reviewer
+
+Read-only audit agent. Reviews code, docs, and architecture for
+correctness, consistency, and compliance with the 5+1 cognitive tier
+model. Reports findings without making changes.
+
+## Unified orchestration pipeline (router-guard)
+
+Every agent, regardless of engine, flows through one pipeline
+(see `output-style.md` pages 15-33 for the original specification;
+canonical file: `.claude/output-styles/router-guard.md`):
+
+```
+[Agent] → honey + task-observer (pre-flight)
+  → OmniRoute (gateway, routes to all backends)
+    → mem0 / terrestrial-brain / code-review-graph
+    → Reasoning Bank (passive execution ledger, crash recovery)
+    → Continual Harness (passive prompt refinement, auto-rollback)
+```
+
+- **Pre-flight:** honey-for-devs (token compression) + task-observer (task mapping) gate all code output.
+- **Gateway:** OmniRoute (port 20128) handles routing to all memory/code-intelligence backends.
+- **Backends:** mem0 (episodic), terrestrial-brain (structural/Postgres), code-review-graph (AST/blast-radius).
+- **Passive infra:** Reasoning Bank (execution ledger, crash recovery) and Continual Harness (prompt refinement, auto-rollback) run underneath — agents don't invoke them.
+- **Secondary tools:** graphify, obsidian, notebook-lm — on-demand, not per-prompt.
+
+All engines (Claude Code, DeepSeek, Qwen, Hermes) hit the same pipeline
+and the same backends. Only the loader differs per engine.
