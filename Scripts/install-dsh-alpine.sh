@@ -14,7 +14,7 @@ node_ok() {
 }
 
 echo "== 1/7 packages =="
-apk add --no-cache git npm build-base python3 linux-headers curl
+apk add --no-cache git npm build-base python3 linux-headers curl cmake samurai
 apk add --no-cache nodejs || true
 if ! node_ok; then
   echo "node $(node -v 2>/dev/null || echo none) too old (need ^22.19 or >=24); trying nodejs-current"
