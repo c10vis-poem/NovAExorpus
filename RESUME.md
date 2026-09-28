@@ -47,7 +47,7 @@ happened in all 7 own repos (raw-databank 9/10). Built:
   `NovA-ai-agent-book`) — nothing of the operator's is exposed.
 
 ### Vault sync — found broken, fixed
-GitSync Portal had **never** synced (last sync: never): a 534 MB
+GitSync Portal had **never** synced before 2026-09-27 23:49 (last sync: never): a 534 MB
 `model.safetensors` aborted every run. 7,951 vault files had never reached
 GitHub. Ignore list now adds `QAIRT-QNN/`, `*.safetensors`,
 `/NovAExorpus/` (on-device repo mirror) and `Large_plan-PDF's/` (personal
