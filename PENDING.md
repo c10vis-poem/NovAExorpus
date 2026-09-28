@@ -40,3 +40,4 @@ Durable cross-session backlog. Not rewritten each session — items persist unti
 - `vault-ci.yml` workflow; shell alias `cc`; global `~/.claude/CLAUDE.md` rewrite.
 - "Rename repo to NovAEcorpus" — conflicts with NAMING-CANON (NovÆxorpus / `NovAExorpus`); confirm or drop.
 - "Obsidian Git plugin" — superseded by GitSync Portal; drop unless wanted.
+- **MemVault server** — waits for the Jetson; fork `dreamor/MemVault` → c10vis-poem and build the image from the fork (not `ghcr.io/dreamor/memvault`). Decide in grill topic 7 whether it earns a place next to Mem0 and OB1.
