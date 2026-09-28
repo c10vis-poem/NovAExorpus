@@ -1,0 +1,28 @@
+📦 vault_root/
+ ├── 📜 MAP.md                           # Master human index & linked concept graph (Read-Heavy / Agent Update)
+ ├── 📊 manifest.jsonl                   # Machine registry with sha256 hashes & paths (Append / Sync)
+ │
+ ├── 📁 01_raw_sources/                  # TIER 1: COLD SENSORY ARCHIVE (Access: READ-ONLY)
+ │   ├── 📑 pdf/                         # Source whitepapers, specs, data sheets (*.pdf)
+ │   ├── 🎬 media/                       # Raw recordings, screen captures, audio (*.mp4, *.wav, *.png)
+ │   └── 📝 text/                        # Raw scraped web text, transcripts, dumps (*.txt, *.html)
+ │
+ ├── 📁 02_master_wiki/                  # TIER 2: SEMANTIC MEMORY VAULT (Access: READ / WRITE)
+ │   ├── 💡 concepts/                    # Atomic, linked knowledge notes (*.md)
+ │   ├── 🏛️ architectures/               # System blueprints and interface contracts (*.md)
+ │   └── 🏷️ entities/                    # Schema registries, API models, entity tables (*.md)
+ │
+ ├── 📁 03_recall_cache/                 # TIER 3: WORKING MEMORY CACHE (Access: REBUILD / OVERWRITE)
+ │   ├── ⚡ jsonl/                       # Chunked, pre-tokenized passages (*.jsonl)
+ │   ├── 📐 vectors/                     # Dense vector index checkpoints (*.bin, *.faiss, *.hnsw)
+ │   └── 🗝️ kv_store/                    # Key-value fast entity lookup tables (*.db, *.json)
+ │
+ ├── 📁 04_skills_runtime/               # TIER 4: PROCEDURAL REPERTOIRE (Access: READ / VERSION-CONTROL)
+ │   ├── 🎯 prompt_skills/               # Modular skill files with frontmatter (*.md, *.yaml)
+ │   ├── ⚙️ runtimes/                     # Standalone Python/Shell automation routines (*.py, *.sh)
+ │   └── 🛡️ policies/                    # Validation guards, retry policies, schemas (*.json, *.yaml)
+ │
+ └── 📁 05_episodic_logs/                # TIER 5: EPISODIC TRAJECTORY STORE (Access: APPEND-ONLY)
+     ├── ⏱️ trajectories/                # Timestamped run logs: inputs, calls, outputs (*.jsonl)
+     ├── ⚖️ rlvr_verifiers/              # Evaluator rewards, assertions, benchmark scores (*.jsonl)
+     └── 🧹 hygiene_reports/             # Linter results, broken link audits, hash mismatches (*.md)

@@ -1,0 +1,9 @@
+Clean numbers:
+
+**Skills (`~/.claude/skills/`):** 0 pre-existed — that directory didn't exist before this session. All 116 installed skills are new. But 51 duplicate copies were found and correctly skipped during install (not new duplicates, just repos shipping the same skill multiple times for different host tools):
+- `NoVa-honey-for-devs` ships each of its 14 skills **4 times** (root `skills/`, `.hermes/`, `.openclaw/`, `plugins/honey/`) — the same content packaged per-tool. 42 of the 51 skips are this.
+- `clovis-mem0-vingiaN` ships `forget`/`remember`/`search`/`status`/`pin`/`dream`/`context-loader`/`tour` across 3 plugin variants (`mem0-plugin`, `pi-agent-plugin`, `claude-code-plugin`) with overlapping names — 9 of the 51 skips. (This is also where I made the earlier mistake overwriting 4 of them with the wrong variant, since fixed.)
+
+**Repos on disk:** 0 duplicates — none of the 19 skill/tool repos, none of the 7 base repos, and neither harness repo existed on this device before today. Everything cloned this session is net-new.
+
+Also: the DeepSeek harness is now actually **running** — `http://127.0.0.1:3080` — built and launched successfully through the Debian proot fix, config loads clean. Still needs your real OpenRouter key in `~/.dsh/.env` to actually generate.

@@ -1,0 +1,44 @@
+On it. First — one prerequisite I need to flag, not ask a pop-up about, just tell you:
+
+**Push access.** The vault (`obsidian-master_wiki`) came into this session as **read-only** (git proxy anonymous read, not attached with credentials). To actually commit spec updates to it I need to attach it with push access — otherwise I can edit in the local working tree here but nothing lands on GitHub. I'll write the edits locally now and hold on pushing until you say — that way you can eyeball diffs before anything ships to the vault. If you want me to attach + push directly, say so and I'll do it.
+
+Starting batch 1 now — three locked visual specs (Router / Monitor / Terminal) + a new cross-cutting UX-rules doc. Reading Router first to confirm the current lines I'm editing around.
+
+Now editing Router with tonight's additions.
+
+Router done. On to Monitor — smaller additions (zoom + inset cropping).
+
+Monitor done. Now Terminal — the biggest set of additions (oscilloscope panel, Termux access, on-device helper, live user manual, LLM-Hub agent pattern, provider picker).
+
+Terminal spec done. Now creating the new cross-cutting UX rules doc.
+
+Batch 1 done. Loading TaskCreate to track the rest of the pass so we both see progress at a glance.
+
+Batch 1 checkpointed. Now PARAMETER-PACKET.
+
+Batch done. Full pass across the doc set, all edits sitting in this session's working tree.
+
+**Vault (`obsidian-master_wiki`) — 7 files touched, 1 file new. Read-only in this session, needs push attach:**
+
+1. `canon/horizons-ui/ROUTER-STEREO-STACK-SPEC.md` — animated CD tray + tap-a-disc fine-tune popup with 4-row `Model/Engine/Runtime/Config` overlay + naming reconciliation to the four packet layers; dual-cassette Browse/Load role split with multi-load and execution-mode swap; tuner deck extended (max tokens, hardware target, cloud/local toggle, STT tuning); new sections: cross-tile pathways, overflow-bounce, per-item Router hotkey.
+2. `canon/horizons-ui/MONITOR-ARCADE-CABINET-SPEC.md` — zoom (pinch primary, Live-Tile fallback), inset-cropping.
+3. `canon/horizons-ui/TERMINAL-SPEC.md` — CRT-oscilloscope panel; "defines only" superseded (now configures/fine-tunes/pushes); Termux `RUN_COMMAND_SERVICE`; describe→draft→confirm→run→auto-fix agent pattern (LLM-Hub reference); port-over to Router when idle; **live in-app user manual with full chapter TOC**; provider picker.
+4. `canon/horizons-ui/UX-RULES.md` — **NEW.** No-typing outside Terminal/browser; long-press → plain-language help popup; zoom on Home/Monitor; inset-cropping on every non-Home room; cross-tile Router pathways; CHONK 2-min vs 3–5-min flag; three failure faces distinctness.
+5. `canon/horizons-ui/FEATURE-INVENTORY.md` — new §15 with ~45 tagged rows organized as 15A Router / 15B Terminal / 15C Monitor / 15D Settings / 15E Voice / 15F Cross-cutting UX / 15G Two-model pairing / 15H Launcher / 15I Commercial.
+6. `canon/horizons-ui/CLOCK-FACE.md` — CHONK timeout flagged open; launcher-tile question noted as not-on-the-wheel.
+7. `canon/aesop/PARAMETER-PACKET.md` — Runtime layer expanded (max_tokens, hardware target); Communication expanded (provider picker); Router popup ↔ four-layer mapping documented.
+8. `canon/MASTER-BUILD-BLUEPRINT.md` — §8.1 refreshed (both STT candidates on Mer0vin8ian HF); new §8.3 (voice failure = accessibility issue, not stack change); new §9.2 (executions model = Qwen3.5-0.8B); new §14.5 (your-fork-first + HF mapping table + on-device folder layout); new §14.6 (provider picker); new §14.7 (commercial tiering back-burner); §16 open list rewritten.
+9. `canon/STATE-OF-EXISTENCE.md` — new §4 (SAF-picker-scope leading hypothesis for backend-not-found); new §5 (2026-08-06 additions consolidated).
+10. `horizons-ui/AGENT-BRIEF.md` — base-branch trap corrected (main IS current); SAF-picker-scope added as leading suspect for "app can't find backend"; launcher-duplicate resolution recorded; no-typing rule added.
+
+**Horizons-UI repo (push scope — branch `claude/novus-device-file-loading-ij4k4r`):**
+
+11. `CLAUDE.md` — resume block extended with spec-expansion summary + SAF-picker leading-suspect note; SOTU gets a new "Spec expansion 2026-08-06 (this session)" section listing every vault file touched; "Still open" priority list rewritten with SAF grep as #0.
+
+**What I need from you before anything gets pushed:**
+- **Vault push access** — the vault came in read-only. Say "attach vault for push" and I'll `add_repo` it with `access:"push"`, use branch `claude/novus-device-file-loading-ij4k4r` there too, and land the 10 vault edits as one commit.
+- **Horizons-UI push** — that CLAUDE.md edit sits in `/workspace/c10vis-poem/horizons-ui/`; I do have push scope on branch `claude/novus-device-file-loading-ij4k4r` there, but haven't committed or pushed yet. Say the word.
+
+Two open flags I couldn't resolve without a call from you:
+- **CHONK timeout** — 2 min (tonight's screenshot caption) vs 3–5 min (older docs). Recorded as open in every affected file.
+- **Executions-model file identity** — on-device 1.21 GB file is labeled `Qwen3.5-2B-Q4_0.gguf`; you said 0.8B. Recorded as open.

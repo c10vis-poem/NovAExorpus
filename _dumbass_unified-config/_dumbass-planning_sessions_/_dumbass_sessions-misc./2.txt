@@ -1,0 +1,58 @@
+This architecture relies on OmniRoute acting as the ultimate traffic controller, with Mem0 tracking conversational memory, Terrestrial Brain managing local structural memory, and your Meta-Skills (task-review and honey-for-devs) enforcing behavioral logic. [1, 2, 3, 4] 
+To keep your layers decoupled and prevent data loops, split the installation into distinct stages:
+------------------------------
+## Phase 1: Before OmniRoute is Wired In
+Before booting OmniRoute, your core goal is to stand up your databases and memory registries as isolated background microservices. Do not use MCP at this stage.
+
+* 
+* Mem0: Set up as an SDK + CLI.
+* Why: You want to initialize Mem0 (mem0 init) via the CLI to provision its local schemas, check the storage directories, and establish your programmatic episodic endpoints. By using the SDK pattern initially, you can test it directly with Python/Node scripts to make sure episodic vectors are tracking independently of any terminal agent interface. [1, 5] 
+* Terrestrial Brain: Set up as an Infrastructure Framework via CLI.
+* Why: Because Terrestrial Brain handles the core PostgreSQL/pgvector structural datasets, you need to use its native CLI tools to pull down schemas, migrate your local databases, and spin up the daemon container/service.
+* 
+
+------------------------------
+## Phase 2: After OmniRoute is Running
+Once OmniRoute is active, it takes over the entry point of your LLM calls. Now, you pivot your memory layers into highly accessible agent utilities. [2] 
+
+* 
+* Mem0: Switch or expose it as an MCP Server.
+* Why: Your agent clients (like Claude Code or Cursor) will routing prompts through OmniRoute. By running Mem0 as an MCP server, the underlying model can natively decide exactly when to update an episodic observation or pull context mid-stream, completely bypassing the need for you to hardcode retrieval steps. [1, 2, 6, 7] 
+* Terrestrial Brain: Expose it as an MCP Server.
+* Why: Your OmniRoute setup needs a direct tool-call pipeline to reach the structural PostgreSQL databases. Exposing Terrestrial Brain as an MCP server enables the routing models to run semantic searches over your static document indices dynamically.
+* 
+
+------------------------------
+## How Your Skill Plugins Factor In
+Your skill plugins operate as the behavioral wrappers inside the specific terminal tool or agent environment that interacts with OmniRoute. They do not interface with the database directly; they control the LLM's thought process. [2] 
+
+       [ Client Terminal (Claude Code / Cursor) ]
+           │                        │
+  ┌────────┴────────┐      ┌────────┴────────┐
+  │ honey-for-devs  │      │   task-review   │ (Meta-Skill Orchestration)
+  │ (Token Saver)   │      │  (Review Spec)  │
+  └────────┬────────┘      └────────┬────────┘
+           │                        │
+           ▼                        ▼
+     ┌────────────────────────────────────┐
+     │      OmniRoute Access Layer        │
+     └─────────────────┬──────────────────┘
+                       │
+             ┌─────────┴─────────┐
+             ▼                   ▼
+     [ Mem0 MCP Server ]   [ Terrestrial Brain MCP ]
+     (Episodic Memory)     (Static / PostgreSQL Layer)
+
+
+   1. honey-for-devs: Sits directly at the agent CLI tool layer. It intercepts the massive context blocks retrieved by your memory layers and compresses/serializes them before sending the payload out, drastically lowering your fallback token usage on OmniRoute endpoints.
+   2. rebelytics/one-skill-to-rule-them-all (task-review): Acts as your structural safety rail. Because autonomous memory injections can sometimes cause an agent to drift or write an entire feature blindly, task-review forces the agent to stop, review the specification step-by-step, log its observations outside the git worktree, and ask for verification. [4] 
+
+Would you like the exact JSON configuration block to link your Mem0 MCP server and Terrestrial Brain endpoints directly to your Claude Code or Cursor configuration files?
+
+[1] [https://mem0.ai](https://mem0.ai/blog/claude-code-memory)
+[2] [https://www.youtube.com](https://www.youtube.com/watch?v=NJEDqWBUnBI)
+[3] [https://dev.to](https://dev.to/mem0/we-built-a-memory-plugin-for-openclawmoltbot-7e1)
+[4] https://agentskillindex.com
+[5] [https://mem0.ai](https://mem0.ai/blog/the-easiest-way-to-add-persistent-memory-to-any-ai-agent)
+[6] [https://mem0.ai](https://mem0.ai/blog/codex-mem0-mcp-build-a-coding-agent-that-remembers-your-codebase)
+[7] [https://docs.mem0.ai](https://docs.mem0.ai/platform/mem0-mcp)

@@ -1,0 +1,3 @@
+I see "auto merge TO MAIN" and now this — but I don't see a distinct correction message from you in between those two. If you sent one, it didn't come through on my end. What did you want corrected?
+
+For status: PR #8 merged into `main` at 18:43:02 (turns out the `--auto` flag did register — it merged itself the moment CI went green). Branch `chore/operating-rules-2026-09-13` left in place per the rule. `novae-xorpus/AGENTS.md` now has Rule 0, Rule 1, and the GH workflow.

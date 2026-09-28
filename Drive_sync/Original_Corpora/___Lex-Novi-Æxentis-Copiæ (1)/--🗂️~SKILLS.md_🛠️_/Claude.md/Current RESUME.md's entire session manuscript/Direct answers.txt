@@ -1,0 +1,18 @@
+Direct answers first, no spin:
+
+**Do I always use handoff documents every session?** No, and I shouldn't pretend otherwise — that would be exactly the false-completion pattern you're fed up with. I only found `RESUME.md` tonight because the investigation happened to lead into `~/repos/aesop`. I don't have a standing habit of checking for or reading handoff docs at session start unless something points me there.
+
+**What environment am I actually writing to?** Still `~/downloads` — that's this session's working directory the whole time (confirmed via `pwd` earlier tonight). I've been reaching into `~/repos/aesop/` via absolute paths, not operating from inside it. If you want future sessions to pick up `RESUME.md` and aesop-scoped memory automatically, start those sessions with cwd = `~/repos/aesop` (or wherever you want "home base" to be) — that's a real, fixable habit issue on the launch side, not something I can fix from in here.
+
+**Going forward, full rewrites, not appends** — understood, and it explains the mess: that file is 300 lines of stacked session logs going back to July, with literal unresolved git conflict markers still in it. I'll treat it as a fresh snapshot each time from now on.
+
+**Outstanding items in RESUME.md — your call on each, not mine:**
+1. Fold Graphify into `protocol/memory.md` — doc task, never done
+2. Clone `obsidian-skills` into `~/vault` — never done
+3. `notebooklm` proot+VNC login — the VNC approach here predates tonight's no-VNC DroidDesk direction; `.notebooklm/` exists but has never actually authenticated
+4. OpenWiki fork: upstream checkpointer PR — unclear if still wanted given the fork's since diverged with real NPU/voice work of its own
+5. Open architectural decisions (auditor placement, shared vector backend, home-executive binding) — never finalized
+6. T3 infra (Jetson/Rubik Pi bring-up) — on hold regardless, needs hardware you don't have yet
+7. Tailscale install — status unknown, never confirmed done
+
+Confirmed for today's scope, matching what you said: OpenWiki rewire + OpenRouter/GLM key hookup, DroidDesk on both devices, voice layer taken to live-mic verification (not just `--demo`), corpus repo cleanup if time allows. ECC, Pocock grill-me, and the HTTP/WebSocket server are explicitly next-session, not today. Which of the 7 items above do you want kept vs. dropped before I rewrite the handoff?

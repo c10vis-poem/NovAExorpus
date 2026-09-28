@@ -1,0 +1,31 @@
+Deletions done, freed ~950MB.
+
+On the Nexa/Google Omni-audio rumor — that's checkable if you want me to verify it, but I won't chase it uninvited given everything else queued up; say the word.
+
+Now the full pass on the remaining files I skipped over — here's every one, based on actually reading them, not guessing from names:
+
+**Real and relevant, keep:**
+- `processor_config.json` — a **Gemma4AudioFeatureExtractor** config (mel spectrogram params, 128 features, 750 seq length). This is the actual audio-preprocessing config for the multimodal Gemma 4 models you have — ties directly to `gemma-4-12B-it-qat-UD-Q4_K_XL.gguf` / `gemma-4-E2B-it-qat-UD-Q4_K_XL.gguf` / `mtp-gemma-4-E2B-it-BF16.gguf`. Needed if you ever run their audio branch.
+- `htp_backend_ext_config.json` — a real QNN HTP backend config (vtcm_mb, dsp_arch, perf_profile: burst). Note: `dsp_arch: "v73"` — this phone's actual NPU is **v79** (confirmed from the Paage.ai APK teardown earlier). This config is for an older Hexagon generation; would need updating before reuse on this device.
+- `mcp.json` — a real MCP server config for an `agentmemory` server via npx. Small, usable as-is.
+- `quickstart.md` / `usage.md` — real docs for **OpenWiki**, your own TypeScript CLI (matches your `c10vis-poem/openwiki` fork) — a repo-documentation agent tool.
+- `INSTRUCTIONS.md` — real doc-writing instructions for the `Novus-Agenti` wiki project.
+- `gemini-code-1787813090295.json` — a structured skill record for "Grill-Me Architectural Interview Harness" targeting your Prime-agent runtime — metadata, not code, but legitimate.
+
+**Harmless scraps, not part of any pipeline, safe to ignore or delete whenever:**
+- `ko` — a stray espeak-ng Korean voice parameter fragment (name/pitch/intonation lines)
+- `latest` — a debug log snippet from something's settings loader, references a broken symlink path
+- `onboarding.json` — config for some ingestion tool, explicitly says "native installation is currently macOS-only" — not usable on this device anyway
+- `phoenix-no-android-no-mail.json` — a Firefox-fork ("Phoenix") browser policy file (uBlock config, bookmarks) — unrelated to voice/agents
+- `vlc_rock_(copy).json` — literally just a VLC equalizer preset
+- `uploads.d.ts` — a tiny deprecated TS re-export stub, no real content
+
+**Big binaries, no content check needed (sizes/names self-explain), no action unless you want them gone:** `Antigravity IDE.tar.gz`, `Claude Setup.exe`, `Genie (1).dll`, `SocketSweep_1.1.0_amd64.deb`, `WirelessAdbBridgeService.kt`, `google-cloud-cli-linux-arm.tar.gz`, `geniex-bench-android-arm64-v0.3.14.tar.gz`, `geniex-plugins-arm64.tar.gz`, `whisper-bin-ubuntu-arm64.tar.gz`, `llama-b10330-bin-macos-x64.tar.gz`, `voices-v1.0.bin`, `model.onnx`, `encode.int8.onnx`, `opencode`, `llama.cpp/`, `pack-b6acfabf...pack`, `GPT-OSS 120B Query.pdf`, `Recommended Termux AI Agents and CLIs.epub`, `open-brain-credential-tracker (1).xlsx`, `novus-boot (1).log`, `.env`, `.last-update.json`, `.prettierignore`, `.ttxfolder`.
+
+**On the voice-agent script** — three of its four steps contradict things already proven on this exact device tonight:
+- Step 1 (Vertex env vars): harmless, but `~/vertex-key.json` doesn't exist — the credential it points at was never actually placed here.
+- Step 2 (Sherpa-ONNX as system TTS engine): this is the same tech VoxSherpa already wraps, which is confirmed broken/silent on this phone per the audio-pipeline notes.
+- Step 3 (`vagent` piping through `termux-tts-speak`): directly contradicted — the notes explicitly say every Android TTS engine including `termux-tts-speak` hangs or is silent on this device, verified 2026-08-18. This step would not work.
+- Step 4 (FUTO mic key inside Termux): FUTO isn't installed, and more importantly, the notes already proved Termux's input field reports `TYPE_NULL`, which disables keyboard voice input for *any* IME inside the terminal — tested and confirmed dead-end 2026-08-18.
+
+So this note reads like generic advice that wasn't written against this device's actual behavior — I wouldn't build on it as-is.

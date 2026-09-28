@@ -1,0 +1,5 @@
+# AGENTS.md
+
+Repository: `raw_database`
+
+Authority: NovÆxorpus Master Canon Specifications

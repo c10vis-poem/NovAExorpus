@@ -1,0 +1,27 @@
+Attach this environment to #dumbass (novae-xorpus). Do this:
+
+1. Always, regardless of what else this environment does:
+   git clone https://github.com/c10vis-poem/novae-xorpus.git ~/novae-xorpus
+   Read ~/novae-xorpus/AGENTS.md in full before doing anything else — it's the
+   real rules file (tool-agnostic, not Claude-specific).
+
+2. Only if this environment is also working on a specific project repo, repeat
+   for each one:
+   git clone <PROJECT_REPO_URL> ~/repos/<PROJECT_NAME>
+   mkdir -p ~/novae-xorpus/projects/<PROJECT_NAME>
+   ln -sfn ~/repos/<PROJECT_NAME>/RESUME.md ~/novae-xorpus/projects/<PROJECT_NAME>/RESUME.md
+   ln -sfn ~/repos/<PROJECT_NAME>/CLAUDE.md ~/novae-xorpus/projects/<PROJECT_NAME>/CLAUDE.md
+   printf '#!/bin/bash\nbash ~/novae-xorpus/tools/regenerate_masters.sh\n' > ~/repos/<PROJECT_NAME>/.git/hooks/post-commit
+   chmod +x ~/repos/<PROJECT_NAME>/.git/hooks/post-commit
+
+   Skip this step entirely if this environment isn't attached to a specific
+   project yet — #dumbass alone is still useful (rules, backlog, master
+   overviews of whatever's already attached elsewhere).
+
+3. Every session from now on: `git pull` novae-xorpus (and any cloned project
+   repo) at the start, `git push` both at the end. This is what actually keeps
+   this environment in sync with every other one — the symlinks in step 2 only
+   work within one filesystem, git is what crosses devices.
+
+Confirm after: read ~/novae-xorpus/unresolved.md and ~/novae-xorpus/MASTER-RESUME.md
+to see current cross-project state before assuming anything about what's done.

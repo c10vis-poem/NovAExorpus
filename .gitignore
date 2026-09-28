@@ -1,6 +1,58 @@
-.obsidian/
+# Heavy folders (models, SDKs, Drive mirror)
+Models/
+qairt_/
+QAIRT-QNN/
+*.safetensors
 .trash/
-*.tmp
-graphify-out/
-.code-review-graph/
-.claude/settings.local.json
+.trashed-*
+
+# Personal records — Google Drive only, never the repo
+Large_plan-PDF's/
+
+# On-device repo mirror inside the vault (a copy of this repo; how repos are
+# mapped/linked into the corpus is decided in the grill session)
+/NovAExorpus/
+node_modules/
+
+# Folders that are their own git repos
+GitHub/
+OBSIDIAN-Master_Wiki/
+**/.git/
+
+# Large binaries and archives
+*.iso
+*.gguf
+*.bin
+*.onnx
+*.apk
+*.tar
+*.gz
+*.xz
+*.zip
+
+# Secrets
+.env
+.env.*
+*.pem
+*.key
+id_*
+
+# Obsidian per-device state and plugin settings (may hold tokens)
+.obsidian/workspace*.json
+.obsidian/plugins/*/data.json
+.obsidian/plugins/gitsync-portal/local-sync-state.json
+*.conflict-*
+
+# Quarantine (Rule 2)
+_quarantine/
+
+# SDK/runtime binaries and model exports
+*.so
+*.dll
+*.pyd
+*.exe
+*.aar
+*.deb
+*.pte
+*.a
+*.lib

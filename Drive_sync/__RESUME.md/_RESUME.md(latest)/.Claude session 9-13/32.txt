@@ -1,0 +1,28 @@
+This confirms it: the skill's own doc says the canonical copy lives in `aesop-xi/skills/termux-helper/`, and there's supposed to be a working copy at `~/.claude/skills/termux-helper/` — which doesn't currently exist here. Wiring that now.
+
+Now checking on the background clone of the 19 skill repos.
+
+Clone job is still running in the background (up to `notebooklm-py` out of 19 so far — `OmniRoute` alone is ~220MB). I'll pick back up once it finishes rather than interrupt it mid-clone.
+
+Now installing every discovered skill into `~/.claude/skills/`.
+
+115 skills installed. But I want to flag something before moving to the app/tool repos: several sub-skills share generic names across different packages (`forget`, `remember`, `search`, `status`, `pin`, `tour`, `dream`, `context-loader`) — likely different mem0 sub-packages (`mem0-cli`, `mem0-integrate`, etc.) each shipping a sub-skill with the same generic name, so only the first one installed "wins" and the rest got silently skipped. Let me check the scope of that before calling this done.
+
+Good — it happened to install the right variant (`claude-code-plugin`) first. Correcting the other 4 sub-skills that came from the wrong plugin folder, then also fixing the `honey` collection (which had the same triple-copy issue but all identical, so no risk there — just redundant scanning). Let me verify `search`/`status` too since those only exist in `pi-agent-plugin` and `claude-code-plugin`, not `mem0-plugin`.
+
+I made a mistake — that `rm -rf` deleted 4 skills before confirming the replacement existed, since `claude-code-plugin` doesn't actually ship `pin`/`dream`/`context-loader`/`tour` at all (only `mem0-plugin` and `pi-agent-plugin` do). Restoring immediately from `mem0-plugin`, which is where they originally came from.
+
+That copy is wrong — I grabbed graphify's entire Python package (70+ source files) instead of a clean skill folder. Fixing it properly.
+
+Now the app/tool repos (not skills) — checking each for its actual install path before running anything heavy.
+
+Status check — 116 skills are installed cleanly (all with correctly-cased `SKILL.md`, mem0's variant collision fixed, termux-helper wired). The remaining 6 aren't simple installs, and I don't want to just run them:
+
+- **`NovA-prime-agent`** and **`Novus-qwen-code`** both install via `curl | sh` from third-party domains (`app.primeintellect.ai`, an Alibaba OSS bucket). I don't run a piped remote script without you knowing what it is first.
+- **`NovA-localdesktop.github.io`** is a full Android APK build (Rust/Cargo + NDK) — a real build job, not a quick install.
+- **`NovA-terrestrial-brain`** needs a live Supabase project (cloud DB), not just local setup.
+- **`reasoning-bank`** and **`memsearch-aesop`** have no simple install path in their READMEs — `memsearch-aesop` specifically wants a running Milvus vector-DB server.
+
+None of these are "copy a skill folder" — each is its own commitment. Want me to proceed with any of them now, and if so which, and are you good with the two remote installers running as-is?
+
+Also still open from earlier: **the DeepSeek/OpenRouter wiring** is still blocked on the real API key — `~/.dsh/.env` still has `OPENROUTER_API_KEY=REPLACE_ME`.

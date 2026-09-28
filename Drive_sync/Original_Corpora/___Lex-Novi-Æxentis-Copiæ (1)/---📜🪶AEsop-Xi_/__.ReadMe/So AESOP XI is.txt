@@ -1,0 +1,26 @@
+So AESOP XI is the governing layer — much bigger scope than "protocol spec." Let me revise what it actually contains:
+
+**`aesop-xi-protocol/`** — the operating scaffolding for all agents:
+- Model scripting (how models are prompted, their system prompts, agent briefs)
+- Inference configs (runtime parameters, temperature, cores — the four layers)
+- MCPs (the MCP server definitions and wiring)
+- IDE rules (CLAUDE.md patterns, `.agents/` configs, project instructions)
+- Hooks (settings.json hooks, pre/post tool hooks)
+- Pathways and routing (how tasks flow between agents, fallback chains)
+- Configurations (all runtime configs across the system)
+- Memory layer (OB1, mem0, OmniRoute — unified under AESOP as the governing protocol)
+
+That makes AESOP XI the *infrastructure layer* that everything else runs on top of. `novus-agenti` = the specific agent built on that infrastructure. `nova-claw` = the action surface that agent exposes. AESOP XI = the scaffolding that makes any of it work.
+
+Let me update the plan with this.
+
+Plan updated. The hierarchy now reads:
+
+- **AESOP XI** = the infrastructure (MCPs, hooks, IDE rules, inference configs, memory layer, pathways)
+- **novus-agenti** = the specific agent built on that infrastructure
+- **nova-claw** = what that agent can do (skills/actions)
+- **horizons-ui** = the hardware interface (Android app)
+
+Everything runs through AESOP XI. That layer owns the memory, the routing, the hooks — the others consume what it provides.
+
+Does this framing match what you have in mind, or does something sit in the wrong place?

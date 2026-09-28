@@ -1,0 +1,30 @@
+Claude Code
+
+
+Two different things — let me take them separately.
+
+
+1. Wake-lock and auth-persistence are unrelated.Wake-lock only stops Android from suspending the CPU during an active session — it has nothing to do with whether your login survives a restart. So don't run it 24/7 for this reason; it won't fix the re-auth problem. The real question is: what's actually happening?
+
+
+Claude Code CLI stores your login token on disk at~/.claude.json(or~/.claude/), not in memory. If it's really there after you close Termux normally, reopening should NOT ask you to re-auth — wake-lock or not. So if you're being asked to log in every single time, something is deleting that file between sessions. That's a distinct bug from "Termux gets killed in the background," and I need to know which one you're actually hitting:
+
+
+(a)You close Termux normally (not switching apps mid-task, not letting the screen lock during a run) — reopen — still asked to log in. This means the credential file isn't persisting at all, which points at something actively wiping it: a Termux:Boot script, a strayrm -rf ~/.claudein your.bashrc/.profile, or Termux running in a proot/container that doesn't persist$HOMEbetween shells.
+
+
+(b)You background Termux mid-session (switch apps, screen locks) — Android kills the process — reopen — asked to log in. This would mean Motorola's battery killer isn't just suspending the process, it's tearing down enough that the token write never completed or something touches the file on the force-kill path.
+
+
+Runls -la ~/.claude/right after a fresh login, then close and reopen Termux the way you normally do, and run it again. If the file's gone, that tells us which bucket you're in. If it's still there but you're still asked to log in, the bug is somewhere else (a different$HOME, wrong user, stale token that's actually expiring server-side).
+
+
+2. Remote Control — driving a Termux-hosted session from the cloud/PWA frontend.This is a real, separate feature from Dispatch (which goes the other direction — cloud session → local terminal). It pairs a local Claude Code instance with a cloud session so you can drive it from a nicer frontend while it actually executes on your phone with your local filesystem, storage, and no STT gap.
+
+
+I don't have a tool from here that walks through pairing setup on your device — I can't see your phone's screen or the Claude Code app's settings menu. What I can point you to:https://code.claude.com/docs/en/claude-code-on-the-web— general docs on environments and remote sessions. Look there, or check the Claude Code app's settings for a "Remote Control" or "Connect device" option, which is what would let this cloud session (or a fresh one) attach to the Termux instance running on your phone.
+
+
+If you get it paired and it shows up, I'd see it viaListAgentsas a "Remote Control session" — at that point I could actually confirm it's live and help drive it. Right now I have nothing to attach to.
+
+

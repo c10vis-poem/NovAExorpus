@@ -1,0 +1,46 @@
+Let me verify the Termux bridge actually exists rather than tell you it does.
+
+Verified, and there's a wrinkle worth knowing.
+
+## 1. Terminal → Termux from the UI
+
+The in-app terminal is **self-contained and does not go through Termux**. `TaskerBridge.kt:50-60` runs `sh -c` directly as the Horizons process, and the comment explains why that was deliberate:
+
+> *"We deliberately do NOT route through Termux — its `RUN_COMMAND` service crashes when external access isn't granted, and a crashed Termux never returns a result, hanging the call forever."*
+
+That's actually **better** for what you want. Commands run under the app's UID — which holds `MANAGE_EXTERNAL_STORAGE`, and, critically, **is the UID that can reach the Hexagon DSP**. So the in-app shell can do things a Termux shell can't.
+
+Termux is still detected and reachable for Tasker-style dispatch, but the shell you'd drive by voice is the app's own.
+
+## 2. Do voice runtimes need compiling? — No. Plug and play.
+
+This is the clean part of the architecture:
+
+- **The engine is already compiled and shipped** — `libsherpa-onnx-jni.so` + `libonnxruntime.so`, inside the AAR, in the APK. Done, permanently.
+- **The models are just ONNX data files.** Drop them in a folder, load by path.
+
+No compile step, ever, for voice. That's the sharp difference from the LLM path, where QAIRT needs an AI Hub bundle.
+
+sherpa-onnx already supports the families out of the box — Whisper, Moonshine, Zipformer/transducer, Paraformer, SenseVoice, **NeMo/Parakeet** (your `parakeet-tdt-0.6b-v3` bucket), FireRedASR; Kokoro/VITS/Matcha for TTS; Silero/TEN for VAD.
+
+**The one catch:** each family needs a *different* factory call and different filenames — `from_whisper()` vs `from_moonshine()` vs `from_nemo()`. So the app can't just sniff a folder. That's exactly why the engine has to be a **declared parameter**, not a guess.
+
+## 3. The Router's voice-stack section
+
+Your instinct is right, and it maps onto something already in the spec — `FEATURE-INVENTORY` 7.9, the **DSP voice panel** (pitch, speech speed, volume scale, voice-model swap). What you're describing extends it into a full voice packet:
+
+| Slot | Carries |
+|---|---|
+| **ASR/STT** | family (`whisper` / `moonshine` / `parakeet` / …) + folder path + threads |
+| **VAD** | threshold, min-silence, min-speech, sample rate |
+| **TTS** | family + folder path + voice ID + speed |
+
+Same shape as a `RuntimeDef` — a declared engine plus a path — which means it belongs in the **four parameter layers** (Weights = paths, Runtime = threads, Engine = VAD sensitivity), not as a bespoke voice-only config. Same fuse, different circuit.
+
+## 4. Voice-driven terminal agent
+
+Yes, and the loop closes entirely inside the APK:
+
+**speak → Silero VAD → in-process STT → text → `shell` tool → output → Kokoro TTS → you hear it**
+
+The `shell` tool already exists in the agent's toolset (`AgentSystemPrompt.kt:65`: *"sh -c; root if available"*). Nothing needs to reach into Termux for this, and nothing needs an inbound listener — it's all one process. That's the thing the dead `:8091` daemon hop was pretending to be.

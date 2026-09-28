@@ -1,0 +1,356 @@
+So here's the thing about the grilling session and basically every of those tools like I tried installing ECC and running honey for dabs and using obsidian scale and the pococ skill or whatever but it's like until I actually create the manifest and implement it and really outfit the agent from jump Street with the entire scope and what it needs to accomplish it's just like pissing up a rope so first is getting a model that can actually utilize the pokhock skill that has access which is Claude code obviously that that's my main daily driver that I use I use it in the cloud I use it on my terminal I use it to build through the GitHub CI eventually it'll have it I'll be running it in obsidian and I'll have an ECC desktop I'll attach a couple different templates that I got from Gemini and now it wrote it thinking that it was actually creating the real deal for me but obviously it didn't get everything right first one was way outdated information and the second one was just kind of Rush didn't even really take its time and I think it did about half as good of a job as the first one twice as much information and then yeah I mean everything that you mentioned would be helpful except I'm not starting a grill session right now this is still this is going to be information fed to the grill session actually and I have like 93 files that I have compiled I don't think I don't have the time in the session to feed all those to you but I'll get you those architecture templates that could be helpful also any advice about the inference or what to download first or how to properly set up my Claude agent so you can utilize the ECC which tools would be best for creating the jsonl manifests that kind of stuff cuz I'm going to need and you'll see in this architecture document one of the I think it's by step three is probably just practice runs just to see the inference between all the stuff and what can run in conjunction with what```plaintext
+1: How to Actually Compile and Use Your Wiki in Repos via Termux
+Compiling everything into Obsidian is just your staging and organization phase. The magic happens
+when you push those files into your git repositories and utilize them in Termux using your Wiki CLI
+and Claude Code.
+Because your Obsidian files on Android are just raw .md text files in a local directory, you can treat
+that folder as a master upstream library.
+The Execution Strategy
+1. Initialize Your Master Wiki Repo: Turn your Obsidian vault folder into its own git repository via
+Termux ( git init ). Commit all your compiled files.
+2. The "Interjection" Method (Submodules or Subtrees): When you start a new software project
+repo, you don't want to copy-paste. Instead, use git submodule or git subtree to pull the specific wiki
+folder straight into your new repository.
+Command: git submodule add <path_to_your_master_wiki_repo> docs/wiki
+3. Piping to Claude Code: Once that folder is interjected into your repo, your PWA's Claude Code
+session reads it natively. You can now prompt Claude Code: "Read docs/wiki/Sarah_Project.md and
+generate the boilerplate API layout based on those project requirements."
+By keeping the files completely flat and strictly using markdown headers, your open Wiki CLI
+in Termux can index them instantly, and Claude Code can consume the whole context without
+choking.
+Part 2: The URL-to-Markdown Tool
+The website you are thinking of where you just drop raw URL links and it instantly formats clean, LLM-
+ready markdown or PDFs for you is Firecrawl or Jina AI Reader.
+How it works on mobile: You paste any noisy webpage link (like a documentation site or a long
+article) into the tool. It completely strips away the ads, headers, and tracking junk, handing you a
+perfectly formatted Markdown code block or document to throw straight into your wiki vault.
+7 sites
+2:16AM
+So how am I going to use these files
+actually? You know, like am I going t…
+AI Mode All Images Videos News Maps Shopping Books Flights Finance Part 3: The PDF-to-JSONL Caching/Compression Tool
+The tool you are referring to that handles heavy KV (Key-Value) Cache optimization, text-chunk
+compression, and converts PDFs into structured JSONL for scripting and fast RAG retrieval is Docling
+(built by IBM) or Reducto AI.
+What it actually does to the PDFs:
+1. Layout & Matrix Deconstruction: It doesn't just read the text; it converts complex elements like
+tables, multi-column charts, and images into accurate data structures.
+2. JSONL Conversion: It outputs the document as a JSON Lines (.jsonl) file. Each line represents a
+perfect chunk of the document with metadata, vector limits, and context boundaries.
+3. KV Cache Efficiency: Because JSONL is highly structured and pre-tokenized, AI models can read it
+with maximum token efficiency. Instead of the model recalculating a massive, messy text document
+every time (which explodes your KV cache size and burns context windows), the JSONL acts as a
+hyper-dense, pre-parsed structure. This means near-instant data retrieval and significantly cheaper
+scripting costs.
+You can install docling via pip inside your Termux environment to process your local documents
+completely offline before shoving them into your repositories.
+Medium·Jea…
+arXiv +3
+[2503.04973]
+Beyond RAG:…
+The paper proposes a
+task-aware key-value…
+arXiv
+Free Website to
+Markdown…
+Free website to
+markdown converter:…
+Firecrawl
+KV Cache
+Compre…
+Figure 1.
+Schematic,…
+NVIDIA
+PDF (and
+any kind…
+Converts PDF
+documents …
+Medium
+From Raw
+PDF to…
+The
+backbone o…
+Towards AI
+My bad, let me correct that immediately: the URL-to-PDF tool you are looking for is PrintFriendly or
+Microlink Website to PDF.
+PrintFriendly: You paste the raw URL link, and it strips out navigation bars, ads, and web junk to
+generate a clean, readable layout before rendering it into a formatted PDF.
+Microlink URL to PDF: A highly developer-centric version that handles bulk processing. You can
+paste a list of up to 50 URLs at a time, batch-convert them to PDFs, and download them wrapped in
+a single ZIP file.
+3 sites
+PrintFriendly
+microlink.io +1
+2:18AM
+No, I said URL to PDF.
+AI Mode All Images Videos News Maps Shopping Books Flights Finance How to use your Google Drive Wiki with Termux Repos
+Since you are setting up your open Wiki CLI on Termux and want to interject your compiled notes
+directly into new repositories, here is exactly how to manage it without duplication:
+1. Setup Your Upstream Google Drive Sync in Termux
+Instead of moving files manually, link your Google Drive directly to a local Termux directory using a
+sync tool or utility.
+Create a master directory in Termux called ~/my-master-wiki .
+Ensure your Obsidian app on your phone points to the local folder that syncs back to your Google
+Drive ( Wiki Inbox / Claude Wiki ). This means your Termux environment, Obsidian app, and Google
+Drive are all seeing the exact same .md files.
+2. The Git Interjection Method (Subtrees)
+When you start a new software project repository ( ~/projects/new-app ), you do not want to manually
+copy folders. Instead, bring your wiki folder in as a Git Subtree.
+Run this command inside your new repository to inject your master wiki files into a subfolder:
+bash
+git subtree add --prefix=docs/wiki ~/my-master-wiki main --squash
+Use code with caution.
+This completely avoids copying files. It maps your organized wiki directly into your project's
+docs/wiki folder as clean markdown text.
+3. Execution with Claude Code
+Because your files are now sitting neatly in the repository structure, your PWA cloud session running
+Claude Code can fully interact with them.
+You can launch Claude Code and run tasks like:
+text
+Read docs/wiki/Project_Requirements.md and generate the boilerplate schema matching those specs.
+Use code with caution.
+This lets you use your Google Docs/Keep brain-dumps to feed your software builds locally on your
+phone.
+Would you like to map out the folder sync paths between your Google Drive and Termux so your CLI
+reads your data automatically?
+Try without personalization
+AI Mode All Images Videos News Maps Shopping Books Flights Finance Bulk
+Downlo…
+How do I bulk
+download…
+microlink.io
+Save
+Webpag…
+You can use a
+free online…
+microlink.io
+How to
+Convert …
+Steps to
+Convert…
+PrintFriendly
+Bulk
+Downlo…
+You can use a
+PDF…
+microlink.io
+Got it, that is my mistake. I completely glossed over the names and made a total mess of the 
+``````plaintext
+🌌 AESOP XI: Autonomous Edge-Computing Architecture Blueprint
+Heterogeneous System Orchestration, Asymmetric Routing, & Autonomous Agent Flywheels
+Specification Version: v2.2-Production-Ready | Target: Multi-Node Sovereign Mesh
+1. Canonical Build Sequence & Execution Roadmap
+
+
+
+
+
+
+Phase 1: Grill with Docs Master Architectural Planning & Repo Partitioning
+Phase 2: Global Knowledge Curation, File Parsing, & Universal JSONL Marker Indexing
+Phase 3: Tool Harness Ingestion (Pocock, Honey for Devs, Prime Agent, ECC, GSD)
+Phase 4: 3-APK Engine Deployment (Horizons UI + Shell Daemon + Media Daemon)
+Phase 5: Local Dual-Model Inference & Continuous Improvement RLVR Loop (GCP)
+Phase 6: Multi-Node Mesh Orchestration & Autonomous Agent Swarm (Jetson / Pi)
+
+* Priority 1: "Grill with Docs" Master Architectural Session & Strategic Roadmap
+   * The Orchestration Driver: Execute the master "Grill with Docs" session first to interrogate baseline documentation and establish the complete technical battle plan.
+   * Repository & Directory Partitioning: Formulate the precise directory schemas, define strict repository isolation barriers, and assign individual agent manifests.
+   * Skill-to-Agent Allocation: Map exactly which skills, harnesses, and tool endpoints are assigned to which agent runtimes (Node Alpha, Beta, Gamma, or Delta).
+   * Data Tiering Strategy: Define explicit boundaries for what gets parsed, what stays on the active "hot plate" (mem0 context cache and local active reasoning ledgers), and what gets archived into the deep cold vault (Obsidian markdown vaults and Postgres OB1 vector stores).
+* Priority 2: Global Knowledge Curation & Universal JSONL Marker Indexing
+   * Assemble, clean, and partition core technical documentation: Qualcomm QAIRT/HTP SDK, Android Media/Accessibility APIs, Google Vertex AI Agent Builder, Llama Server, and Unsloth.
+   * Attach dense JSONL marker schemes to every markdown file, tool repository, and skill guideline to allow direct KAG/RAG indexing without context bloat.
+* Priority 3: Tool Harness Ingestion & Action Schemas
+   * Transform static reference repositories into machine-executable skills.
+   * Ingest developer harnesses: Matt Pocock Skills (Grill-Me, Spec, Ticket, TDD, Code-Review), Honey for Devs, Prime Agent (RLM persistent REPL + Continual Harness with rollback snapshots), ECC, GSD (Get Shit Done), Claude Video, Reverse Skills, Code Review Graph, mem0, and OpenAI/Anthropic LocalAI Omni-Route bridges.
+* Priority 4: 3-APK Native Android Deployment (Parallel with Priority 5)
+   * Deploy the decoupled 3-APK Android execution suite: Horizons UI (Orchestrator), Shell Daemon APK (Termux-free OS assistant/accessibility access), and Media Daemon APK (Screen-vision + Silero VAD + Speech stack).
+* Priority 5: Dual-Model On-Device Inference & Concierge Gateway
+   * Deploy the dual-model tandem: Qwen 3.5 0.8B GGUF Q4_0 (Executor) and Qwen 3.5 9B GGUF Q4_0 (Query / Metaprompt compiler).
+   * Wire the on-device Concierge Flow: Voice capture $\rightarrow$ Silero VAD $\rightarrow$ Screen Vision context $\rightarrow$ Synthesized clean markdown meta-prompt $\rightarrow$ User verification $\rightarrow$ Frontier Model / LocalAI $\rightarrow$ Kokoro TTS speech output.
+* Priority 6: Network-Wide Integration & GCP Cloud Training Flywheel
+   * Establish the continuous improvement training flywheel: Real-time inference triples aggregated locally by Home Assistant $\rightarrow$ Packaged for batch audit $\rightarrow$ Validated by Red Agent $\rightarrow$ Exported to GCS $\rightarrow$ GCP Vertex AI / Compute Instances run RLVR (GRPO/Unsloth) fine-tuning $\rightarrow$ Updated weights pushed back to edge.
+   * Activate the multi-agent home node: Home Assistant Auditor & Housekeeper, Red Agent Batch Training Auditor, IT Help Desk & Manual Operator, Web Ingestion & News Monitor, and NPU Inference Manager.
+2. Multi-Node Compute Infrastructure
+
+
+Node ID
+	Physical Platform
+	Primary Function
+	Core Acceleration & Compute
+	Primary Software & Daemons
+	NODE ALPHA
+	Moto Razr Ultra 2025
+	Local Orchestration & Concierge Hub
+	Snapdragon 8 Elite (Hexagon NPU v79)
+	3-APK Unified Stack (Horizons + Daemons), LocalAI, Moonshine/Kokoro
+	NODE BETA
+	Nvidia Jetson Orin Nano Super
+	Headless Home Server & Vector Hub
+	Dedicated CUDA Core Array (60–70 TOPs)
+	Postgres OB1 Protocol, Home Assistant, Red Agent Auditor, Multi-Agent Swarm
+	NODE GAMMA
+	Rubik Pi 3 (Dragonwing)
+	Display Workstation & Helpdesk Gateway
+	Thundercomm / Qualcomm SoC (14+ TOPs)
+	Dual-Monitor Display Engine, System Log Viewer, IT Manual Search
+	NODE DELTA
+	Google Cloud Platform
+	Asymmetric RAG & Heavy RLVR Training
+	Cloud TPUs / A100/H100 Instances
+	Vertex AI Agent Builder ($1,000 Credit Tier), GCS Buckets, Unsloth/Axolotl GRPO
+	3. The 3-APK Unified Android Architecture
+
+
+
+
+
+
+┌────────────────────────────────────────────────────────────────────────┐
+│                        APK 1: HORIZONS UI                              │
+│  - Chromium Webview Sandbox & Websocket Bridge                         │
+│  - LLM Chat Tile Interface & Terminal GUI Visualizer                   │
+│  - Omni-Route Model Dispatcher (Local vs. OpenRouter Fallback)         │
+│  - NanoAgent / SmolAgent Inference Orchestration Daemon                │
+└──────────────────┬─────────────────────────────────┬───────────────────┘
+                  │                                 │
+                  ▼ (IPC / Local Service Bindings)  ▼
+┌──────────────────────────────────────┐  ┌──────────────────────────────┐
+│       APK 2: SHELL DAEMON            │  │     APK 3: MEDIA DAEMON      │
+│ - OS Assistant / Accessibility Engine│  │ - Screen-Vision Frame Buffer │
+│ - Android Sandbox Bypass Gateway     │  │ - Silero VAD Ingress Loop    │
+│ - Raw Shell Tool Execution           │  │ - Moonshine STT / Kokoro TTS │
+│ - Native Termux Shell Replacement    │  │ - Game SDK Real-Time Ingress │
+└──────────────────────────────────────┘  └──────────────────────────────┘
+
+
+
+4. End-to-End System Dataflow & Runtime Routing
+
+
+
+
+
+
+[ USER VOICE / INTENT ]
+        │
+        ▼
+[ APK 3: MEDIA DAEMON ] ──► Screen Capture + Silero VAD Audio Intercept
+        │
+        ▼
+[ MOONSHINE ONNX STT ] ──► Compiles Raw Voice Transcription
+        │
+        ▼
+[ OMNI-ROUTE / LOCALAI ] ──► Anthropic / OpenAI Format Translation
+        │
+        ├───────────────────────────────────────────────────────┐
+        ▼                                                       ▼
+┌───────────────────────────────────┐   ┌───────────────────────────────────┐
+│   EXECUTOR CORE (0.8B Qwen 3.5)   │   │     QUERY CORE (9B Qwen 3.5)      │
+├───────────────────────────────────┤   ├───────────────────────────────────┤
+│ • mem0 Context Cache (Hot Plate)  │   │ • OB1 Vector Database (Postgres)  │
+│ • Reasoning Bank Ledger Paths     │   │ • Universal JSONL Document Index  │
+│ • Task / Command Execution        │   │ • Synthesizes Markdown Meta-Prompt│
+└─────────────────┬─────────────────┘   └─────────────────┬─────────────────┘
+                 │                                       │
+                 └───────────────────┬───────────────────┘
+                                     ▼
+                       [ APK 1: HORIZONS UI DISPLAY ]
+                                     │
+                       (User Verification / Intercept)
+                                     │
+                                     ▼
+                     [ FRONTIER MODEL / LOCAL CLOUD ]
+                                     │
+                                     ▼
+                  [ REASONING BANK / ACTIVE EXECUTION LEDGER ]
+                                     │
+                                     ▼
+         [ HOME ASSISTANT: CROSS-AGENT AUDITOR & LOG COMPILER ]
+         - Real-Time Live Inference Auditing Across Agents
+         - Daily Execution Logs Deduplication & Script Aggregation
+         - Accumulates Task-Output-Verdict Triples Locally
+                                     │
+                  (Context Reaches Training Threshold?)
+                                     │
+                                     ▼
+                       [ RED AGENT AUDITOR SANDBOX ]
+                       - Intercepts Accumulated Training Batches
+                       - Air-Gapped Validation Against Nope Data Bank
+                       - Certifies Ground-Truth Dataset for RLVR
+                                     │
+                    ┌────────────────┴────────────────┐
+                    ▼                                 ▼
+            [ MATCHES NOPE ]                  [ PASSED AUDIT ]
+                    │                                 │
+           (Drop & Recover)           ┌───────────────┴───────────────┐
+                                      ▼                               ▼
+                             [ VAULT / STORAGE ]             [ GCP CLOUD STORAGE ]
+                             - Obsidian Markdown Vault       - gs://business-secure-bucket
+                             - Local KAG Graphs              - Verified Training Batches
+                                                                      │
+                                                                      ▼
+                                                            [ GCP TRAINING FLYWHEEL ]
+                                                            - Vertex AI Discovery Engine
+                                                            - Unsloth/Axolotl GRPO Jobs
+                                                            - New Weights Pushed to Edge
+
+
+
+5. Multi-Agent Home Node Topology (Node Beta / Jetson)
+* Home Assistant (Cross-Agent Auditor & Housekeeper): Manages real-time cross-agent auditing during live inference sessions, aggregates daily execution logs, compiles draft automation scripts, and packages raw telemetry pairs for downstream training.
+* Red Agent Auditor (Batch Training Guardrail): Operates strictly when accumulated context reaches the training compilation threshold, conducting air-gapped safety verification against the Nope Data Bank before datasets are shipped to GCP.
+* IT Help Desk & Manual Operator Agent: Indexes local technical documentation, tool schemas, and hardware specs to debug operational failures and suggest system repairs.
+* Web Ingestion & News Monitor Agent: Tracks breaking updates in local open-weight models, new tools, and upstream repository changes.
+* NPU / Local Inference Manager: Balances weight offloading between Snapdragon Hexagon NPU, Jetson CUDA cores, and fallback cloud APIs.
+6. GCP Cross-Account IAM Handshake & RLVR Loop
+* Business / Contractor Resource Tier: Houses proprietary data in gs://business-secure-vault-bucket/ and grants read-only roles/storage.objectViewer to the personal consumer service account.
+* Personal Developer Tier ($1,000 Credit Pool): Vertex AI Discovery Engine (service-PERSONAL_PROJECT_NUMBER@gcp-sa-discoveryengine.iam.gserviceaccount.com) points directly to the business bucket without copying data, absorbing 100% of RAG query costs.
+* The RLVR Training Loop: Home Assistant packages verified task triples, Red Agent approves the batch, and the dataset streams to GCS. GCP instances run scheduled GRPO fine-tuning jobs on fixed base weights (Qwen/Llama) using Unsloth/Axolotl, returning fine-tuned GGUF weights back down to Node Alpha and Beta.
+7. Decentralized Multi-Repository Map
+
+
+
+
+
+
+📁 master_workspace/
+├── 📁 file-management-and-skills/  # Master Canonical Docs, JSONL Markers, Tool Schemas (Priority 1 Core)[cite: 1, 4]
+├── 📁 horizons-ui-v2.0/             # Kotlin/Java APK 1: Orchestration GUI, Webview, Chat Tile[cite: 8, 9]
+├── 📁 nova-daemon-shell/           # Kotlin/Java APK 2: OS Assistant & Accessibility Sandbox Bypass[cite: 8, 9]
+├── 📁 nova-daemon-media/           # Kotlin/Java APK 3: Screen Vision, Moonshine STT, Kokoro TTS[cite: 1, 8, 9]
+├── 📁 agent-harness-hub/           # Prime Agent (RLM), Pocock Skills, Honey for Devs, ECC, GSD[cite: 1, 7]
+├── 📁 localai-omni-route/          # Modality Routing, OpenAI/Anthropic Translation Endpoints[cite: 1, 6]
+├── 📁 obsidian-knowledge-vault/    # Graphify Networks, KAG/RAG Markdown Trees, NotebookLM Hooks[cite: 1]
+├── 📁 red-agent-auditor/           # Air-gapped Batch Training Verification, Nope Data Bank[cite: 1]
+├── 📁 node-beta-jetson/            # Postgres OB1 Vector Store, CUDA Inference Servers[cite: 1]
+└── 📁 gcp-training-flywheel/       # RLVR Export Scripts, Cross-Account IAM Handshake, GRPO Pipelines[cite: 3, 5]
+
+8. Universal JSONL Marker Schema
+Every markdown documentation file and skill repository includes an attached .jsonl schema block to enable rapid, low-token search indexing across local agents and Vertex AI Discovery engines:
+
+
+
+
+
+
+JSON
+{
+ "record_id": "SKILL_POCOCK_GRILL_001",
+ "document_path": "agent-harness-hub/pocock-skills/grill-me.md",
+ "category": "SKILL_HARNESS",
+ "target_runtime": "PRIME_AGENT_RLM",
+ "metadata": {
+   "title": "Grill-Me Architectural Interview Harness",
+   "description": "Interactive question-driven prompt for technical planning",
+   "primary_tools": ["claude-code", "open-wiki-cli", "prime-agent"],
+   "required_context_keys": ["repo_scope", "target_architecture"]
+ },
+ "retrieval_tokens": ["grill", "spec", "architecture", "audit", "pocock"],
+ "entry_points": {
+   "repl_command": "/skill run grill-me",
+   "jsonrpc_method": "agent.skills.execute"
+ }
+}
+```

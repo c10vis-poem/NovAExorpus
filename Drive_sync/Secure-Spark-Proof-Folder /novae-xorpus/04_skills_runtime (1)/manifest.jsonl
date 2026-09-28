@@ -1,0 +1,1 @@
+{"id": "EXT_384aee6f3a422c5c", "source_doc": "Corpus verify SKILL.md", "skill_created": "04_skills_runtime/prompt_skills/corpus_verify_skill_skill.md", "tools_created": [{"type": "tool", "subtype": "cli_shell", "path": "04_skills_runtime/extracted_tools/cli/corpus_verify_skill_tool_0.sh", "hash": "bd4952eaf6c1e923"}], "timestamp": "2026-09-09T18:41:49.361795+00:00"}

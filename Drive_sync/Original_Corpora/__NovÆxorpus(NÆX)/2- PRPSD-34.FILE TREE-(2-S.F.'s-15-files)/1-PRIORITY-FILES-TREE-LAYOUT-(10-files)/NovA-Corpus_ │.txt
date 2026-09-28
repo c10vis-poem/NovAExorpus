@@ -1,0 +1,16 @@
+📁 NovA-Corpus/
+│   └─ README.md · CLAUDE.md · STACK-MAP.md · GLOSSARY.md · master_blueprint.txt
+│
+├── 📁 horizons-ui/            README.md · CLAUDE.md · skill_manifest.json · llm_wiki.md · src/
+├── 📁 novus-agenti/           " " · executor-core/ · query-core/
+├── 📁 nova-claw/              " " · daemons/ · runtimes/ · tool-skills/
+├── 📁 aesop/                  " " · ob1/ · omni-route/ · mem0/ · reasoning-bank/ · memory-tools/
+├── 📁 clis-and-agents/        " " · open-wiki-tui/ · pi-agent/ · claude-code-termux/ · code-review-graph/
+├── 📁 skills/                 ROUTER.md · base_skill_guideline.md · <skill-name>/
+├── 📁 file-management-system/ ← memory tiers live HERE ONLY (see #3)
+├── 📁 recursive-training/     [designed-only]
+├── 📁 red-agent-auditor/      [designed-only]
+├── 📁 github-ci-cd/           README.md · workflows/
+├── 📁 nodes/                  razr/ · jetson/ · rubik-pi/
+├── 📁 global-documentation-vault/  qairt-docs/ · genie-x/ · google-dev-docs/ · llama-docs/ · unsloth-docs/
+└── 📁 registries/             models.md · repos.md

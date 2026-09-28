@@ -1,0 +1,175 @@
+Two important corrections — let me verify the current state on both before I update my recommendations.
+
+Good — now I have the full picture on both. You were right on both counts. Let me correct my recommendations.
+
+---
+
+## Correction 1: Model Pathway — QAI Hub + QAIRT, Not llama.cpp Direct
+
+You're absolutely right. There are **two distinct NPU pathways**, and I conflated them. Here's the corrected breakdown based on what Qualcomm's own GenieX documentation now specifies:
+
+### Pathway A: QAIRT Runtime (Pre-compiled AI Hub Bundles)
+
+This is your **primary NPU path** for any model that exists on Qualcomm AI Hub:
+
+- Models come **pre-compiled and pre-quantized per chipset** — pinned to Hexagon NPU only
+- You download the **Genie bundle** (not a GGUF) from `huggingface.co/qualcomm/<model-name>` — each model card has a table with per-device download links
+- Run via `genie-t2t-run` executable from the QAIRT SDK
+- **NPU-only**, no CPU/GPU fallback — fastest path
+- Precision, context length, and KV cache size are **baked into the bundle** — you cannot change them at runtime
+
+```bash
+# Environment setup for Snapdragon 8 Elite (Hexagon v73)
+export QAIRT_HOME=/path/to/downloaded/QAIRT_SDK
+export PATH=${QAIRT_HOME}/bin/aarch64-android/:${PATH}
+export LD_LIBRARY_PATH=${QAIRT_HOME}/lib/aarch64-android:${LD_LIBRARY_PATH}
+export ADSP_LIBRARY_PATH=${QAIRT_HOME}/lib/hexagon-v73/unsigned
+```
+
+### Pathway B: llama_cpp Runtime (GGUF → GGML → librc → Kernel → HTP)
+
+This is your path for models **not** on AI Hub, or when you need GPU/CPU fallback:
+
+- GGUF model (Q4_0) → Qualcomm's **GGML Hexagon backend** → routes through `librc` → kernel → lands on the **same HTP0**
+- Also NPU-pinned by default (`npu` compute unit = `HTP0`)
+- You **choose** the quantization (`Q4_0`, `Q8_0`, `F16`, etc.)
+- Can fall back to Adreno GPU or CPU if needed
+- Pass `hybrid` for HTP + CPU per-tensor scheduling (Qualcomm says this is the faster path on Snapdragon)
+
+### Corrected Download Priority
+
+| Priority | Model | Pathway | Source | Format |
+|---|---|---|---|---|
+| **1st** | Qwen 3.5 0.8B (or smallest available on AI Hub) | **QAIRT** | `huggingface.co/qualcomm/<model>` | Genie bundle (pre-compiled) |
+| **2nd** | Qwen 3.5 0.8B GGUF Q4_0 | **llama_cpp** | `huggingface.co/TheStageAI/Qwen3.5-0.8B-GGUF` | GGUF |
+| **3rd** | Qwen3-4B (if available on AI Hub) | **QAIRT** | `huggingface.co/qualcomm/Qwen3-4B` | Genie bundle |
+| **4th** | Qwen 3.5 9B GGUF Q4_0 | **llama_cpp** (Jetson CUDA) | `huggingface.co/bartowski/...` | GGUF |
+
+**Key insight from the docs**: AI Hub has Qwen3-4B pre-compiled for Snapdragon 8 Elite, and your device (16GB RAM) meets the requirement of "16GB+ for 7B+ or 4096 context length models, 12GB+ for 3B+ models." So you could potentially run a 4B model on the NPU directly via QAIRT — that's a better executor than the 0.8B if it's available.
+
+### Corrected NPU Proof-of-Life Test
+
+```bash
+# Pathway A — QAIRT (preferred for AI Hub models)
+# Download the Genie bundle from huggingface.co/qualcomm/<model>
+# Then run:
+genie-t2t-run --context_length 4096 --model_dir ./genie_bundle --prompt "Hello"
+
+# Pathway B — llama_cpp with GGUF (for non-AI-Hub models)
+# Uses Qualcomm's GGML Hexagon backend, pinned to HTP0
+llama-cli -m ~/models/qwen-0.8b/Qwen3.5-0.8B-Q4_0.gguf \
+  -p "Hello" \
+  --compute-unit npu   # or 'hybrid' for HTP+CPU scheduling
+```
+
+Your architecture doc was right and I was wrong to suggest `--n-gpu-layers 99` — that's the llama.cpp desktop syntax. On Snapdragon with Qualcomm's GGML backend, you use `--compute-unit npu` or `--compute-unit hybrid`.
+
+---
+
+## Correction 2: Docling in Termux — It Actually Works Now (with Caveats)
+
+The "Docling won't work in Termux" advice was based on older information. According to the Docling GitHub issues, **as of recent versions it does work in Termux**, but there are specific gotchas:
+
+### What Actually Works
+
+Based on the GitHub issues thread (specifically issue #2261, updated as recently as May 2026):
+
+```bash
+# The fix that made it work — install qt6 first, then docling
+apt install qt6-qtbase-gtk-platformtheme
+pip install -U docling
+
+# If you hit the torch._C._distributed_c10d error:
+pip install transformers -U
+```
+
+### Known Issues & Fixes
+
+| Problem | Cause | Fix |
+|---|---|---|
+| `Bus error` on launch | `torchao` installed (not a Docling dependency) | `pip uninstall torchao` |
+| `No module named 'torch._C._distributed_c10d'` | Termux's `apt install python-torch` missing DISTRIBUTED flag | `pip install transformers -U` |
+| `docling-parse` build fails | Was a CMake/`libqpdf` compilation issue | Now fixed — `apt install qt6-qtbase-gtk-platformtheme` first |
+| Slow first install | `docling-parse` compiles from source on aarch64 | Allow ~1 hour for the build |
+| Python version | Docling 2.70.0+ dropped Python 3.9 | Use Python 3.10+ (Termux default is 3.12+) |
+
+### Verified Working Configuration
+
+From the issue thread, this exact setup was confirmed working:
+
+```text
+Docling version: 2.52.0 (or newer)
+Python: cpython-312 (3.12.11)
+Platform: Linux-4.14.186+-aarch64-with-libc (Android/Termux)
+```
+
+And another user confirmed:
+
+```text
+Docling version: 2.109.0
+Python: cpython-314 (3.14.6)
+Platform: Android-11-aarch64-64bit-ELF
+```
+
+### What WON'T Work in Termux
+
+The `[vlm]` extra I recommended earlier — `pip install "docling[vlm]"` — **will likely fail or be unusably slow** on phone. The VLM pipeline uses GraniteDocling (a vision-language model) which needs significant compute. For your use case:
+
+- ✅ **Core Docling** (text extraction, tables, structure) — works in Termux
+- ❌ **Docling VLM** (vision-language model for complex layouts) — use on Jetson or cloud instead
+
+### Corrected Docling Install for Termux
+
+```bash
+# 1. Install prerequisite
+apt install qt6-qtbase-gtk-platformtheme
+
+# 2. Install docling (core only, no VLM)
+pip install -U docling
+
+# 3. Fix torch distributed issue if it appears
+pip install transformers -U
+
+# 4. If bus error occurs, remove torchao (not needed by docling)
+pip uninstall torchao
+
+# 5. Verify
+docling --version
+```
+
+### Alternative If Docling Still Fails
+
+If after all the above it still doesn't cooperate on your specific device/Android version, the fallback for PDF → JSONL on Termux is:
+
+```bash
+# PyMuPDF (fitz) — lightweight, pure-Python, works everywhere in Termux
+pip install pymupdf
+
+# Then write a simpler chunker:
+python3 -c "
+import fitz, json
+doc = fitz.open('your-doc.pdf')
+for page in doc:
+    text = page.get_text()
+    record = {
+        'record_id': f'DOC_{page.number}',
+        'content_chunk': text,
+        'page': page.number
+    }
+    print(json.dumps(record))
+" >> output.jsonl
+```
+
+PyMuPDF won't give you the lossless table/layout deconstruction that Docling provides, but it will extract text reliably on any Android device. For the complex PDFs with tables and charts, push those to the Jetson where Docling VLM can run properly.
+
+---
+
+## Updated TL;DR — Corrected
+
+1. **Download**: Pull the **Genie bundle** from `huggingface.co/qualcomm/<model>` for your executor model — pre-compiled for Snapdragon 8 Elite, runs via `genie-t2t-run` through QAIRT
+2. **Also download**: Qwen 3.5 0.8B GGUF Q4_0 as your fallback/custom pathway model — runs through Qualcomm's GGML Hexagon backend → `librc` → kernel → HTP0
+3. **NPU test**: `genie-t2t-run --model_dir ./genie_bundle --prompt "Hello"` (QAIRT path) or `llama-cli --compute-unit npu ...` (GGUF path)
+4. **Docling**: `apt install qt6-qtbase-gtk-platformtheme && pip install -U docling` — it does work now, core text extraction only, skip the `[vlm]` extra
+5. **ECC + Pocock**: Same as before — `/plugin install ecc@ecc` and `npx skills@latest add mattpocock/skills`
+
+Want me to now dig into the ECC skill-to-agent mapping for your specific architecture, or should we start prepping the actual grill session structure with the corrected model pathways?

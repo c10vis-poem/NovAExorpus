@@ -1,0 +1,35 @@
+{
+  "mcpServer": {
+    "name": "filesystem-mcp-node",
+    "version": "1.0.0",
+    "command": "node",
+    "args": [
+      "/data/data/com.termux/files/home/novae-xorpus/novaexopia/mcp_connectors/filesystem_mcp/index.js",
+      "/data/data/com.termux/files/home/novae-xorpus"
+    ],
+    "env": {
+      "NODE_ENV": "production",
+      "ALLOWED_DIRECTORIES": "/data/data/com.termux/files/home/novae-xorpus,/data/local/tmp/models"
+    },
+    "capabilities": {
+      "resources": {
+        "subscribe": true,
+        "listChanged": true
+      },
+      "tools": {
+        "listChanged": true
+      }
+    },
+    "security": {
+      "readOnly": false,
+      "sandboxPaths": [
+        "/data/data/com.termux/files/home/novae-xorpus"
+      ],
+      "forbiddenExtensions": [
+        ".apk",
+        ".so",
+        ".dex"
+      ]
+    }
+  }
+}

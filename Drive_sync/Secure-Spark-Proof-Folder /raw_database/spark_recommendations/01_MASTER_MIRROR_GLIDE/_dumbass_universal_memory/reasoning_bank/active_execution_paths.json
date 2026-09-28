@@ -1,0 +1,45 @@
+{
+  "ledger_version": "1.0",
+  "system_id": "dumbass_reasoning_bank",
+  "description": "Active state recovery ledger tracking in-flight agent tasks, execution checkpoints, step rollbacks, and error recovery states across split runtimes.",
+  "active_sessions": [
+    {
+      "session_id": "session_init_master",
+      "timestamp": "2026-09-06T19:00:00Z",
+      "target_repo": "novae-xorpus",
+      "active_agent": "executor_bridge",
+      "status": "CHECKPOINTED",
+      "current_step": 3,
+      "total_steps": 5,
+      "step_history": [
+        {
+          "step": 1,
+          "action": "validate_environment",
+          "verdict": "PASS",
+          "checkpoint_hash": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "step": 2,
+          "action": "mount_dumbass_memory_tables",
+          "verdict": "PASS",
+          "checkpoint_hash": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "step": 3,
+          "action": "stage_subsystem_schemas",
+          "verdict": "IN_PROGRESS",
+          "checkpoint_hash": "sha256:7bc1bbed4f61f77d3f0a12e3e56a695c027e1f4963595f922c0bcf1904a43d92"
+        }
+      ],
+      "recovery_context": {
+        "rollback_target_step": 2,
+        "interruption_signal": null,
+        "resume_token": "rtk_resume_9921_beta"
+      }
+    }
+  ],
+  "quarantine_summary": {
+    "total_quarantined_batches": 0,
+    "active_investigations": []
+  }
+}

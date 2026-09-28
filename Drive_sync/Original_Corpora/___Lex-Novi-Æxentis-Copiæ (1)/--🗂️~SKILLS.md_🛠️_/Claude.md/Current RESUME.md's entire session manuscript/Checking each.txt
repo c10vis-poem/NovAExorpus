@@ -1,0 +1,11 @@
+Checking each of those specifically against the real repo tree, not assuming.
+
+All three checked against actual source, not assumption — mixed results, and I want to be precise since two of these don't hold up as stated:
+
+**"Postgres vector" — not accurate.** The vector store (`src/lib/memory/vectorStore.ts`) is real and sophisticated — hybrid search combining `sqlite-vec` (vector similarity) with SQLite's FTS5 (full-text) via RRF (Reciprocal Rank Fusion), with int8 quantization and self-healing upsert, all backed by tests. But it's **SQLite end to end, not Postgres/pgvector**. Functionally it does the same *job* as OB1's Recall memory, just on a different, lighter backend — which actually helps your "universal, everywhere" memory goal more than Postgres would, since SQLite files sync/replicate far more easily than a Postgres instance tied to one home node. But it's not literally Postgres, and I don't want that detail sitting wrong in the architecture doc.
+
+**"Stale information flagging" — narrower than the claim.** What's actually there (`free-note-freshness.test.ts`) is a set of hardcoded tests checking that specific AI-provider free-tier pricing/quota notes (Kiro's 50-credit/month limit, LongCat's token cap, Cerebras's TPM limit) match current reality — that's freshness-checking for *provider metadata*, not a general mechanism for flagging stale facts in your memory/knowledge base. The other "stale" hits I found (TLS client staleness, API-key encryption guards, session TTLs) are connection/credential expiration handling — a different kind of staleness (technical/security), not content staleness. There's no general-purpose stale-knowledge detector here to repurpose.
+
+**"Adhering to ReasoningBank's guidelines/implementation" — zero hits, doesn't exist.** Searched the full repo tree for any reasoning-bank reference at all. Nothing. If you want OmniRoute to route to or implement ReasoningBank's schema, that's net-new integration work, not something already there to wire up.
+
+So: one real asset (the SQLite hybrid vector store, genuinely usable for Recall memory), and two claims that don't match what's actually in the repo. Worth knowing before either gets written into `ARCHITECTURE.md` as fact.

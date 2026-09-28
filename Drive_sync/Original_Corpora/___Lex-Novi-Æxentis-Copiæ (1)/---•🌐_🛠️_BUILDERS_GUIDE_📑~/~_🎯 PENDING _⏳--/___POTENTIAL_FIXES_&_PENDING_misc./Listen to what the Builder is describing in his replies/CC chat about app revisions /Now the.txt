@@ -1,0 +1,34 @@
+Now the imports and scope that edit depends on:
+
+Good — that's a real distinction and I want to get it right: the fuse *theater* isn't wanted, but the four failure classes are. Noted, and I'll place them precisely once this compiles.
+
+First, the imports my edit needs:
+
+No Android SDK in this environment — I can't compile here. CI is the only real verifier, so I'm not going to claim this builds. Here's exactly what changed:
+
+Three files, +74/−8. Nothing else touched — `HomeGrid.kt` untouched, gate logic byte-for-byte identical.
+
+**What the pass does:**
+
+1. **`RouterPane.switchOn()` now launches.** It builds args from the def's `argsTemplate` (substituting `{model}` and `{port}`), calls `DaemonLauncher(ctx, def.binaryName)`, and on failure reverts the config to `READY` with the real error instead of leaving a lying "RUNNING" label. Configs with no def — cloud, PWA, terminal — fall through untouched, since there's no local binary to start.
+
+2. **`NpuClient` takes `port` and `healthPath`** instead of the `ENGINE_PORT` constant. Defaults preserve old behavior, so `CliffordService`'s watchdog relaunch is unaffected.
+
+3. **`activateNpuRuntime(port, healthPath)`** rebuilds the client when the endpoint changes. Previously you could plate geniex on `:18181` and the chat pane would still be talking to `:8080`.
+
+4. **The `HomeGrid.kt:69` NPU-ready bug is fixed** without opening the frozen file. The `"Adreno 830 · no backend"` fallback string originated in `HorizonsApplication`, and the home grid's `startsWith("Adreno 830")` check matched it — so *no backend* rendered as *NPU ready*. Changed the string to `"no backend · idle"`. Frozen file never touched.
+
+**On your four failure points — where they now stand:**
+
+| | Check | State |
+|---|---|---|
+| 1 | Engine — what makes it go | binary present + exec bit — already there |
+| 2 | Fuel & cargo — assets | `requiredAssets` + model path — already there |
+| 3 | **Road & weight limit — arch + RAM** | **missing.** Nothing checks either. |
+| 4 | Communication — syntax + handshake | `argsTemplate` was defined but never consumed; now it is, and health hits the def's own port/path |
+
+So #4 closed as a side effect of the seam. **#3 is the real remaining gap** — and it's the one that matters for shipping to arbitrary devices, since it's what stops the app trying to boot a Hexagon daemon on hardware that has no NPU. That's a genuine failure point, not ceremony. I left it out because you asked for the seam and I didn't want to bundle a second change into an unverified commit.
+
+**Two things I'm not claiming:** this compiles, and it runs. No SDK here. The honest next step is pushing to `claude/repo-restructure-crash-analysis-j9v9fl` and letting CI build it — that's a real verdict in a few minutes, and it either produces an APK you can install or a compile error I fix.
+
+Want me to push it?

@@ -1,0 +1,115 @@
+Project: Novus Agenti (Novus Claw) — on-device agentic AI assistant.
+App repo: c10vis-poem/Horizons-UI   Vault: c10vis-poem/OBSIDIAN-Master_Wiki[ not to be referenced right now it's under construction Builder will provide Canon docks and point unit correct files treat every reference file here is suspect unless handed to you from The Builder Himself]
+Protocol and universal memory layer: c10vis-poem/aesop         GenieX fork: c10vis-poem/GenieX.
+
+There needs to be a way to load this file from the device storage I have the entire genie SDK downloaded I should be able to fetch it from either the terminal or the file selector from the settings with no problem at all. The same goes for any file any run time any model
+
+### SPECS LIVE IN THE VAULT, NOT HERE. READ THEM FIRST, IN FULL. ONLY AFTER YOU'VE GIVEN THE BUILDER A LINK TO THE FILE AND HAD HIM PROOFREAD. 
+
+Vault `main` is current (PR #5 merged). Start with, in order: ASKING THE BUILDER IF THESE ARE THE CORRECT FILES TO READ FIRST AND THEN PROVIDING HIM WITH THE LINKS TO THE FOLLOWING DO NOT INGEST THESE UNTIL DIRECTED DO NOT TAKE ANY ACTIONS THAT OR WILL WASTE COMPUTE FLOAT THE SESSION OR BURN UP TOKENS WITHOUT BEING DIRECTED 
+
+  canon/SOURCE-PRECEDENCE.md      which source wins when two disagree
+  canon/STATE-OF-EXISTENCE.md     the ONLY build-state authority
+  canon/MASTER-BUILD-BLUEPRINT.md the target, W5+H, build map §12.1
+  canon/horizons-ui/WHAT-IT-IS.md + FEATURE-INVENTORY.md
+  horizons-ui/AGENT-BRIEF.md      hard stops + which local docs lie
+The vault has 337 md files across 13 top-level dirs. canon/ + horizons-ui/
+is 59 of them. pending-corpora/ is PRECEDENCE RANK 2 — higher than the
+locked visual specs — and is easy to miss. Do not claim you read the
+corpus after reading two folders. (A prior session did exactly that.)
+
+### BRANCH REALITY — verified 2026-08-06, trust this over older docs
+`main` == 7b9e5db. It HAS the correct frozen HomeGrid (blob 618cf4b6).
+RELEASE-correct-home-screen-984b0610 is 9 commits BEHIND main, 0 ahead.
+**The old "main does NOT have the working home screen" warning is STALE.**
+Basing off RELEASE now DISCARDS work. Verify with:
+  git rev-parse origin/main:horizons/src/main/java/com/horizons/ui/HomeGrid.kt
+
+### THE ACTUAL DISEASE: 19 OPEN DRAFT PRs, NONE MERGED
+Every session branched from main, built something real, opened a draft PR,
+got CI green, and stopped. So main never accumulates and each session
+rediscovers or rebuilds what already exists elsewhere. This is why the
+docs and the code disagree: the docs describe the UNION of 19 branches,
+any session sees only main. It is a merge problem, not a docs problem.
+
+SIX of those PRs actively edit HomeGrid.kt and would OVERWRITE THE FREEZE:
+  #30 #27 #26 #24 #22 #20  ← do not merge without operator sign-off
+PR #33 carries the CORRECT blob plus real work (see below).
+
+### PR #33 — read it before writing anything in Router/params/voice
+`claude/repo-restructure-crash-analysis-j9v9fl`, open, draft, unmerged.
+Contains: core/stt/MoonshineSttEngine.kt (in-process STT on the sherpa
+AAR, no download, user-is-the-loader), UNLESS THIS APP KEEPS FAILING TO LOAD FILES AND MODELS SDKS FIND COMPILED RUNTIME ETC THIS NEEDS TO BE FIXED FIRST BEFORE WE CAN RELY ON THIS APP WORKING PROPERLY switchOn() driving DaemonLauncher
+from the RuntimeDef, NpuClient taking port/healthPath. Its BODY documents
+only the Router change — the STT engine is invisible from the description. FOR NOW
+READ THE DIFF, NOT THE WRITE-UP. It explicitly did NOT touch gate
+semantics and did NOT add the arch/RAM check.
+
+### PR #34 — current session's work, open draft, CI green (run #368)
+`claude/deprecated-repo-recovery-ycl0i8`. Contains: Router FUSE BOX gate
+removed (Rule 7a fix), Silero VAD CI fetch, 503 Content-Length fix,
+ModelImportActivity .so allowlist removed (libggml-hexagon.so etc. now
+accepted), MonitorPane detail truncation fixed GOOD ENOUGH TO BARELY GET THIS THING OFF THE GROUND, `manual` command in Monitor
+console, I'M GOING TO BE REFORMATTED wiki/BUILD-STATUS.md (mechanical feature inventory).
+Needs operator decision to merge. Merge #33 and 34 to main is COMPLETE 
+
+### HARD STOPS
+HomeGrid.kt is FROZEN at 984b061 / blob 618cf4b6. Never edit it, for any
+reason, without explicit operator sign-off. The home screen is DONE.
+If a doc disagrees with the screen, the doc is wrong.
+Never push main. No --no-verify / push --force / reset --hard.
+A skipped or unanswered question is NOT consent. Take no action without
+an explicit order.
+
+### ARCHITECTURE —THIS IS BEING DESIGNED TO BECOME A CONSUMER UNIVERSAL APPLICATION THAT WILL WORK WITH ANDROID IOS ARM64 X86 RIGHT NOW THE operator-confirmed 2026-08-06
+Runtime pathways, both LIVE, selected by GenieX `plugin_id`:
+  llama_cpp — GGUF (Q4_0), NPU via ggml-hexagon / GPU OpenCL / CPU
+  qairt     — QAIRT .bin shards + geniex.json, NPU ONLY, max performance
+TFLite / LiteRT / QAT are INPUT FORMATS to the AI Hub compile, which emits
+the per-chipset bundle qairt loads. "The GGML route" = the llama.cpp
+RUNTIME. It is NOT Google LiteRT — LiteRT appears in these docs only as
+the REJECTED in-process option. WHICH IS INCORRECT
+Quantization + model selection: SETTLED. Q4_0. Do not reopen or re-analyse. UNTIL WE GET THIS THING FIXED
+
+MODEL RESIDENCY: every model gets its own isolated device folder and loads
+by absolute path. The APK is currently launching without its weights. Drag-and-drop to swap sounds great but this thing can't seem to get files out of the folders to load into the app THE WEBVIEW BROWSER INSIDE THE APK CAN DOWNLOAD THE CHAT PANEL HAS WEB ACCESS TO DOWNLOAD THE TERMINAL CAN DOWNLOAD AND UPLOAD SETTINGS CAN UPLOAD, all of these aspects of still not been completely built 
+
+Same storage either way — downloading only buys a boot-time failure mode. So technically this thing is not working yet
+
+VOICE: in-process on the sherpa-onnx AAR, on device, through the APK.
+**NEVER on the NPU** — the actions model and query model already take turns
+there. This closes blueprint §8.1. Termux+proot voice was a temporary
+stopgap and is discarded; port its parameters, not its architecture.
+Measured int8 sizes: Whisper tiny.en 104MB · Moonshine tiny 124MB ·
+Whisper base.en 161MB · Moonshine base 287MB. (STATE-OF-EXISTENCE §2's
+"Moonshine is materially smaller" is FALSE — base is 78% larger.) We're not even going to worry about moonshine base because we're not using it. I DO WANT TO EXPLORE THE NEW WHISPER KIT ANDROID AND SEE IF THAT'S WORTH OUR TIME THOUGH
+
+WIRED != LAUNCHED. The APK should be capable of everything on the phone —THE GROUNDWORK IS THERE THIS THING WILL BE CAPABLE TO DO EVERYTHING STAYED RIGHT NOW IT CAN POSSIBLY DO THE BARE MINIMUM BUT THAT EVEN THAT HASN'T BEEN PROVEN SO RIGHT NOW I CAN STAY ALIVE FOR A LITTLE WHILE BUT PRETTY MUCH EVERY DEEPER FUNCTION IS NOT EVEN BEEN WIRED YET WHAT HAS BEEN HALF-ASS WIRED AND HIS SOMEWHAT WORKED=
+sockets, the harness, permissions, an initial runtime for its own backend,
+
+WHAT IS STILL UP IN THE AIR=
+NPU manager + file search, WebView/Chromium hooks, API + cloud inference,
+OpenRouter fallback. What is forbidden is LOADING AND LANDING with it. UNTIL WE CAN FIGURE OUT HOW TO DO SO WITHOUT CRASHING BUT EVEN THEN IT DOESN'T REALLY MATTER THIS THING SHOULDN'T LOAD HEAVY AT ALL IF ANYTHING MAYBE YOU'RE WORKING VOICE THERE AND AN ON DEVICE NANOAGENT
+
+DAEMON SPLIT (operator, 2026-08-06): a dying process cannot report its own
+death, so OOM recovery REQUIRES an external observer. Separate: LLM
+inference (+ vision co-located), and the watchdog/recovery in :clifford.
+In-process: voice, sockets, permissions, file search, UI. The NPU manager
+stays in-APK for coordination but must NOT own OOM detection. NEITHER ONE OF THESE HAS BEEN PROVEN TO BE BUILT CORRECTLY OR EVEN EFFECTIVE
+
+### AUTHORITY MODEL — series circuit
+Settings supplies (no authority to run) · Terminal forges parameters AND STILL NEEDS TO BE CODED TO DO A WHOLE HELL OF A LOT MORE THAN THAT
+· MONITOR is the switch, verifies LIVE at flip time, stores
+nothing, dispatches WHICH IS NOT CORRECT AND NOT WHAT WAS INTENDED THIS ALSO NEEDS TO DO A LOT MORE THAN THIS AT BARE MINIMUM 
+· Router is fuse box + breaker, carries current,
+DOESN'T ARGUE · Archives stores verified profiles, recovery restores here. TILE ALSO NEEDS TO BE AN ANIMATED GUI WHICH HAS NOT BEEN BUILT YET 
+
+The Router NEVER says no. A failed flip is a circuit that didn't energise,
+not an app throwing a wall. The operator EXPLICITLY REJECTED the hardened
+gatekeeper. Rule 7a: behavioural metaphors are NEVER compiled. Rule 7b:
+the supplied visual references ARE literal build specs.
+
+Use /memory to reload. HF_TOKEN / QAI_HUB_API_TOKEN from environment.
+Never hardcode them.
+
+NOW THERE WAS A WHOLE HELL OF A LOT MORE THAT CLAUDE WAS SUPPOSED TO LOAD ON HERE BUT PERHAPS IT'S IN ONE OF THE FILES THAT IT POINTED YOU AT LET'S HAVE A LINK AND SEE JUST A HEADS UP THERE'S A LOT OF COATING AHEAD IN THIS PROJECT WE'RE NOT GOING TO DO ANY CI PASSES WITH A PRIORITY ASPECT STUBBED IN AIM FOR 100% BUILD EVERY PASS.  PUSH ONE AT A TIME. NEVER TAKE ACTION WITHOUT BEING DIRECTED NEVER ASSUME ESPECIALLY ON POP-UP QUESTIONS IN FACT TRY NOT TO USE THOSE IF YOU CAN HELP IT

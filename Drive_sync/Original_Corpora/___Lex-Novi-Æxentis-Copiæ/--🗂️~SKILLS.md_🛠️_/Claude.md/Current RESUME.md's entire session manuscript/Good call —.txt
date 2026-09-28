@@ -1,0 +1,13 @@
+Good call — let me pull it straight from this session's own transcript file instead of my in-context recollection.
+
+That confirms my reconstruction was accurate to what's actually in the transcript. Let me also pull the exact verbatim text of your most recent restatement (the one with "honey-for-devs," "help desk," "terminal daemon") to make sure that one's transcribed correctly too.
+
+Found it — both are genuinely accurate transcriptions of two different things you said at two different points, not an error on my part transcribing either one. They just don't fully overlap:
+
+**Original (early session):** Voice → Desktops → On-device-agent+OpenWiki (together) → Pocock+ECC+**Anthropic plugins** → **JSONL markers/files + Enterprise knowledge base → tools/skills** → Grill session → **repo structure** → build APKs + on-device agents (**nano/turbo-quant models for cross-audit/RAG**)
+
+**Later restatement (what's in RESUME.md now):** OpenWiki → DroidDesk → Voice line → ECC+Pocock+**honey-for-devs** → Grill session → **on-device help desk** → **salvaging the existing APK as a terminal daemon**
+
+Bolded are the parts that only appear in one, not the other. Missing from `RESUME.md` right now: Anthropic plugins, the JSONL-markers/Enterprise-KB step, and "repo structure" as its own item. Only in `RESUME.md` right now, not the original: honey-for-devs, on-device help desk, salvaging-the-APK — these read like genuine additions you made later, not contradictions.
+
+I don't want to merge these myself a third time and guess wrong again — can you confirm the actual final order, incorporating whichever of these still stand?

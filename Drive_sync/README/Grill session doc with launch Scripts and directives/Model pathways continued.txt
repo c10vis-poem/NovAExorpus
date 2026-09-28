@@ -1,0 +1,167 @@
+Got it. So your 93 files + readme + handoff docs + the start of a grill session file are all in a GitHub repo. Here's how we wire this up:
+
+## Step 1: Clone the Repo into Termux
+
+```bash
+# Clone your repo into Termux home
+cd ~
+git clone https://github.com/<your-username>/<your-repo-name>.git aesop-grill-input
+
+# Verify the files are there
+ls ~/aesop-grill-input/
+# You should see your .md files, README, handoff docs, grill session file
+```
+
+Give me the actual repo URL and I'll give you the exact command. But the structure works regardless — once it's cloned locally, the grill session reads from `~/aesop-grill-input/`.
+
+## Step 2: The Grill Session Structure
+
+Here's how the grill session should be structured. This is the manifest the grill agent follows — it reads your docs, interrogates them, and outputs the master plan.
+
+---
+
+### Grill Session Manifest
+
+```markdown
+# GRILL WITH DOCS — AESOP XI MASTER ARCHITECTURE SESSION
+
+## SESSION CONTEXT
+
+### Corrected Model Pathways (Ground Truth)
+- **Executor Model**: Qwen 3.5 0.8B Q4_0 GGUF
+  - Pathway: GGUF → GenieX llama_cpp → GGML Hexagon backend → librc → kernel → HTP0
+  - Compute: --device npu (pinned to Hexagon NPU v79)
+  - Context: 4096
+  - Role: Fast task execution, prompt synthesis, mem0 + Reasoning Bank access
+  - Runs: Node Alpha (phone), always-on
+
+- **Query Model**: Qwen 3.5 9B Q4_0 GGUF
+  - Pathway: Same as executor — GGUF → GenieX → GGML → librc → kernel → HTP0
+  - Compute: --device npu (pinned, test for op fallback, drop to hybrid if needed)
+  - Context: 4096
+  - Role: Meta-prompt compilation, OB1 vector queries, JSONL index retrieval
+  - Runs: Node Alpha (phone), on-demand
+
+- **Voice Stack**: NOT IN SCOPE for this session
+  - Deferred to Priority 5 (post-APK build)
+  - 3-APK architecture (Horizons UI + Shell Daemon + Media Daemon) is the solution
+  - No existing solution to reference — this is greenfield work
+
+### Hardware Reality (Ground Truth)
+- Node Alpha: Moto Razr Ultra 2025, 16GB RAM, 9-12GB available stripped down
+- Node Beta: Jetson Orin Nano Super — NOT an inference node, it's the vector store + auditor + training host
+- Node Gamma: Rubik Pi 3 — display + helpdesk gateway
+- Node Delta: GCP — heavy RLVR training only
+- Current state: PHONE ONLY, no Jetson/Pi yet, no host computer
+
+### Available RAM Math
+- 9B Q4_0 weights: ~5.45 GB
+- KV cache 4096 ctx: ~0.5-1 GB
+- Total 9B footprint: ~6-6.5 GB
+- Available RAM: 9-12 GB stripped
+- Headroom: 2.5-6 GB for system + APKs
+- VERDICT: Both models run on phone, NPU-pinned, confirmed
+
+## INPUT FILES
+- Source: ~/aesop-grill-input/ (local clone of GitHub repo)
+- Contents: 93 markdown files + README + handoff docs + grill session starter
+- All files are pre-vetted and accuracy-checked by user
+
+## GRILL SESSION PHASES
+
+### Phase 1: Architecture Interrogation
+Objective: Read and validate the complete architecture blueprint against corrected ground truth.
+
+Questions the grill agent must answer:
+1. Does the v2.2 architecture doc accurately reflect the corrected model pathways?
+2. Are the 6 phases correctly ordered given the phone-only constraint?
+3. Is the 3-APK architecture (Horizons UI + Shell Daemon + Media Daemon) properly scoped?
+4. Are all named tools/harnesses accounted for? (ECC, Pocock, GSD, Prime Agent, Honey for Devs, Claude Video, Reverse Skills, Code Review Graph, mem0, Omni Route, OB1, node.js, LocalAI)
+5. Are the 4-6 home node agents properly defined? (Home Assistant Auditor, Red Agent Auditor, IT Help Desk, Web Ingestion Monitor, NPU Inference Manager)
+6. Does the GCP cross-account IAM handshake + RLVR loop make sense?
+
+### Phase 2: Repo Partitioning & Directory Schema
+Objective: Define the exact repo structure that will be created on-device.
+
+Output required:
+- Complete folder tree with every repo and subfolder
+- Each repo gets: scope definition, assigned agent, isolation rules, manifest file
+- Map which tools/skills live in which repo
+- Define what's shared (the canonical docs vault) vs. what's isolated (per-repo code)
+
+Repos to define:
+1. file-management-and-skills (canonical docs, JSONL markers, skill schemas)
+2. horizons-ui-v2.0 (APK 1: orchestration GUI)
+3. nova-daemon-shell (APK 2: OS assistant, accessibility, shell access)
+4. nova-daemon-media (APK 3: screen vision, voice stack, STT/TTS)
+5. agent-harness-hub (Pocock, Honey for Devs, Prime Agent, ECC, GSD)
+6. localai-omni-route (modality routing, OpenAI/Anthropic translation)
+7. obsidian-knowledge-vault (Graphify, KAG/RAG, NotebookLM hooks)
+8. red-agent-auditor (air-gapped batch training verification)
+9. node-beta-jetson (Postgres OB1, CUDA servers, home node agents)
+10. gcp-training-flywheel (RLVR export, IAM handshake, GRPO pipelines)
+
+### Phase 3: Skill-to-Agent Allocation Matrix
+Objective: Map every tool/harness to the agent runtime that will use it.
+
+Output required:
+- Table: Tool | Assigned Agent/Node | Runtime | When Used | Why
+- Identify overlaps (ECC vs Pocock vs GSD) and decide which wins for which task
+- Define the execution engine: GSD v2 for build phases, ECC for skills/rules/hooks, Pocock for planning
+- Map each Pocock skill (grill-with-docs, to-spec, to-tickets, implement, code-review, domain-modeling, wayfinder) to specific phases
+
+### Phase 4: Data Tiering Strategy
+Objective: Define what's hot, what's cold, what's archived.
+
+Output required:
+- Hot plate (mem0, active reasoning ledgers): What lives here, how long, eviction rules
+- Warm layer (OB1 vector store, JSONL index): What gets indexed, retrieval triggers
+- Cold vault (Obsidian markdown, Postgres archives): What gets archived, when, how
+- Training pipeline (GCP flywheel): What triples get shipped, when, audit gates
+
+### Phase 5: Execution Roadmap
+Objective: Produce the step-by-step build plan with phone-only first steps.
+
+Output required:
+- Ordered task list starting from RIGHT NOW (phone only, Termux, Claude Code)
+- Each task: What | Why | Tool | Dependencies | Output
+- Phase 1 tasks must be 100% phone-executable
+- Phase 2+ tasks can reference future hardware (Jetson, Pi, GCP)
+- Include the GenieX install + NPU proof-of-life as Task 1
+- Include the JSONL marker pipeline as Task 2
+- Include the repo scaffolding as Task 3
+- Voice stack explicitly deferred to later phase with justification
+
+## OUTPUT FORMAT
+The grill session must produce:
+1. MASTER_PLAN.md — The complete execution roadmap
+2. REPO_STRUCTURE.md — The directory schema with manifests
+3. SKILL_MATRIX.md — The tool-to-agent allocation table
+4. DATA_TIERING.md — The hot/warm/cold/training data boundaries
+5. CONTEXT.md — The domain model (shared vocabulary, key decisions, ADRs)
+
+All output files go into ~/aesop-grill-output/
+```
+
+---
+
+## Step 3: Run the Grill Session
+
+Once your repo is cloned and ECC + Pocock are installed, you start the session in Claude Code:
+
+```
+# In Claude Code (Termux), inside your cloned repo:
+cd ~/aesop-grill-input
+
+# Start the grill session
+/grill-with-docs
+```
+
+The grill agent reads the manifest above, interrogates your 93 files, asks you questions, and produces the 5 output documents.
+
+## What I Need From You
+
+1. **Your GitHub repo URL** — so I can give you the exact clone command and verify the file structure
+2. **Confirm the grill session manifest above captures what you want** — or tell me what's missing/wrong
+
+Once you give me the repo URL, I'll finalize the clone command and we can get this running.

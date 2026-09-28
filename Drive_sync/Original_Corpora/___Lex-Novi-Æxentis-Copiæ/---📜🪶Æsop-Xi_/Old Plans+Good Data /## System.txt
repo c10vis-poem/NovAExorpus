@@ -1,0 +1,186 @@
+## System Architecture Manifestos (The READMEs)
+Below are the updated, high-fidelity technical overviews for your project documentation. They explicitly credit the foundational components, CLI tools, and routing protocols driving the system.
+------------------------------
+## Technical Specification: The AESOP XI Ecosystem## Agentic Executions Split Operations Protocol (Extended Intelligence)
+AESOP XI is a decentralized, self-healing multi-agent cognitive architecture operating across a heterogeneous peer-to-peer edge network (smartphones and developmental boards) with automated cloud-assisted optimization flywheels. The system is engineered to eliminate stateless LLM computing, replacing it with a continuous, audited, three-tooled memory and execution loop.
+------------------------------
+## 🏗️ System Architecture: The 4-Tier Sovereign Stack
+
+┌────────────────────────────────────────────────────────────────────────┐
+│                          AESOP XI SYSTEM STACK                         │
+└────────────────────────────────────────────────────────────────────────┐
+
+  [ TIER 1: FRONTEND USER INTERFACE ]
+  📱 HORIZON UI (Native Kotlin/Java APK)
+  ↳ The Interface Layer (XI): Captures ambient telemetry and human intent.
+
+                                    │
+                                    ▼
+  [ TIER 2: COGNITIVE RATIONALIZATION CORE ]
+  🧠 NOVUS AGENTI (MoE / MoA Model Architecture)
+  ↳ The Brain: Handles multi-model orchestration, planning, and debating.
+
+                                    │
+                                    ▼
+  [ TIER 3: HARDWARE-ABSTRACTED RUNTIME ]
+  🦅 OMNI CLAW (Native Daemons, SDKs, & Scripts)
+  ↳ The Body: Low-level system hooks, permissions, and tool execution.
+
+                                    │
+                                    ▼
+  [ TIER 4: MEMORY FABRIC, AUDITING, & DATA FLYWHEEL ]
+  🔄 AESOP XI CORE PROTOCOL
+  ↳ The Synthesis Layer: Context routing, sandboxed security, and self-evolution.
+
+------------------------------
+## 🧠 Core Component Catalog & Credits## 1. Intelligence & Frontend
+
+* Horizon UI: A native Kotlin/Java APK providing the primary user interface. It acts as the visual dashboard for real-time monitoring and human-in-the-loop task governance.
+* Novus Agenti: The cognitive core combining Mixture-of-Experts (MoE) and Mixture-of-Agents (MoA) topologies. It decouples tasks into parallel planning operations before execution.
+
+## 2. The Omni Claw Runtime
+
+* Omni Claw: A hardware-abstracted runtime utilizing local phone daemons, dev board background services, native SDKs, and cloud API connectors. It acts as the automated "hands" of the system, executing actions directly on target devices without human interface requirements.
+
+## 3. The Tri-Tailed Memory Fabric & Context Routing
+
+* Open Brain Protocol (OB1): Built on Nate B. Jones's foundational open-brain repository. It operates as the centralized local Postgres vector database backend and Model Context Protocol (MCP) server. It decouples your global context from specific LLM instances, allowing you to swap models while retaining permanent historical data alignment.
+* Omni Route: The dynamic context router. It evaluates model output mid-inference to determine the optimal memory path required (e.g., whether to fetch a temporal token, a localized markdown link, or a heavy analytical document).
+* Tier 1 Memory (Episodic): mem0 — An open-source agent memory layer that tracks shifting user habits, ambient preferences, and micro-context states across real-time interactions.
+* Tier 2 Memory (Structural): LLM Wiki, Open Wiki CLI & Obsidian Skills — The grounding repository. Agents manage their own second brain in markdown format (.md). During bootstrap and early development phases, this is managed via an Open Wiki CLI terminal utility to audit the vault network before it syncs via P2P to the local Obsidian Vault infrastructure.
+* Tier 3 Memory (Analytical): notebooklm-py & Graphify — Structured graph-relational parsing via Graphify coupled with Teng Lin's notebooklm-py tool. It automates Google's backend APIs to dynamically spin up and populate high-capacity Gemini Notebook contexts for heavy log analysis, bypassing local resource constraints.
+* Reasoning Bank: A dedicated cryptographic and logical storage ledger. It saves intermediate agent chain-of-thought pathways, letting models resume complex problem-solving routines without restarting the entire inference loop.
+
+## 4. The Adversarial Self-Healing Data Flywheel
+
+* Isolated Red Agent Auditor & Nope Data Bank: An out-of-band, air-gapped security container. It intercepts all raw tool inputs, model responses, and terminal executions. It reviews them against the "Nope Data Bank" to block security exploits or logical loops.
+* Recursive KAG Pipeline: Validated traces from the Red Agent are formatted into .jsonl files and compressed markdown, then streamed to Google Cloud Platform (GCP) storage buckets. This data feeds automated recursive Knowledge-Augmented Generation (KAG) pipelines, continuously fine-tuning the underlying models on your specific operational history.
+
+------------------------------
+## 🔄 The Comprehensive Execution Flow Lifecycle
+
+[ Human Intent / Telemetry ]
+            │
+            ▼
+     ( HORIZON UI ) ────► Triggers Ingress Intent
+            │
+            ▼
+    ( NOVUS AGENTI ) ───► Parses Plan ───► Requests Memory Context via OMNI ROUTE
+            │                                         │
+            │                                         ▼
+            │                   ┌───────────────────────────────────────────┐
+            │                   │     THE AESOP XI TRI-TAILED MEMORY        │
+            │                   ├───────────────────────────────────────────┤
+            │                   │ • Tier 1: mem0 (Real-time Habits)         │
+            │                   │ • Tier 2: Open Wiki CLI / Obsidian (.md)  │
+            │                   │ • Tier 3: notebooklm-py & Graphify (RAG)  │
+            │                   │ • Vector Backbone: OB1 (Open Brain Protocol)│
+            │                   └─────────────────────┬─────────────────────┘
+            │                                         │
+            ▼                                         ▼
+      ( OMNI CLAW ) <─────────────────────────────────┘ (Injects Context Logs)
+            │
+            ▼
+[ Native Daemon Tool Execution / Script Call ]
+            │
+            ▼
+ ( RED AGENT AUDITOR ) ◄─── Intercepts Execution Traces & Evaluates against NOPE DATA BANK
+            │
+            ├─► [ REJECT / RE-ROUTE ] ──► Returns back to Novus Agenti for Self-Correction
+            │
+            └─► [ APPROVE ]
+                    │
+                    ├──► [ COMMIT LOCAL ] ──► Appends to Open Wiki CLI Vault Network
+                    │
+                    └──► [ STREAM CLOUD ] ──► Pushes .jsonl to GCP Storage Bucket
+                                                     │
+                                                     ▼
+                                      [ RECURSIVE KAG FINE-TUNING LOOP ]
+
+------------------------------
+Now that the complete technical blueprint and component stack are locked into the system specs, we can look at the data visualization layers.
+------------------------------
+## Part 1: Horizon UI Visual Layout (The XI Dashboard)
+Because your system functions on an asynchronous "Heartbeat" loop, Horizon UI must display heavy background agent metrics without freezing your phone's UI thread. It uses separate threads to process text and visuals, pulling data from local SQLite streams updated by Omni Claw.
+Here is how the on-screen architecture looks:
+
+┌────────────────────────────────────────────────────────────────────────┐
+│  HORIZON XI MAIN SYSTEM DASHBOARD                               [⚙️]  │
+├────────────────────────────────────────────────────────────────────────┤
+│ 🟢 SYSTEM STATUS: ACTIVE | MESH NODES: [ PHONE_01 ] [ DEV_BOARD_04 ]    │
+├────────────────────────────────────────────────────────────────────────┤
+│                                                                        │
+│  ┌──────────────────────────────────────────────────────────────────┐  │
+│  │ 🧠 NOVUS AGENTI: MOE/MOA COGNITIVE CORE                          │  │
+│  │ 🔄 Heartbeat: ACTIVE [ 840ms Loop Latency ]                     │  │
+│  │ 💬 CURRENT TASK: Processing automated file compilation routine. │  │
+│  │ 🛑 [██████████████░░░░░░░] DEBATE LAYER: Agent_01 <─► Agent_02    │  │
+│  └──────────────────────────────────────────────────────────────────┘  │
+│                                                                        │
+│  ┌──────────────────────────────────────────────────────────────────┐  │
+│  │ 🦅 OMNI CLAW RUNTIME: ACTIVE EXECUTIONS                          │  │
+│  │  ▶️ PID 4092: [LOCAL_SH_EXEC] running code_sandbox_v2.py         │  │
+│  │  ▶️ PID 4110: [OB1_SERVER_CON] Syncing Postgres Vector Spaces      │  │
+│  │  ⚙️ PERMISSIONS: ROOT_GRANTED | API_GATEWAY: CONNECTED           │  │
+│  └──────────────────────────────────────────────────────────────────┘  │
+│                                                                        │
+│  ┌──────────────────────────────────────────────────────────────────┐  │
+│  │ 🛡️ ADVERSARIAL RED AUDITOR STATE                                 │  │
+│  │ STATUS: 🛡️ SCREENING TRACES                                      │  │
+│  │ ├─ Log Line #142: Terminal script syntax check...      [ PASS ✅ ]│  │
+│  │ ├─ Log Line #143: Checking payload vs NOPE DATA BANK... [ PASS ✅ ]│  │
+│  │ └─ Output Status: STREAMING DATASTREAM TO GCP BUCKET... [ SYNC 🔁 ]│  │
+│  └──────────────────────────────────────────────────────────────────┘  │
+│                                                                        │
+│  ┌──────────────────────────────────────────────────────────────────┐  │
+│  │ 🔄 AESOP XI TRI-TAILED MEMORY FLOW                               │  │
+│  │ 📌 OMNI ROUTE DESTINATION ──► [ TIER 2: OPEN WIKI CLI VAULT ]    │  │
+│  │ 🧠 MEM0 CACHE: 42 Active Keys                                    │  │
+│  │ 📝 WIKI SYNC: 14 .md mutations pending P2P cluster handshake     │  │
+│  │ 🧪 NOTEBOOKLM-PY: 3 Remote Context Pools Loaded                  │  │
+│  └──────────────────────────────────────────────────────────────────┘  │
+│                                                                        │
+├────────────────────────────────────────────────────────────────────────┤
+│  [⏸️ PAUSE MESH]         [🛡️ MANUAL AUDIT MODE]         [⚡ FORCE SYNC] │
+└────────────────────────────────────────────────────────────────────────┘
+
+------------------------------
+## Part 2: Omni Claw & Red Agent Asynchronous Handshake Protocol
+This sequence maps how a background daemon in Omni Claw wakes up, executes a native tool requested by Novus Agenti, passes it to the isolated Red Agent Auditor, and writes it back to your memory layers.
+
+ Novus Agenti             Omni Claw Daemon             Red Agent Auditor           Open Wiki CLI / GCP
+      │                           │                           │                           │
+      │ 1. Request Tool Call      │                           │                           │
+      ├──────────────────────────►│                           │                           │
+      │    (e.g., Run Bash Script)│                           │                           │
+      │                           │ 2. Spawns Subprocess       │                           │
+      │                           ├────────────────┐          │                           │
+      │                           │                │          │                           │
+      │                           │ 3. Captures Raw│          │                           │
+      │                           │    Output Logs │          │                           │
+      │                           │◄───────────────┘          │                           │
+      │                           │                           │                           │
+      │                           │ 4. Intercepts Unsanitized Traces                      │
+      │                           ├──────────────────────────►│                           │
+      │                           │                           │                           │
+      │                           │                           │ 5. Evaluates Payload      │
+      │                           │                           ├───────────────┐           │
+      │                           │                           │               │           │
+      │                           │                           │ Cross-checks  │           │
+      │                           │                           │ NOPE DATA BANK│           │
+      │                           │                           │◄──────────────┘           │
+      │                           │                           │                           │
+      │                           │ 6. Return Clean/Sanitized │                           │
+      │                           │◄──────────────────────────┤                           │
+      │                           │                           │                           │
+      │ 7. Notify Success State   │                           │                           │
+      │◄──────────────────────────┤                           │                           │
+      │                           │                           │                           │
+      │                           │ 8. Commit Local Markdown Log Mutation                 │
+      │                           ├──────────────────────────────────────────────────────►│
+      │                           │                                                       │
+      │                           │ 9. Stream Structured .jsonl Payload For Training      │
+      │                           ├──────────────────────────────────────────────────────►│
+
+If you are ready to start writing the functional core files, we can implement the actual components next. Let me know if you want to write out the code for the Omni Route decision matrix or the Red Agent Auditor trace parser!
+

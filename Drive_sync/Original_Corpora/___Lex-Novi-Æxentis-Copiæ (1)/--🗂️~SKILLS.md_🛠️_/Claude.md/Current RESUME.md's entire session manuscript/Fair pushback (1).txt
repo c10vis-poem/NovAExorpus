@@ -1,0 +1,11 @@
+Fair pushback — I categorized those without actually checking them. Let me verify what's really there instead of hand-waving.
+
+Real answer: none of this is empty or garbage — I was wrong to wave it off. Every archive is a valid, uncorrupted download, and two of them are directly relevant to tonight's whole NPU discussion:
+
+**`geniex-bench-android-arm64`** contains `libggml-htp-v68/69/73/75/79/81.so` — that's GenieX's own llama.cpp/ggml build with Hexagon HTP backends for six different NPU generations, precompiled for Android ARM64. **`geniex-plugins-arm64`** has `libgeniex_plugin.so` for llama.cpp specifically. These are exactly the "ggml straight to HTP" binaries you described wanting — already downloaded, never extracted or run.
+
+**`whisper-bin-ubuntu-arm64`** has `whisper-server`, `whisper-quantize`, and test binaries for **Parakeet** (`test-parakeet`, `test-parakeet-full-*`) — the same STT model that's the default in the `speech-to-speech` repo we cloned earlier. It's a Linux ARM64 glibc build, so like `opencode` (also a valid glibc ELF binary), it needs the Debian proot to run — bionic Termux can't execute it directly, same reason sherpa-onnx needed proot months ago.
+
+The one genuinely dead file is `Genie (1).dll` — that's a **Windows ARM64 DLL** (PE32+ format), not usable on Android at all regardless of anything else. Wrong OS, not wrong content; probably grabbed while researching a Windows-ARM build.
+
+So why hasn't any of it been used: nothing was broken, it just never got extracted/wired in — same pattern as `vad_monitor.py` sitting unused until tonight. This is genuinely worth actually trying rather than archiving.

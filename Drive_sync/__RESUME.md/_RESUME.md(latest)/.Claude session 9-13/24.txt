@@ -1,0 +1,9 @@
+Now the master vault — cloning it and landing the same rules there, through the actual GH workflow (branch → PR → CI → merge) rather than just talk.
+
+1301 commits behind upstream — a real, concrete case for the fork-sync rule. Fast-forwarding and pushing now.
+
+Push landed — `origin/master` (your fork) now matches `upstream/master` exactly, 0 commits apart. That's the fork-sync rule actually executed, not just documented.
+
+Now let's land the rules doc in the master vault (`novae-xorpus`), following the same GH workflow end-to-end.
+
+Hit a real constraint: this device has no GPG or SSH signing key configured anywhere, and no git `user.name`/`user.email` set — so a local commit here literally cannot be signed, which `novae-xorpus`'s branch protection requires. Rather than bypass signing, I'll use GitHub's Contents API instead, which creates commits GitHub itself marks "Verified" server-side — no local key needed. Proceeding with that.

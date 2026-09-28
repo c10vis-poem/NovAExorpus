@@ -1,0 +1,49 @@
+Found everything except "happy ending" (no repo matches "gsd", "happy", or "ending" in your own list, consistent with what you said — GSD is external, upstream is `gsd-build/get-shit-done`, not yet forked). And `NovA-terrestrial-brain` is added for the terrestrial brain ask.
+
+Full resolved list before I touch anything:
+
+| Ask | Repo |
+|---|---|
+| honey for devs | `NoVa-honey-for-devs` |
+| clean my ai harness | `NovA-clean-my-ai-harness` |
+| mem0 | `clovis-mem0-vingiaN` |
+| one skill to rule them all | `one-skill-to-rule-them-all-aesop` |
+| claude video | `C10vis-claude-video` |
+| claude GSD | not forked — upstream `gsd-build/get-shit-done` |
+| omniroute | `OmniRoute` |
+| notebooklm py | `notebooklm-py` |
+| graphify skills | `graphify` |
+| official obsidian skills | `obsidian-skills` |
+| llm wiki | `llm_wiki` |
+| openwiki | `openwiki` |
+| terrestrial brain | `NovA-terrestrial-brain` |
+
+Found `reasoning-bank` and `NovA-localdesktop.github.io` — both clean matches. But I searched twice more for a third reverse-engineering repo and only find the same two (`NoVa-reverse-skill`, `android-reverse-engineering-skill`) — no third candidate exists in your account under any reverse-engineering-adjacent term I can think of.
+
+Got it — `android-reverse-engineering-skill` confirmed.
+
+Parking "happy ending" for now since it's still unresolved and not worth blocking on — say the word whenever you want to name it and I'll add it in later.
+
+**Final list to install**, plus finishing the DeepSeek/OpenRouter wiring:
+
+| # | Repo |
+|---|---|
+| 1 | `NoVa-honey-for-devs` |
+| 2 | `NovA-clean-my-ai-harness` |
+| 3 | `clovis-mem0-vingiaN` |
+| 4 | `one-skill-to-rule-them-all-aesop` |
+| 5 | `C10vis-claude-video` |
+| 6 | `android-reverse-engineering-skill` |
+| 7 | `OmniRoute` |
+| 8 | `notebooklm-py` |
+| 9 | `graphify` |
+| 10 | `obsidian-skills` |
+| 11 | `llm_wiki` |
+| 12 | `openwiki` |
+| 13 | `NovA-terrestrial-brain` |
+| 14 | `reasoning-bank` |
+| 15 | `NovA-localdesktop.github.io` |
+| + | GSD — fork `gsd-build/get-shit-done` (not yours yet) |
+| + | Finish `novus-deepseek-harness` → OpenRouter wiring (still need the real API key — placeholder is still `REPLACE_ME` in `~/.dsh/.env`) |
+
+Installing to `~/.claude/skills/` on this device, with bootstrap/launch scripts where a repo needs one to actually run. Confirm and I'll start — this is 15+ clones plus setup work, so flag now if anything above is wrong before I go.

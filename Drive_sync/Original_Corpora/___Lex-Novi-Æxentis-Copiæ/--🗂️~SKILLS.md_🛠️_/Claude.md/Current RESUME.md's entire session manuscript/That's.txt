@@ -1,0 +1,11 @@
+That's cleaner, and it also means the global `~/unresolved.md` I made as a "pragmatic stand-in until #dumbass exists" should actually just move inside novae-xorpus now, since #dumbass demonstrably already exists there.
+
+One real mechanical concern before I build this: how "cloned" happens matters a lot. If it means literal file *copies*, you get exactly the staleness problem this whole session has been fighting — the copy in dumbass drifts the moment the original changes, unless something remembers to re-copy it. Since aesop-xi and novae-xorpus are on the same device right now, a **symlink** gets you true mirroring for free — dumbass and the source repo are looking at the literal same file, zero drift possible, not "kept in sync," just *actually the same*. That only works for same-device repos, though — the tablet or a cloud session can't be symlinked in from here; that part stays real, unsolved groundwork, not something I can wave away.
+
+So concretely, my proposal:
+- `~/novae-xorpus/projects/aesop-xi/RESUME.md` (and `CLAUDE.md`) → symlinks to the real files in `~/repos/aesop-xi/`
+- The global `~/unresolved.md` → moves into `~/novae-xorpus/unresolved.md` for real (dumbass's actual home, not a stand-in), aesop-xi's now-stub `unresolved.md` keeps pointing there
+- Any future same-device repo gets the same `projects/<name>/` symlink treatment as it's created
+- Cross-device repos (tablet, cloud) don't get this automatically — flagged honestly, not solved here
+
+Want me to build it this way?

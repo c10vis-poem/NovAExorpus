@@ -1,0 +1,54 @@
+It acts as a Context Router, dynamically deciding whether an agent needs a semantic search block (via OB1),
+a flat chronological log check (via mem0 or log.md ), or deep contextual mapping (via a Graphify pipeline).
+The Technical "Stack" Breakdown of AESOP XI
+To describe AESOP XI to an enterprise architect, you can map your components to standard software
+infrastructure layers:
+Component in AESOP XI Enterprise System Equivalent
+Omni Route / Model Context Protocol (MCP) API Gateway / Service Mesh
+mem0 / Reasoning Bank Real-time Cache / State Machine
+OB1 (Open Brain via Postgres) Vector Database Layer
+LLM Wiki / Open Wiki TUI / Obsidian Skills Knowledge Management System (KMS)
+Graphify / lmpy Data Graph Analytics Pipeline
+How to Describe It Professionally
+If you are explaining AESOP XI to software engineers or AI researchers, use this technical definition:
+"AESOP XI is an open-source, multi-tier agentic memory fabric and context-routing architecture. It
+unifies local semantic graph networks, markdown-based agent repositories, and decoupled open-
+protocol vector backends to allow independent, local AI agents to maintain sub-millisecond, cross-
+session persistent state alignment."
+To explore this further, let me know if you want to write out a system architecture diagram or define the exact
+JSON-RPC state schemas that AESOP XI uses to route a data token from mem0 down to your OB1 Postgres
+layer!
+Agentic AI Found…
+YouTube +1
+NateBJones-
+Projects/O…
+Open Brain. The
+infrastructure…
+GitHub
+You Don't
+Need SaaS…
+your AI agent
+probably does…
+YouTube · AI News &…
+Build Your
+Open Brai…
+The Companion
+Prompts cover…
+promptkit.natebjone…
+Mem0: Building
+Production-Ready …
+user and an assistant. ( ...
+supports more advanced…
+arXiv
+The
+Ultimate…
+a couple wee
+ago I covered
+YouTube
+1m
+Layer Name
+Ingress & Transport
+Episodic & User Memory
+Storage & Semantic Sync
+Agentic Workspace
+Graph / Logic Execution

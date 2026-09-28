@@ -1,0 +1,39 @@
+📦 vault_root/
+ ├── 📜 MAP.md                                # Master human-readable index & ontology graph
+ ├── 📊 manifest.jsonl                        # Root-level RAG registry & global hash table
+ │
+ ├── 📁 01_raw_sources/                       # TIER 1: COLD SENSORY ARCHIVE (Read-Only Ground Truth)
+ │   ├── 📊 manifest.jsonl                    # Local RAG catalog of all immutable raw sources
+ │   ├── 📑 pdf/                              # Source whitepapers, specs, data sheets (*.pdf)
+ │   ├── 🎬 media/                            # Video captures, audio memos, transcripts (*.mp4, *.wav)
+ │   └── 📝 text/                             # Raw text scrapes, dumps, API payload exports (*.txt)
+ │
+ ├── 📁 02_wiki_md/                           # TIER 2: THE LLM WIKI LAYER (OpenWiki TUI Managed)
+ │   ├── 📊 manifest.jsonl                    # Local RAG catalog of conceptual nodes & graph links
+ │   ├── 💡 concepts/                         # Atomic linked notes, theory, and domain models (*.md)
+ │   ├── 🏛️ architectures/                    # System blueprints, data flows, interface specs (*.md)
+ │   ├── 🏷️ entities/                         # Registries, schema contracts, hardware profiles (*.md)
+ │   └── 🧭 indexes/                          # MOCs (Maps of Content) and taxonomy clusters (*.md)
+ │
+ ├── 📁 03_recall_cache/                      # TIER 3: WORKING MEMORY ACCELERATOR (Rebuilt/Ephemeral)
+ │   ├── 📊 manifest.jsonl                    # Local RAG catalog of vector & chunk shards
+ │   ├── ⚡ jsonl/                            # Pre-tokenized chunks generated from wiki_md/
+ │   ├── 📐 vectors/                          # Dense vector indices (FAISS/Chroma/HNSW checkpoints)
+ │   └── 🗝️ kv_store/                         # Low-latency key-value entity lookups
+ │
+ ├── 📁 04_skills_runtime/                    # TIER 4: PROCEDURAL REPERTOIRE & EXTRACTED TOOLS
+ │   ├── 📊 manifest.jsonl                    # Local RAG catalog of all extracted skills & tools
+ │   ├── 🎯 prompt_skills/                    # Modular SKILL.md prompt definitions (Extracted & Authored)
+ │   ├── 🛠️ extracted_tools/                  # Deterministic tools mined by Files Executive Agent
+ │   │   ├── cli/                             # Extracted command-line utilities (*.sh)
+ │   │   └── wrappers/                        # Extracted API interfaces & micro-functions (*.py)
+ │   ├── ⚙️ runtimes/                          # Master operational scripts and execution hooks
+ │   └── 🛡️ policies/                         # Self-correction guidelines and validation schemas
+ │
+ └── 📁 05_episodic_logs/                     # TIER 5: TELEMETRY, AUDITS & TRAJECTORIES
+     ├── 📊 manifest.jsonl                    # Local RAG catalog of sessions, audits, and verifiers
+     ├── 📲 daily_driver_sync/                # Ingested logs from edge device sessions
+     ├── ⏱️ trajectories/                     # Multi-model traces (Query, Executor, Frontier)
+     ├── 🛑 red_audit_sandbox/                # Red Auditor evaluation reports & pass/fail quarantine
+     ├── ⚖️ rlvr_verifiers/                   # Graded rewards, assertion outcomes (+1.0 / -1.0)
+     └── 🧹 hygiene_reports/                  # Schema integrity audits, broken link checks

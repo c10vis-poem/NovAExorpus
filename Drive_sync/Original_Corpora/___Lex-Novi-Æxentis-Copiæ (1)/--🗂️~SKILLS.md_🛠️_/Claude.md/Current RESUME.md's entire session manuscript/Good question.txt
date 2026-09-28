@@ -1,0 +1,3 @@
+Good question to actually test rather than just assert — let me have a genuinely fresh agent (no memory of this conversation) cold-read the repo the way a blind pickup would, and report back honestly.
+
+Rather than just tell you "yes, I'm confident" — I launched a genuinely fresh agent with zero memory of this conversation to cold-read the repo the way a blind pickup actually would, and report back honestly on any contradictions, dangling references, or gaps. That's running now; I'll relay exactly what it finds, including anything unflattering, once it completes.

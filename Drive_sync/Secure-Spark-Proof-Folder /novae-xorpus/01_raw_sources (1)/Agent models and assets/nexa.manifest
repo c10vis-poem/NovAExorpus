@@ -1,0 +1,5 @@
+{
+    "ModelName": "omni-neural",
+    "ModelType": "vlm",
+    "PluginId": "npu"
+}

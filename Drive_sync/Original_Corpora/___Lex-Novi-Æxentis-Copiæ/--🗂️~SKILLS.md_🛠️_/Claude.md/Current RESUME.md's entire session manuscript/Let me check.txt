@@ -1,0 +1,9 @@
+Let me check what actually exists before touching anything.
+
+Not a glitch-worthy stop, continuing. Direct answer to your question: `protocol/memory.md` is **not** a Claude Code standard — it's bespoke to your own AESOP architecture (from the "3 memory types" design in your `ARCHITECTURE.md`/`RESUME.md`). And it turns out it doesn't actually exist — RESUME.md claimed "4 subagents were writing" it, but only `protocol/tiers.md` ever actually landed. Another claimed-done thing that wasn't. `unresolved.md` and a repo-level `CLAUDE.md` don't exist either — clean slate.
+
+Creating both now: `unresolved.md` seeded with the 7 outstanding items, and `protocol/memory.md` as a real (if minimal) file pointing to it.
+
+Both created. Saving the new RESUME/unresolved workflow rule to memory now so it's followed in future sessions regardless of which one runs.
+
+`unresolved.md` and `protocol/memory.md` are created, and the workflow itself is saved to memory so it sticks. Ready to move into today's actual scope — OpenWiki rewire first, or DroidDesk?

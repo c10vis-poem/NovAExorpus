@@ -1,0 +1,249 @@
+Now I can see the actual structure. This is much more organized than I assumed — you've already built a 3-stage curation pipeline. Let me fetch the key files so I understand your existing conventions before finalizing the manifest:
+
+Repo's not publicly fetchable — either private or Exa can't reach it. No problem, I don't need to read the files myself. You have them locally. Let me update the manifest based on what I can see from your `ls -la` output and run a quick search on what your naming canon likely contains:
+
+Now I see your actual setup. This is way more organized than I assumed. You have a **3-stage curation pipeline** already running, plus existing Claude Code config, skills, tools, and wiki directories. Let me update the manifest to match reality:
+
+---
+
+## Your Actual Repo Structure
+
+```
+novae-xorpus/
+├── .claude/                    ← Claude Code already configured
+├── 01-sources/  (15 subdirs)  ← Stage 1: Raw source documents
+├── 02-clean/     (15 subdirs)  ← Stage 2: Cleaned versions
+├── 03-check/     (15 subdirs)  ← Stage 3: Accuracy-checked (PRIMARY SOURCE)
+├── handoffs/                   ← Previous session handoff docs
+├── skills/                     ← Skills directory
+├── tools/                      ← Tools directory
+├── wiki/                       ← Wiki files
+├── CLAUDE.md                   ← Claude Code instructions (2.6KB)
+├── LAPTOP-TRICK.md             ← Workaround for no-computer constraint
+├── NAMING-CANON.md             ← Your naming conventions
+├── README.md                   ← Main readme (22.7KB — substantial)
+└── SOURCE-RETRIEVAL-MAP.md     ← Provenance map (22.8KB)
+```
+
+You also already have a `claude-code-android` repo and an `OB1` repo on your GitHub. This is not a blank starting point — you've been building the foundation.
+
+---
+
+## Corrected Grill Session Manifest (Final — Matches Your Repo)
+
+```markdown
+# GRILL WITH DOCS — AESOP XI MASTER ARCHITECTURE SESSION
+
+## SESSION CONTEXT
+
+### Corrected Model Pathways (Ground Truth)
+
+- **Executor Model**: Qwen 3.5 0.8B
+  - Source: QAI Hub (pre-compiled Genie bundle)
+  - Pathway: QAIRT runtime → HTP0 (Hexagon NPU v79)
+  - NO llama.cpp, NO GenieX — runs through QAIRT directly
+  - Compute: NPU-pinned (HTP0)
+  - Context: 4096
+  - Role: Fast task execution, prompt synthesis, mem0 + Reasoning Bank access
+  - Runs: Node Alpha (phone), always-on
+
+- **Query Model**: Qwen 3.5 9B (Unsloth GGUF)
+  - Source: Unsloth GGUF release
+  - Pathway: GGUF → GenieX llama_cpp → GGML Hexagon backend → librc → kernel → HTP0
+  - Compute: --device npu (pinned to Hexagon NPU v79)
+  - Context: 4096
+  - Role: Meta-prompt compilation, OB1 vector queries, JSONL index retrieval
+  - Runs: Node Alpha (phone), on-demand
+
+- **Fallback Hierarchy** (if 9B NPU chokes on unsupported ops):
+  1. 9B Q4_0 → npu (preferred, test first)
+  2. 9B Q4_0 → hybrid (if NPU-pinned has op fallback issues)
+  3. 4B Q4_0 → npu (drop to smaller model, stay on NPU)
+  - Architecture goal: largest model running on bare metal NPU
+  - 0.8B stays NPU-pinned via QAIRT regardless — it's the executor, not negotiable
+
+- **Voice Stack**: NOT IN SCOPE for this session
+  - Deferred to Priority 5 (post-APK build)
+  - 3-APK architecture (Horizons UI + Shell Daemon + Media Daemon) is the solution
+  - No existing solution to reference — this is greenfield work
+
+### Harness & Tool Corrections (Ground Truth)
+
+- **ECC** (affaan-m): For Claude Code sessions (cloud + terminal). Plugin marketplace, 68 agents, 286 skills. Skills/rules/hooks/agents layer.
+- **Prime Agent** (PrimeIntellect-ai): For openweight models (your NPU models). RLM harness with persistent IPython REPL, Continual Harness (memories/skills/prompts/subagent specs persist across sessions), /refine self-improvement, daemon-backed sessions, direct agent-to-agent communication. Upgrade of Pi agent.
+- **LocalAI vs OmniRoute**: These overlap. Pick ONE as routing layer:
+  - OmniRoute: 350 providers, 19 routing strategies, modality bridge, quota-aware. Point at local GenieX/QAIRT endpoint via openai-compatible provider.
+  - LocalAI: Local inference server + OpenAI↔Anthropic translation. Heavier on phone, redundant if using OmniRoute.
+  - RECOMMENDED: OmniRoute only, point at local runtime. Skip LocalAI on phone.
+- **Repo correction needed**: novae-xorpus mistakenly cites "OpenAI" — should be "LocalAI" (or "OmniRoute" per above decision). Flag in Phase 1.
+
+### Hardware Reality (Ground Truth)
+- Node Alpha: Moto Razr Ultra 2025, 16GB RAM, 9-12GB available stripped down
+- Node Beta: Jetson Orin Nano Super — NOT an inference node, it's the vector store + auditor + training host
+- Node Gamma: Rubik Pi 3 — display + helpdesk gateway
+- Node Delta: GCP — heavy RLVR training only
+- Current state: PHONE ONLY, no Jetson/Pi yet, no host computer
+
+### Available RAM Math
+- 9B Q4_0 weights: ~5.45 GB
+- KV cache 4096 ctx: ~0.5-1 GB
+- Total 9B footprint: ~6-6.5 GB
+- Available RAM: 9-12 GB stripped
+- Headroom: 2.5-6 GB for system + APKs
+- VERDICT: Both models run on phone, NPU-pinned, confirmed
+- Architecture principle: maximize on-device model size on bare metal
+
+## INPUT FILES
+
+### Primary Source (Accuracy-Checked)
+- Path: ~/novae-xorpus/03-check/
+- 15 subdirectories of accuracy-checked documentation
+- THIS IS WHAT THE GRILL AGENT READS AS TRUTH
+
+### Reference / Provenance
+- Path: ~/novae-xorpus/01-sources/
+- Raw source documents (for tracing claims back to origin)
+- Path: ~/novae-xorpus/02-clean/
+- Cleaned versions (intermediate stage, reference only)
+
+### Root-Level Context Documents (READ ALL)
+- ~/novae-xorpus/CLAUDE.md — Existing Claude Code instructions (DO NOT OVERWRITE)
+- ~/novae-xorpus/README.md — Main project readme (22.7KB, substantial)
+- ~/novae-xorpus/NAMING-CANON.md — Naming conventions (FOLLOW THESE)
+- ~/novae-xorpus/SOURCE-RETRIEVAL-MAP.md — Provenance map (22.8KB)
+- ~/novae-xorpus/LAPTOP-TRICK.md — Workaround for no-computer constraint
+
+### Existing Work (READ + BUILD ON, DON'T DUPLICATE)
+- ~/novae-xorpus/handoffs/ — Previous session handoff docs
+- ~/novae-xorpus/skills/ — Skills already drafted
+- ~/novae-xorpus/tools/ — Tools already drafted
+- ~/novae-xorpus/wiki/ — Wiki entries already written
+- ~/novae-xorpus/.claude/ — Existing Claude Code config (preserve)
+
+### Related Repos (User Already Has)
+- c10vis-poem/claude-code-android — Claude Code on Android via Termux
+- c10vis-poem/OB1 — Open Brain Protocol implementation
+
+## GRILL SESSION PHASES
+
+### Phase 1: Architecture Interrogation
+Objective: Read and validate the complete architecture blueprint against corrected ground truth.
+
+Questions the grill agent must answer:
+1. Does the v2.2 architecture doc accurately reflect the corrected model pathways?
+2. Are the 6 phases correctly ordered given the phone-only constraint?
+3. Is the 3-APK architecture (Horizons UI + Shell Daemon + Media Daemon) properly scoped?
+4. Are all named tools/harnesses accounted for with corrected roles?
+   - ECC → Claude Code harness
+   - Prime Agent → openweight model harness (RLM, Continual Harness, daemon-backed)
+   - LocalAI → CORRECTED to OmniRoute (routing layer, point at local runtime)
+   - Pocock Skills, GSD, Honey for Devs, Claude Video, Reverse Skills, Code Review Graph, mem0, OB1, node.js
+5. Are the 4-6 home node agents properly defined? (Home Assistant Auditor, Red Agent Auditor, IT Help Desk, Web Ingestion Monitor, NPU Inference Manager)
+6. Does the GCP cross-account IAM handshake + RLVR loop make sense?
+7. Flag and correct "OpenAI" → "LocalAI"/"OmniRoute" error in source docs
+8. Review existing skills/, tools/, wiki/ directories — what's already built vs. what's missing?
+
+### Phase 2: Repo Partitioning & Directory Schema
+Objective: Define the exact repo structure that will be created on-device.
+
+Output required:
+- Complete folder tree with every repo and subfolder
+- Each repo gets: scope definition, assigned agent, isolation rules, manifest file
+- Map which tools/skills live in which repo
+- Define what's shared (the canonical docs vault) vs. what's isolated (per-repo code)
+- NOTE: novae-xorpus is the input/curation repo — it feeds the session but is not a build repo
+- NOTE: claude-code-android and OB1 already exist as separate repos — reference, don't recreate
+
+Repos to define:
+1. file-management-and-skills (canonical docs, JSONL markers, skill schemas)
+2. horizons-ui-v2.0 (APK 1: orchestration GUI)
+3. nova-daemon-shell (APK 2: OS assistant, accessibility, shell access)
+4. nova-daemon-media (APK 3: screen vision, voice stack, STT/TTS)
+5. agent-harness-hub (Pocock, Honey for Devs, Prime Agent, ECC, GSD)
+6. omni-route-gateway (modality routing, OpenAI/Anthropic translation, local runtime endpoint)
+7. obsidian-knowledge-vault (Graphify, KAG/RAG, NotebookLM hooks)
+8. red-agent-auditor (air-gapped batch training verification)
+9. node-beta-jetson (Postgres OB1, CUDA servers, home node agents)
+10. gcp-training-flywheel (RLVR export, IAM handshake, GRPO pipelines)
+
+### Phase 3: Skill-to-Agent Allocation Matrix
+Objective: Map every tool/harness to the agent runtime that will use it.
+
+Output required:
+- Table: Tool | Assigned Agent/Node | Runtime | When Used | Why
+- Identify overlaps (ECC vs Pocock vs GSD vs Prime Agent) and decide which wins for which task
+- Define execution engines:
+  - ECC: Claude Code sessions (cloud/terminal, skills/rules/hooks/agents layer)
+  - Prime Agent: Openweight model sessions (NPU models, RLM harness, persistent REPL)
+  - GSD v2: Build phase execution engine (fresh context per task, git branch-per-slice)
+  - Pocock: Planning layer (grill-with-docs, to-spec, to-tickets, domain-modeling, wayfinder)
+- Map each Pocock skill to specific phases
+- Define when Prime Agent's /refine and Continual Harness kick in (persistent state across sessions for openweight model work)
+
+### Phase 4: Data Tiering Strategy
+Objective: Define what's hot, what's cold, what's archived.
+
+Output required:
+- Hot plate (mem0, active reasoning ledgers, Prime Agent Continual Harness state): What lives here, how long, eviction rules
+- Warm layer (OB1 vector store, JSONL index): What gets indexed, retrieval triggers
+- Cold vault (Obsidian markdown, Postgres archives): What gets archived, when, how
+- Training pipeline (GCP flywheel): What triples get shipped, when, audit gates
+
+### Phase 5: Execution Roadmap
+Objective: Produce the step-by-step build plan with phone-only first steps.
+
+Output required:
+- Ordered task list starting from RIGHT NOW (phone only, Termux, Claude Code)
+- Each task: What | Why | Tool | Dependencies | Output
+- Phase 1 tasks must be 100% phone-executable
+- Phase 2+ tasks can reference future hardware (Jetson, Pi, GCP)
+- Include the QAIRT + 0.8B QAI Hub NPU proof-of-life as Task 1
+- Include the GenieX + 9B Unsloth GGUF NPU test as Task 2 (separate pathway)
+- Include the JSONL marker pipeline as Task 3 (reads from 03-check/, outputs to file-management-and-skills/)
+- Include the repo scaffolding as Task 4
+- Include Prime Agent setup for openweight model orchestration as Task 5
+- Voice stack explicitly deferred to later phase with justification
+
+## OUTPUT FORMAT
+The grill session must produce:
+1. MASTER_PLAN.md — The complete execution roadmap
+2. REPO_STRUCTURE.md — The directory schema with manifests
+3. SKILL_MATRIX.md — The tool-to-agent allocation table
+4. DATA_TIERING.md — The hot/warm/cold/training data boundaries
+5. CONTEXT.md — The domain model (shared vocabulary, key decisions, ADRs)
+
+All output files go into ~/novae-xorpus/handoffs/ (extend existing handoff convention)
+```
+
+---
+
+### Key Changes From Previous Version
+
+| Item | Before | After |
+|---|---|---|
+| Input path | `~/aesop-grill-input/` (placeholder) | `~/novae-xorpus/03-check/` (your actual accuracy-checked pipeline stage) |
+| File count | "93 markdown files" (assumed flat) | 15 subdirectories across 3 stages (01-sources, 02-clean, 03-check) |
+| Existing work | Not accounted for | `handoffs/`, `skills/`, `tools/`, `wiki/` directories flagged as "read + build on, don't duplicate" |
+| Claude Code config | Assumed none | `.claude/` directory exists — preserve it |
+| Naming conventions | Not referenced | `NAMING-CANON.md` flagged as must-follow |
+| No-computer workaround | Not referenced | `LAPTOP-TRICK.md` flagged as context document |
+| Related repos | Not referenced | `claude-code-android` and `OB1` repos acknowledged |
+| Output location | `~/aesop-grill-output/` | `~/novae-xorpus/handoffs/` (extends your existing convention) |
+
+---
+
+You're ready to run this. Inside your cloned repo:
+
+```bash
+cd ~/novae-xorpus
+
+# Start Claude Code
+claude
+
+# Then run the grill skill
+/grill-with-docs
+```
+
+The grill agent reads `03-check/` as truth, references `01-sources/` for provenance, reads your root-level docs for context, checks `skills/` and `tools/` to see what's already drafted, and outputs the 5 planning documents into `handoffs/`.
+
+Anything you want adjusted before you fire it up?

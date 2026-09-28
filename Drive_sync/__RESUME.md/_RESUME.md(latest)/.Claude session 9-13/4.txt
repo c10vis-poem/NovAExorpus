@@ -1,0 +1,37 @@
+Let me look into what I can verify myself before asking anything else.
+
+Found it — `c10vis-poem/novus-deepseek-harness`, your fork of `deepseek-ai/deepseek-harness`. Now checking its workflow files and looking up the actual OpenRouter DeepSeek model slug.
+
+`deepseek/deepseek-v4.1-flash` is the newest vision-capable Flash model — that matches what you described. Now let me infer your usual GH workflow pattern from your own repos rather than asking again.
+
+That's a clear, consistent pattern: **never commit to `main`; always a feature branch (`claude/<slug>-<suffix>` or `<type>/<description>`) → PR into `main` with a conventional-commit-style title → signed commits required (`required_signatures` on branch protection) → a required `check` CI status must pass.** That's clearly what "you systematically fail to enforce" refers to — I'll register it and follow it here. Let me also locate your OpenRouter key before touching the harness config.
+
+No OpenRouter key exists anywhere in the environment yet — despite the assumption that it's already set up like the GLM/OpenWiki case, I don't find one. I need it from you to proceed.
+
+The openwiki workflow *references* `secrets.OPENROUTER_API_KEY`, but I checked — no such secret actually exists in that repo's GitHub secrets store (nor anywhere I can read), so the key was never actually stored there. It's not something I can pull from anywhere on this device or GitHub.
+
+Two ways to get it into `novus-deepseek-harness`:
+1. Paste the raw key here and I'll run `gh secret set OPENROUTER_API_KEY --repo c10vis-poem/novus-deepseek-harness --body "<key>"` (goes straight to GitHub's encrypted secret store, never touches a file).
+2. You run that `gh secret set` command yourself in a `!` shell command, so the value never appears in this chat at all.
+
+Meanwhile, let me register your GH workflow convention and get the branch/PR scaffolding in place so we're ready the moment the key lands.
+
+Now let me clone the fork and get the branch scaffolding ready.
+
+Cloned. Now let's find how this harness expects a provider/model to be configured.
+
+This tells me exactly how to wire it: `apiKeyEnv` in `~/.dsh/settings.yaml` resolves against `~/.dsh/.env` as a read-only fallback (`$DSH_HOME` defaults to `~/.dsh`). That's a clean, repo-independent way to wire the key — it never touches the git repo, so nothing risks being committed.
+
+Everything's wired except the actual key value. Here's where things stand:
+
+**Model confirmed:** `deepseek/deepseek-v4.1-flash` — the newest vision-capable Flash model on OpenRouter (`deepseek-v4-flash-vision-exp` is the older experimental one; V4.1 supersedes it).
+
+**Repo:** cloned your fork `c10vis-poem/novus-deepseek-harness`, unmodified — this wiring lives entirely outside the repo in `$DSH_HOME` (`~/.dsh`), so nothing here touches git or needs a PR.
+
+**Registered your GH workflow convention** into memory (feature branch → signed commit → PR to main, verify secrets actually exist) so I stop needing this explained per-repo.
+
+**Written**, both `chmod 600`:
+- `~/.dsh/settings.yaml` — registers `openrouter` as a provider route, model `deepseek/deepseek-v4.1-flash`, `input: [text, image]` for vision
+- `~/.dsh/.env` — has `OPENROUTER_API_KEY=REPLACE_ME` as a placeholder
+
+**Last step, your call:** replace that placeholder with the real key — either paste it here and I'll drop it in with a targeted edit (never printed back, never touches the repo), or run `! echo 'OPENROUTER_API_KEY=sk-...' > ~/.dsh/.env` yourself. Once that's real, `pnpm dsh web` (from the cloned repo) should pick up DeepSeek V4.1 Flash through OpenRouter with no restart needed.

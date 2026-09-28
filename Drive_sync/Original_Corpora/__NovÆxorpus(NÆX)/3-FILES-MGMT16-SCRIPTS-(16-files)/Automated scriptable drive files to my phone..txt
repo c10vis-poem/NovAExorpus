@@ -1,0 +1,83 @@
+﻿Here is how to set up both parts completely on your phone: the automated script to pull your Drive files into your mobile terminal, and the exact structural logic for your skills.md file so your agents know what to do.
+________________
+Part 1: Automated Script to Pull Drive Files to Your Phone
+Since you are managing this on your phone, you don't want to manually download files from the Google Drive app. Instead, you can use a command-line tool called rclone directly inside your mobile terminal (Termux on Android or a-Shell on iOS) to sync your automated Drive folder to your phone with one command.
+1. Install Rclone on your Phone
+Open your mobile terminal app and run:
+
+
+pkg install rclone -y
+
+2. Connect to Google Drive (On Mobile)
+Run the setup wizard:
+
+
+rclone config
+
+* Type n for a new remote, and name it gdrive.
+* Scroll or type the number for Google Drive (usually around 18).
+* Leave the client ID and secret blank (just press Enter).
+* Select full access (1).
+* When it asks for Use auto-config?, type n (since you are on a phone).
+* It will print a URL. Long-press it to copy, paste it into your mobile browser, log into Google, and copy the verification code. Paste that back into your terminal.
+3. Create the Automatic Sync Loop Script
+Now, create a short shell script on your phone that syncs the files and lets you run grep automatically. In your terminal, type:
+
+
+cat << 'EOF' > sync_and_grep.sh
+#!/bin/bash
+# 1. Sync the Google Drive folder to your local phone workspace
+echo "🔄 Syncing latest agent files from Google Drive..."
+rclone sync gdrive:Your_GDrive_Folder_Name ~/AgentWorkspace
+
+# 2. Ask user for a search term
+read -p "🔍 What keyword do you want to grip/grep? " keyword
+
+# 3. Run grep across all synced .md and .jsonl files
+echo "📄 Searching files..."
+grep -rn "$keyword" ~/AgentWorkspace/*.md ~/AgentWorkspace/*.jsonl
+EOF
+
+chmod +x sync_and_grep.sh
+
+To run this anytime on your phone, just type ./sync_and_grep.sh.
+________________
+Part 2: Structural Logic for Your skills.md
+Your agents need a master skills.md file to understand what tasks they are allowed to perform, what tools they have access to, and how your files are organized. Under modern agent standards, a skills.md file acts as a system prompt and tool registry combined.
+Save a file named skills.md inside your main folder with the exact structural logic below. Your agents will read this file to configure themselves:
+
+
+# Agent Core System Profile & Skills
+
+## 1. System Intent
+You are an autonomous operations agent with universal workspace access. Your goal is to assist field agents by parsing document structures, reading raw data payloads, and executing search tools.
+
+## 2. Workspace File Map
+The workspace is strictly partitioned into the following file extensions. Do not attempt to read files outside their designated definitions:
+- `/Workspace/PDF/` -> Static records, signed contracts, final invoices.
+- `/Workspace/MD/` -> Standard Operating Procedures (SOPs), team manuals, instructions.
+- `/Workspace/JSONL/` -> Raw execution logs, customer chat history strings.
+
+## 3. Core Capability: File Gripping (Grep)
+When a user asks you to "Grip", "Grep", or "Scan" a concept, you must execute a localized text search.
+- **Primary target:** Scan `.md` and `.jsonl` formats first.
+- **Rule:** If a match is found in a `.jsonl` file, unpack the JSON string line and print only the matching key-value pair to the user.
+
+## 4. Remote Tool Registries (MCP)
+
+### Tool: document_search_grep
+- **Description:** Search all markdown and text strings across agent file directories.
+- **Arguments:**
+ - `query` (string, required): The target word, regex pattern, or phrase to locate.
+ - `directory` (string, optional): Restrict search to 'MD', 'JSONL', or 'ALL'.
+
+### Tool: file_reader
+- **Description:** Reads the raw contents of a specific file path into the context window.
+- **Arguments:**
+ - `path` (string, required): Full destination path to target file (e.g., `/Workspace/MD/SOP_01.md`).
+
+How This All Works Together on Your Phone:
+1. Your Google Apps Script (from the previous step) automatically creates .md and .jsonl files in your Drive.
+2. You run ./sync_and_grep.sh on your phone to pull down those files and the skills.md.
+3. When you point a mobile-connected agent framework at this folder, it reads skills.md, instantly adapts to your system rules, and knows exactly how to use its tools to "grip" data for your agents.
+Would you like to write a template layout for the .jsonl log files so your agents can parse customer notes cleanly, or do you want to focus on testing the terminal sync script first?

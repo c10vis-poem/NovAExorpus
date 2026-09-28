@@ -1,0 +1,12 @@
+I had to interrupt because I'm not done I was a premature send off 
+
+Task 2 cont. Once open Wiki and the on device files administrator are set I'm going to split the open Wiki tui and the two separate sessions / agentic platforms the one instance I will use it in will be for the files administrator agent and I will create a second primary function of the open Wiki tui that can be utilized by an on-device help desk agent
+
+Task 3. I have a deep dive that I can included with the outside agent as far as repository file tree grille dock preparation targets and to-do list so this task would be cross referencing that against what's already been compiled here and completed throughout editing the outside agents faster list to comply with current sotu and then final draft of the grill with ducks targeted output scope. 
+
+The grill with doc session is obviously going to be implied after that last one as a result task4 will involve [EDIT I JUST REALIZED THAT I WANTED THE JASON AL MARKER AND THE FINAL COMPILATION OF THE DATABASE TO BE ORGANIZED BY THE OUTCOME OF THE GIRL WITH DOCS SO INSTEAD OF AFTER I GET TO OPEN WIKI AGENT RUNNING INSTEAD OF REDOING THE ENTIRE DATABASE I JUST WANT TO COMPILE THE REMAINING DOCS THAT ARE GOING TO BE NECESSARY FOR THE GRILL SESSION ITSELF THAT WAY WE WERE NOT WASTING COMPILATION OR MANIFEST JASON L AT ITS ON SHIT THAT'S NOT GOING TO BE RELEVANT]
+Completing the compilation of the files and the extraction of tools and skills from set documents along with the completion of the dumbass as per grill with doc's guidelines.
+
+Utilizing/salvaging the remaining repo APK and implementing that as my terminal Daemon and utilizing that as the on-device assistant/npu manager microagent plus whatever websocket ADB loop, device assistant accessibility OS etc permissions that it will need to carry for the final UI.
+
+After that the remaining to do's are all going to primarily be based on the output of that Grill session including the mapping tooling and file structures that will incorporate all the necessary repositories created afterwards and the build out of all those

@@ -1,0 +1,10 @@
+Fair pushback on both counts — let me address them properly instead of patching.
+
+**1. Rules that aren't Claude-specific.** You're right, and there's actually a real, spreading convention for exactly this: **`AGENTS.md`** — a plain, tool-agnostic file name several agent tools (OpenAI's Codex among them) already read natively, with no Claude branding baked in. The fix: move novae-xorpus's actual substantive rules (verbatim preservation, nothing-merged, sha256 manifests, the whole hard-rules list) out of `CLAUDE.md` and into `AGENTS.md`. Then `CLAUDE.md` becomes a two-line pointer ("see AGENTS.md — same rules, tool-agnostic"), and any other tool you bring in later (Gemini, Prime-agent, whatever) gets the same treatment: its own thin, tool-branded pointer file, all converging on one real `AGENTS.md`. That gives you the universal rule set you're actually asking for, with Claude Code (or anything else) as just one consumer of it, not the owner.
+
+**2. A real tie-in, not a single pointer line.** Agreed that's too thin. What I'd propose instead is an actual short protocol, not just a mention — three concrete obligations, stated explicitly (in the global `CLAUDE.md`, and mirrored in `AGENTS.md` for non-Claude agents):
+- **At session start**, check `~/novae-xorpus/handoffs/` for current state when the session's work touches anything dumbass-relevant.
+- **During the session**, durable discoveries get written as new files into `01-sources/` (never edited/merged into existing ones — respects hard rule 2), not left sitting only in Claude's own private per-project memory.
+- **At session end**, `handoffs/` gets rewritten with current state — same discipline as `aesop-xi`'s `RESUME.md`, just scoped to novae-xorpus/#dumbass itself.
+
+That's a real, binding workflow rather than a "check this if you feel like it" line — and it's the same shape as the RESUME/unresolved/CLAUDE.md discipline we already built for aesop-xi tonight, just at the universal layer instead of one repo. Want me to set it up this way?

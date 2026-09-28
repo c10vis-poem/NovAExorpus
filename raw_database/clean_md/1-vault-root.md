@@ -1,0 +1,46 @@
+---
+source: raw/1 vault_root/.txt
+cleaned: 2026-09-09
+converter: direct read (plain UTF-8 text, already clean, no scaffolding to strip)
+disposition: "COMBINE — earlier draft of the same vault_root tree diagram. raw/5- vault_root/.txt is the later, more polished revision (color-coded tier tags, refined descriptions), kept as canonical at clean_md/5-vault-root.md. This draft kept as-is, not deleted."
+---
+
+📦 vault_root/
+ ├── 📜 MAP.md                                # Master human-readable index & ontology graph (Read-Heavy / Agent Update)
+ ├── 📊 manifest.jsonl                        # Root-level RAG registry & global hash table (Append / Sync)
+ │
+ ├── 📁 01_raw_sources/                       # TIER 1: COLD SENSORY ARCHIVE (Access: READ-ONLY)
+ │   ├── 📊 manifest.jsonl                    # Local RAG catalog of all immutable raw sources
+ │   ├── 📑 pdf/                              # Source whitepapers, specs, data sheets (*.pdf)
+ │   ├── 🎬 media/                            # Video captures, audio memos, transcripts (*.mp4, *.wav, *.png)
+ │   └── 📝 text/                             # Raw text scrapes, dumps, API payload exports (*.txt, *.html)
+ │
+ ├── 📁 02_wiki_md/                           # TIER 2: THE LLM WIKI LAYER (Access: READ / WRITE - OpenWiki TUI)
+ │   ├── 📊 manifest.jsonl                    # Local RAG catalog of conceptual nodes & graph links
+ │   ├── 💡 concepts/                         # Atomic linked notes, theory, and domain models (*.md)
+ │   ├── 🏛️ architectures/                    # System blueprints, data flows, interface specs (*.md)
+ │   ├── 🏷️ entities/                         # Registries, schema contracts, hardware profiles (*.md)
+ │   └── 🧭 indexes/                          # Maps of Content (MOCs) and taxonomy clusters (*.md)
+ │
+ ├── 📁 03_recall_cache/                      # TIER 3: WORKING MEMORY ACCELERATOR (Access: REBUILD / OVERWRITE)
+ │   ├── 📊 manifest.jsonl                    # Local RAG catalog of vector & chunk shards
+ │   ├── ⚡ jsonl/                            # Pre-tokenized passages for high-speed prompt injection (*.jsonl)
+ │   ├── 📐 vectors/                          # Dense vector indices (*.bin, *.faiss, *.hnsw checkpoints)
+ │   └── 🗝️ kv_store/                         # Low-latency key-value entity lookups (*.db, *.json)
+ │
+ ├── 📁 04_skills_runtime/                    # TIER 4: PROCEDURAL REPERTOIRE & TOOLS (Access: VERSION-CONTROLLED)
+ │   ├── 📊 manifest.jsonl                    # Local RAG catalog of all extracted skills & tools
+ │   ├── 🎯 prompt_skills/                    # Modular SKILL.md prompt definitions (*.md, *.yaml)
+ │   ├── 🛠️ extracted_tools/                  # Deterministic tools mined from ingested documentation
+ │   │   ├── cli/                             # Extracted command-line utilities (*.sh)
+ │   │   └── wrappers/                        # Extracted API interfaces & micro-functions (*.py)
+ │   ├── ⚙️ runtimes/                          # Master operational scripts and execution hooks (*.py, *.sh)
+ │   └── 🛡️ policies/                         # Validation guards, retry policies, schemas (*.json, *.yaml)
+ │
+ └── 📁 05_episodic_logs/                     # TIER 5: TELEMETRY & EPISODIC RUNS (Access: APPEND-ONLY)
+     ├── 📊 manifest.jsonl                    # Local RAG catalog of sessions, audits, and verifiers
+     ├── 📲 daily_driver_sync/                # Ingested logs from edge device sessions (*.jsonl)
+     ├── ⏱️ trajectories/                     # Multi-model traces: Query, Executor, Frontier (*.jsonl)
+     ├── 🛑 red_audit_sandbox/                # Red Auditor evaluation reports & pass/fail quarantine (*.jsonl)
+     ├── ⚖️ rlvr_verifiers/                   # Graded rewards, assertion outcomes (+1.0 / -1.0) (*.jsonl)
+     └── 🧹 hygiene_reports/                  # Schema integrity audits, broken link checks (*.md)

@@ -1,0 +1,2 @@
+{"chunk_id": "chunk_aeyre_001", "document_path": "README.md", "tier": 0, "token_count": 85, "text": "novus-aeyre is the native Android foreground media and sensory daemon executing sensory acquisition, Silero VAD, Moonshine STT, Kokoro-82m TTS, and screen capture."}
+{"chunk_id": "chunk_aeyre_002", "document_path": "AGENTS.md", "tier": 0, "token_count": 70, "text": "Operating boundaries: Non-1:1 Condensation Law, Locality of Reference, Hard Rule 5 Extractor Independence, Red Auditor Stealth Invariant (~/.red/), and zero audio latency overhead."}

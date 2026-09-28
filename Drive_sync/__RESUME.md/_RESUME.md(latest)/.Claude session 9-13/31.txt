@@ -1,0 +1,1 @@
+Found the rest: "Emmy Em search" = `memsearch-aesop` (phonetic match for "mem search"), plus `qwen code` = `Novus-qwen-code`, `prime agent` = `NovA-prime-agent`, `code review graph` = `NovA-code-review-graph`. GSD dropped per your call. Cloning everything now.

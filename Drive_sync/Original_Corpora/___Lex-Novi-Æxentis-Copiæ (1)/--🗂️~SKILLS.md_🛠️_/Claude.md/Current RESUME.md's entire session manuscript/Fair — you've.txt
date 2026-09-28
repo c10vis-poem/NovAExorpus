@@ -1,0 +1,13 @@
+Fair — you've got it exactly right, I was over-explaining one small nuance more than it needed. Building it now.
+
+Now creating the symlink mirror for aesop-xi's RESUME.md/CLAUDE.md into novae-xorpus.
+
+Now the AGENTS.md restructuring — moving the actual rules out of CLAUDE.md into a tool-agnostic file.
+
+Now making `CLAUDE.md` the thin pointer.
+
+Let me update Claude's own memory file (which documented the earlier workflow) so it reflects novae-xorpus as the real home, not the stand-in locations from earlier tonight.
+
+One more consistency fix — `unresolved.md`'s own header still describes itself as a "pragmatic stand-in until #dumbass exists," but it's now sitting inside #dumbass itself.
+
+Everything's consistent now: `AGENTS.md` holds the real tool-agnostic rules, `CLAUDE.md` is a two-line pointer to it, `unresolved.md` lives in novae-xorpus for real (not a stand-in), `projects/aesop-xi/` symlinks are live and verified resolving to the actual files, and both the cross-device attach sequence and the mirror discipline are documented in `AGENTS.md`. Claude's own memory file is updated to match so this doesn't get rediscovered from scratch next time. Ready for whatever's next — the RESUME.md task-order write, the flash session, or something else.

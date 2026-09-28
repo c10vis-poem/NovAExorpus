@@ -1,0 +1,33 @@
+Let me check if I can find that repo first, then give you the actual fix.
+
+No exact match for "termux assistant recovery" — only `termux-packages` and `termux-gui-bash` show up under "termux," and nothing matches "recovery." You might be thinking of a different name, or it's a private repo not in your GitHub account, or it doesn't exist yet. Tell me the exact name if you know it and I'll look again — or if it's a local-only folder on the phone (not pushed anywhere), that's a different problem than what I can search for.
+
+Now the actual fix, since this is a real and common Termux problem:
+
+**Why Claude Code "shakes hands" again every time:**
+
+Two different failure modes, and they need different fixes:
+
+1. **Termux gets killed by Android, not just backgrounded.** Motorola's battery manager is notoriously aggressive — more aggressive than stock Android. If Termux isn't exempted, Android kills the whole process (not just puts it to sleep) when you switch apps or the screen locks. When Termux dies mid-session, any *unsaved* state is gone, but the actual auth token file should survive since it's written to disk immediately, not held in memory. If you're being asked to re-auth every launch, something is deleting that file, not just killing the process.
+
+2. **The auth/session files are getting wiped, not just the process killed.** Claude Code CLI stores its login token and session history on disk at:
+   - `~/.claude.json` or `~/.claude/` (auth + config)
+   - `~/.claude/projects/<encoded-path>/*.jsonl` (session transcripts — this is your actual history)
+
+   If these are gone on relaunch, either (a) Termux's app storage is being cleared by Android/Motorola's storage manager, (b) you're launching a fresh Termux profile/instance each time, or (c) `$HOME` isn't pointing where you think it is.
+
+**What to check on the phone, in order:**
+
+1. `echo $HOME` in Termux — confirm it's the same path every session (should be `/data/data/com.termux/files/home`).
+2. `ls -la ~/.claude/` — does the folder exist and have a recent timestamp after a session you thought was saved?
+3. Android Settings → Apps → Termux → Battery → set to **Unrestricted** (not "Optimized"). On Motorola specifically, there's a second layer: Settings → Battery → Battery optimization → look for a separate "adaptive battery" or "manage apps if unused" toggle — Motorola ships its own on top of stock Android's, and stock exemption doesn't disable Moto's.
+4. Run `termux-wake-lock` at the start of any session you want to survive backgrounding — keeps the CPU from sleeping and reduces (not eliminates) the chance Android kills the process outright.
+5. Confirm you're not accidentally reinstalling Termux (via Play Store update conflicts with F-Droid builds — Termux stopped shipping Play Store updates a while back; if you have both installed, they have separate `$HOME`s and separate everything).
+
+**To recover a specific past session's history**, inside Claude Code CLI itself (not Termux settings) run:
+```
+claude --resume
+```
+or use the `/resume` slash command from inside an active session — it lists prior sessions by project path and lets you pick one back up, provided the `.jsonl` transcript files under `~/.claude/projects/` weren't wiped.
+
+Want me to write this up as an actual setup script (wake-lock + battery-exemption check + a boot alias) and put it in one of your Termux repos so it's not tribal knowledge you have to remember each time?

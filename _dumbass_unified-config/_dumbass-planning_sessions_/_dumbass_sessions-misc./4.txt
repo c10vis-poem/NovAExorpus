@@ -1,0 +1,51 @@
+[ YOU ENTER A PROMPT IN TERMINAL ]
+                                     │
+                                     ▼
+                      [ Layer 1: Claude Code / Cursor ]
+                                     │
+  =================== STAGE A: PRE-COMPRESSION & SPEC ===================
+                                     │
+                                     ▼
+                        [ honey-for-devs & task-review ]
+         (Token footprint is slashed, and task spec is drafted instantly)
+                                     │
+                                     ▼
+                             [ OmniRoute ]
+             (Routes prompt payload out to your active MCP layers)
+                                     │
+  =================== STAGE B: DATA & REASONING BLENDING ==================
+                                     │
+          ┌──────────────────────────┼──────────────────────────┐
+          ▼                          ▼                          ▼
+  [ code-review-graph ]           [ Mem0 ]             [ Terrestrial Brain ]
+(AST file-impact maps)     (Episodic preferences)   (Static Postgres schemas)
+          │                          │                          │
+          └──────────────────────────┼──────────────────────────┘
+                                     │
+                                     ▼
+                        [ Layer 6: Reasoning Bank ]
+             (Extracts historical step-by-step logic frameworks.
+              Blends context data with its active thought patterns)
+                                     │
+                                     ▼
+                       [ Outbound API Completion ]
+               (Claude generates and applies the code changes)
+                                     │
+  ================= STAGE C: THE ASYNCHRONOUS LEARNING LOOP =================
+                                     │
+         ┌───────────────────────────┴───────────────────────────┐
+         ▼                                                       ▼
+[ Continuous Workflow Execution ]               [ Layer 7: Continual Harness ]
+  (You and your agent keep coding                  (Runs quietly in the background.
+   uninterrupted. Files are pushed                 Analyzes runtime behavior, errors,
+   anonymously straight to GitHub)                 and post-execution code performance)
+                                                                 │
+                                                                 ▼
+                                                    [ Telemetry Translation ]
+                                                   (Translates failures/fixes into
+                                                    structured logical blueprints)
+                                                                 │
+                                                                 ▼
+                                                    [ SYSTEM UPGRADE CRADLE ]
+                                                  (Feeds corrections straight back
+                                                   into your active REASONING BANK)

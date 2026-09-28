@@ -1,0 +1,11 @@
+📁 Drive/NovA-Corpus/
+├── 📁 00-INBOX/            everything you've shipped over lands here, unsorted
+├── 📁 01-CANON/            settled truth — the tier tree lives in here
+│   ├── 📁 tier-1-horizons-ui/
+│   ├── 📁 tier-2-novus-agenti/
+│   ├── 📁 tier-3-nova-claw/
+│   ├── 📁 tier-4-aesop/
+│   └── 📁 (support layers…)
+├── 📁 02-PENDING-CORPORA/  experimental, unproven
+├── 📁 03-VAULT/            alternative builds, keep for later
+└── 📁 04-REVERSE-ENG/      troubleshooting + failback source

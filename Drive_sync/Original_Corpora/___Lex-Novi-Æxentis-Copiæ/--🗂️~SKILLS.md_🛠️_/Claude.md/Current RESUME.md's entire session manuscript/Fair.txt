@@ -1,0 +1,11 @@
+Fair correction, and I mischaracterized it — you're not describing confirmation-fatigue, you're describing things getting claimed as done, handed off, or pushed, and then never actually being real. That's a follow-through/verification problem, not a "too many approval prompts" problem, and it's the opposite of what I implied. Noted, and it's exactly why I've been live-testing everything tonight (the mic amplitude checks, the actual TTS→STT round-trip, the real pactl connection) instead of just checking file existence and calling it done.
+
+On the manifest: understood, you're running your own regardless of what ECC already has — not my call to relitigate, moving on.
+
+On DroidDesk — let me check whether it (or a newer alternative) actually replaced VNC with ADB, since that's a real, checkable claim rather than something to guess at again.
+
+Real clarity here: **DroidDesk itself was never VNC-based** — it renders through Termux:X11 directly, not VNC. VNC only shows up in its docs as an optional bridge for external monitor output (via a Raspberry Pi), not for phone↔tablet remoting. So if you hit VNC lag messing with it, that was a separate viewer layered on top (AVNC, or droidVNC-NG), not DroidDesk itself.
+
+The actual fix for what you're describing: **scrcpy** — which you already have forked (`c10vis-poem/scrcpy`) — is the real ADB-based, no-VNC answer. It uses ADB (USB or WiFi) as the transport and the phone's own hardware H.264/H.265 encoder, getting sub-30ms latency, vs. VNC's raw-framebuffer-over-network approach which is inherently laggier and lower quality. The clean architecture: **DroidDesk runs the actual Linux/X11 desktop on the phone; scrcpy runs on the tablet and mirrors/controls the phone over ADB** — no VNC anywhere in the chain.
+
+That said, if you specifically remember a *different, newer* repo (not DroidDesk, not scrcpy) that natively does both — the desktop *and* the ADB transport — as one project, tell me its name/description and I'll check it directly rather than assume this DroidDesk+scrcpy pairing is exactly what you had in mind. Otherwise, want me to proceed building it this way?

@@ -1,0 +1,90 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "HorizonsUI_WebViewBridgeContract",
+  "description": "WebSocket JSON-RPC 2.0 interface contract between Chromium WebView frontend and native background daemons (Æsc, Æyre, and OmniRoute).",
+  "version": "1.0.0",
+  "endpoints": {
+    "terminal_shell": "ws://127.0.0.1:8080/shell",
+    "media_ingress": "ws://127.0.0.1:8765/media",
+    "inference_gateway": "http://127.0.0.1:20128/v1"
+  },
+  "message_types": {
+    "request": {
+      "type": "object",
+      "required": ["jsonrpc", "id", "method", "params"],
+      "properties": {
+        "jsonrpc": { "type": "string", "enum": ["2.0"] },
+        "id": { "type": ["string", "integer"] },
+        "method": {
+          "type": "string",
+          "enum": [
+            "shell.execute",
+            "shell.interrupt",
+            "media.start_voice_stream",
+            "media.stop_voice_stream",
+            "media.synthesize_speech",
+            "model.swap",
+            "model.get_status",
+            "system.get_metrics"
+          ]
+        },
+        "params": {
+          "type": "object",
+          "properties": {
+            "command": { "type": "string" },
+            "text": { "type": "string" },
+            "target_model": { "type": "string" },
+            "stream_audio": { "type": "boolean" },
+            "timeout_ms": { "type": "integer", "default": 10000 }
+          }
+        }
+      }
+    },
+    "response": {
+      "type": "object",
+      "required": ["jsonrpc", "id"],
+      "properties": {
+        "jsonrpc": { "type": "string", "enum": ["2.0"] },
+        "id": { "type": ["string", "integer"] },
+        "result": {
+          "type": "object",
+          "properties": {
+            "stdout": { "type": "string" },
+            "stderr": { "type": "string" },
+            "exit_code": { "type": "integer" },
+            "audio_pcm_base64": { "type": "string" },
+            "status": { "type": "string" },
+            "active_model": { "type": "string" }
+          }
+        },
+        "error": {
+          "type": "object",
+          "properties": {
+            "code": { "type": "integer" },
+            "message": { "type": "string" },
+            "data": { "type": "string" }
+          }
+        }
+      }
+    },
+    "telemetry_event": {
+      "type": "object",
+      "required": ["event_type", "timestamp", "payload"],
+      "properties": {
+        "event_type": {
+          "type": "string",
+          "enum": [
+            "VAD_SPEECH_DETECTED",
+            "VAD_SPEECH_ENDED",
+            "STT_TRANSCRIPTION_INTERIM",
+            "STT_TRANSCRIPTION_FINAL",
+            "NPU_THERMAL_ALERT",
+            "LMK_PRESSURE_WARNING"
+          ]
+        },
+        "timestamp": { "type": "string", "format": "date-time" },
+        "payload": { "type": "object" }
+      }
+    }
+  }
+}

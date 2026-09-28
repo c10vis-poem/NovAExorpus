@@ -1,0 +1,9 @@
+Not quite that simple, and I want to be direct about why rather than let it sound solved when it isn't yet: a symlink only bridges two paths *on the same filesystem*. It can't reach across to a different physical device — the tablet and any cloud sandbox each have their own separate storage, so `~/novae-xorpus` on the phone and `~/novae-xorpus` on the tablet would be two unrelated, empty-until-cloned directories, not the same thing.
+
+What actually closes that gap is git — which novae-xorpus's own `CLAUDE.md` already assumes (hard rule 6: "push every session, `main` stays current"). The real sequence per other device/environment is:
+1. `git clone` novae-xorpus there (once)
+2. `git clone` whatever project repo it's working on there too (once, if not already present)
+3. Create the same local symlink *within that environment* — same idea as here, just a separate physical copy
+4. On every session touching either repo: `git pull` at start, `git push` at end — that's what actually keeps the tablet/cloud copy from drifting from this phone's copy, not the symlink itself
+
+So it's genuinely achievable, just one more real step than "symlink it" — the symlink handles local wiring once the repos exist there; git is what gets them there and keeps them current across devices. Want me to build the phone side now (symlinks + move `unresolved.md` into novae-xorpus) and write this exact 4-step sequence into novae-xorpus's docs as what a new environment needs to do?

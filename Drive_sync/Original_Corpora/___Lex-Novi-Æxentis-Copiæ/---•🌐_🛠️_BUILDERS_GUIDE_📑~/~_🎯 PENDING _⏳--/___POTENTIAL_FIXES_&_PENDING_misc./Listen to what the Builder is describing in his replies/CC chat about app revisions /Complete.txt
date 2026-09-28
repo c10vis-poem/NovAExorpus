@@ -1,0 +1,21 @@
+Complete answer first, since you need it: **six** PRs actively edit `HomeGrid.kt` and would overwrite the freeze — **#30, #27, #26, #24, #22, #20**. The other thirteen are safe, including **#33** (which carries the correct blob and the STT engine). And `main` already has the correct HomeGrid — nothing to merge.
+
+Locking the plan for this session.
+
+Plan locked. Coding the Kokoro fix now — reading the current implementation first.
+
+Now I have what I need. The fix is to turn `KokoroModelManager` from a **downloader** into a **resolver** — same user-is-the-loader pattern as `MoonshineSttEngine`. Checking the state-store key convention first so I match it.
+
+Writing the fix.
+
+Only `HorizonsApplication` consumes it. Updating both sites.
+
+Clean. Now the stale comment that keeps regenerating the phantom bug.
+
+Now the CLAUDE.md rewrite — the resume prompt and SOTU, with only verified facts.
+
+Now the State of the Union section, then reassemble.
+
+I'm out of plan mode. Reading the actual Kokoro code before I change it.
+
+That's already fixed on my branch — `KokoroModelManager` is already a resolver with no download. My earlier claim that `onCreate:322` calls `ensureReady()` came from the PR #33 branch, not from HEAD. Verifying what HEAD actually does before I touch anything.

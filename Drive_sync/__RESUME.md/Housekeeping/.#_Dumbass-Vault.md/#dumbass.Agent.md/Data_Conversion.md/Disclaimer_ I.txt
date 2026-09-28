@@ -1,0 +1,9 @@
+Disclaimer: I work in the data platform space (founder of Bruin), so take this as general guidance, not a pitch. The best option really depends on your company size, how your teams are structured, and what your current stack looks like (MSSQL 2016, lake, warehouse, etc.). Also helpful to know how you orchestrate things today; Airflow, SSIS, cron, notebooks, whatever.
+
+One thing I’d definitely think about is choosing asset-based orchestration instead of task-based. Task-based tools like Airflow or SSIS focus on tasks, not data, so lineage ends up shallow, incomplete, or manually maintained. You also get a lot of glue code that makes governance harder. Asset-based tools like Dagster, dbt, or Bruin treat data assets as the core unit, which gives you proper lineage, clear dependencies, and a cleaner way to centralize metadata and governance. If your goal is a single referential for governance, this approach saves a lot of pain later.
+
+Regarding OpenMetadata: it’s a good open-source option, but it’s not light. You’ll spend time maintaining connectors, and lineage quality depends on how your SQL is written. Glossary, business rules, RACI, etc., also take time to set up. It works well in mature teams that can own it.
+
+You can also look at metadata-first platforms like DataHub if your priority is lineage and visibility over heavy enterprise governance. Sometimes that’s enough depending on your size.
+
+Just keep in mind that no tool magically creates governance. You still need a central team, standards, ownership, and a gradual rollout. The tool only reinforces the process you already put in place.

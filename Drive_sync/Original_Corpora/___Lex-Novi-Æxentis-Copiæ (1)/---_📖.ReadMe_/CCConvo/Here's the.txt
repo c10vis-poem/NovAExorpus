@@ -1,0 +1,12 @@
+Here's the two-phase plan as I heard it — check me before I lock it in:
+
+**Phase 1 — finish what's running now.** Corpus consolidation, still open question: agent-orchestrated (a Sonnet-tier model driving the `xgrep_` deep-read pass itself) versus local batch tooling that mechanically transforms files into your four-document schema and drops them into the vault layout — each component gets its own Wiki + `CLAUDE.md` + skills folder, action-description files become skills.
+
+**Phase 2 — the AESOP XI build-out, sequenced:**
+1. Sonnet-tier model wires up the actual harness stack (everything we audited tonight — ECC, Prime Agent, mem0, OB1, OmniRoute, reverse-skill, Honey, etc.), checks for real collisions this time (ports, MCP names), not just theoretical.
+2. Opus-tier model runs Pocock's skill sequence (5–6 skills, including `implement`) for repo scaffolding — through scope/strategy definition, **stops before actual implementation.**
+3. Branch off there into a separate session to write AESOP XI's README/whitepaper/mission statement, finish hard-wiring its protocols, and decide which harnesses are swappable per environment/node.
+4. Once the universal memory bank format *and* the protocol/orchestration layer are both defined, fully wire it all, then have the open-wiki LLM-wiki agent log and snapshot it as the persistent memory layer underneath everything.
+5. Rejoin the original Pocock-skills branch, have an orchestrating model run the actual multi-repo build: **5 repos** — one per APK (3), one for AESOP XI itself, one for the Obsidian Vault/memory bank.
+
+That's a real plan, not a rough one — but none of it is tonight's work. Given you flagged the inefficiency yourself, I'd save this to the handoff now so it's not lost, and stop here.

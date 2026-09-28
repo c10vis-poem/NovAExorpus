@@ -1,0 +1,24 @@
+Let me actually search broadly instead of trying to decode that — checking Termux's shared storage access and scanning for anything STT/TTS-related across locations I haven't covered yet.
+
+Big miss on my part — I never did a full `ls ~/bin`, only checked for specific known filenames. There's a lot more here, and it reframes things. Checking the most important pieces now: the full `~/bin` listing, and `.hermes/hermes-agent` — which has its own complete, separate TTS/STT provider system with an extensive test suite, potentially a much bigger framework than the `vv` script we've been treating as the whole pipeline.
+
+Found real documented architecture — `##DEVICE-STT&TTS_/architecture.md`, `operations.md`, and a `DaemonTtsClient.kt`. Reading these now to see if this is the actual "working speech layer" you remembered.
+
+This is it — real documented architecture for `c10vis-poem/aesop`'s `voice-engine/` (a different, more complete subsystem than the `deploy/phone/` one `vv` currently uses). The mechanism you remembered wasn't tmux+X11 — it was **PulseAudio bridging**: PulseAudio runs in Termux, its socket gets bind-mounted into the Debian proot, and `sounddevice` inside the proot talks to it via `PULSE_SERVER`, letting Python (running in glibc/proot, where sherpa-onnx actually installs) read the real Termux mic and write to the real Termux speaker in real time. tmux was probably just how you kept the session alive, not part of the audio path.
+
+Bigger deal: this describes a **fully real-time, continuous VAD→STT→TTS loop** (`live_voice_loop.py`) — no manual start/stop, no fixed recording window, VAD segments speech live as you talk. That's architecturally exactly what would sidestep tonight's whole 10-second Moonshine cliff, since each VAD-detected segment gets transcribed individually and immediately. Checking right now whether this still exists in `~/repos/aesop` alongside the `deploy/phone/` scripts we've been using all session.
+
+`live_voice_loop.py` and `run_live.sh` genuinely still exist in `~/repos/aesop/voice-engine/scripts/` — the real-time engine survived. But the test/demo scripts and README/SETUP docs referenced alongside it are gone from the repo now (only in the Obsidian mirror), and the `deploy/phone/` scripts we've used all session are a separate, simpler successor. Quick check on whether the two missing runtime dependencies (PulseAudio, sounddevice) are actually in place before I say this is ready to try.
+
+Real status: **PulseAudio is already installed** in Termux (`pulseaudio` + `pulseaudio-glib` 17.0-3), just not currently running. **`sounddevice` is missing** from the proot venv — that's the only missing piece. No dead ends this time, just two small setup steps.
+
+So the actual "working speech layer" you remembered is `~/repos/aesop/voice-engine/scripts/live_voice_loop.py` + `run_live.sh` — real-time mic→VAD→STT→TTS→speaker over a PulseAudio bridge between Termux and the Debian proot, no fixed recording window, VAD segments speech naturally as you talk. The code survived; only its test-script siblings and docs got pruned from the repo at some point.
+
+**Approval card to actually try it:**
+- Install `sounddevice` in the proot venv: `proot-distro login debian -- /root/venv/bin/pip install sounddevice`
+- Start PulseAudio in Termux: `pulseaudio --start -nF ~/pulse-noauth.pa --exit-idle-time=-1 --disable-shm`
+- Run `bash ~/repos/aesop/voice-engine/scripts/run_live.sh --demo` first (speaker+STT self-test, no mic) before the live mic version
+- Rollback: `pip uninstall sounddevice` in proot; `pulseaudio --kill`
+- Risk: low — nothing here touches `vv`/the current working pipeline; this runs standalone
+
+Want me to go ahead and try to actually revive this?

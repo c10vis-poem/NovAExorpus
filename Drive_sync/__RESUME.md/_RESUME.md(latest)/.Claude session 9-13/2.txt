@@ -1,0 +1,8 @@
+I want to make sure I clone the right thing and don't mishandle your API key before I start. A few things are blocking me:
+
+1. **Repo** — no URL was given. What GitHub repo has the "deepseek harness" you want cloned?
+2. **Model name** — I'm not aware of a "DeepSeek v.4 Flash Vision" model on OpenRouter (DeepSeek's vision-capable releases I know of are things like `deepseek-ai/deepseek-vl2` or the V3 line; "Flash" is normally a Gemini naming convention). Can you confirm the exact OpenRouter model slug (e.g. `deepseek/deepseek-...`) so I wire up the right one?
+3. **API key handling** — is your OpenRouter key already set as an env var somewhere (e.g. `OPENROUTER_API_KEY`), or do you want me to set that up? I won't paste a raw key into a committed file.
+4. **"GH workflow"** — do you mean a GitHub Actions CI/CD workflow file in that repo, or your intended git branch/PR workflow for this change?
+
+What would you like to clarify?

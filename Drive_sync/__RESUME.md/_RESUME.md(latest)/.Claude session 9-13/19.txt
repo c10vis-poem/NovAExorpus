@@ -1,0 +1,11 @@
+Let me check what's actually configured versus assumed, rather than guess.
+
+Straight answer: none of that exists here. I checked — no `mem0ai` package, no Honcho, no Honeycomb, and `mcpServers` is an empty list on this device. There is no enterprise-wide memory layer wired up anywhere I can see. The only persistence I actually have is the local file-based memory at `~/.claude/projects/.../memory/`, and it's new — before this session it held exactly one entry (a cache-timing note from yesterday, 2026-09-12). So "why isn't this universal yet" has a blunt answer: this is close to session one of that system actually being populated with anything real.
+
+On the launch protocol question — also straight: no, I didn't run one, because there wasn't one to run. `~/.claude/CLAUDE.md` didn't exist until I created it partway through this conversation. There was no standing checklist anywhere on this device for me to execute at session start beyond auto-loading `MEMORY.md`, which is exactly the one entry I just described.
+
+Two separate real gaps, then, not excuses:
+1. **No cross-device/enterprise memory layer** (mem0 or otherwise) — that's an actual infrastructure decision, not something I can silently assume into existence. If you want it, I can help wire an actual mem0 MCP server or similar, but that's real setup work I shouldn't start without you saying go.
+2. **No launch protocol in `CLAUDE.md`** to force a self-check every session (read memory, verify live state, don't re-derive known facts). That one I can fix directly, now, in the file I already created.
+
+Want me to write that launch protocol into `CLAUDE.md` right now?

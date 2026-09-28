@@ -1,0 +1,5 @@
+Also cleaning up the two other real errors I already flagged in the memory file while I'm here: the false "signatures are required" claim, and a duplicated section from an earlier edit.
+
+Now fixing the same wording in `novae-xorpus/AGENTS.md`, which I already merged — same GH workflow: branch, push, PR, CI, merge.
+
+Merged. Wording is now consistent everywhere: `~/.claude/CLAUDE.md`, the `gh-workflow-convention` memory entry, and `novae-xorpus/AGENTS.md` all say auto-merge to `main`, unambiguously — plus the false signing-required claim is corrected and the duplicate section cleaned up.

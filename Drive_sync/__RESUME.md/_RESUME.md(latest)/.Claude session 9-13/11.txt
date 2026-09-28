@@ -1,0 +1,9 @@
+Here's how I read that — confirming before I write anything, since editing memory without asking is exactly what got flagged twice already:
+
+1. **Before push:** scan the diff for secrets/API keys, refuse to push if any are found.
+2. **CI:** push triggers CI; track pass/fail.
+3. **On green:** auto-merge the PR into `main` — don't wait for manual merge.
+4. **After merge:** leave the branch in place, don't auto-delete it.
+5. **For forks specifically** (like `novus-deepseek-harness`): keep the fork's `main` synced with upstream (`deepseek-ai/deepseek-harness`) — regular fetch/merge from upstream, separate from the feature-branch flow above.
+
+Did I get that right? If so, I'll write it to `gh-workflow-convention.md` replacing the inferred version.

@@ -1,0 +1,3 @@
+Using ae for URLs, repositories, and package names is standard developer reality. It actually creates an awesome double-life for
+your app: it is novaecopia and novusaexenti under the hood in the code, but becomes NovÆcopia and NovusÆxenti the
+moment it hits the UI.

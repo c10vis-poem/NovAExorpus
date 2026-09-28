@@ -1,0 +1,25 @@
+﻿Tab 1
+
+
+Goal of this project launch setup 
+using Claude Mem paired with an AST-aware code_map or a sub-agent context engineering skill like GSD (Get-Shit-Done} Or better yet Honey-for-Devs I'm pretty sure it has that feature in it.
+
+
+Then I need to utilize an Orchestrator:
+Master workflow router. Automatically routes complex repository ingestion, multi-repo tasks, and AST indexing to ECC and Honey for Devs child shttps://claude.ai/newkills.
+
+
+I haven't even began to build my agent platforms pathways run times engines scripts tools parameters memory layer or harnesses This all right there was just for ingesting knowledge so that it can build all these other things and get these all put together I already have a good idea of a lot of other skills that I'm going to utilize to help it build these platforms along the way. +
+
+
+I just need to iron out a couple things like the master orchestrator if I can use the same one for each thing or if I got to just build a new agent or maybe there's a repo that already does this or maybe ECC there's a combination of ECC tools and all the other multitude of tools that we have at our disposal 
+
+
+ That and I can build a runtime paired with custom harnesses and scripts.
+
+
+an agent script and modular environment for each different coding session, and I just run a specia;ized claude orchestrator to map the tooling and help script my smol / namo agent orchestration layer. Then utilize a local mode to do the on device tasks or the easier stuff or use cheap cloud model for some median tasks
+Tab 2
+
+
+Tab 3

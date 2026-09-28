@@ -1,0 +1,5 @@
+views:
+  - type: table
+    name: Table
+    summaries:
+      file.name: new summary

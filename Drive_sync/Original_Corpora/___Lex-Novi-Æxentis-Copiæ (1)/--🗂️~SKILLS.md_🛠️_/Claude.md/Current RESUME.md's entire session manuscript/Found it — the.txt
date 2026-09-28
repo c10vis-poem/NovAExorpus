@@ -1,0 +1,7 @@
+Found it — the real table already exists in `ARCHITECTURE.md` (better than the RESUME.md snippet I saw), with exactly the format you want: Memory | Kind | Content | Backend. Adding the 4th row there, then fixing `protocol/memory.md` to reference it properly instead of duplicating it.
+
+Now updating `protocol/memory.md` to properly reference this instead of duplicating it.
+
+Since I just referenced `../CLAUDE.md` from `protocol/memory.md`, I need to actually create it now rather than leave a dangling pointer — this is where the RESUME/unresolved workflow convention belongs.
+
+All four pieces now exist and reference each other correctly instead of overlapping: `ARCHITECTURE.md` §4 has the real 4-type table (added Working/Ephemeral, backed by the Redis container your own deploy files already provisioned but never named), `protocol/memory.md` points there instead of duplicating it, and `CLAUDE.md` (newly created — the actual Claude Code convention file, not a stand-in) holds the RESUME/unresolved workflow rule. Ready to move into today's scope, or is there more structural work to settle first?

@@ -1,0 +1,47 @@
+Let me verify rather than list from memory — I've been wrong too many times today asserting from documents. Running a sweep.
+
+Launch path is intact — `MonitorPane:92-100` dispatches via `DaemonLauncher`. The spec is implemented, not just documented. Nothing got orphaned by the Router change.
+
+One more sweep, then I'll write the list into the repo.
+
+Four came back "present" on loose greps — I need to check those before writing them down as built.
+
+Three of those four were false positives on my grep — worth catching:
+
+- **`NpuManager`** is Qualcomm's `@hide` *performance-lock* service in `CliffordService`. That's not the NPU manager harness from canon (dual-model context switch, OOM catch). **Absent.**
+- **Max utterance cap** only matched the 5-minute screensaver timer. **Absent.**
+- **Barge-in is genuinely real** — `VoiceLoopController` has `bargeInJob` and detection. **Present.**
+- **MediaProjection** is referenced in `ChatPane`. **Partial.**
+
+Writing the verified inventory into the repo.
+
+Done — `wiki/BUILD-STATUS.md`, pushed. ~60 rows across seven sections, every one checked by grepping for the **consumer**, not by reading a doc.
+
+## The big absences
+
+**The circuit** — the amperage check (arch + free RAM) is missing entirely. No `SUPPORTED_ABIS`, no `availMem` anywhere. That's your own item 3, and it's the only structural guard against a silent LMK kill. Archives doesn't store verified profiles, and Router SLEEP sets a flag without unloading anything.
+
+**All four parameter layers.** `temperature` hardcoded `0.7` in two places. `verbosity` — `SettingsPane` *writes* it and **nothing reads it**. `cores` hardcoded to `2` in two files. And **no compute-unit selector at all**, which is the one that blocks your consumer-grade goal — without it there's no way to say "strictly NPU" or "spread it" or degrade gracefully on a phone with no NPU.
+
+**Voice** — Whisper engine absent, engine family not parameterised, no ~60 s cap, and `DaemonSttClient` with its dead `:8091` is still sitting there as a fallback that masks failures. Barge-in *is* real, though.
+
+**Runtime** — no NPU manager harness, no dual-model ping-pong, no recovery daemon.
+
+**Sockets** — zero `ServerSocket`, zero Ktor, zero WebSockets.
+
+## Three false positives I caught
+
+Worth flagging because it's the same error class as the phantom `HomeGrid.kt:69` bug: `NpuManager` in `CliffordService` is Qualcomm's `@hide` **performance-lock** service, not the harness canon describes. And "max utterance cap" only matched the screensaver timer. If I'd trusted the first grep, this file would have lied to you in two places.
+
+## Shortest path, dependency-ordered
+
+1. Amperage check
+2. The four parameters — especially the compute-unit selector
+3. Whisper engine + family as a parameter, then measure it on the phone
+4. Utterance cap
+5. Delete `DaemonSttClient`
+6. `http_server` read loop for vision payloads
+
+Also confirmed the Router change didn't orphan anything — `MonitorPane:92-100` dispatches via `DaemonLauncher`, exactly as the adopted spec requires.
+
+PR #34 is at six commits now. CI's building the merged tree — that's the APK to walk the guide against.

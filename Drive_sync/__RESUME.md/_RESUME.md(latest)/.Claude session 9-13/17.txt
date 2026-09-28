@@ -1,0 +1,3 @@
+Confirmed — `manifest.jsonl`, `MAP.md`, `AGENTS.md`, and `.github/` are already there. No new manifest or subfolder map needed; the structure's already by design as you said. That closes out the vault-mirroring/manifest ask — nothing to build there.
+
+That leaves the earlier open item: disk space blocks cloning all ~121 repos at once (15GB free vs. ~35-40GB needed). Do you want to proceed with shallow clones or small batches for the clone-stack idea, or should we set that aside for now?

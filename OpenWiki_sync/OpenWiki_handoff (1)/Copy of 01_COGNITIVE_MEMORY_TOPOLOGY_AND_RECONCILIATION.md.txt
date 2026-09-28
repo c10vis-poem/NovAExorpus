@@ -1,0 +1,76 @@
+﻿01_COGNITIVE_MEMORY_TOPOLOGY_AND_RECONCILIATION.md
+Unified Cognitive-Engineering Architecture & 5+1 Tier Memory Model
+1. Executive Summary & Reconciliation
+Historical drafts explored both a 4-tier model (collapsing procedural logic and run traces into /automation_scripts/) and a 5-tier model (separating raw sources, wiki, and JSONL caches, but missing procedural prompt definitions).
+
+
+The unified canonical architecture resolves this divergence by establishing a strict 5+1 Tier Cognitive Memory Model that maps human cognitive functions directly to deterministic AI engineering structures:
+
+
+Tier
+	Canonical Directory
+	Cognitive Memory Equivalence
+	Primary Function & Artifact Types
+	Tier 1
+	01_raw_sources/
+	Sensory / External Ground Truth
+	Immutable PDFs, technical manuals, transcripts, media dumps. Read-only.
+	Tier 2
+	02_wiki_md/
+	Semantic Memory (Conceptual)
+	Human-readable Markdown linked graph, architectural blueprints, entity registries.
+	Tier 3
+	03_recall_cache/
+	Working Memory Accelerator
+	Line-delimited JSONL (chunk.jsonl), vector indexes, and low-latency KV tables.
+	Tier 4
+	04_skills_runtime/
+	Procedural Memory (Skills & Habits)
+	Executable scripts (.py, .sh), prompt templates (SKILL.md), runtime policies.
+	Tier 5
+	05_episodic_logs/
+	Episodic Memory (Trajectories)
+	Time-indexed run traces, RLVR assertion outcomes (+1.0 / -1.0), quarantine logs.
+	Root
+	MAP.md & manifest.jsonl
+	Metacognitive Index & Navigation
+	Global ontology graph, cryptographic hash registries, and cross-tier routing pointers.
+	
+
+________________
+
+
+2. Human Cognitive Memory vs. AI Engineering Memory in KAG/RLVR
+Memory Type
+	Human Cognitive Function
+	AI System Engineering Counterpart
+	Operational Role in KAG Recurse & RLVR Training
+	Episodic
+	Personal History: Remembering specific past events, times, and errors.
+	Execution Logs & Vector Stores (05_episodic_logs/)
+	Logs the exact sequence of an attempt (Prompt ➔ Tool Call ➔ Error Trace ➔ Verifier Score).
+	Procedural
+	Habits & Skills: Automated, unconscious execution routines.
+	Algorithmic Policies & Model Weights (04_skills_runtime/)
+	Permanent behavioral intuition developed via RLVR to backtrack and self-correct on error states.
+	Semantic
+	Facts & Concepts: Generalized objective knowledge.
+	Static Parametric Weights & Living Wiki (02_wiki_md/)
+	Foundational domain concepts, programming syntax, and architectural specs.
+	Working / Short-Term
+	Mental Workbench: Holding 4–7 active items in immediate awareness.
+	The Context Window & Fast Cache (03_recall_cache/)
+	Active prompt system instructions, injected user habits, and immediate task branch variables.
+	
+
+________________
+
+
+3. The Continuous Evolution Flywheel
+In recursive training and online agent adaptation, these memory layers interact continuously:
+
+
+1. Ingress: The agent executes a step utilizing its Working Memory (Context Window loaded via 03_recall_cache/).
+2. Telemetry: Every tool call and outcome is logged into Episodic Memory (05_episodic_logs/).
+3. Verification: The RLVR verifier evaluates episodic traces, assigning rewards (+1.0) or penalties (-1.0).
+4. Refinement: Audited successes update Procedural prompt skills and fine-tuning datasets, permanently upgrading baseline performance.

@@ -1,0 +1,5 @@
+Given this is genuinely still-forming exploration on your end (not a decision), I'll write it into `ARCHITECTURE.md` as clearly-marked open questions with the verified facts kept separate from the hypothesis — not as settled architecture, since you said yourself you're not grasping the OB1 placement yet.
+
+Also adding this to `unresolved.md` so it's tracked in the durable backlog, not just left inside the architecture doc's prose.
+
+Both written up — `ARCHITECTURE.md` §9 gets the T3-doesn't-exist-yet gap, and a new §10 documents the OmniRoute/OB1/ReasoningBank exploration with verified facts kept clearly separate from your hypothesis (episodic memory as a possible 5th type, OB1's placement, Postgres as a possible post-training test store rather than live recall). `unresolved.md` now tracks all of it as durable backlog, plus the ECC one-command-fix note and the obsidian-skills pattern worth replicating. None of it is asserted as decided — it's marked as exploration to resolve later, matching how you framed it.

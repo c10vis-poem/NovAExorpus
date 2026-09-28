@@ -1,0 +1,225 @@
+Let me pull the repo and verify Prime Intellect's agent so I get the corrections right:
+
+Got it on all three. Here's what I found and the corrected manifest:
+
+## Corrections Confirmed
+
+### 1. Prime Agent — You're Right, It's From Prime Intellect
+- Repo: `github.com/PrimeIntellect-ai/prime-agent`
+- **Recursive Language Model (RLM)** harness with persistent IPython REPL
+- **Continual Harness** — memories, skills, prompts, subagent specs persist across sessions with rollback snapshots
+- `/refine` for self-improvement (evidence-backed updates to harness state, never rewrites base system prompt)
+- Daemon-backed sessions (keep running when terminal disconnects)
+- Direct agent-to-agent communication (running agents can orchestrate each other)
+- Recursive subagents via `rlm()` primitive (programmatic, not workflow-graph)
+- **Designed for openweight models** — confirmed
+- ARC-AGI-3 RHAE Best@1 from 30% to 95.5% in their benchmarks
+
+**Your call is correct**: Prime Agent for openweight models (your 0.8B + 9B on NPU), ECC for Claude Code (cloud/terminal sessions).
+
+### 2. LocalAI vs Omni Route — They're Different, You Pick One (or Layer Them)
+
+They're two different products with significant overlap:
+
+| | LocalAI (mudler) | OmniRoute (diegosouzapw) |
+|---|---|---|
+| **What it is** | Local inference server (Go) | Multi-provider routing gateway (Next.js) |
+| **OpenAI-compatible API** | Yes | Yes (`/v1/*`) |
+| **Local model hosting** | Yes (core feature) | No (routes TO local runtimes like llama.cpp, Ollama) |
+| **Cloud model routing** | Yes (cloud-proxy backend) | Yes (350 providers, 19 routing strategies) |
+| **OpenAI↔Anthropic translation** | Yes (translate mode) | Yes (request/response translation) |
+| **Quota-aware routing** | No | Yes (quota-share, P2C account selection) |
+| **Modality bridge** | Limited | Yes (vision + audio + video) |
+
+**Your instinct is right** — running both is redundant for routing. Two options:
+- **Option A**: Use OmniRoute as your routing layer, point it at your GenieX/QAIRT local runtime via the `llama.cpp` or `openai-compatible-*` provider card. Skip LocalAI.
+- **Option B**: Use LocalAI as your local inference server + OpenAI↔Anthropic translation, skip OmniRoute. Simpler, fewer moving parts on the phone.
+
+For a phone-only setup with two NPU-pinned local models, **Option A (OmniRoute only)** makes more sense — it handles the modality routing and translation, and you point it at your local GenieX endpoint. LocalAI would be extra weight on the phone for no additional benefit since you're not hosting multiple local model formats.
+
+### 3. OpenAI → LocalAI in Your Repo
+Noted — your repo mistakenly cites "OpenAI" where you meant "LocalAI". The grill session should flag this as a correction to make in the repo during Phase 1.
+
+---
+
+## Corrected Grill Session Manifest (Final)
+
+```markdown
+# GRILL WITH DOCS — AESOP XI MASTER ARCHITECTURE SESSION
+
+## SESSION CONTEXT
+
+### Corrected Model Pathways (Ground Truth)
+
+- **Executor Model**: Qwen 3.5 0.8B
+  - Source: QAI Hub (pre-compiled Genie bundle)
+  - Pathway: QAIRT runtime → HTP0 (Hexagon NPU v79)
+  - NO llama.cpp, NO GenieX — runs through QAIRT directly
+  - Compute: NPU-pinned (HTP0)
+  - Context: 4096
+  - Role: Fast task execution, prompt synthesis, mem0 + Reasoning Bank access
+  - Runs: Node Alpha (phone), always-on
+
+- **Query Model**: Qwen 3.5 9B (Unsloth GGUF)
+  - Source: Unsloth GGUF release
+  - Pathway: GGUF → GenieX llama_cpp → GGML Hexagon backend → librc → kernel → HTP0
+  - Compute: --device npu (pinned to Hexagon NPU v79)
+  - Context: 4096
+  - Role: Meta-prompt compilation, OB1 vector queries, JSONL index retrieval
+  - Runs: Node Alpha (phone), on-demand
+
+- **Fallback Hierarchy** (if 9B NPU chokes on unsupported ops):
+  1. 9B Q4_0 → npu (preferred, test first)
+  2. 9B Q4_0 → hybrid (if NPU-pinned has op fallback issues)
+  3. 4B Q4_0 → npu (drop to smaller model, stay on NPU)
+  - Architecture goal: largest model running on bare metal NPU
+  - 0.8B stays NPU-pinned via QAIRT regardless — it's the executor, not negotiable
+
+- **Voice Stack**: NOT IN SCOPE for this session
+  - Deferred to Priority 5 (post-APK build)
+  - 3-APK architecture (Horizons UI + Shell Daemon + Media Daemon) is the solution
+  - No existing solution to reference — this is greenfield work
+
+### Harness & Tool Corrections (Ground Truth)
+
+- **ECC** (affaan-m): For Claude Code sessions (cloud + terminal). Plugin marketplace, 68 agents, 286 skills. Skills/rules/hooks/agents layer.
+- **Prime Agent** (PrimeIntellect-ai): For openweight models (your NPU models). RLM harness with persistent IPython REPL, Continual Harness (memories/skills/prompts/subagent specs persist across sessions), /refine self-improvement, daemon-backed sessions, direct agent-to-agent communication. Upgrade of Pi agent.
+- **LocalAI vs OmniRoute**: These overlap. Pick ONE as routing layer:
+  - OmniRoute: 350 providers, 19 routing strategies, modality bridge, quota-aware. Point at local GenieX/QAIRT endpoint via openai-compatible provider.
+  - LocalAI: Local inference server + OpenAI↔Anthropic translation. Heavier on phone, redundant if using OmniRoute.
+  - RECOMMENDED: OmniRoute only, point at local runtime. Skip LocalAI on phone.
+- **Repo correction needed**: novae-xorpus mistakenly cites "OpenAI" — should be "LocalAI" (or "OmniRoute" per above decision). Flag in Phase 1.
+
+### Hardware Reality (Ground Truth)
+- Node Alpha: Moto Razr Ultra 2025, 16GB RAM, 9-12GB available stripped down
+- Node Beta: Jetson Orin Nano Super — NOT an inference node, it's the vector store + auditor + training host
+- Node Gamma: Rubik Pi 3 — display + helpdesk gateway
+- Node Delta: GCP — heavy RLVR training only
+- Current state: PHONE ONLY, no Jetson/Pi yet, no host computer
+
+### Available RAM Math
+- 9B Q4_0 weights: ~5.45 GB
+- KV cache 4096 ctx: ~0.5-1 GB
+- Total 9B footprint: ~6-6.5 GB
+- Available RAM: 9-12 GB stripped
+- Headroom: 2.5-6 GB for system + APKs
+- VERDICT: Both models run on phone, NPU-pinned, confirmed
+- Architecture principle: maximize on-device model size on bare metal
+
+## INPUT FILES
+- Source repo: novae-xorpus (https://github.com/c10vis-poem/novae-xorpus)
+- Local path: ~/novae-xorpus/ (after clone)
+- Contents: 93 markdown files + README + handoff docs + grill session starter
+- All files are pre-vetted and accuracy-checked by user
+- KNOWN ERROR IN REPO: "OpenAI" references should be "LocalAI" (or "OmniRoute")
+
+## GRILL SESSION PHASES
+
+### Phase 1: Architecture Interrogation
+Objective: Read and validate the complete architecture blueprint against corrected ground truth.
+
+Questions the grill agent must answer:
+1. Does the v2.2 architecture doc accurately reflect the corrected model pathways?
+2. Are the 6 phases correctly ordered given the phone-only constraint?
+3. Is the 3-APK architecture (Horizons UI + Shell Daemon + Media Daemon) properly scoped?
+4. Are all named tools/harnesses accounted for with corrected roles?
+   - ECC → Claude Code harness
+   - Prime Agent → openweight model harness (RLM, Continual Harness, daemon-backed)
+   - LocalAI → CORRECTED to OmniRoute (routing layer, point at local runtime)
+   - Pocock Skills, GSD, Honey for Devs, Claude Video, Reverse Skills, Code Review Graph, mem0, OB1, node.js
+5. Are the 4-6 home node agents properly defined? (Home Assistant Auditor, Red Agent Auditor, IT Help Desk, Web Ingestion Monitor, NPU Inference Manager)
+6. Does the GCP cross-account IAM handshake + RLVR loop make sense?
+7. Flag and correct "OpenAI" → "LocalAI"/"OmniRoute" error in source docs
+
+### Phase 2: Repo Partitioning & Directory Schema
+Objective: Define the exact repo structure that will be created on-device.
+
+Output required:
+- Complete folder tree with every repo and subfolder
+- Each repo gets: scope definition, assigned agent, isolation rules, manifest file
+- Map which tools/skills live in which repo
+- Define what's shared (the canonical docs vault) vs. what's isolated (per-repo code)
+- NOTE: novae-xorpus is the input/grill repo, not a build repo — it feeds the session
+
+Repos to define:
+1. file-management-and-skills (canonical docs, JSONL markers, skill schemas)
+2. horizons-ui-v2.0 (APK 1: orchestration GUI)
+3. nova-daemon-shell (APK 2: OS assistant, accessibility, shell access)
+4. nova-daemon-media (APK 3: screen vision, voice stack, STT/TTS)
+5. agent-harness-hub (Pocock, Honey for Devs, Prime Agent, ECC, GSD)
+6. omni-route-gateway (modality routing, OpenAI/Anthropic translation, local runtime endpoint)
+7. obsidian-knowledge-vault (Graphify, KAG/RAG, NotebookLM hooks)
+8. red-agent-auditor (air-gapped batch training verification)
+9. node-beta-jetson (Postgres OB1, CUDA servers, home node agents)
+10. gcp-training-flywheel (RLVR export, IAM handshake, GRPO pipelines)
+
+### Phase 3: Skill-to-Agent Allocation Matrix
+Objective: Map every tool/harness to the agent runtime that will use it.
+
+Output required:
+- Table: Tool | Assigned Agent/Node | Runtime | When Used | Why
+- Identify overlaps (ECC vs Pocock vs GSD vs Prime Agent) and decide which wins for which task
+- Define execution engines:
+  - ECC: Claude Code sessions (cloud/terminal, skills/rules/hooks/agents layer)
+  - Prime Agent: Openweight model sessions (NPU models, RLM harness, persistent REPL)
+  - GSD v2: Build phase execution engine (fresh context per task, git branch-per-slice)
+  - Pocock: Planning layer (grill-with-docs, to-spec, to-tickets, domain-modeling, wayfinder)
+- Map each Pocock skill to specific phases
+- Define when Prime Agent's /refine and Continual Harness kick in (persistent state across sessions for openweight model work)
+
+### Phase 4: Data Tiering Strategy
+Objective: Define what's hot, what's cold, what's archived.
+
+Output required:
+- Hot plate (mem0, active reasoning ledgers, Prime Agent Continual Harness state): What lives here, how long, eviction rules
+- Warm layer (OB1 vector store, JSONL index): What gets indexed, retrieval triggers
+- Cold vault (Obsidian markdown, Postgres archives): What gets archived, when, how
+- Training pipeline (GCP flywheel): What triples get shipped, when, audit gates
+
+### Phase 5: Execution Roadmap
+Objective: Produce the step-by-step build plan with phone-only first steps.
+
+Output required:
+- Ordered task list starting from RIGHT NOW (phone only, Termux, Claude Code)
+- Each task: What | Why | Tool | Dependencies | Output
+- Phase 1 tasks must be 100% phone-executable
+- Phase 2+ tasks can reference future hardware (Jetson, Pi, GCP)
+- Include the QAIRT + 0.8B QAI Hub NPU proof-of-life as Task 1
+- Include the GenieX + 9B Unsloth GGUF NPU test as Task 2 (separate pathway)
+- Include the JSONL marker pipeline as Task 3
+- Include the repo scaffolding as Task 4
+- Include Prime Agent setup for openweight model orchestration as Task 5
+- Voice stack explicitly deferred to later phase with justification
+
+## OUTPUT FORMAT
+The grill session must produce:
+1. MASTER_PLAN.md — The complete execution roadmap
+2. REPO_STRUCTURE.md — The directory schema with manifests
+3. SKILL_MATRIX.md — The tool-to-agent allocation table
+4. DATA_TIERING.md — The hot/warm/cold/training data boundaries
+5. CONTEXT.md — The domain model (shared vocabulary, key decisions, ADRs)
+
+All output files go into ~/aesop-grill-output/
+```
+
+---
+
+## Clone Command
+
+```bash
+cd ~
+git clone https://github.com/c10vis-poem/novae-xorpus.git
+cd novae-xorpus
+ls -la
+```
+
+One heads up — when I tried to fetch your repo, it returned empty. That could mean:
+- It's a private repo (need auth to clone)
+- Exa just couldn't index it (doesn't affect your clone)
+
+If it's private, you'll need to either make it public or use a token:
+```bash
+git clone https://<your-token>@github.com/c10vis-poem/novae-xorpus.git
+```
+
+Clone it and run `ls -la` — tell me what's in there so I can confirm the file structure matches what the grill session expects.

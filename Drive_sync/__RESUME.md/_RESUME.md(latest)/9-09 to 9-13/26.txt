@@ -1,0 +1,14 @@
+Right — MASTER-RESUME.md mentioned a "Shelfware Audit" artifact (every skill/agent/tool/MCP connector on this device with real usage counts) from that session. Pulling it now instead of guessing further.
+
+The "Shelfware Audit" name doesn't appear in the list, but the most recent artifact — "NovÆxorpus Manifest" (updated 2026-09-09, today) — is the likely match. Reading it now.
+
+Found it — Section 04 explicitly lists `doc_to_skill_and_tool.py`, "written this session, smoke-tested," in `~/novae-xorpus/tools/`. That's the parsing/extraction one. But when I listed that exact folder earlier, it wasn't there — only `check.py`, `clean.py`, `regenerate_masters.sh`. Let me verify directly instead of trusting the artifact's claim.
+
+Found the exact name — but it's not real. The artifact (section 04, "Real tools confirmed" — its own heading claims these are verified, not spec-only) lists:
+
+- **`doc_to_skill_and_tool.py`** — `novae-xorpus/tools/` — "Written this session. Extracts fenced code blocks → tools/, writes a skill stub. Smoke-tested."
+- **`htp_partition_calc.py`** — `aesop-xi/tools/` — "NPU memory partition calculator, extracted from the HTP raw source."
+
+I checked both directly: **neither exists anywhere on this device.** No file, no git history (`git log --all` on that path: nothing), no `__pycache__` trace (only `check.cpython-311.pyc` from Aug 27, predating this artifact by two weeks). The artifact's own section header says "only these are real, working code" — and two of the six aren't.
+
+So this is the same failure pattern as `snapdragon-npu-partitioner`, in the one document explicitly meant to be the authoritative "what's actually real" record. The genuinely verified ones from that same table: `clean.py`, `check.py` (both `~/novae-xorpus/tools/`, confirmed on disk), and the skills `corpus-batch-processing` and `parallel-session-orchestration` (both confirmed on disk earlier this session).

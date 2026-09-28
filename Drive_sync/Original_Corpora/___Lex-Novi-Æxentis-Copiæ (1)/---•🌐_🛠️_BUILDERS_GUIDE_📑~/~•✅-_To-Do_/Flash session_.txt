@@ -1,0 +1,24 @@
+Flash session: ECC + Pocock skills + honey-for-devs tune-up.
+
+Context: ECC is a real, ready-to-go Claude Code plugin at ~/repos/ECC-aesop
+(.claude-plugin/plugin.json exists) that has never actually been installed via
+the plugin system — confirmed against ~/.claude/plugins/installed_plugins.json,
+which lists only 3 unrelated plugins (mattpocock-skills, obsidian, watch).
+
+Do this, in order:
+1. Install ECC for real via the plugin system (not just referencing the cloned
+   repo) and verify it actually registers — check installed_plugins.json
+   afterward, don't just assume the install command succeeded.
+2. Review what ECC actually provides (67 agents, 281 skills per its own
+   plugin.json description) against what's already installed
+   (mattpocock-skills, obsidian-skills) — flag real overlap before assuming
+   ECC replaces or duplicates anything.
+3. Tune up Pocock skills and honey-for-devs (~/repos/NoVa-honey-for-devs) —
+   confirm what's actually usable now vs. what needs wiring.
+4. This is a flash session — don't update RESUME.md or unresolved.md files for
+   this; if anything genuinely unresolved comes out of it, add it to
+   ~/novae-xorpus/unresolved.md directly (numbered, dated) since that's not
+   scoped to one repo anyway.
+
+Read ~/repos/aesop-xi/CLAUDE.md's "Discovered assets" section for related
+context (geniex-bench, whisper-parakeet, mcp.json) before starting.

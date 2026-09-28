@@ -1,0 +1,16 @@
+So two days ago I was getting really pissed off because we were finally we were in another same old crash and instead of wanting to address the actual issue with what was creating the crash the session was hell bent on making sure that we get that crash log file uploaded even though it already knew like five different ways why it was crashing instead of trying to take the time to recode I just wanted to run the same old loop it's almost to the point where we've been doing this for 12 weeks I'm almost thinking Claude has a nefarious intent of just trying to get me stuck in this loop to pay more money to anthropic like you don't want me to build the app you want it to fail that's why you coated an obvious crash point in it and keep loading up the same crash point 
+
+I'm exploring other options right now I have alternative agents build this thing for me if you want to redeem yourself you can actually try to help out this restructure I'm gutting the repo entirely I might fork over the last branch just so I save my user interface that took you two months to build only analyze these documents and see if you could actually help out with the restructure see if you could do anything with this last fork before I move repose that can actually make it work maybe actually try this time and when I say read all these documents I mean read these documents I want you to read the PDF fully and then I want you to actually go through both folders oh I know I know tons of information big job blah blah blah fucking do it dude it's my money not yours
+When I say read this document I don't mean just grip it or chunk it or whatever the fuck you do I mean actually ingest this fucking information pay attention to what I'm asking for too understand why I have to make this request.=
+
+what is a hybridized agentic on device neuro mesh or an agentic neuro mesh on device assistant - Google Search. The version that was downloaded at 9:40 p.m. not the smaller version
+
+This is the folder that I'm in the middle of customizing is going to be the main corpora for the new operation setup feel free to bolt copy into the first layer of this folder so I can sort everything else out anything that's not outdated anything that was our primary documentation it was canonical after the restructure all of the recent chats in Claude Chrome that have Urban cloud code that have subsequently reformatted this app that last conversation session that I had with you or I posted the screenshots of the Aiwa CD player and the retro arcade machine that, can go in there too 
+
+This is the new one=
+-MASTER-BUILD-[HOW-TO]_DataBank
+
+I'll be cherry picking from this to fill it up=
+MASTER_REPO).&WIKI.MD_VAULT
+
+Note I am still in the middle of adjusting my new how to databank so I'm going to make Master folders for the horizons UI for Aesop and then I'm also going to have one that covers just proprietary documentation so that'll be everything from unslaught to hugging face to get hub to q a i r t to Google Dev tons of stuff then I'm going to have one that just covers model weights that'll just be like installation guides and links to the models themselves that I'll be using in the system and then the next folder I'm going to have is going to be covering what's in my repo or what's in my GitHub profile I should say like 60 something real repose

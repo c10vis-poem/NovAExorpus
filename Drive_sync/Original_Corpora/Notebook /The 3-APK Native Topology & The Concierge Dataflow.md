@@ -1,0 +1,38 @@
+<!-- Converted from The 3-APK Native Topology & The Concierge Dataflow.pdf — 3 pages -->
+
+## Page 1
+
+You are absolutely right. I shortchanged the technical depth on those sections and gave you a condensed outline instead of the comprehensive blueprint you actually wrote. No more cutting corners. Here are the expanded, highly granular, full-length replacements for Part 2 and Part 3, mapping every exact API hook, daemon permission, tool harness, and JSONL architectural rule from your logs.
+## 🌌 AESOP XI: Sovereign
+## Edge-Computing Architecture (Cont.)
+## 📱 4. Part 2: The 3-APK Native Topology & The
+## Concierge Dataflow
+To bypass the restrictive Android application sandbox, prevent the OS Low Memory Killer (LMK) from wiping background execution states, and secure bare-metal hardware access, the on-device environment is physically decoupled into three distinct APKs functioning as a single unified interface.
+### I. APK 1: Horizons UI (The Master Orchestrator)
+This is the front-end user interface and primary routing controller for the entire device. ● Webview & WebSocket Bridge: The UI is built around a Chromium Webview browser that utilizes WebSockets to maintain persistent, bidirectional connections with the background daemons. ● Visual Interface Suite: It supplies the LLM chat tile interface, the terminal GUI visualizer, and a dedicated model router/file picker/uploader. ● Orchestrator Agent: Houses a NanoAgent or SmolAgent (to be determined) responsible for orchestrating the dual-agent query/execute tandem and managing runtime access to the Snapdragon NPU. ● Cloud Fallbacks: Contains front-end cloud hooks and automatic fallback routing to an OpenRouter server if local processing limits are exceeded.
+### II. APK 2: The Shell Daemon (System Execution & Access)
+A separate bare-metal GUI application strictly responsible for shell and script execution. ● The Termux Replacement: This APK serves as a complete replacement for Termux, granting the on-device agents direct access to the device shell without the standard Android app sandbox restrictions. ● OS Accessibility Registration: By registering natively as an Accessibility Service and OS Assistant, it secures elevated, persistent permissions required to run autonomous CLI loops in the background.
+### III. APK 3: The Media Daemon (Speech, Vision, & Ingress)
+An isolated bare-metal GUI application dedicated entirely to sensory ingestion and text-to-speech output. ● Screen Vision Engine: Leverages Video Game SDK permissions and OS accessibility
+
+---
+
+## Page 2
+
+APIs to capture real-time screen context and frame arrays. ● VAD & Bare-Metal Audio: Hosts the Silero VAD (Voice Activity Detection) runtime to allow human voice interjection over ongoing outputs. ● Speech Pipelines: Intercepts audio and routes it through the Moonshine ONNX STT engine for transcription, and Kokoro TTS for real-time auditory feedback.
+## IV. The On-Device Inference Tandem & Concierge Flow
+The system utilizes two specific open-weight models, tightly bounded by the mem0 protocol to keep them strictly task-oriented and prevent context bloat. ● The Executor Model: A 0.8B Qwen 3.5 GGUF Q4_0 model handling fast, local, lightweight tasks. ● The Query / Meta-Prompt Compiler: A 9B Qwen 3.5 GGUF Q4_0 model designated for heavy reasoning and complex prompt construction. ● The Concierge Execution Loop: 1. The human user triggers the microphone; the Media Daemon captures the prompt and active screen vision. 2. The 9B Query model compiles a structured, clean markdown meta-prompt based on the request. 3. Horizons UI displays the meta-prompt for human approval and verification before transmission. 4. Upon approval, inference is run (via local weights or frontier models like Claude API). 5. The output is streamed back, read aloud real-time via TTS (with VAD listening for interruptions), and the agent stands by to execute follow-up shell actions.
+## 🗂 5. Part 3: Universal JSONL Architecture & Tool
+## Harness Integration
+## I. The Universal JSONL KAG/RAG Marker System
+The JSONL architecture is not restricted to massive databases; it is a universal indexing protocol attached to every single document, folder, script, and repository in the ecosystem. ● Compacted Markdown Compression: All raw documentation is stripped of HTML/fluff and compacted into structured markdown, fundamentally reducing the context window consumption required for an agent to read it. ● Hyper-Specific Skill Mapping: Every tool repository (e.g., ECC, Pocock, Prime Agent) includes a JSONL file that explicitly points to each and every individual instance of when a skill should be used, why it should be used, and the precise execution pathways to access it. ● Rapid Retrieval & Auditing: This schema allows any querying agent, IT auditor, or extraction model to instantly grab the exact documentation needed for usage verification and troubleshooting without having to ingest the entire repository.
+## II. LocalAI & Omni-Route (The Connective Tissue)
+LocalAI is positioned as the single central engine connecting Horizons UI, the harnesses, and the physical NPU weights. ● On-Demand Modality Images: It runs any modality (LLM, vision, voice) behind one API,
+
+---
+
+## Page 3
+
+but only pulls the specific backend (llama.cpp, vLLM, whisper.cpp) when requested, keeping the system lean. ● Native API Translation: It natively speaks both OpenAI and Anthropic API formats. Tool harnesses like Prime Agent that expect Claude's API shape can point directly at LocalAI and hit your local Qwen weights without any external translation layer. ● First-Class Agent Support: Includes built-in tool use, RAG, and MCP (Model Context Protocol) support directly, effectively bridging Layer A (serving weights) and Layer B (agent execution) natively on mobile CPU/NPU hardware.
+### III. The Agent Harness Hub (Tool Ingestion Protocol)
+AESOP XI ingests multiple elite developer harnesses, wrapping them in JSONL pointers so the Concierge agents know exactly how to deploy them. 1. Prime Agent (The Continual Harness): ○ RLM (Recursive Language Model): The Python control environment that runs the loop, treating context as variables and tools/subagents as function calls within a persistent REPL. ○ Continual Harness: The state layer storing supplemental prompts, skill descriptions, and memories. It uses small, evidence-backed updates via /refine and holds rollback snapshots to prevent degradation, while keeping the base system prompt completely immutable. 2. Matt Pocock Skills: Ingested and structured to provide grill-me, spec, ticket, tdd, and code-review frameworks. 3. Additional Harnesses: Honey for Devs, ECC, GSD (Get Shit Done), Claude Video, and Reverse Skills are parsed, compressed, and injected into the target-docs-curation folder with precise JSONL execution bounds. This matches the scale and granularity of Part 1. Do you want to run the expanded breakdown for Part 4: The Home Node Auditing & GCP Cross-Account RLVR Flywheel next, or start drafting the specific JSONL marker templates for these tool harnesses?

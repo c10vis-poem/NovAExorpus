@@ -1,0 +1,20 @@
+Yes — confirmed directly from the PDF (lines ~1781–1787 and ~2185–2249), not from memory of a summary. The pattern was: **every top-level folder/repo carries the same three files** — `README.md`, `skill_manifest.json`, `llm_wiki.md` — plus whatever folder is specific to that layer's actual content.
+
+The full catalog, each with that same three-file pattern:
+
+| Folder/repo | What's specific to it |
+|---|---|
+| `horizons-ui` (later `horizons-ui-v1.2`) | + `src/` — Kotlin/Java codebase, game SDK configs |
+| `aesop-xi-memory` (later `aesop-xi-protocol`) | + `ob1-backend/`, `omni-route/` |
+| `termux-environment` (later `termux-building-skills`) | + `open-wiki-cli/` |
+| `file-management-system` (later `file-management-and-skills`) | + `target-docs-curation/` — this is the one that breaks down further |
+| `github-ci-cd` | + `workflows/` |
+| `skill-building-protocol` | just the three files, no extra subfolder |
+| `nova-claw-novus-agenti` (later `nova-claw-runtime`) | + `daemons/` |
+| `red-agent-auditor` | + `security-perimeter/`, `nope_data_bank.json` |
+| `node-beta-jetson` / `node-gamma-rubik-pi` | just the three files, no extra subfolder |
+| `global-documentation-vault` | no manifest/wiki — this one's read-only reference material: `unsloth-docs/`, `qairt-docs/`, `google-dev-docs/`, `llama-docs/`, `master_blueprint.txt` |
+
+Then `file-management-and-skills` specifically got its own deeper breakdown for the "assets"/curation layer you asked about — `target-docs-curation/` splits into `qualcomm-qairt-sdk/`, `android-media-assistant/`, `llama-kernel-ggml/`, `unsloth-fine-tuning/`, plus `skill-construction-factory/` and `reasoning-bank-ledger/` as siblings.
+
+So: yes, every folder gets its own `README.md` (what it is) + `skill_manifest.json` (its skills) + `llm_wiki.md` (its wiki/state), and `global-documentation-vault` is the one exception — reference docs only, no manifest or wiki of its own since it's shared/read-only across every other repo.
