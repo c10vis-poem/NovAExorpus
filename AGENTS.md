@@ -118,3 +118,17 @@ directly from testing across engines:
 - Claude Code and any local engine (Prime Agent, Codex, dsh) are never active
   in the same repo directory at the same time — running two simultaneously
   causes git-lock and file-write races.
+
+## Agent skills
+
+### Issue tracker
+
+GitHub Issues on `c10vis-poem/NovAExorpus`, via `gh -R c10vis-poem/NovAExorpus`. See `docs/agents/issue-tracker.md`.
+
+### Triage labels
+
+Default five: `needs-triage`, `needs-info`, `ready-for-agent`, `ready-for-human`, `wontfix`. See `docs/agents/triage-labels.md`.
+
+### Domain docs
+
+Single-context: root `CONTEXT.md` + `docs/adr/`, created lazily by `/domain-modeling`. See `docs/agents/domain.md`.
