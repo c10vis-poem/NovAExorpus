@@ -9,7 +9,7 @@ This file is rewritten top to bottom at the end of every session. Anything unres
 ## NEXT SESSION — START HERE
 
 1. Open Claude Code in the vault: `cd ~/storage/shared/Documents/NovAExorpus && claude`. It loads `AGENTS.md` by itself.
-2. Read this file, `grill/DECISIONS.md` (today's decisions) and `CONTEXT.md` (the glossary).
+2. Read this file, `grill/DECISIONS.md` (today's decisions), `grill/research-notes-2026-09-29.md` (sourced facts on OmniRoute, ReasoningBank, the Continual Harness paper and the Æsop-Xi doc conflicts) and `CONTEXT.md` (the glossary). The OB1 and Continual Harness code facts are in `grill/ob1-read-ledger.md` and `grill/continual-harness-read-ledger.md`. Don't re-read sources those files already cover; read only what they list as unread.
 3. Work the open items below in order, then resume `/grill-with-docs`. The agenda is `GRILL-MANIFEST.md`; the grill was on the Continual Harness definition.
 
 ## OPEN ITEMS, IN ORDER
