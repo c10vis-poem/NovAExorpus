@@ -9,6 +9,10 @@ Anything unresolved goes to `PENDING.md`.
 
 ## NEXT SESSION — START HERE
 
+**Latest session (2026-09-28 → 29) ended mid-grill. Read `grill/HANDOFF-2026-09-29.md` first.** It has the open items in order: PR #21 blocked by gitleaks, `master` → `main` clean-up, the unfinished Continual Harness read, the aesop-xi CLAUDE.md fix, and resuming the grill. This file has not yet had its full rewrite; the older notes below are from the previous session.
+
+### Previous session's start-here notes
+
 1. Open Claude Code **in the vault**: `cd ~/storage/shared/Documents/NovAExorpus && claude`
    (Claude Code ≥2.1.277 loads `AGENTS.md` by itself; there is no CLAUDE.md).
 2. Operator types: `/setup-matt-pocock-skills` (issues: GitHub,
