@@ -33,4 +33,4 @@ Rows marked (agent) were read by a sub-agent and spot-checked. Unmarked rows wer
 - `tests/`, text files only.
 - `pokemon_env/`, `pokemon_red_env/` code, plus `Emerald-GBAdvance/` and `PokemonRed-GBC/` configs (game data skipped and listed).
 
-See `grill/HANDOFF-2026-09-29.md` item 3.
+See `RESUME.md` open item 3.
