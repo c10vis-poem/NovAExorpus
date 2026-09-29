@@ -1,106 +1,120 @@
-# NovÆxorpus — the router
+# AGENTS.md
 
-Tool-agnostic. Any agent/session that attaches to this repo follows this file —
-not just Claude Code. This is the real rules file; `CLAUDE.md` (and any other
-tool-specific file, e.g. a future `GEMINI.md`) is just a thin pointer to this one.
+Repository: `NovAExorpus`
 
-**It is not the wiki.** No daily updates, no session notes, no running knowledge —
-those live in `wiki/` and `handoffs/`.
+Authority: NovÆxorpus Master Canon Specifications
 
-## What this repo is
+## RULE 1 — NO ACTION WITHOUT AN EXPLICIT PROMPT
 
-The pre-planning database — this project's #dumbass (Database & Universal Memory
-Bank Across Split Services): the universal memory layer meant to persist across
-every repo and every agent, not scoped to any one project. Source documents named
-in the 2026-08-18 session, translated verbatim into structured Markdown for the
-`grill-with-docs` session. Read `README.md` before doing anything.
+A skipped or unanswered question is NOT consent. No action — reading,
+searching, or anything else — without an explicit prompt or permitted
+request. State-changing or not, it doesn't matter.
 
-## Naming
+## RULE 2 — READ THE REPO'S OWN CLAUDE.MD AND RESUME.MD FIRST
 
-`NAMING-CANON.md` is authoritative. NovÆxorpus · NovÆxenti · NovÆxopia ·
-Æsop-Xi · Horizons-Ui · Æsc · Æyre. Source documents keep their original
-spellings — never rewrite a source to match the canon.
+Before doing anything else in any of the operator's repos — before
+investigating, before answering a question about that project's state —
+check for and read that repo's own CLAUDE.md and RESUME.md. This has been
+the operator's standing convention for session handoff and current state
+across their repos for months. It is not optional background reading; it is
+step one, every session, every repo, no exceptions.
 
-## Hard rules
+## GH workflow (every repo)
 
-1. Verbatim. Content survives, furniture goes.
-2. Nothing merged. Same file count out as in.
-3. Nothing interpreted.
-4. Speaker attribution is content.
-5. Nothing self-certifies.
-6. Push every session. `main` stays current.
-7. Never stall on a tool. If it fails, do the job another way.
+1. Feature branch (never commit to `main`/`master` directly).
+2. Before every push, scan the diff for secrets/API keys; refuse to push if found.
+3. Push, open a PR, track CI.
+4. On green CI, auto-merge into `main` immediately.
+5. Leave the branch in place after merge — do not delete it.
+6. Forked repos: at the start of every session, sync the fork's default
+   branch from `upstream` before any other work.
 
-## Layout
+The point of this workflow is that everything reaches `main` — a branch
+that never gets a PR opened, or a PR that never gets merged, is a failure
+of this rule, not a valid alternative to it. Don't let work sit stranded.
 
-| | |
-|---|---|
-| `01-sources/` | untouched originals + sha256 manifest |
-| `02-clean/` | verbatim cleanups |
-| `03-check/` | what the checking tool reported |
-| `wiki/` | running knowledge — built later, from `02-clean/` |
-| `handoffs/` | session state, rewritten and pushed every session |
-| `unresolved.md` | durable, cross-repo, cross-agent backlog (moved here 2026-08-31) |
-| `MASTER-RESUME.md`, `MASTER-CLAUDE.md` | auto-generated overview of every attached project's RESUME.md/CLAUDE.md — see below, don't hand-edit |
-| `projects/<name>/` | same-device mirror symlinks into other repos' RESUME.md/CLAUDE.md — see below |
-| `tools/` | scripts this repo uses |
-| `skills/` | skills scoped to this repo |
+Source: operator-confirmed 2026-09-13, cross-linked in `~/.claude/CLAUDE.md`
+on the operator's device and in the `gh-workflow-convention` memory entry.
 
-## The RESUME/unresolved/CLAUDE discipline, reflected here (2026-08-31)
+## Mandatory runtime pipeline (all engines)
 
-Rather than this repo keeping its own separate handoff discipline, every attached
-project's own `RESUME.md`/`CLAUDE.md` gets mirrored here instead:
+Every agent — Claude Code, Codex, dsh, Prime Agent, Hermes — must satisfy
+these layers in order before writing files or running commands.
 
-- **Same device**: `projects/<name>/RESUME.md` and `CLAUDE.md` are real symlinks
-  into the actual repo (e.g. `projects/aesop-xi/RESUME.md` -> `~/repos/aesop-xi/RESUME.md`).
-  Not copies — the literal same file, so there is no drift to manage.
-- **A different device or cloud environment** cannot be symlinked in from here —
-  symlinks don't cross physical machines. To attach a new environment:
-  1. `git clone` this repo (novae-xorpus) into it.
-  2. `git clone` whatever project repo it's working on, if not already present.
-  3. Create the same local symlink within that environment.
-  4. Every session there: `git pull` both repos at start, `git push` both at end
-     (this is just hard rule 6 applied to every attached repo, not only this one).
-- `unresolved.md` lives here directly (not mirrored) since it was never repo-specific
-  to begin with.
+### Layer sequence
 
-### The MASTER-*.md auto-regeneration hook
+| # | Layer | Name | Interface | Endpoint |
+|---|-------|------|-----------|----------|
+| 0 | Execution + routing | OmniRoute | HTTP gateway daemon | `http://34.31.112.77:20128` |
+| — | Judgment | Continual Harness | OmniRoute internal | via OmniRoute |
+| — | Execution ledger | Reasoning Bank | OmniRoute internal | via OmniRoute |
+| 1 | Token saver | honey-for-devs | MCP tool / skill / text-strip | per-engine |
+| 2 | Orchestration | task-observer | CLI / file-gen (Claude Code only) | per-engine |
+| 3 | Code intel | code-review-graph | MCP Server (stdio) | local binary |
+| 4 | Episodic memory | mem0 | MCP Server (HTTP) | `mcp.mem0.ai` |
+| 5 | Structural memory | terrestrial-brain | MCP Server (HTTP) | `http://34.31.112.77:8000` |
 
-`~/repos/aesop-xi/.git/hooks/post-commit` calls
-`novae-xorpus/tools/regenerate_masters.sh` after every commit in aesop-xi, which
-reads every `projects/*/RESUME.md` and `projects/*/CLAUDE.md` (via the symlinks,
-live working-tree content) and concatenates each into its own overview —
-`MASTER-RESUME.md` and `MASTER-CLAUDE.md`. This means **both reflect state as of
-the last commit, not the current working tree** — edit a project's file without
-committing, and the master stays one commit behind until the next commit fires
-the hook. Any other repo added under `projects/` should get the same hook
-installed in its own
-`.git/hooks/post-commit`.
+**OmniRoute** is the execution layer, memory retrieval layer, and routing
+layer. It distributes requests, retrieves memory context, and makes
+routing decisions. Continual Harness provides the judgment — it watches
+agents and their refinements mid-run, optimizes routing, and auto-rolls
+back on error. Reasoning Bank records every agent execution step, maps
+logic pathways, and enables crash recovery. Both are OmniRoute internals, not
+standalone services.
 
-## Tools and skills
+**OmniRoute fallback:** if OmniRoute is unreachable, fall back to direct
+execution and log a warning. All other memory layers remain active via
+their individual MCP connections.
 
-**`tools/clean.py`** — the only tool here. Converts `01-sources/` to
-`02-clean/` in one pass: pymupdf for PDFs, pandoc for docx and html, plain
-read for text. Detects PDFs by magic bytes, so extensionless files work.
-Strips a fixed furniture list and runs a word-frequency loss check against the
-raw extraction. Re-run it whenever new sources land — it is idempotent and
-rewrites the whole tree.
+**mem0 safety:** before `update_memory` or `delete_memory`, always
+`get_memory` or `search_memories` first. Never `delete_all_memories`.
 
-    python3 tools/clean.py
+### Multi-write protocol
 
-Its loss check does **not** satisfy hard rule 5. Same script, no vote.
+Every execution cycle follows three phases:
 
-No skills yet. Populated when the grill session defines what's needed — not
-before, and not by copying in a library. A skill without a stated trigger does
-not get installed.
+1. **READ** — query mem0 (session context), terrestrial-brain (static
+   guards/preferences), code-review-graph (code dependencies). Do not
+   guess file imports.
+2. **WRITE-BACK** — commit ephemeral state to mem0, long-term invariants
+   to terrestrial-brain.
+3. **OBSIDIAN LOG** — on every terrestrial-brain write, create/append a
+   markdown file in `~/storage/shared/Documents/NovAExorpus/memories/`
+   with YAML frontmatter (`source_db`, `uuid`, `timestamp`, `category`).
 
-## Retrieval — how Drive files actually come down
+### Secondary tools (on-demand, not per-prompt)
 
-The Google Drive connector works and is the normal path. Large files are not a
-problem: when an MCP result exceeds the inline cap the harness spools the whole
-thing to a JSON file on disk and returns the path. Read that file, decode the
-`content` field, write the bytes — the base64 never enters context. This works
-for multi-megabyte binaries. **Never paste base64 through model output**; that
-truncates silently and has already corrupted files once.
+| Tool | Interface | When |
+|------|-----------|------|
+| graphify | CLI via proot (`~/bin/graphify`) | Codebase mapping, knowledge graph, `--obsidian` export |
+| obsidian | obsidian-skills plugin or CLI | Vault interaction, note linking |
+| notebook-lm | Python CLI (`notebooklm-py`) | Document ingestion, audio overview, research export |
 
-rclone was never needed. No remote is configured and none is required.
+### Harness anchors
+
+The multi-write protocol, layer roles table, and pre-flight gate are
+immutable — no automated refinement or optimization pass may alter them.
+
+### Enforcement
+
+- Do not write code before pre-flight layers have run.
+- Do not bypass OmniRoute unless it is unreachable.
+- Do not silently skip a memory layer — log the failure if one is down.
+- Do not skip the Obsidian vault log on any terrestrial-brain write.
+
+## Cross-engine compatibility (this file only — tool-agnostic)
+
+This file is read by any agent, not just Claude Code. Two rules that follow
+directly from testing across engines:
+
+- **Honey for Devs applies universally** — natively in Claude Code, as a
+  text-strip layer in Codex, as a Cordis plugin in DeepSeek Harness (dsh).
+  Apply its rules regardless of which engine is running.
+- **task-observer / GSD-style skill scaffolding is Claude-Code-only.** Codex
+  cannot parse markdown skill wrappers or the dual-layer activation protocol;
+  dsh's sandboxed plugin layer blocks task-observer's observation-log writes
+  entirely. Do not expect either to work, or try to force them, under Codex
+  or dsh — that's the `.claude/` directory's job, not this file's.
+- Claude Code and any local engine (Prime Agent, Codex, dsh) are never active
+  in the same repo directory at the same time — running two simultaneously
+  causes git-lock and file-write races.

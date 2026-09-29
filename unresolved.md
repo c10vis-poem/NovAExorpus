@@ -6,7 +6,7 @@ for its own session). Items get added, resolved-and-removed, or explicitly kept 
 across many sessions and many repos — this file is never rewritten wholesale the way
 a `RESUME.md` is.
 
-This is its real, permanent home: this repo (novae-xorpus) **is** #dumbass
+This is its real, permanent home: this repo (NovAExorpus) **is** #dumbass
 (Database & Universal Memory Bank Across Split Services) — the universal memory/
 housekeeping system, not a stand-in for it. Briefly lived at bare `~/unresolved.md`
 before this repo was confirmed as the actual pre-dumbass foundation (2026-08-31);
@@ -75,7 +75,7 @@ spans more than one.
     ECC itself is now installed and configured (2026-08-31: plugin at user scope,
     hooks at standard profile, `common`/`python`/`kotlin` rule packs copied to
     `~/.claude/rules/ecc/`), so this is no longer "should we install it," it's
-    "should novae-xorpus adopt or fold into the vault instead of continuing to
+    "should NovAExorpus adopt or fold into the vault instead of continuing to
     hand-build the same thing." Real design decision, not yet made.
 13. **[aesop-xi]** ECC dashboard-on-tablet via SSH tunnel — steps given
     (2026-08-31: `sshd` started on phone, port 8022, password still needs setting

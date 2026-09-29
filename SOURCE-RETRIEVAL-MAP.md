@@ -409,7 +409,7 @@ original and fails hard rule 1 for `01-sources/`.
 
 Two documents exist and both are in the corpus. **Use `Copy of NovÆcopia~`**
 (Drive `1xsuEOhOyXbavAq80hR5vn1zUPc1XEGv-GFFyA7Dg05w`, in
-`ReadMe*/.ReadMe/`, retrieved to `01-sources/novaexopia-vincet/`).
+`ReadMe*/.ReadMe/`, retrieved to `01-sources/NovAExopia-vincet/`).
 
 Operator-stated: it is the **updated and upgraded** version. *"It doesn't have
 any less information in it, it only has more."* It also carries deliberate

@@ -21,9 +21,9 @@ single-letter form** — `Æ` becomes `ae`.
 
 | Canon | URL / repo |
 |---|---|
-| NovÆxorpus | `novae-xorpus` |
+| NovÆxorpus | `NovAExorpus` |
 | NovÆxenti | `novaexenti` |
-| NovÆxopia | `novaexopia` |
+| NovÆxopia | `NovAExopia` |
 | Æsop-Xi | `aesop-xi` |
 | Horizons-Ui | `horizons-ui` |
 | Æsc | `aesc` |
@@ -37,9 +37,9 @@ Operator-stated, 2026-08-26. In the ligature form the **`x` carries the hard `k`
 sound** — `NovÆxorpus`, `NovÆxopia` — and it stays findable there. Flattened to
 two separated words the `c` reads as a `z` instead, which is what the `x` fixes.
 
-The vault repo **keeps its hyphen**: `novae-xorpus`. This is deliberate and is
+The vault repo **keeps its hyphen**: `NovAExorpus`. This is deliberate and is
 not an inconsistency to be tidied away. The others run together —
-`novaexenti`, `novaexopia` — and `aesop-xi` keeps the hyphen its display name
+`novaexenti`, `NovAExopia` — and `aesop-xi` keeps the hyphen its display name
 already has.
 
 ## Superseded spellings
