@@ -21,11 +21,11 @@ This file is rewritten top to bottom at the end of every session. Anything unres
      - public reCAPTCHA site keys in `Drive_sync/__RESUME.md/Housekeeping/llm-wiki/Deception Pass Volunteer Form….mht`.
    - The 8th is a GitHub fine-grained token that sat in an archived Drive filename, listed in `__RESUME.md/_whatisit/files_cleanup/z.st_/index.jsonl:67`. The operator doubts it still exists and does not want to be forced to revoke it.
    - Done: `__RESUME.md/_whatisit/files_cleanup/` is untracked and gitignored on `vault-sync` (commit `c915243`). The files stay on the phone.
-   - Not done: a `.gitleaksignore` listing the 8 reviewed findings. Claude Code's automatic safety check refused it as a CI bypass because of the token. The finding list (commit/file/rule/line, no secret values) is in the archived scratchpad for this session: `~/.claude/scratchpad-archive/*8e411716*/gitleaks-fingerprints.txt`.
+   - Not done: a `.gitleaksignore` listing the 8 reviewed findings. Claude Code's automatic safety check refused it as a CI bypass because of the token. The finding list (commit/file/rule/line, no secret values) is saved at `~/NovAExorpus-PR21-gitleaks-fingerprints.txt` on the phone.
    - To clear it, pick one:
      - the operator checks github.com/settings/personal-access-tokens and confirms the token is gone, then an agent retries;
      - or the operator commits the `.gitleaksignore` themselves.
-   - #21 then re-runs its checks and auto-merges.
+   - #21 then re-runs its checks and auto-merges. Its merge conflict (AGENTS.md) is already resolved (`vault-sync` commit `56eb9b9`, keeping the phone's newer AGENTS.md), so the secret scan is the only blocker.
 2. **`master` → `main`.** The operator wants `main` only. GitHub has a stale `master` branch: last commit 2026-09-06, 41 behind `main`, and 6 commits that never reached `main` (newest `d6510a1` "Retire hard rule 2 …"). Review those 6, carry anything worth keeping into `main` by PR, then delete `master`. The phone's local `.git` is an unrelated leftover (GitSync works through the GitHub API), so its `master` branch doesn't matter.
 3. **Finish reading the Continual Harness code.**
    - Fork: `c10vis-poem/AEsops-continual-harness` @ `bbab97a`, clone at `~/repos/AEsops-continual-harness`. Paper: arXiv 2605.09998.
@@ -61,7 +61,7 @@ This file is rewritten top to bottom at the end of every session. Anything unres
   - no invented hard rules and no "canonical" in docs;
   - ECC parked;
   - the Auditor.
-- **PRs:** #22, #25 and #24 merged (#24 was empty: #23 had merged `main` *into* `happy-ending-unresolved-updates`). #26 carries this session's docs.
+- **PRs:** #22, #25, #24, #26 and #28 merged. #24 was empty, because #23 had merged `main` *into* `happy-ending-unresolved-updates`. #26 and #28 carry this session's docs. #27 was closed as a duplicate of #28. Open: #21 (secret scan) and #7 (operator review).
 
 ## OPERATOR TO-DO
 
