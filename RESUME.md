@@ -1,104 +1,101 @@
+Session files: [[AGENTS]] · [[PENDING]] · [[MAP]] · [[GRILL-MANIFEST]] · [[NAMING-CANON]]
+
 # RESUME.md — Session Ledger
-Repository: NovAExorpus
-Last session: 2026-09-18 (late session)
 
-## WHAT LANDED THIS SESSION
+Repository: NovÆxorpus (`c10vis-poem/NovAExorpus`), the master wiki and vault.
+Last session: 2026-09-28 → 2026-09-29 (phone, Claude Code, Opus 5.5). It ended mid-grill, at the operator's call, to start fresh.
+This file is rewritten top to bottom at the end of every session. Anything unresolved also goes to `PENDING.md`.
 
-### VM fully operational
-- **GCP firewall rule `dev-ports`** created — ports 8080, 7681, 8001 open
-  - gcloud CLI found on phone at `~/google-cloud-sdk/bin/gcloud`
-  - Authenticated as d.drew.legrand@gmail.com
-  - Project ID: `project-alchemist-490416`
-- **code-server** (:8080) — VS Code in browser, password `changeme`, WORKING
-- **ttyd** (:7681) — terminal in browser, no auth, WORKING
-  - Binary at `/usr/bin/ttyd` (not /usr/local/bin — service was fixed)
-- **dsh** (:8001) — DeepSeek harness, WORKING but needs config
-  - dsh refuses `--host 0.0.0.0` for security, so socat proxies 8001→8002
-  - systemd services: `dsh` (localhost:8002) + `dsh-proxy` (socat on :8001)
-  - Token auth required — token changes on every restart
-  - Get current token: `sudo journalctl -u dsh --no-pager -n 5 | grep token`
-- **gh CLI** installed and authed on VM (c10vis-poem account)
-- **Repos cloned on VM** at `~/repos/`:
-  NovAExorpus, aesop-xi, NovA-terrestrial-brain, NoVa-honey-for-devs,
-  novus-deepseek-harness
+## NEXT SESSION — START HERE
 
-### Already running (from prior sessions)
-- **OmniRoute** (:20128) — execution/routing/memory layer
-- **Terrestrial Brain** (:8000) — structural memory, Postgres+pgvector
+1. Open Claude Code in the vault: `cd ~/storage/shared/Documents/NovAExorpus && claude`. It loads `AGENTS.md` by itself.
+2. Read this file, `grill/DECISIONS.md` (today's decisions) and `CONTEXT.md` (the glossary).
+3. Work the open items below in order, then resume `/grill-with-docs`. The agenda is `GRILL-MANIFEST.md`; the grill was on the Continual Harness definition.
 
-### Reconnect script
-`bash tools/vm-reconnect.sh` — starts VM if stopped, sets OpenRouter key,
-fixes sudo, restarts all services, health checks, prints access URLs with
-current dsh token.
+## OPEN ITEMS, IN ORDER
 
-## STILL BROKEN / NOT DONE
+1. **PR #21 (`vault-sync` → `main`, "vault: first full sync from phone") is blocked by the secret scan.** This is the PR that brings the phone's vault into `main`.
+   - gitleaks found 8 things. 7 are false positives:
+     - a CSS class name in `__RESUME.md/_inbox/Tickets.mht:9907`;
+     - an example `TKN-AESOP-…` id in three copies of `aesop_arbitration_and_governance.md`;
+     - public reCAPTCHA site keys in `Drive_sync/__RESUME.md/Housekeeping/llm-wiki/Deception Pass Volunteer Form….mht`.
+   - The 8th is a GitHub fine-grained token that sat in an archived Drive filename, listed in `__RESUME.md/_whatisit/files_cleanup/z.st_/index.jsonl:67`. The operator doubts it still exists and does not want to be forced to revoke it.
+   - Done: `__RESUME.md/_whatisit/files_cleanup/` is untracked and gitignored on `vault-sync` (commit `c915243`). The files stay on the phone.
+   - Not done: a `.gitleaksignore` listing the 8 reviewed findings. Claude Code's automatic safety check refused it as a CI bypass because of the token. The finding list (commit/file/rule/line, no secret values) is in the archived scratchpad for this session: `~/.claude/scratchpad-archive/*8e411716*/gitleaks-fingerprints.txt`.
+   - To clear it, pick one:
+     - the operator checks github.com/settings/personal-access-tokens and confirms the token is gone, then an agent retries;
+     - or the operator commits the `.gitleaksignore` themselves.
+   - #21 then re-runs its checks and auto-merges.
+2. **`master` → `main`.** The operator wants `main` only. GitHub has a stale `master` branch: last commit 2026-09-06, 41 behind `main`, and 6 commits that never reached `main` (newest `d6510a1` "Retire hard rule 2 …"). Review those 6, carry anything worth keeping into `main` by PR, then delete `master`. The phone's local `.git` is an unrelated leftover (GitSync works through the GitHub API), so its `master` branch doesn't matter.
+3. **Finish reading the Continual Harness code.**
+   - Fork: `c10vis-poem/AEsops-continual-harness` @ `bbab97a`, clone at `~/repos/AEsops-continual-harness`. Paper: arXiv 2605.09998.
+   - Ledger: `grill/continual-harness-read-ledger.md`. It lists what is read (core harness, `agents/`, `utils/stores/`, docs, run scripts, containers) and what isn't: the rest of `utils/`, `server/`, `tests/`, and the game environment code.
+   - Findings so far, all verified in source:
+     - The code "sandbox" hands model-written code `__import__`, so any skill can take over the host, and there's no timeout (`agents/PokeAgent.py:491, 586`).
+     - Trajectory logs drop tool results and mark every step a success (`agents/PokeAgent.py:2924-2937`), so the Refiner never sees tool failures.
+     - Every self-evolved "create" is reported as failed; self-evolved new skills get no code.
+     - There is no rollback feature, but the pieces exist (per-field change history, a file for every prompt version, backups).
+     - A fixed system prompt versus rewritable strategy is a real guardrail.
+     - Objective completion is self-declared; emulator milestones are the only ground truth.
+4. **Æsop-Xi CLAUDE.md** (`~/repos/aesop-xi`, §Runtime memory stack) says ReasoningBank does "crash recovery (resume from step N+1)". The ReasoningBank repo never claims that, so it was invented. Put its removal to the operator, along with the other agent-written "never/must" rules there.
+5. **Resume the grill:** what the Continual Harness is for us, then the rest of `GRILL-MANIFEST.md`.
 
-1. **OpenRouter key not confirmed on VM** — `~/.bashrc` export may not
-   have taken. The reconnect script handles this. dsh needs it to talk
-   to DeepSeek models via OpenRouter.
-2. **Passwordless sudo on VM** — command was given but user may not have
-   run it yet. Reconnect script handles this too.
-3. **dsh workspace selection** — user couldn't navigate to repos in the
-   dsh UI. May need to set default workspace or restart with workspace arg.
-4. **Qwen on phone NPU (HTP v79)** — geniex-bench is at
-   `~/tools/geniex-bench/` with HTP v73/v75/v79 plugins. Needs
-   `LD_LIBRARY_PATH` set to run. Model at
-   `~/downloads/Qwen3.5-2B-Q4_0.gguf` (1.2GB). NOT wired up yet.
-   Command to test:
-   ```
-   export LD_LIBRARY_PATH=$HOME/tools/geniex-bench/lib:$HOME/tools/geniex-bench/lib/qairt:$HOME/tools/geniex-bench/lib/llama_cpp
-   ~/tools/geniex-bench/bin/geniex-bench --model ~/downloads/Qwen3.5-2B-Q4_0.gguf --backend htp --htp-soc v79 --server --port 8081
-   ```
-5. **OmniRoute not wired to phone's local model** — once Qwen is serving
-   on phone:8081, OmniRoute needs a backend config pointing to it.
-6. **feat/vm-lifecycle-2026-09-18 branch** — never pushed. Has vm-spec.md,
-   vm-install.sh, vm-connect.sh updates. Push and PR still needed.
-7. **sherpa-onnx cron workflows** — 8 inherited upstream workflows still
-   active, all skipping. Classifier blocked `gh workflow disable`.
+## WHAT HAPPENED THIS SESSION
 
-## PRIOR SESSION CARRY FORWARD (still not done)
+- **OB1 fork read in full.** Every file in `c10vis-poem/OB1` @ `238df6c` has a row in `grill/ob1-read-ledger.md`, with a summary at the end. Merged to `main` (#22, #25).
+- **Grill decisions** (`grill/DECISIONS.md`):
+  - OmniRoute keeps its own SQLite and memory tables.
+  - The four memory layers (mem0, OB1, Graphify, code-review-graph) are separate MCP servers.
+  - ReasoningBank is an OmniRoute plugin with its own judge and store.
+    - It judges against ground truth, never the agent's word. That covers the task outcome and whether the pipeline ran properly: routing, ignored tools, unused skills, the mem0 write, the OB1/Supabase row, and whether the expected path was followed.
+    - It keeps ReasoningBank's own lesson-writing rules and its own model settings.
+    - It has no crash recovery.
+  - Æsop-Xi (Agentic Executions Split Operation Protocol) is the home of the whole runtime system.
+  - The on-device Auditor only flags prompts that weren't done as told; it stores nothing.
+  - ECC is parked.
+- **CONTEXT.md** now defines Æsop-Xi, ReasoningBank and Auditor.
+- **33 vendor files restored** to `02_wiki_md/vendors/github/`. They had been moved into the gitignored nested `NovAExorpus/` folder.
+- **ECC parked** at `~/.claude/ecc-parked/` (its README explains how to bring it back). It no longer loads from `~/.claude/rules/`, and its "mandatory agents" block is out of `~/.claude/CLAUDE.md`.
+- **Claude memory notes added:**
+  - push, PR and merge once, at session end;
+  - no invented hard rules and no "canonical" in docs;
+  - ECC parked;
+  - the Auditor.
+- **PRs:** #22, #25 and #24 merged (#24 was empty: #23 had merged `main` *into* `happy-ending-unresolved-updates`). #26 carries this session's docs.
 
-1. Upgrade compact skill to ECC version
-2. mem0 + TB must actually write during sessions
-3. Honey-for-devs setup wizard
-4. Graphify integration
-5. NotebookLM integration
-6. Obsidian Git plugin
-7. OmniRoute MCP verification + round-trip test
-8. mem0 vault export
-9. Shell alias (`cc`)
-10. Global ~/.claude/CLAUDE.md rewrite
-11. Reasoning Bank / Continual Harness — spec-only
-12. `restructure/drive-file-tree` branch — 250+ corpus files
-13. `master` remote branch — review before deletion
-14. Rename repo to NovAEcorpus
-15. Read remaining source docs from `~/storage/shared/Documents/9-18-26/`
-16. vault-ci.yml GitHub Actions
-17. Git sync forked repos
-18. Web UI dashboards on VM
-19. mem0 self-hosting on VM
-20. Bootstrap.sh — still points at localhost
+## OPERATOR TO-DO
+
+1. PR #21: confirm the token is gone, or commit `.gitleaksignore` yourself (item 1 above).
+2. Register the session hooks (makes `sync-forks` / `ship-session` automatic). Paste in Claude Code:
+   `! f=~/.claude/settings.json; jq '.hooks.SessionStart=[{"hooks":[{"type":"command","command":"jq -r .session_id | { read -r s; nohup ~/bin/sync-forks \"$s\" >/dev/null 2>&1 & }","timeout":10}]}] | .hooks.SessionEnd[0].hooks+=[{"type":"command","command":"jq -r .session_id | { read -r s; nohup ~/bin/ship-session \"$s\" >/dev/null 2>&1 & }","timeout":10}]' $f > $f.tmp && mv $f.tmp $f && jq '.hooks|keys' $f`
+3. PR #7 (`restructure/drive-file-tree`, open since 2026-09-06, deletes about 37,000 lines across 334 files, no checks): review, then merge or close.
 
 ## VM REFERENCE
 
-- Instance: `omniroute-brain`, zone `us-central1-a`
-- Project: `project-alchemist-490416` (display name: Project Alchemist)
-- IP: `34.31.112.77`
-- OS: Ubuntu 24.04 ARM64
-- SSH: `~/google-cloud-sdk/bin/gcloud compute ssh omniroute-brain --zone=us-central1-a`
-- gcloud on phone: `~/google-cloud-sdk/bin/gcloud`
-- Firewall rule: `dev-ports` (tcp:7681,8080,8001)
-- VM username: `d_drew_legrand`
+- Instance `omniroute-brain`, zone `us-central1-a`, project `project-alchemist-490416`. From the phone: `~/bin/vm on|off|status|ssh`.
+- The external IP is ephemeral and changes on every start (`vm on` prints it). `34.31.112.77` in `tools/launch.sh` and `router-guard.sh` is stale.
+- Idle auto-off after 30 minutes; 4 AM backstop.
 
-## GH WORKFLOW — AUTOMATIC, DO NOT ASK
+## ENVIRONMENT NOTES
 
-Feature branch → scan diff for secrets → push → PR → CI green → auto-merge.
-Run `gh pr merge N --auto --merge` on every PR. If classifier blocks it,
-tell the operator to run it manually.
+- `!` works only inside the Claude Code chat box. In a plain Termux shell, paste the command without it.
+- zsh: never name a loop variable `path`, because it overwrites `PATH`.
+- GitSync Portal syncs through the GitHub API to `vault-sync`, on startup only. The vault's local `.git` is a leftover.
+- Claude Code MCP connections that failed this session: `omniroute` (invalid URL in its config) and `terrestrial-brain` (timeout).
 
-## ENVIRONMENT
+## HANDOFF SOURCES
 
-- Device: Android aarch64, Termux, kernel 5.15
-- Shell paths with special chars need python os.path.join
-- Output with parentheses/numbers gets blanked in terminal — use code blocks
-- `!` prefix does not work in Termux — give raw commands in code blocks
+Read this session:
+- **Vault:** AGENTS.md, CONTEXT.md, RESUME.md, PENDING.md, `recovered/2026-09-26-ob1/` (README, the continual-harness plugin draft, the orchestration contract via grep), `_dumbass_unified-config/continual_harness/POINTER.md`, `02_wiki_md/vendors/POINTER.md`.
+- **OB1:** the whole fork.
+- **Continual Harness:** as listed in its ledger.
+- **aesop-xi:** AGENTS.md, CLAUDE.md, RESUME.md.
+- **OmniRoute:** AGENTS.md, `docs/routing/AUTO-COMBO.md` (partly), and a search of the source for "Continual Harness" and "Reasoning Bank" (0 hits).
+- **reasoning-bank:** README, the judge prompts, the lesson-writing prompts, and the SWE-Bench outcome code.
+- **GitHub:** state of PRs #7, #21, #23 and #24, and the gitleaks logs.
+
+Not read:
+- documents 00–05;
+- `_dumbass_unified-config/` (beyond one pointer file);
+- MAP.md, MASTER-CLAUDE.md, MASTER-RESUME.md, SOURCE-RETRIEVAL-MAP.md;
+- most of the vault (AGENTS.md Rule 4).
