@@ -1,3 +1,5 @@
 2026-09-26 00:03 [tmp] session-start scan: files=6 parsed=6
 2026-09-26 09:00 [home] session-start scan: files=7 parsed=7
 2026-09-27 09:43 [home] session-start scan
+2026-09-27 23:56 [home] deliverable flush: session wrap-up, obs 0008 + 0007 update logged
+2026-09-28 00:40 [NovAExorpus] session-start scan: files=8 parsed=8

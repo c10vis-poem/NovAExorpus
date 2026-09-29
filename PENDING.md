@@ -40,4 +40,17 @@ Durable cross-session backlog. Not rewritten each session — items persist unti
 - `vault-ci.yml` workflow; shell alias `cc`; global `~/.claude/CLAUDE.md` rewrite.
 - "Rename repo to NovAEcorpus" — conflicts with NAMING-CANON (NovÆxorpus / `NovAExorpus`); confirm or drop.
 - "Obsidian Git plugin" — superseded by GitSync Portal; drop unless wanted.
-- **MemVault server** — waits for the Jetson; fork `dreamor/MemVault` → c10vis-poem and build the image from the fork (not `ghcr.io/dreamor/memvault`). Decide in grill topic 7 whether it earns a place next to Mem0 and OB1.
+- **MemVault server** (carried from the 2026-09-28 session) — waits for the Jetson; fork `dreamor/MemVault` → c10vis-poem and build the image from the fork (not `ghcr.io/dreamor/memvault`). Decide in grill topic 7 whether it earns a place next to Mem0 and OB1.
+
+## Added 2026-09-29
+
+- **PR #21 blocked by gitleaks.** One GitHub token sits in an archived Drive filename. The operator is to confirm it's gone or commit `.gitleaksignore` (RESUME.md item 1).
+- **GitHub `master` branch:** 6 unmerged commits. Review, move anything worth keeping into `main`, delete it.
+- **Continual Harness read unfinished.** See `grill/continual-harness-read-ledger.md` "Not yet read".
+- **aesop-xi CLAUDE.md:** remove the invented ReasoningBank "crash recovery" line and review its agent-written hard rules.
+- **AGENTS.md still says "Honey applies universally", and the SessionStart hook still enables Honey.** The operator dropped Honey.
+- **`_dumbass_unified-config/` unread.**
+- **Task-observer review outstanding.**
+- **PR #7 (`restructure/drive-file-tree`):** open since 2026-09-06, deletes about 37,000 lines. Operator to review.
+- **aesop-xi local clone:** branch `feat/memory-stack-canonical-2026-09-15` is 1 commit ahead with uncommitted `tools/bootstrap.sh` and an untracked `tools/aesop-tmux.sh`. Not this session's work; needs the operator's call.
+- **OmniRoute local clone:** uncommitted `.source/dynamic.ts`, and the clone is dated 2026-08-15. Sync the fork before relying on it.

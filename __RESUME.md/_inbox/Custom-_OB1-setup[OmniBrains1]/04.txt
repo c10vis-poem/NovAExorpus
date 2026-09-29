@@ -1,0 +1,71 @@
+You're right, I'll drop the Node.js tangent. And you're right that I was hand-waving OmniRoute as "just routes the LLM call." It's not dumb. Here's how it actually picks:
+
+## How OmniRoute Picks From 1200+ Models
+
+The **Auto-Combo Engine** runs a **13-factor scoring function** (`scoring.ts → DEFAULT_WEIGHTS`) on every request. The factors:
+
+| Factor | What It Measures |
+|---|---|
+| Cost | $/token for the candidate |
+| Latency | Recent p50/p95 response time |
+| Success rate | Historical success for that provider+model |
+| Context fit | Does the model's context window fit the request size? |
+| Task fitness | Intent classification match (coding vs. reasoning vs. vision, etc.) |
+| Recent failures | Penalty for recent 4xx/5xx |
+| Quota | Remaining rate-limit headroom |
+| Circuit-breaker state | Is the provider tripped? |
+| LKGP stickiness | Bonus for the last-known-good provider |
+| ... | Up to 13-15 total depending on version |
+
+On top of that:
+- **Intent classification** — reads the request, classifies it (coding, reasoning, creative, etc.), filters the candidate pool
+- **Task-aware routing** — if you have model-combo mappings configured, it auto-overrides to the mapped combo
+- **LKGP** — "Last Known Good Provider" stickiness, so it doesn't bounce between providers on every request
+- **Fusion** (strategy #18) — for high-stakes calls, fans out to a panel of models, then a judge picks the best answer
+
+You control the weighting via the `auto/` prefix:
+- `auto/coding` → quality-first, filters for coding-capable models
+- `auto/smart` → quality-first + 10% exploration
+- `auto/cheap` → cost-optimized
+- `auto/fast` → latency-first
+
+## The 37 MCP Tools Are For EXTERNAL Control
+
+The MCP tools don't drive internal routing. They're how **you** (or your agents) query and steer the gateway:
+
+| Tool | What You'd Use It For In Your Stack |
+|---|---|
+| `omniroute_route_request` | Send the final LLM call through its scoring engine |
+| `omniroute_best_combo_for_task` | Ask "given this task type, which combo should I use?" — **this is the one Continual Harness would call** |
+| `omniroute_explain_route` | Debug: "why did this go to provider X?" |
+| `omniroute_simulate_route` | Dry-run before committing |
+| `omniroute_check_quota` | Pre-flight: "do I have headroom?" |
+| `omniroute_get_provider_metrics` | p50/p95/p99 latency per provider |
+| `omniroute_list_models_catalog` | Full catalog with capabilities + pricing |
+| `omniroute_set_routing_strategy` | Change strategy at runtime (e.g., switch to `auto/smart` for a hard task) |
+
+## How This Actually Fits Your Architecture
+
+The key thing I was glossing over: **OmniRoute's routing intelligence and your 4 memory tools are orthogonal.**
+
+- **Your script** decides *which tools to call* (the `Promise.allSettled` fan-out to mem0, OB1, Graphify, code-review-graph)
+- **OmniRoute** decides *which model answers* (the 13-factor scoring across 1200+ models)
+
+They don't talk to each other directly. But **Continual Harness** is the bridge — it can call `omniroute_best_combo_for_task` and `omniroute_set_routing_strategy` to **steer OmniRoute's model selection** based on what the memory tools returned. If mem0 says "this is a similar task to last week's bug fix," Continual Harness can tell OmniRoute to switch to `auto/coding` with a quality-first weight. If OB1 says "this is a novel domain with no prior context," it can bump to `auto/smart` for more exploration.
+
+So the flow is:
+
+```
+Your script: fan out to 4 memory tools (deterministic)
+       ↓
+Continual Harness: read results, call omniroute_best_combo_for_task
+       ↓
+OmniRoute: 13-factor scoring picks the model (its own intelligence)
+       ↓
+Your script: send the merged context to omniroute_route_request
+       ↓
+ReasoningBank: extract + consolidate the trajectory
+```
+
+The model selection is **not** something you trust to a prompt. It's a scoring engine with telemetry. And Continual Harness can **steer** that engine at runtime via the MCP tools.
+
