@@ -56,3 +56,6 @@ _quarantine/
 *.pte
 *.a
 *.lib
+
+# Local cleanup-tool output (Drive file indexes, duplicate copies), not vault content
+__RESUME.md/_whatisit/files_cleanup/
