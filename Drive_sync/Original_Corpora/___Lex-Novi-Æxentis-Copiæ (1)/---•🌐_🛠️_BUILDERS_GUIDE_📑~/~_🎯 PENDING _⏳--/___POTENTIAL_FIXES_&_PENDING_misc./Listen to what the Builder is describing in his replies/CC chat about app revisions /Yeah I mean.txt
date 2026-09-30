@@ -1,0 +1,3 @@
+Yeah I mean this is going to be commercial grade app so it should have you know be able to pick whatever provider or from a list of them anyway not just to and I'm pretty sure open router is through open AI isn't it and I don't even know why salmonella is still a part of it but whatever I guess it's might as well leave it there now huh 
+
+Oh and one more thing this kind of important here all these assets that were using any kind of facet of architecture that we're building with if I have it forked in my repo or in my hugging face model if I have a copy hugging face model with my brand on it or it's in my GitHub repo we got to use my version fine-tuning anything will push it through my repos

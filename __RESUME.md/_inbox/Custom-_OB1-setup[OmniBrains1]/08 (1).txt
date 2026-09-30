@@ -1,0 +1,4 @@
+Yeah, exactly. It's right there on GitHub — `sethkarten/continual-harness` for the original paper implementation, plus the npm packages like `pi-continual-harness` and `dsh-continual-harness` if you want it as a plugin you can drop into a stack. You can Google it, find the repo, read the README, get help. It's not some private thing.
+
+So in your stack it's a concrete, callable tool with an MCP proxy that you wire into OmniRoute's fan-out alongside the other four. Not a layer, not an abstraction — a tool. Got it.
+

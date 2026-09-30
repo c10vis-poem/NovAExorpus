@@ -1,0 +1,71 @@
+You're right, that was garbage advice. Here's what actually happens:
+
+## The Truth: OmniRoute Does NOT Execute Tools
+
+From their own issue #14037: **"Do not execute tools inside OmniRoute; return calls to the client for execution."**
+
+OmniRoute is a **model router**, not a tool orchestrator. When a request carries a non-empty `tools` array, it hits the **tool-bearing bypass** — skips the fusion panel entirely, routes to a single model, passes `tools`/`tool_choice` through unmodified. The model emits `tool_calls[]`, OmniRoute returns them to **your client**, and **your client** executes them.
+
+So "trust the model to call all five" is exactly what I said, and you're right that's unreliable.
+
+## What You Actually Have to Work With
+
+| Mechanism | What It Does | Where |
+|---|---|---|
+| `TOOL_POLICY_MODE=allowlist` | Restricts model to ONLY your 5 tools (can't call anything else) | OmniRoute env var |
+| `MCP_TOOL_ALLOW` / `MCP_TOOL_DENY` | Filters which MCP tools appear in the manifest | OmniRoute env var |
+| `tool_choice: "required"` | Forces model to emit at least one tool call | Your request payload |
+| **Your own agent loop** | **Deterministic fan-out — you control the `Promise.allSettled`** | **Your script** |
+
+## The Actual Architecture
+
+The fan-out does NOT live in OmniRoute. It lives in **your orchestration script** that sits in front of it:
+
+```
+Your Script (Node.js)
+│
+├── 1. Promise.allSettled([
+│       mem0.callTool("search_memories", ...),
+│       ob1.callTool("query", ...),
+│       graphify.callTool("shortest_path", ...),
+│       codeReviewGraph.callTool("blast_radius", ...),
+│       neo4j.callTool("vector_search", ...)
+│   ])
+│   ← THIS is deterministic. You control it. Not the model.
+│
+├── 2. Merge results into context block
+│
+├── 3. ReasoningBank.retrieve() → inject top-1 strategy
+│
+├── 4. POST http://localhost:20128/v1/chat/completions
+│      body: {
+│        model: "auto/reasoning:pro",
+│        system: mergedContext + strategy,
+│        messages: task,
+│        tool_choice: "none"   ← no tools here, just get the routing decision
+│      }
+│   ← OmniRoute routes this to the best model for the decision
+│
+├── 5. ContinualHarness.refine(harnessState, outcome)
+│
+└── 6. ReasoningBank.extract() + consolidate()
+```
+
+**Step 1 is your code, not the model's.** You're the one calling all five MCP servers in parallel. You're the one deciding when to call them. The model never gets a chance to "forget" one.
+
+## What OmniRoute Is For In This Setup
+
+OmniRoute handles **step 4 only** — routing the final LLM call to the best available model/provider with fallback. It's your inference layer, not your orchestration layer.
+
+## If You Want OmniRoute to Do More
+
+Two options:
+
+1. **The deterministic fork** — `KrzysiekSko/diegosouzapw-OmniRoute` is explicitly "focused on a controlled AI Control Plane for **deterministic routing**, resilient multi-provider execution, agent integration, observability and governance." That fork might have the tool-orchestration hooks you want.
+
+2. **A2A protocol** — OmniRoute exposes 6 A2A skills over JSON-RPC 2.0. You could define a task that fans out to sub-agents. But that's agent-to-agent, not tool-to-tool. It's heavier than you need.
+
+## TL;DR
+
+**You write the fan-out. OmniRoute routes the LLM call.** The `Promise.allSettled` in your script IS the deterministic guarantee. The model only sees the merged results and makes one routing decision. No trusting the model to "remember" to call five tools.
+

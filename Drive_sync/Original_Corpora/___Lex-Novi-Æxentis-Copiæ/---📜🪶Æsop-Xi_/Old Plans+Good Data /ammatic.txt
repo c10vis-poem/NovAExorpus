@@ -1,0 +1,67 @@
+ammatic notebook pipelines.📁 master_build-guide/                      # Root Canonical Workspace
+│
+├── 📁 horizons-ui/                         # NODE ALPHA FRONTEND UI / XI LAYER
+│   ├── 📄 README.md                        # UI visual architecture and tile definitions
+│   ├── 📄 skill_manifest.json              # Front-end tool calling & screen vision skills
+│   ├── 📄 llm_wiki.md                      # Metadata tracking front-end state parameters
+│   └── 📁 src/                             # Native Kotlin/Java codebase & game SDK configs
+│
+├── 📁 aesop-xi-memory/                     # COGNITIVE TRANSLATION & ROUTING FABRIC
+│   ├── 📄 README.md                        # Memory layer coordination specifications
+│   ├── 📄 skill_manifest.json              # Vector storage, caching, & search parameters
+│   ├── 📄 llm_wiki.md                      # Dynamic context token weight maps
+│   ├── 📁 ob1-backend/                     # Nate B. Jones OB1 Postgres schema hooks
+│   └── 📁 omni-route/                      # Context routing logic matrices
+│
+├── 📁 termux-environment/                  # LOCAL DEVELOPMENT CONTEXT & RUNTIMES
+│   ├── 📄 README.md                        # Sandbox limits and terminal tool definitions
+│   ├── 📄 skill_manifest.json              # Shell scripting and package management rules
+│   ├── 📄 llm_wiki.md                      # Active environment trace variables
+│   └── 📁 open-wiki-cli/                   # Local terminal markdown interface scripts
+│
+├── 📁 file-management-system/              # THE PHYSICAL MASTER DATA ENGINE
+│   ├── 📄 README.md                        # Storage indexing and ingestion laws
+│   ├── 📄 skill_manifest.json              # Automated folder parsing and matching parameters
+│   ├── 📄 llm_wiki.md                      # Static file tree validation checksums
+│   └── 📁 target-docs/                     # Curation yard for cherry-picked user inputs
+│
+├── 📁 github-ci-cd/                        # AUTOMATED REPOSITORY ORCHESTRATION
+│   ├── 📄 README.md                        # Git branching rules and pipeline conditions
+│   ├── 📄 skill_manifest.json              # Commit automation and change-log parsing rules
+│   ├── 📄 llm_wiki.md                      # GitHub API validation metrics
+│   └── 📁 workflows/                       # GitHub Actions compilation scripts
+│
+├── 📁 skill-building-protocol/            # STANDARDIZED AGENT CAPABILITY FACTORY
+│   ├── 📄 README.md                        # Skill onboarding and restriction guidelines
+│   ├── 📄 skill_manifest.json              # Evaluation parameters for skill validation
+│   └── 📄 llm_wiki.md                      # Registry tracking verified agent tools
+│
+├── 📁 nova-claw-novus-agenti/              # LOGIC CORE & HARDWARE ABSTRACTED RUNTIME
+│   ├── 📄 README.md                        # MoE/MoA debating logic and daemon lifecycles
+│   ├── 📄 skill_manifest.json              # Local permission maps & root utility access
+│   ├── 📄 llm_wiki.md                      # Live running model weight parameters
+│   └── 📁 daemons/                         # Model loading, network routing, and recovery scripts
+│
+├── 📁 red-agent-auditor/                   # AIR-GAPPED EXCLUSIONARY PERIMETER
+│   ├── 📄 README.md                        # Zero-trust audit procedures and check steps
+│   ├── 📄 skill_manifest.json              # Trace verification and script parser routines
+│   ├── 📄 llm_wiki.md                      # Logic checking trace maps
+│   ├── 📁 security-perimeter/              # Out-of-band script validation environments
+│   └── 📄 nope_data_bank.json              # Exploit profiles, invalid logic loop matrices
+│
+├── 📁 node-beta-jetson/                    # PERSISTENT TENSOR COMPUTE HOST LAYERS
+│   ├── 📄 README.md                        # OS flashing, CUDA kernel allocation metrics
+│   ├── 📄 skill_manifest.json              # Vector hosting and remote execution parameters
+│   └── 📄 llm_wiki.md                      # NVMe storage usage benchmarks
+│
+├── 📁 node-gamma-rubik-pi/                 # DISPLAY ENVIRONMENT SERVER LAYERS
+│   ├── 📄 README.md                        # Hardware ribbon setup and UI rendering paths
+│   ├── 📄 skill_manifest.json              # Dual-monitor scaling and window mapping skills
+│   └── 📄 llm_wiki.md                      # Qualcomm SoC telemetry tracking registers
+│
+└── 📁 global-documentation-vault/          # CORE RESOURCE & SDK ENCYCLOPEDIA
+    ├── 📁 unsloth-docs/                    # Unsloth fine-tuning optimization specs
+    ├── 📁 qairt-docs/                      # Qualcomm AI Runtime SDK reference libraries
+    ├── 📁 google-dev-docs/                 # Android media and assistant system documentation
+    ├── 📁 llama-docs/                      # Llama server configuration manual sets
+    └── 📄 master_blueprint.txt             # Global ground-truth

@@ -1,0 +1,19 @@
+How should provenance be verified across multi-agent delegation boundaries?
+
+I'm looking at a security problem in multi-agent/distributed systems:
+
+Human → orchestrator → agent → sub-agent → tool
+
+Once a delegation crosses process or framework boundaries, ordinary logs can show the sequence of events, but they don't necessarily provide cryptographic evidence that a downstream instruction actually originated from the claimed upstream authority.
+
+I'm exploring a provenance-layer approach where delegation claims are cryptographically linked and independently verifiable, while deliberately keeping authorization/enforcement separate from provenance.
+
+For people working on distributed systems/security:
+
+Where would you place the trust boundary?
+
+Specifically, would you want the provenance evidence attached to the delegation message itself, carried through execution context, or represented separately as an auditable chain?
+
+I'm particularly interested in failure modes around replay, delegation across process boundaries, sub-agent spawning, and revocation/expiry.
+
+Looking for architecture/security feedback rather than product recommendations.

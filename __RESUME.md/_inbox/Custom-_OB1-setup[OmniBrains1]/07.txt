@@ -1,0 +1,213 @@
+Alright. Here's the actual architecture with real tool names and a concrete script.
+
+## "Note 4S" = Neo4j
+
+That's your missing vector DB. Neo4j has **native HNSW vector index** (cosine/euclidean), added in v5.11, with the `SEARCH` clause in Cypher as of 2026.01. It does **hybrid search** (vector + keyword in one query), in-index filtering, and works as a graph + vector store simultaneously. That's the piece that gives you semantic similarity search *on top of* graph structure — which is exactly what Graphify and code-review-graph lack (they're structural-only, no embeddings).
+
+## The Actual MCP Tool Surface Per Node
+
+| Node | MCP Server | Tools You'd Call in Fan-Out |
+|---|---|---|
+| **Mem0** | `npx mcp-add --name mem0-mcp --type http --url "https://mcp.mem0.ai/mcp"` | `search_memories` (query + filters), `get_memories` (list with pagination) |
+| **OB1** | Supabase Edge Function (your own) | `query` (SQL), `vector_search` (pgvector cosine) |
+| **Graphify** | `python -m graphify.serve` (stdio or HTTP) | `query_graph` (BFS/DFS + context), `shortest_path` (Dijkstra between two symbols), `god_nodes` (hubs), `graph_stats` |
+| **code-review-graph** | Its MCP server (Python) | Blast-radius queries, dependency flow, call-graph traversal (30+ tools, SQLite-backed) |
+| **Neo4j** | Neo4j MCP (or direct Cypher) | `vector_search` (HNSW ANN), `hybrid_search` (vector + keyword), graph traversal via Cypher |
+
+## How OmniRoute Actually Does the Fan-Out
+
+OmniRoute has two relevant mechanisms:
+
+1. **Fusion strategy** (strategy #18 in their 19 strategies) — fans out to a panel of models in parallel, then a judge synthesizes one answer. This is model-level parallelism, not tool-level.
+
+2. **Parallel tool calls** — OmniRoute preserves `tool_calls[]` arrays with multiple entries (fixed in issue #14037 for web-cookie providers). This is what you actually want: one request that triggers **multiple MCP tool calls simultaneously** in the `tool_calls` array.
+
+There's also an **open feature request** (#6364) for aggregating upstream MCP servers behind one endpoint — a "multi-server client pool" with a server registry. That's not merged yet, so right now you either:
+- Register all four MCP servers in your client config (Claude Code, Cursor, etc.) and let the model call them in parallel via `tool_calls[]`, **or**
+- Write a thin orchestration script that hits all four MCP servers directly via HTTP/stdio and merges results before sending to OmniRoute for the routing decision.
+
+## The Script (Node.js, since OmniRoute is Node)
+
+```javascript
+// orchestrator.js — parallel fan-out to all 4 memory nodes
+import { Client } from "@modelcontextprotocol/sdk/client/index.js";
+import { StdioClientTransport } from "@modelcontextprotocol/sdk/client/stdio.js";
+import { StreamableHTTPClientTransport } from "@modelcontextprotocol/sdk/client/streamableHttp.js";
+
+// --- MCP Client Setup ---
+const clients = {
+  mem0: await connectHTTP("https://mcp.mem0.ai/mcp", { headers: { Authorization: `Bearer ${MEM0_KEY}` } }),
+  ob1:  await connectHTTP(`https://${SUPABASE_REF}.supabase.co/functions/v1/ob1-mcp`),
+  graphify: await connectStdio("python", ["-m", "graphify.serve"]),
+  codeReviewGraph: await connectStdio("python", ["-m", "code_review_graph.mcp_server"]),
+  neo4j: await connectHTTP("http://localhost:7474/mcp"), // Neo4j MCP adapter
+};
+
+// --- The Fan-Out ---
+async function parallelContextGather(taskContext) {
+  const results = await Promise.allSettled([
+    // Episodic: "what happened?"
+    clients.mem0.callTool("search_memories", {
+      query: taskContext.summary,
+      filters: { type: "episodic", limit: 5 }
+    }),
+
+    // Semantic: "what are the facts?"
+    clients.ob1.callTool("query", {
+      sql: `SELECT * FROM knowledge WHERE embedding <=> $1 ORDER BY embedding <=> $2 LIMIT 5`,
+      params: [taskContext.embedding, taskContext.embedding]
+    }),
+
+    // Navigational: "how do I get there?"
+    clients.graphify.callTool("shortest_path", {
+      from: taskContext.currentNode,
+      to: taskContext.targetNode,
+      edge_type_filter: ["CALLS", "IMPORTS", "USES"]
+    }),
+
+    // Routing: "what's the blast radius?"
+    clients.codeReviewGraph.callTool("blast_radius", {
+      symbol: taskContext.affectedSymbol,
+      direction: "dependents"
+    }),
+
+    // Vector similarity: "what's semantically close?"
+    clients.neo4j.callTool("vector_search", {
+      index: "task_embeddings",
+      query_vector: taskContext.embedding,
+      limit: 5,
+      filter: { status: "active" }
+    })
+  ]);
+
+  // Merge all results into a single context block
+  return mergeContexts(results);
+}
+
+// --- ReasoningBank Loop (retrieve → act → extract → consolidate) ---
+async function reasoningBankCycle(taskContext, mergedContext) {
+  // 1. RETRIEVE: top-k reasoning strategies from bank
+  const relevantStrategies = await reasoningBank.retrieve({
+    query: taskContext.summary,
+    k: 1, // default is k=1 per the paper
+    method: "embedding_similarity"
+  });
+
+  // 2. INJECT: strategies go into the system prompt for the routing decision
+  const augmentedPrompt = buildSystemPrompt(mergedContext, relevantStrategies);
+
+  // 3. ACT: OmniRoute makes the routing call with augmented context
+  const routeDecision = await omniroute.route({
+    model: "auto/reasoning:pro", // OmniRoute's auto-routing syntax
+    system: augmentedPrompt,
+    messages: taskContext.messages
+  });
+
+  // 4. EXTRACT: after the task completes, distill the trajectory
+  const memoryItem = await reasoningBank.extract({
+    trajectory: { input: taskContext, output: routeDecision, success: taskContext.success },
+    judge: "llm" // LLM-as-a-judge self-assessment
+  });
+  // memoryItem = { title, description, content }
+
+  // 5. CONSOLIDATE: write back to the bank
+  await reasoningBank.consolidate(memoryItem);
+
+  return routeDecision;
+}
+
+// --- Continual Harness: mid-episode CRUD on harness state ---
+async function continualHarnessRefine(currentState, mergedContext) {
+  // The Refiner LLM rewrites harness state IN PLACE via CRUD edits
+  const edits = await refinerLLM.call({
+    system: `You are a harness refiner. Given the current harness state and new context,
+             produce CRUD operations (CREATE, READ, UPDATE, DELETE) on:
+             - system_prompt
+             - sub_agents[]
+             - skills[]
+             - memory[]
+             Return JSON: [{ op: "update", target: "sub_agents[2].prompt", value: "..." }, ...]`,
+    input: { currentState, newContext: mergedContext }
+  });
+
+  // Apply edits in-place (no reset, no restart)
+  for (const edit of edits) {
+    applyEdit(currentState, edit);
+  }
+
+  return currentState; // mutated in place
+}
+```
+
+## How ReasoningBank Specifically Helps the Parallel Path
+
+It's not a parallel node in the fan-out. It's the **feedback loop around** the fan-out:
+
+```
+┌─────────────────────────────────────────────────────────┐
+│  BEFORE the fan-out:                                     │
+│  ReasoningBank.retrieve() → top-1 strategy injected     │
+│  into the system prompt that guides which tools to call  │
+│  and how to interpret results                            │
+├─────────────────────────────────────────────────────────┤
+│  DURING the fan-out:                                     │
+│  5 MCP calls fire in parallel (mem0, ob1, graphify,     │
+│  code-review-graph, neo4j)                               │
+├─────────────────────────────────────────────────────────┤
+│  AFTER the fan-out:                                      │
+│  ReasoningBank.extract() distills the trajectory into    │
+│  {title, description, content}                           │
+│  ReasoningBank.consolidate() writes it back              │
+│  → Next time a similar task comes, the agent already     │
+│    knows the pattern                                     │
+└─────────────────────────────────────────────────────────┘
+```
+
+The key insight from the paper: **MaTTS parallel scaling** — you can generate multiple distinct trajectories for the same query, self-contrast them (which succeeded vs. which took a wrong path), and distill *more robust* strategies from the contrast. That's how you make the bank learn faster than one-at-a-time.
+
+## What Continual Harness Actually Does (Concrete)
+
+From the repo: `agents/utils/harness_evolver.py` + `agents/utils/store/base_store.py`
+
+It's not a "layer." It's a **Refiner LLM** that:
+1. Reads the current harness state (system prompt, sub-agent definitions, skill list, memory block)
+2. Receives new context (from your fan-out results, task outcomes, corrections)
+3. Outputs **CRUD operations** — e.g. `UPDATE sub_agents[2].prompt SET value = "..."`, `DELETE skills[7]`, `CREATE memory_entry { ... }`
+4. Applies them **in-place, mid-episode** — no reset, no restart
+
+The MCP proxy in `run_cli.py` exposes this to external agents. You'd wire it into your flow as:
+
+```javascript
+// After each fan-out cycle:
+const newState = await continualHarness.refine({
+  currentState: myHarnessState,  // { system_prompt, sub_agents, skills, memory }
+  newEvidence: mergedContext,     // what the 5 nodes returned
+  outcome: routeDecision.success  // did it work?
+});
+// myHarnessState is now mutated — next cycle uses the improved prompt
+```
+
+## How to Tell OmniRoute to Hit All Four at Once
+
+You don't configure it *in* OmniRoute. You configure it in your **client** (the thing sending requests *through* OmniRoute). In your MCP client config:
+
+```json
+{
+  "mcpServers": {
+    "mem0": { "url": "https://mcp.mem0.ai/mcp" },
+    "ob1": { "url": "https://YOUR_REF.supabase.co/functions/v1/ob1-mcp" },
+    "graphify": { "command": "python", "args": ["-m", "graphify.serve"] },
+    "code-review-graph": { "command": "python", "args": ["-m", "code_review_graph.mcp_server"] },
+    "neo4j": { "url": "http://localhost:7474/mcp" }
+  }
+}
+```
+
+Then in your system prompt / agent directive, you instruct:
+
+> "For every routing decision, call `search_memories`, `query` (OB1), `shortest_path` (Graphify), `blast_radius` (code-review-graph), and `vector_search` (Neo4j) **in parallel** in a single tool_calls array. Wait for all results before making the routing call."
+
+The model emits all five in one `tool_calls[]` array, OmniRoute passes them through (it preserves parallel tool calls), all five MCP servers respond, results come back, and then the model makes the actual routing decision with the full merged context.
+
+**Neo4j** is the piece you're missing. Install it, create a vector index on your task/strategy embeddings, and it becomes your fifth node in the fan-out — the one that does semantic similarity search across everything the other four produce structurally.
+

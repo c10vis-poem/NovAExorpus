@@ -1,0 +1,9 @@
+That's a fair challenge — inferring "the convention" from this repo's past PRs only tells me what pattern was followed *historically*; it doesn't confirm that's still GitHub's current recommended mechanism. GitHub has been migrating people off classic branch protection onto **Rulesets**, and I haven't checked which one your repos actually use, nor checked for anything more recent than my knowledge cutoff. Let me verify both before treating this as settled.
+
+Confirmed — you were right to push on this. GitHub shipped a one-click "convert branch protection to ruleset" migration in their Aug 2026 changelog and has been positioning Rulesets as the modern replacement all year. None of your repos (checked all 4, including the fresh harness fork) have adopted rulesets — they're all still on legacy classic branch protection. So the pattern I found is real, but it's the *outgoing* mechanism, not the currently-recommended one. Updating the memory to reflect that instead of treating classic branch protection as the permanent target.
+
+Your instinct was correct: I'd derived the convention purely from these repos' own PR/branch history, which confirmed the *behavior* (branch → PR → signed → CI gate) but silently assumed the *mechanism* (classic branch protection) was still current. It isn't — GitHub's been steering everyone to Rulesets throughout 2026, with an Aug 2026 one-click migration path, and none of your repos have moved yet. Memory now flags that gap instead of treating the old mechanism as settled.
+
+Sources:
+- [Automatically migrate branch protection rules to repository rulesets](https://github.blog/changelog/2026-08-11-automatically-migrate-branch-protection-rules-to-repository-rulesets/)
+- [Branch Protection is Dead, Long Live Rulesets](https://wafaa-t.medium.com/branch-protection-is-dead-long-live-rulesets-1de78c35efca)

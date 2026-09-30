@@ -1,0 +1,5 @@
+Spot on analysis
+this hits on two core design trade-offs we've been wrestling with:
+Header Bloat: Completely agree. If you try to pass full evidence or audit logs in the request header, you break Nginx/Envoy 8KB header caps. We keep the in-flight header down to ~800 bytes by carrying only parent SHA-256 digests and Ed25519 signatures, while pushing heavy execution receipts asynchronously to the audit/SIEM layer.
+JIT Identity for Sub-Agents: Pairing JIT short-lived credentials (like Akeyless or SPIFFE SVIDs with <5 min TTLs) with ephemeral keypairs is definitely the right foundation. It ensures sub-agents don't hold standing credentials, and if a sub-agent spawns, its APC node expires almost immediately after the task.
+Really appreciate the perspective confirming that JIT secrets handle identity/auth while leaving provenance as its own separate layer is super helpful validation for this architecture.

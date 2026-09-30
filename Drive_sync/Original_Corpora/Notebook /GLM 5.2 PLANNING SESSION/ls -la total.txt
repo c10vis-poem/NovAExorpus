@@ -1,0 +1,20 @@
+ls -la
+total 111
+drwx------. 11 u0_a538 u0_a538  3452 Aug 27 20:46 .
+drwx------. 52 u0_a538 u0_a538 20480 Aug 27 20:46 ..
+drwx------.  3 u0_a538 u0_a538  3452 Aug 27 20:46 .claude
+drwx------.  7 u0_a538 u0_a538  3452 Aug 27 20:46 .git
+-rw-------.  1 u0_a538 u0_a538    25 Aug 27 20:46 .gitignore
+drwx------. 15 u0_a538 u0_a538  3452 Aug 27 20:46 01-sources
+drwx------. 15 u0_a538 u0_a538  3452 Aug 27 20:46 02-clean
+drwx------. 15 u0_a538 u0_a538  3452 Aug 27 20:46 03-check
+-rw-------.  1 u0_a538 u0_a538  2667 Aug 27 20:46 CLAUDE.md
+-rw-------.  1 u0_a538 u0_a538  3275 Aug 27 20:46 LAPTOP-TRICK.md
+-rw-------.  1 u0_a538 u0_a538  2920 Aug 27 20:46 NAMING-CANON.md
+-rw-------.  1 u0_a538 u0_a538 22725 Aug 27 20:46 README.md
+-rw-------.  1 u0_a538 u0_a538 22813 Aug 27 20:46 SOURCE-RETRIEVAL-MAP.md
+drwx------.  2 u0_a538 u0_a538  3452 Aug 27 20:46 handoffs
+drwx------.  2 u0_a538 u0_a538  3452 Aug 27 20:46 skills
+drwx------.  3 u0_a538 u0_a538  3452 Aug 27 20:46 tools
+drwx------.  2 u0_a538 u0_a538  3452 Aug 27 20:46 wiki
+%

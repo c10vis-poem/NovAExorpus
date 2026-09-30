@@ -1,0 +1,406 @@
+Now I have everything. Here's the final consolidated document with every correction folded in.
+
+---
+
+# AESOP XI — GRILL SESSION MASTER DOCUMENT
+## Final Consolidated Version (All Corrections Applied)
+
+---
+
+## PART 0: CANONICAL BRANDING & NAMING
+
+### Latin Motto (Exact Spelling)
+
+```
+Xçineribus, in-variis-nunquam-varius,
+Novi-Æxentis-Copiæ, Vincent
+```
+
+**Translation**: "From the ashes, unwavering in the midst of adversity, new forces of abundance conquer"
+
+### Naming Canon
+
+| Layer | Canonical Name | URL-Safe Repo Name | Symbolism |
+|---|---|---|---|
+| Philosophy | Xçineribus, in-variis-nunquam-varius | — | From the ashes, unwavering |
+| Protocol Harness | Æsop-Xi™ | `aesop-xi` | The tactical, narrative logic and ethical operations (Agentic Execution Split Operations Protocol) |
+| Agent Core | NovusÆxenti™ | `novus-aexenti` | The new dynamic force |
+| Agentic Tools/Harness/UI Bridge | NovÆxopia™ | `novaexopia` | The abundance of the new agent (the "Claw" harness) |
+| Universal Database | NovÆxorpus™ | `novae-xorpus` | The hardened, unbreakable body of knowledge |
+| Presentation | Horizons UI™ | `horizons-ui` | The ever-expanding canopy — "Ever-evolving ecosystems, For ever-expanding Horizons." |
+| Shell Daemon | Æsc (aesc) | `nova-daemon-shell` | Rooted and unwavering — the grounded root daemon |
+| Media Daemon | Æyre (aeyre) | `nova-daemon-media` | In the eye of the storm — the volatile execution daemon |
+| Database & Universal Memory Bank | NovÆxorpus | `novae-xorpus` | The living truth of the system — across split services |
+
+**ASCII/Unicode Note**: Use `\u00C6` (uppercase Æ) or `\u00E6` (lowercase æ) in Android string resources for crisp vector rendering.
+
+**The D.U.M.B.A.S.S. Proof**: "It isn't 'dumbass-proof' if it hasn't been '#d.u.m.b.a.s.s.' proven." — The cognitive layer and living truth verification standard.
+
+---
+
+## PART 1: CORRECTED PRIORITY SEQUENCE
+
+### Phase 0: File Structure & Knowledge Base Organization (FIRST — NOW)
+
+**Before anything else** — before protocols, before models, before repos — the knowledge base itself must be organized, defined, chopped down. Files, tools, plugins, and skills are equally valuable and must be leveled out, unified, and synced together.
+
+- Separate wheat from chaff across all documentation
+- Define exact file structure so files don't outweigh tools/plugins/skills
+- Establish the universal database (NovÆxorpus) as the living truth
+- Get OpenWiki TUI running in Termux as file administrator (GLM 5.2 via OpenRouter)
+- Convert raw files (PDF/DOCX/TXT/HTML) → markdown via converter pipeline
+- Generate JSONL markers for everything — source docs AND wiki synthesis
+- The 93 curated files are markdown; the several hundred in raw-bucket are NOT — converter handles this
+
+### Phase 1: Protocols, Memory Layers, Scripts, Runtimes, Tools, Harnesses, Workflows
+
+- Æsop-Xi protocol definitions
+- Memory pipeline: OmniRoute/SQL → Reasoning Bank → OB1 → mem0 → Daemons/Models
+- RLVR corrections strategy (verifiable rewards, exogenous deterministic verifiers)
+- Scripts and runtimes (GenieX, QAIRT, llama.cpp)
+- Tool/harness ingestion: ECC, Pocock, GSD, Prime Agent, Honey for Devs, Claude Video, Reverse Skills, Code Review Graph, mem0, OmniRoute, OB1, node.js
+- Agent setup and harness workflows
+- ECC desktop UI + Anthropic plugins (now agent-friendly, thousands of plugins)
+- ECC can be wired to Gemini (possibly Gemini CLI/Code)
+- JSONL manifests for everything (all custom stuff, not just Claude Code)
+
+### Phase 2: Hardware, Models, Agent Framework, Repo Setups (In Tandem)
+
+- Repo design and build-out (all 12 repos defined in Part 5)
+- Hardware: Node Alpha (phone), Node Beta (Jetson), Node Gamma (Pi), Node Delta (GCP)
+- Models: Qwen 0.8B (QAIRT), Qwen 9B (GenieX), frontier models as tool calls
+- Agent framework: Claude Code harness, Prime Agent for openweight models
+- Schema and context protocols
+- ADB loopback bridge protocol ("laptop trick") — purely defined
+- Custom MCP server (eventually custom for Æsop-Xi; for now use what tools already provide)
+- Droid Desk setup on phone + tablet (ADB root, working voice stack, desktop UI)
+- Salvage prior APK (has model loading, router, terminal UI, Chromium browser) — gear toward terminal + NPU manager script
+- Help desk agent: 2000-page GenieX Enterprise docs → trained/formatted agent for flashing Nano and other tasks. Models: Phi instructor, Granite mini, Gemma 4B, Qwen, Gemma 12B, Twin 9B
+- TurboQuant/smol/nano/mini agent builds — can get away with less-smart local agents because of cloud access for heavy inference
+
+### Phase 3: 3-APK Deployment + Inference
+
+- 3-APK architecture: Horizons UI + Æsc Shell Daemon + Æyre Media Daemon
+- Bypass Termux entirely — build custom terminal APK
+- NPU manager script runs on the terminal
+- Dual-model on-device inference (0.8B executor + 9B query)
+- 9B CAN call frontier models as tool calls (research mode, deep query mode, conversation mode)
+- Conversation/chat modes: GLM 5.2, Fable 5, Opus, Gemini (good for ideas/infrastructure, bad at code)
+- Voice stack: Silero VAD + Moonshine STT + Kokoro TTS (the hard unsolved problem — greenfield)
+
+### Phase 4: Network Integration + GCP Flywheel
+
+- Flash Jetson Orin Nano Super + Rubik Pi 3
+- Tailscale mesh network
+- Red Agent Auditor (air-gapped batch training verification)
+- Home node multi-agent swarm: Home Assistant Auditor, Red Agent Auditor, IT Help Desk, Web Ingestion Monitor, NPU Inference Manager
+- GCP cross-account IAM handshake + RLVR training flywheel
+- GCP Agent App Builder: developer credit allocation, which apps utilize what, memory/data collection scripts, training schemas (future planning doc, not grill session scope)
+
+---
+
+## PART 2: CORRECTED MODEL PATHWAYS
+
+### Executor Model (0.8B)
+
+| Field | Value |
+|---|---|
+| **Model** | Qwen 3.5 0.8B |
+| **Source** | QAI Hub (pre-compiled Genie bundle) |
+| **Pathway** | QAI Hub → QAIRT runtime → HTP0 (Hexagon NPU v79) |
+| **Compute** | NPU-pinned (HTP0) — no llama.cpp, no GenieX |
+| **Context** | 4096 |
+| **Role** | Fast task execution, prompt synthesis, mem0 + Reasoning Bank access |
+| **Runs on** | Node Alpha (phone), always-on |
+| **Download** | `huggingface.co/qualcomm/Qwen3.5-0.8B` — pull the Genie bundle for your device |
+
+### Query Model (9B)
+
+| Field | Value |
+|---|---|
+| **Model** | Qwen 3.5 9B (Unsloth GGUF) |
+| **Source** | Unsloth GGUF release |
+| **Pathway** | Unsloth GGUF → GenieX `llama_cpp` → GGML Hexagon backend → librc → kernel → HTP0 |
+| **Compute** | `--device npu` (pinned to Hexagon NPU v79) |
+| **Context** | 4096 |
+| **Role** | Meta-prompt compilation, OB1 vector queries, JSONL index retrieval, **tool calling including frontier models** |
+| **Runs on** | Node Alpha (phone), on-demand |
+| **Download** | `huggingface.co/unsloth/Qwen3.5-9B-GGUF` — pull Q4_0 |
+
+### 9B Frontier Model Calling (Correction)
+
+The 9B is NOT limited to local-only inference. It can call frontier models as part of its tool calling:
+- **Research mode / deep query mode**: 9B can call Claude, GLM 5.2, Fable 5, Opus, Gemini APIs for heavy compute
+- **Conversation mode**: Can route to GLM 5.2, Fable 5, Opus, or Gemini for different chat purposes
+- **Gemini usage**: Good for fresh ideas, unique problem solving, infrastructure/enterprise data. Bad at code (makes shit up). Use for ideas, end session when it starts coding.
+- This is just another tool in its toolkit — it knows the situation and context
+
+### Fallback Hierarchy (if 9B NPU chokes on unsupported ops)
+
+1. 9B Q4_0 → `--device npu` (preferred, test first)
+2. 9B Q4_0 → `--device hybrid` (if NPU-pinned has op fallback issues)
+3. 4B Q4_0 → `--device npu` (drop to smaller model, stay on NPU)
+
+**Architecture principle**: Maximize on-device model size on bare metal. 0.8B stays NPU-pinned via QAIRT regardless — it's the executor, not negotiable.
+
+### RAM Math (Confirmed)
+
+- 9B Q4_0 weights: ~5.45 GB
+- KV cache 4096 ctx: ~0.5–1 GB
+- Total 9B footprint: ~6–6.5 GB
+- Available RAM stripped down: 9–12 GB
+- Headroom: 2.5–6 GB for system + APKs
+- **VERDICT**: Both models run on phone, NPU-pinned, confirmed
+
+### Voice Stack
+
+**NOT IN SCOPE for the grill session.** Deferred to Phase 3 (post-APK build). The 3-APK architecture (Horizons UI + Æsc Shell Daemon + Æyre Media Daemon) is the solution. No existing solution to reference — this is greenfield work. Every AI session that has tried to help with voice on Android has failed because there's no prior art.
+
+---
+
+## PART 3: DOWNLOAD & INSTALL LIST (In Order)
+
+### Tier 1: Download Immediately
+
+| Item | Source | Size | Why First |
+|---|---|---|---|
+| Qwen 3.5 0.8B Genie bundle | `huggingface.co/qualcomm/Qwen3.5-0.8B` | ~800 MB | Proof-of-life that QAIRT → HTP0 works on your device |
+| Qwen 3.5 9B Unsloth GGUF Q4_0 | `huggingface.co/unsloth/Qwen3.5-9B-GGUF` | ~5.45 GB | Your query model, test on NPU |
+
+**Note**: User already has all weights, runtimes, SDKs, MCP, and voice stack on device. These downloads may already be present — verify before re-downloading.
+
+### Tier 2: Install Before Grill Session
+
+| Item | Install Command | Why |
+|---|---|---|
+| ECC (Claude Code plugin) | `/plugin marketplace add https://github.com/affaan-m/ECC` then `/plugin install ecc@ecc` in Claude Code | Skills/rules/hooks/agents layer for Claude Code sessions. Also has desktop UI with manifest guide. |
+| Anthropic Plugins | Browse the agent-friendly plugin repo (thousands of plugins now available) | Extends Claude Code capabilities |
+| Pocock Skills | `npx skills@latest add mattpocock/skills` then `/setup-matt-pocock-skills` | Planning layer — grill-with-docs, to-spec, to-tickets, domain-modeling |
+| OpenWiki | `npm install -g openwiki` | File administrator — GLM 5.2 synthesizes your docs into wiki |
+| File converters | `pip install pymupdf python-docx markdownify` | Convert raw PDF/DOCX/HTML → markdown for OpenWiki |
+| Droid Desk | Install on phone + tablet | ADB root setup, working voice stack, desktop UI for tablet remote sessions |
+
+### Tier 3: Install After Grill Session (When Ready to Use)
+
+| Item | Install Command | Role |
+|---|---|---|
+| GSD v2 | `npm install -g gsd-pi@latest` | Build phase execution engine (fresh context per task, git branch-per-slice) |
+| Prime Agent | Clone `github.com/PrimeIntellect-ai/prime-agent` | Openweight model harness (RLM, Continual Harness, daemon-backed, /refine) |
+| obsidian-skills | `/plugin marketplace add kepano/obsidian-skills` then `/plugin install obsidian@obsidian-skills` | Teaches Claude Code proper Obsidian syntax |
+| notebooklm-py | `pip install "notebooklm-py[browser]"` then `notebooklm skill install` | Push docs into Gemini Notebook for deep research |
+| graphify | `uv tool install graphifyy` then `graphify install` | Build knowledge graphs from your repos/docs |
+| Honey for Devs | `npx honey add` | Developer-focused skill harness |
+| mem0 | `pip install mem0ai` | Episodic memory — hot-plate context cache for executor model |
+| OmniRoute | Clone and configure | Routing layer — point at local GenieX/QAIRT endpoint via openai-compatible provider |
+
+### Tier 4: Help Desk Agent Models (For GenieX/Flashing/Infrastructure Docs)
+
+| Model | Size | Use Case |
+|---|---|---|
+| Phi instructor | Small | Lightweight help desk |
+| Granite mini | Small | IBM-optimized help desk |
+| Gemma 4B | Medium | General help desk with good context |
+| Qwen (various) | Various | Flexible help desk |
+| Gemma 12B | Large | Deep documentation help desk (GenieX 2000-page docs) |
+| Twin 9B | Large | Heavy documentation tasks |
+
+---
+
+## PART 4: CORRECTED TOOL ROLES
+
+### Execution Engines (No Overlap — Parallel, Not Integrated)
+
+| Tool | For | What It Does | Notes |
+|---|---|---|---|
+| **ECC** | Claude Code sessions (cloud/terminal/desktop) | Plugin marketplace, agents, skills, hooks, rules. Extends Claude Code. Has desktop UI with manifest guide. Can be wired to Gemini. | Does NOT integrate with Prime Agent |
+| **Prime Agent** | Openweight models (your NPU models) | RLM harness with persistent IPython REPL, Continual Harness, /refine, daemon-backed sessions | Does NOT integrate with ECC |
+| **GSD v2** | Build phase execution | Standalone CLI on Pi SDK. Fresh context window per task, git branch-per-slice, crash recovery. | |
+| **Pocock Skills** | Planning layer | grill-with-docs, to-spec, to-tickets, implement (TDD), code-review, domain-modeling, wayfinder | |
+
+### Routing Layer
+
+**OmniRoute only. Skip LocalAI on phone.**
+
+| | OmniRoute |
+|---|---|
+| What | Multi-provider routing gateway (Next.js) |
+| Local model hosting | No (routes TO local runtimes like GenieX/QAIRT) |
+| Cloud routing | Yes (350 providers, 19 strategies) |
+| OpenAI↔Anthropic translation | Yes |
+| Modality bridge | Yes (vision + audio + video) |
+| Quota-aware | Yes |
+
+### Memory Pipeline (Canonical Order)
+
+```
+OmniRoute/SQL → Reasoning Bank → OB1 → mem0 → Daemons/Models
+```
+
+| Stage | Role |
+|---|---|
+| OmniRoute/SQL | Foundational database routing, local SQL infra, syncs with external buckets |
+| Reasoning Bank | RLVR trajectory store — verified execution paths that passed programmatic tests |
+| OB1 (Open Brain) | Cognitive translation layer — maps unstructured docs into semantic vectors via Postgres |
+| mem0 | Front-facing episodic memory — user preferences, short-term state, rolling habits |
+
+### RLVR (Corrections Strategy)
+
+RLVR = Reinforcement Learning with **Verifiable** Rewards (not "Vector Reasoning")
+
+- The verifier is **exogenous and deterministic** (compiler, linter, graph engine) — never a neural network
+- Cross-auditing (not dual-model) is the gold standard
+- Two verification layers: **syntactic** (linters/compilers) + **semantic/graph** (KAG mutual indexing)
+- Trajectory flow: daily logs → Red Agent audit → tokenized trajectories → Reasoning Bank → back to edge models
+
+### Local Agent Tiers
+
+| Tier | Models | Why |
+|---|---|---|
+| TurboQuant/smol/nano/mini | Small quantized models | Can get away with less-smart local agents because cloud access handles heavy inference |
+| Help desk agents | Phi, Granite mini, Gemma 4B/12B, Qwen, Twin 9B | Feed 2000-page GenieX docs → agent for flashing Nano, infrastructure help |
+| Executor | Qwen 0.8B (QAIRT, NPU-pinned) | Fast task execution, always-on |
+| Query | Qwen 9B (GenieX, NPU-pinned) | Meta-prompt, tool calling including frontier models |
+
+### Repo Correction Needed
+
+`novae-xorpus` mistakenly cites "OpenAI" in places — should be "OmniRoute" per the routing decision.
+
+---
+
+## PART 5: REPO PARTITIONING & DIRECTORY SCHEMA
+
+### The 12 Repos
+
+| # | Repo Name | Scope | Assigned Agent |
+|---|---|---|---|
+| 1 | `file-management-and-skills` | Canonical docs, JSONL markers, skill schemas | File administrator (GLM 5.2 via OpenWiki) |
+| 2 | `horizons-ui` | APK 1: orchestration GUI, WebView, chat tile, Omni-Route dispatcher | Horizons UI specialist |
+| 3 | `nova-daemon-shell` | APK 2: Æsc — OS assistant, accessibility, shell access, NPU housekeeper | Æsc daemon specialist |
+| 4 | `nova-daemon-media` | APK 3: Æyre — screen vision, voice stack, STT/TTS, Game SDK | Æyre daemon specialist |
+| 5 | `agent-harness-hub` | Pocock, Honey for Devs, Prime Agent, ECC, GSD, Anthropic plugins | Harness integration agent |
+| 6 | `omni-route-gateway` | Modality routing, OpenAI/Anthropic translation, local runtime endpoint | Routing specialist |
+| 7 | `obsidian-knowledge-vault` | Graphify, KAG/RAG, NotebookLM hooks, Obsidian sync | Knowledge graph agent |
+| 8 | `aesop-xi` | Split execution harness, protocol definitions | Protocol agent |
+| 9 | `novae-xorpus` | Universal database / LLM wiki / memory bank | Database agent |
+| 10 | `red-agent-auditor` | Air-gapped batch training verification, Nope data bank | Red Agent |
+| 11 | `node-beta-jetson` | Postgres OB1, CUDA servers, home node agents | Node Beta specialist |
+| 12 | `gcp-training-flywheel` | RLVR export, IAM handshake, GRPO pipelines | GCP specialist |
+
+### Data Tiering (4-Bucket Physical Structure + 5-Layer Conceptual Flow)
+
+**Physical Structure (4 Buckets):**
+```
+raw_sources/     → master_wiki/     → inference_skills/     → automation_scripts/
+```
+
+**Conceptual Flow (5 Layers):**
+```
+raw_pdf → wiki_md → recall_jsonl → repos/scripts → INDEX.jsonl
+```
+
+**JSONL Record Format:**
+```json
+{"id": "doc_001", "topic": "QAIRT conversion", "summary": "...", "source_pdf": "specs/qairt.pdf", "wiki_link": "wiki/qairt.md"}
+```
+
+---
+
+## PART 6: THE SALVAGED APK
+
+### What You Already Have
+
+The prior repo APK already has:
+- ✅ Model loading capability
+- ✅ Router system
+- ✅ Terminal connection UI
+- ✅ Chromium browser built in
+- ❌ Previously crashed because Watchdog daemon was wired wrong
+- ❌ User was inexperienced with repo management, believed models instead of checking file structure
+
+### New Approach
+
+Instead of trying to make it a "do everything" app:
+1. **Gear it toward landing on the terminal** — make the terminal the primary interface
+2. **Run NPU manager script on it** — the terminal loads and manages NPU models
+3. **Use it for on-device file management** — OpenWiki TUI runs through this terminal
+4. **Help desk agent** — feed it GenieX/infrastructure docs, use as help when flashing Nano
+5. **Don't vibe code** — be stringent on file structure, tools, skills, harnesses. No room to wiggle. Build exactly what's wanted.
+
+### Why 3-APK (The Real Motivation)
+
+- Fed up with Termux being a piece of shit
+- Android audio layer doesn't work properly for speech-to-text
+- Android sandboxes every single app
+- Screen vision doesn't work through Termux
+- VNC viewer is laggy and glitchy — feels like running old DOS
+- Termux limitations are the entire reason for building custom APKs
+- Æsc and Æyre run as native Android services with proper permissions
+- WebSocket loop between APKs for IPC (no slow Android IPC)
+
+---
+
+## PART 7: GRILL SESSION PREPARATION CHECKLIST
+
+### Before You Start the Grill Session
+
+- [ ] Termux installed (from F-Droid, not Play Store)
+- [ ] OpenRouter API key acquired
+- [ ] `novae-xorpus` repo cloned to `~/novae-xorpus/`
+- [ ] `raw-bucket` repo created or cloned to `~/raw-bucket/`
+- [ ] OpenWiki installed and initialized (`~/setup-aesop.sh` completed)
+- [ ] Raw files converted to markdown (`~/convert-raw-to-md.py` run)
+- [ ] JSONL markers generated (`~/generate-jsonl-markers.py` run)
+- [ ] ECC installed in Claude Code (`/plugin install ecc@ecc`, Full profile)
+- [ ] ECC desktop UI running
+- [ ] Anthropic plugins browsed and relevant ones installed
+- [ ] Pocock Skills installed (`npx skills@latest add mattpocock/skills` + `/setup-matt-pocock-skills`)
+- [ ] Droid Desk operating on phone + tablet (ADB root, voice stack)
+- [ ] Qwen 3.5 0.8B Genie bundle downloaded (or confirmed already on device)
+- [ ] Qwen 3.5 9B Unsloth GGUF Q4_0 downloaded (or confirmed already on device)
+- [ ] QAIRT + 0.8B NPU proof-of-life test completed (Task 1 below)
+- [ ] GenieX + 9B Unsloth GGUF NPU test completed (Task 2 below)
+- [ ] `/grill-with-docs` verified available in Claude Code
+
+### NPU Proof-of-Life Tests
+
+**Task 1 — QAIRT Pathway (0.8B)**
+
+```bash
+export QAIRT_HOME=/path/to/QAIRT_SDK
+export PATH=${QAIRT_HOME}/bin/aarch64-android/:${PATH}
+export LD_LIBRARY_PATH=${QAIRT_HOME}/lib/aarch64-android:${LD_LIBRARY_PATH}
+export ADSP_LIBRARY_PATH=${QAIRT_HOME}/lib/hexagon-v73/unsigned
+
+genie-t2t-run --context_length 4096 --model_dir ./genie_bundle --prompt "Hello"
+```
+
+**Task 2 — GenieX Pathway (9B)**
+
+```bash
+geniex infer unsloth/Qwen3.5-9B-GGUF --device npu --context-length 4096 --quantization q4_0
+# If stalls: --device hybrid
+# If still choking: drop to 4B
+```
+
+---
+
+## PART 8: GRILL SESSION MANIFEST
+
+Save this as `~/novae-xorpus/GRILL-MANIFEST.md`:
+
+```markdown
+# GRILL WITH DOCS — ÆSOP-XI MASTER ARCHITECTURE SESSION
+
+## SESSION CONTEXT
+
+### Canonical Branding
+- Motto: Xçineribus, in-variis-nunquam-varius, Novi-Æxentis-Copiæ, Vincent
+- Translation: "From the ashes, unwavering in the midst of adversity, new forces of abundance conquer"
+- Protocol: Æsop-Xi™ (aesop-xi)
+- Agent Core: NovusÆxenti™ (novus-aexenti)
+- Tools/Harness: NovÆxopia™ (novaexopia)
+- Database: NovÆxorpus™ (novae-xorpus)
+- UI: Horizons UI™ (horizons-ui)
+- Shell Daemon: Æsc (nova-daemon-shell)
+- Media Daemon: Æyre (nova-daemon-media)
+- Verification

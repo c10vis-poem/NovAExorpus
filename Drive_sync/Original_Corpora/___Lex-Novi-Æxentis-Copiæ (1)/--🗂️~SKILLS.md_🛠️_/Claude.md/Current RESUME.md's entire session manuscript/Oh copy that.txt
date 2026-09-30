@@ -1,0 +1,5 @@
+Oh copy that that makes sense as far as what the memory MD is now I got that misconstrued I think because what I just explained having memory MD point towards it that would be something that would be in the repo based Claude MD is that not correct right that sounds more accurate doesn't it and then that memory MD is actually what is that that's just going to be a file that coordinates which data sets go where and how each memory file is piped? 
+
+If that's the case is that even the correct way to go about that? Aren't there more than three types anyway? 
+
+Does it even help to keep them segmented like that or wouldn't a flat file be better with the manifest Jason l pointing at the root of every repo or at the root of every master folder and the individual files themselves would it still need segmented if that was the case sounds like it's something that's more curated towards the user side making it easier for a human's visual processing

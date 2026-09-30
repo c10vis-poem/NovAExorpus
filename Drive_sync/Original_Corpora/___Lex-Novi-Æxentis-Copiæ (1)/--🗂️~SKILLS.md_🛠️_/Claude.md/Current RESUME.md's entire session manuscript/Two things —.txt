@@ -1,0 +1,7 @@
+Two things — you're right that a per-project symlink isn't the same as an actual master overview, and I'll fix that. Let me build the aggregation for real: a script that pulls every project's `RESUME.md` into one master file, plus a git hook so it regenerates automatically.
+
+Works. Now the git hook so it regenerates automatically on commit (safer/more reliable than pre-push, fires effectively as often).
+
+PostToolUse:Bash says: Tip: Run /ultrareview before you push to catch bugs with a cloud-based multi-agent review.
+
+Hook confirmed working — it fired automatically and regenerated the master file on that commit. Now building the artifact you asked for, loading the required design skill first.

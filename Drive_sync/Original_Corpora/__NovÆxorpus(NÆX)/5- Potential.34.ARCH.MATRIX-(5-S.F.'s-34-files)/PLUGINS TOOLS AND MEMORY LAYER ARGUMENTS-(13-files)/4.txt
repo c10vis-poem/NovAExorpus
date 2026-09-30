@@ -1,0 +1,42 @@
+Reordering caught, and it makes sense conceptually — nodes are hardware/body, termux is body too (the on-device execution shell), so they sit together, ahead of skills:
+
+```
+horizons-ui/
+novus-agenti/
+nova-claw/
+aesop/
+nodes/              ← moved up — home stack (jetson + rubik-pi + main compute)
+termux/             ← pulled out of clis-and-agents, own folder, sits between nodes and skills
+skills/
+clis-and-agents/    ← open-wiki-tui, pi-agent, claude-code-local, code-review-graph
+file-management-system/
+recursive-training/
+red-agent-auditor/
+github-ci-cd/
+global-documentation-vault/
+registries/
+```
+
+`claude-code-termux` moves out of `clis-and-agents/` into the new `termux/` folder — that's the same tool, just now living where you said it belongs.
+
+Three new architecture facts from what you just said, worth recording exactly as stated rather than me guessing at the harness detail:
+
+- **Home isn't one agent** — main-compute box runs an inference agent, Jetson runs its own inference agent, and Rubik Pi runs a **housekeeper** task (candidate stack: pi-agent + aider + notebooklm hookup), sandboxed, sharing the same universal memory layer as everything else.
+- **Housekeeper ↔ Red Agent is an open swap, not a decision** — you said "we can swap it out for the red agent," not "it is the red agent." I'm logging that as unresolved, not merging the two roles.
+- **Internal `nodes/` layout is explicitly deferred** — you don't want Jetson vs. Rubik Pi split decided now; that's a future session's job, and you're trusting an agent to map the harness/model detail once it gets there. `nodes/` stays a placeholder folder, not fleshed out.
+
+One thing I won't silently absorb: **"one agent tackles NovA-Claw, one tackles Novus-Agenti, two different repos"** directly contradicts the repo-count recommendation already in the plan ("two repos, going on three" — `NovA-Corpus` + `horizons-ui`, with `nova-claw-runtime` later). If NovA-Claw and Novus-Agenti are each getting their own repo, that's at minimum four repos, not two-going-on-three. I'm not reconciling that myself — flagging it as a real conflict for you to settle, since it changes the repo-count answer that's still marked open.
+
+Plan file updated — reordered tree, the home-stack agent roles, the housekeeper/Red-Agent swap flagged as open rather than merged, and the repo-count conflict called out explicitly rather than resolved on my own.
+
+That last one needs your call before I go further, since it changes how many repos get created:
+
+Fair, and you're right — "two going on three" was my recommendation, not something you'd agreed to. I shouldn't have framed disagreeing with my own idea as a conflict for you to resolve. Here's the actual argument, since you asked for it directly:
+
+**For splitting NovA-Claw and Novus-Agenti now:** the trigger isn't code volume, it's that you're about to run **two independent building sessions against them in parallel.** Folder-level `agent_manifest.json` isolation works fine when one person curates docs slowly. It's weaker the moment two live coding sessions are pushing commits concurrently — shared repo means shared CI runs, shared PR queue, shared branch-protection surface, and one session's broken commit can block or confuse the other's review even with folder scoping. A repo boundary is the only thing that gives each session its own CI and its own history with zero interference. That's exactly the condition you just described, so it's the real trigger for splitting, not a future one.
+
+**Against splitting right now:** neither has committable code yet — Novus-Agenti's `designed-only`, and NovA-Claw's actual runtime bits (daemons, launcher) currently live inside Horizons-UI's repo, not built fresh. And the brain/body boundary is still being worked out at the design level, so a shared repo makes it easier to adjust that boundary in one PR while it's still unsettled. More repos before there's content is also a fixed maintenance cost regardless of justification — that's the literal failure mode already lived through on the vault.
+
+**My actual call:** split now. The parallel-session plan is concrete and near-term, and that's specifically the condition that makes separate repos worth their cost.
+
+On the second thing — you're right, and I'll own it plainly rather than explain it away. I scanned Repo-Bank once, surfaced a few findings, and then folded most of the rest into a bullet list titled "Also present" — which is exactly the "doesn't quite believe it's real" treatment you're describing, even though I didn't intend dismissal. What you're describing isn't a junk drawer — it's a live discovery pipeline you run every few days, with a track record of catching things early. That's a real capability and it needs its own place, not a subfolder buried under `clis-and-agents/`.

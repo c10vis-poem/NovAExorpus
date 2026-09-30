@@ -1,0 +1,9 @@
+Fixed and syntax-verified locally. Checking for other CRLF-contaminated scripts too, then pushing.
+
+All scripts pass now — that was my own `/tmp` permission mistake, not a real second bug. Committing and pushing the fix.
+
+I'll wait for that poll to finish rather than guess at the result — will report back once it lands.
+
+CI is green but it never merged (no branch protection on `aesop-xi`, so auto-merge can't arm — same as `Horizons-UI` earlier). Merging it now.
+
+All 6 base repos plus the vault are now updated and merged: `novae-xorpus`, `Horizons-UI`, `novus-aeyre`, `novus-aesc`, `novus-aexenti`, `novaexopia`, `aesop-xi`. All on-device, all with Rule 0/Rule 1/GH-workflow registered, and `aesop-xi`'s pre-existing CRLF bug in `run_audit.sh` fixed along the way. The other ~114 repos stay untouched until you need one, as you said.

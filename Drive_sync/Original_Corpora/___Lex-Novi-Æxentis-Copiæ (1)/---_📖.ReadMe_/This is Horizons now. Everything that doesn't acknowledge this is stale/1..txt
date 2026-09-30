@@ -1,0 +1,4 @@
+1. **Callers:** none — standalone artifact source.
+2. **No existing file serves this purpose** — confirmed, only `aesop-roadmap.html` exists in scratchpad, different content.
+3. **No data files read/written** — static document.
+4. **Verbatim:** *"I'd like to ask an agent and make that just another project in and of itself would be uploading the agent with all of the necessary data and skills and tools to analyze user end goals and assets and then audit existing repo code and assets against the usability or Salvage worthiness"*

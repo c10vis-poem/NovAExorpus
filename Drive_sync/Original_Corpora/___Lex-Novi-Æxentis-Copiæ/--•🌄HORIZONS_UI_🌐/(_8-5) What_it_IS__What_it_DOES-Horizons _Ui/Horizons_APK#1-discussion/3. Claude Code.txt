@@ -1,0 +1,39 @@
+Claude Code
+
+
+Logged — this is a big batch, organized by area. Still not writing anything, just confirming I've got it straight.
+
+
+Cross-tile connectivity.All six tiles need a pathway to the Router, not just the subset currently drawn in the circuit diagrams. And Archives (in addition to Horizons) is a source for the Easter-egg game — Archives can push it to the Router the same way Horizons's hidden payload does.
+
+
+Overflow / failure behavior — new, not in canon yet.If the Router (or device storage) is full when something gets pushed to it, it bounces back to wherever it came from (Archives, Settings, etc.) rather than failing hard, and a failure face pops up. One thing to confirm: you said "404 goat" — canon currently has these as twoseparatefaces (GOAT = handshake/fuse failure with the bleat sound; ASCII 404 CAT = browser-scoped connection failure). Are you merging those into one face for this case, or is this a third, distinct face?
+
+
+Terminal — correction to the locked spec.TERMINAL-SPEC.mdundersold it: Terminal also configures models and fine-tunes parameters (beyond just scripting), and needs menus for selecting preloaded scripts/runtime configs — not just a shell. It also needs a view into Archives contents and the ability to move files from the Settings vault into Archives to free up space, from inside the Terminal itself.
+
+
+Voice stack — status update, flagging clearly since it reverses a standing priority.You said you can't get the voice stack running on your phone at all, and the app might have to ship without it. Current canon (MASTER-BUILD-BLUEPRINT.md§16, Phase 0) has "a working voice agent on the phone" as thenearest priority, proved off-app first. Want me to record voice as deprioritized/at-risk for this ship, or is this just you flagging the current blocker rather than a decision to cut it?
+
+
+Termux.Confirming "term locks" = Termux — Terminal is supposed to have real Termux access and doesn't yet. Matches the existing gap inAGENT-BRIEF.md(no inbound listener, Termux backend absent) — this makes it a hard priority, not just a nice-to-have.
+
+
+Live, in-app user manual + guided assistant.The on-device CLI assistant (currentlydesigned-only) needs to be scripted specifically to walk a user through aliveuser manual — not a static doc, something interactive in-app.
+
+
+Complexity concern.Noted directly — you said the app is getting overcomplicated and shouldn't be. That's context for everything below, not a separate feature.
+
+
+UX principle — no typing except Terminal/browser.This is a hard rule now: Settings, Archives, and Router must be100% button/list-driven, zero free-text entry. Loading models, fine-tuning params, all of it — pick from a list, don't type a config. Long-press or tap on any control should pop up a plain-language description of what it does. Typing is only acceptable inside the Terminal itself or when using the browser (Monitor's main browser / Terminal's browser shortcut).
+
+
+Settings additions.Standard app-level settings — font choice, light/dark theme — alongside the wallpaper support that's already speced.
+
+
+Router — STT tuning.The DSP/voice panel on the Router's tuner deck currently only covers TTS (pitch, speed, volume, voice swap perROUTER-STEREO-STACK-SPEC.md). Add STT fine-tuning controls to that same panel.
+
+
+Keep going whenever you're ready.
+
+

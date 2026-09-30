@@ -1,0 +1,45 @@
+You're right, and I see exactly where it went wrong — I let two different things collide under one word. I borrowed "tier" from the **memory-curation system** (episodic/structural/analytical — an information-*type* classification, picture 2) and slapped it onto the **stack layers** (Horizons-UI/Novus-Agenti/NovA-Claw/AESOP — a system-*role* classification) as `tier-1-horizons-ui`, `tier-2-novus-agenti`, etc. That's not the same taxonomy, and forcing it into one prefix is what made everything read as more nested than it is.
+
+Three separate templates, not one:
+
+**1. Corpus folder structure — flat, plain domain names, picture 1's shape:**
+```
+📁 NovA-Corpus/
+│   └─ README.md · CLAUDE.md · STACK-MAP.md · GLOSSARY.md · master_blueprint.txt
+│
+├── 📁 horizons-ui/            README.md · CLAUDE.md · skill_manifest.json · llm_wiki.md · src/
+├── 📁 novus-agenti/           " " · executor-core/ · query-core/
+├── 📁 nova-claw/              " " · daemons/ · runtimes/ · tool-skills/
+├── 📁 aesop/                  " " · ob1/ · omni-route/ · mem0/ · reasoning-bank/ · memory-tools/
+├── 📁 clis-and-agents/        " " · open-wiki-tui/ · pi-agent/ · claude-code-termux/ · code-review-graph/
+├── 📁 skills/                 ROUTER.md · base_skill_guideline.md · <skill-name>/
+├── 📁 file-management-system/ ← memory tiers live HERE ONLY (see #3)
+├── 📁 recursive-training/     [designed-only]
+├── 📁 red-agent-auditor/      [designed-only]
+├── 📁 github-ci-cd/           README.md · workflows/
+├── 📁 nodes/                  razr/ · jetson/ · rubik-pi/
+├── 📁 global-documentation-vault/  qairt-docs/ · genie-x/ · google-dev-docs/ · llama-docs/ · unsloth-docs/
+└── 📁 registries/             models.md · repos.md
+```
+No `tier-N-` prefix anywhere in this list. One content subfolder or two per domain, section kit at each — matches picture 1's depth exactly.
+
+**2. Repo structure — picture 3's shape, used *only* when a domain graduates into its own actual git repo** (build tooling, `.github/workflows/`, compiled output). Horizons-UI takes this shape once it's pulled out; nothing in the corpus does until then.
+
+**3. Memory structure — picture 2's shape, scoped *only* to `file-management-system/`:**
+```
+file-management-system/
+├── tier-1-episodic/                mem0 storage
+├── tier-2-structural/
+│   ├── open-wiki-cli-vault/
+│   └── obsidian-vault-network/
+└── tier-3-analytical/
+    ├── graphify-pipelines/
+    └── notebooklm-py-contexts/
+```
+"Tier" means information-type here, and stays inside this one folder — it doesn't describe the rest of the corpus.
+
+Fixing the plan file now.
+
+Fixed — plan file now has the three templates called out explicitly with the "do not merge" note, and the flat corpus tree drops every `tier-N-` prefix except inside `file-management-system/`, where it correctly means information-type rather than stack role.
+
+Ready to split-screen whenever you are — show me the README/build-doc format for ingestion and we'll start on the inbox.

@@ -1,0 +1,25 @@
+Real answers, not another deflection:
+
+**NovA-orca** — this might be more than "the housekeeper's tool." An ADE for running a fleet of parallel agents across desktop/mobile/VPS is close to purpose-built for your actual topology: phone dual-agent, main-compute agent, Jetson agent, Rubik Pi housekeeper. Worth considering as the orchestration layer itself, not just something sitting on one node.
+
+**ECC-aesop** (fork of `affaan-m/ECC`) — genuinely the most architecturally important one here. It's a skills/instincts/memory/security harness that works *across* Claude Code, Codex, OpenCode, and Cursor — meaning it's a candidate for actually implementing "the same universal memory layer reaches every agent," which right now is a design goal with no mechanism. One real problem: naming it `ECC-aesop` collides with your own AESOP protocol. That needs a rename on your end before it causes the same confusion `OmniRoute` did.
+
+**c10vis--pi** — solid pick for the home-node coding agent, and `tmux-assistant-resurrect` explicitly supports it. But you also have aider and Hermes doing overlapping jobs. That's not wrong yet, but it's three coding-agent CLIs for roles that may only need one — worth deciding if that's intentional redundancy (backup options) or clutter to prune later.
+
+**NovA-openship** — flag, not dismissal: "Openship" upstream is normally an order-routing/fulfillment platform, not agent deployment. "Self-hosted deployment platform" is generic enough that this might not do what the name suggests for your use case. Worth actually checking before relying on it.
+
+**SuperClaude_Framework** — real overlap risk with the skills system you're already building by hand. If you adopt its command/persona layer *and* build your own `skills/`, you get two systems governing Claude Code's behavior. That's a decision to make explicitly, not something to silently run both of.
+
+**anything-llm** — closer to a reference implementation than something to bolt on. It's a full local-LLM platform that competes with your custom Novus-Agenti/AESOP design rather than serving it. I'd park it as vault material to study, not integrate.
+
+**c10vis-crawl4ai vs. NovA-browser-use** — not redundant with each other, despite the category overlap. `crawl4ai` scrapes/extracts (fits your discovery pipeline directly). `browser-use` automates interactive actions (fits the Horizons-UI browser tab). Both earn a place, different jobs.
+
+**kotlin-sdk** (JetBrains MCP SDK) — this one's load-bearing, not exploratory. Horizons-UI is Kotlin and needs to expose or consume MCP; this is probably the actual dependency for the Termux inbound listener that's been a known gap.
+
+**NovA-ai-agent-book** — genuinely good reference text on agent fundamentals, exactly as you said — vault material, not code to run.
+
+**What I still owe you, not opinion yet:** I haven't actually read `nanobot_style_personal_ai_agent_from_scratch` — you asked for a custom script out of it, and I don't want to guess at that content before producing one. And `modern-web-guidance-src` I genuinely don't know the fit on without reading it.
+
+Logging the substantive ones to the plan now.
+
+Already answering that above as this came in — the per-tool breakdown just posted (NovA-orca, ECC-aesop, c10vis--pi, NovA-openship, SuperClaude_Framework, anything-llm, crawl4ai vs. browser-use, kotlin-sdk, NovA-ai-agent-book) is that response, and it's now logged in the plan. If that's not the batch of assets you meant, tell me which ones and I'll go through those specifically.

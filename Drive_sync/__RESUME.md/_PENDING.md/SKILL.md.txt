@@ -1,0 +1,19 @@
+﻿---
+name: orchestrator
+description: "Master workflow router. Automatically routes complex repository ingestion, multi-repo tasks, and AST indexing to ECC and Honey for Devs child skills."
+allowed-tools: ["Skill", "Bash"]
+---
+
+
+# Master Execution Router
+Whenever the user asks to ingest, map, wire, or build a repository:
+1. NEVER execute raw file reads or grep commands.
+2. Route the task to the exact ECC skill or Honey sub-agent based on this routing table:
+   - **Large file/doc ingestion:** Invoke `Skill(honey-crush)` or `Skill(px-reader)`.
+   - **AST / Code Mapping:** Invoke `Skill(nexus-mapper)` with `--file` or `--dir`.
+   - **Architecture / Multi-Repo Planning:** Invoke `Skill(ecc-planner)`.
+3. Receive the child skill output, format it, and return the compressed summary
+
+
+--- name: orchestrator description: "Master workflow router. Automatically routes complex repository ingestion, multi-repo tasks, and AST indexing to ECC and Honey for Devs child skills." allowed-tools: ["Skill", "Bash"] ---  # Master Execution Router Whenever the user asks to ingest, map, wire, or build a repository: 1. NEVER execute raw file reads or grep commands. 2. Route the task to the exact ECC skill or Honey sub-agent based on this routing table:    - **Large file/doc ingestion:** Invoke `Skill(honey-crush)` or `Skill(px-reader)`.    - **AST / Code Mapping:** Invoke `Skill(nexus-mapper)` with `--file` or `--dir`.    - **Architecture / Multi-Repo Planning:** Invoke `Skill(ecc-planner)`. 3. Receive the child skill output, format it, and return the compressed summary.:.txt.----
+# 

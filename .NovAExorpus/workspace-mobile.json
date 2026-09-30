@@ -1,0 +1,254 @@
+{
+  "main": {
+    "id": "d40e048dd518ec98",
+    "type": "split",
+    "children": [
+      {
+        "id": "eb336eddfff6091f",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "69f3e3f3859a49ef",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "NovÆxorpus_Repo's/novae-xorpus/MAP.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "MAP"
+            }
+          },
+          {
+            "id": "cc014e6ccbb9c421",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "d.u.m.b.a.s.s./manifest.jsonl.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "manifest.jsonl"
+            }
+          },
+          {
+            "id": "ffc7cb7a330e11ff",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "d.u.m.b.a.s.s./Read.me.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Read.me"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "5aff7339e6285710",
+    "type": "mobile-drawer",
+    "children": [
+      {
+        "id": "9027e7782efa7515",
+        "type": "leaf",
+        "state": {
+          "type": "file-explorer",
+          "state": {
+            "sortOrder": "byModifiedTime",
+            "autoReveal": false,
+            "showSearch": false,
+            "searchQuery": ""
+          },
+          "icon": "lucide-folder-closed",
+          "title": "Files"
+        }
+      },
+      {
+        "id": "9f9bb0cce6228ea7",
+        "type": "leaf",
+        "state": {
+          "type": "search",
+          "state": {
+            "query": "tag:#database",
+            "matchingCase": false,
+            "explainSearch": false,
+            "collapseAll": false,
+            "extraContext": false,
+            "sortOrder": "alphabetical"
+          },
+          "icon": "lucide-search",
+          "title": "Search"
+        }
+      },
+      {
+        "id": "980c35ed8631d109",
+        "type": "leaf",
+        "state": {
+          "type": "tag",
+          "state": {
+            "sortOrder": "frequency",
+            "useHierarchy": true,
+            "showSearch": true,
+            "searchQuery": ""
+          },
+          "icon": "lucide-tags",
+          "title": "Tags"
+        }
+      },
+      {
+        "id": "436d2bd81e564782",
+        "type": "leaf",
+        "state": {
+          "type": "all-properties",
+          "state": {
+            "sortOrder": "frequency",
+            "showSearch": false,
+            "searchQuery": ""
+          },
+          "icon": "lucide-archive",
+          "title": "All properties"
+        }
+      },
+      {
+        "id": "f143cf38dbf74e1d",
+        "type": "leaf",
+        "state": {
+          "type": "bookmarks",
+          "state": {
+            "showSearch": false,
+            "searchQuery": ""
+          },
+          "icon": "lucide-bookmark",
+          "title": "Bookmarks"
+        }
+      }
+    ],
+    "currentTab": 0
+  },
+  "right": {
+    "id": "ad6b6cc90110662a",
+    "type": "mobile-drawer",
+    "children": [
+      {
+        "id": "d58efcad48e39775",
+        "type": "leaf",
+        "state": {
+          "type": "backlink",
+          "state": {
+            "file": "NovÆxorpus_Repo's/novae-xorpus/MAP.md",
+            "collapseAll": false,
+            "extraContext": false,
+            "sortOrder": "alphabetical",
+            "showSearch": false,
+            "searchQuery": "",
+            "backlinkCollapsed": false,
+            "unlinkedCollapsed": true
+          },
+          "icon": "links-coming-in",
+          "title": "Backlinks"
+        }
+      },
+      {
+        "id": "38d332f6626f5c93",
+        "type": "leaf",
+        "state": {
+          "type": "outgoing-link",
+          "state": {
+            "file": "d.u.m.b.a.s.s./Read.me.md",
+            "linksCollapsed": false,
+            "unlinkedCollapsed": true
+          },
+          "icon": "links-going-out",
+          "title": "Outgoing links"
+        }
+      },
+      {
+        "id": "b541eceddfb2a47e",
+        "type": "leaf",
+        "state": {
+          "type": "outline",
+          "state": {
+            "file": "d.u.m.b.a.s.s./Read.me.md",
+            "followCursor": false,
+            "showSearch": false,
+            "searchQuery": ""
+          },
+          "icon": "lucide-list",
+          "title": "Outline"
+        }
+      }
+    ],
+    "currentTab": 0
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "bases:Create new base": false
+    }
+  },
+  "active": "69f3e3f3859a49ef",
+  "lastOpenFiles": [
+    "NovÆxorpus_Repo's/novae-xorpus/_dumbass_universal_memory/omniroute/POINTER.md",
+    "NovÆxorpus_Repo's/novae-xorpus/01_raw_sources/POINTER.md",
+    "NovÆxorpus_Repo's/novae-xorpus/00_DEFINITIVE_MASTER_SPECIFICATION_V3_COMPLETE.md",
+    "NovÆxorpus_Repo's/novae-xorpus/_dumbass_universal_memory/POINTER.md",
+    "NovÆxorpus_Repo's/raw_database/audit/FULL-SESSION-LOG-2026-09-09.md",
+    "NovÆxorpus_Repo's/aesop-xi/RESUME.md",
+    "NovÆxorpus_Repo's/aesop-xi/episodic_logs/POINTER.md",
+    "NovÆxorpus_Repo's/raw_database/audit/session-failures-2026-09-09-part3.md",
+    "NovÆxorpus_Repo's/raw_database/audit/session-failures-2026-09-09-part2.md",
+    "Drive_sync/___Lex-Novi-Æxentis-Copiæ/--•🌄HORIZONS_UI_🌐/Reference archives/src-restored/main/java/com/horizons/core/agent/tools/SystemInfoTool.kt",
+    "Drive_sync/___Lex-Novi-Æxentis-Copiæ/--•🌄HORIZONS_UI_🌐/Reference archives/src-restored/main/java/com/horizons/core/agent/tools/NotificationTool.kt",
+    "Drive_sync/___Lex-Novi-Æxentis-Copiæ/--•🌄HORIZONS_UI_🌐/Reference archives/src-restored/main/java/com/horizons/core/agent/tools/MediaTool.kt",
+    "Drive_sync/___Lex-Novi-Æxentis-Copiæ/--•🌄HORIZONS_UI_🌐/Reference archives/src-restored/main/java/com/horizons/core/agent/tools/DeviceTool.kt",
+    "Drive_sync/___Lex-Novi-Æxentis-Copiæ/--•🌄HORIZONS_UI_🌐/Reference archives/src-restored/main/java/com/horizons/core/agent/tools/ContactsTool.kt",
+    "Drive_sync/___Lex-Novi-Æxentis-Copiæ/--•🌄HORIZONS_UI_🌐/Reference archives/src-restored/main/java/com/horizons/core/agent/tools/ClipboardTool.kt",
+    "Drive_sync/___Lex-Novi-Æxentis-Copiæ/--•🌄HORIZONS_UI_🌐/Reference archives/src-restored/main/java/com/horizons/core/agent/tools/CalendarTool.kt",
+    "Drive_sync/___Lex-Novi-Æxentis-Copiæ/--•🌄HORIZONS_UI_🌐/Reference archives/src-restored/main/java/com/horizons/core/agent/tools/AppTool.kt",
+    "Drive_sync/___Lex-Novi-Æxentis-Copiæ/--•🌄HORIZONS_UI_🌐/Reference archives/src-restored/main/java/com/horizons/core/agent/tools/AlarmTool.kt",
+    "Drive_sync/___Lex-Novi-Æxentis-Copiæ/--•🌄HORIZONS_UI_🌐/Reference archives/src-restored/main/java/com/horizons/ui/theme/HorizonsTheme.kt",
+    "Drive_sync/Secure-Spark-Proof-Folder /raw_database/spark_recommendations/03_ALTERNATIVES_PROPOSAL_V1/novaexopia/modular_harnesses/local-nanobots/nanobot-personal-ai-agent-notebook.md",
+    "Drive_sync/___Lex-Novi-Æxentis-Copiæ/---📜🪶Æsop-Xi_/Æsc&Æyer/device-stt-tts/MOONSHINE-BASE-ONNX/moonshine-base-ONNX (1)/Silero VAD.md",
+    "Drive_sync/___Lex-Novi-Æxentis-Copiæ/---•🌐_🛠️_BUILDERS_GUIDE_📑~/~_🎯 PENDING _⏳--/___POTENTIAL_FIXES_&_PENDING_misc./Listen to what the Builder is describing in his replies/CC chat about app revisions /Screenshot (Aug 11, 2026 6_10_50 AM).png",
+    "Drive_sync/___Lex-Novi-Æxentis-Copiæ/---•🌐_🛠️_BUILDERS_GUIDE_📑~/~_🎯 PENDING _⏳--/___POTENTIAL_FIXES_&_PENDING_misc./Listen to what the Builder is describing in his replies/CC chat about app revisions /Screenshot (Aug 11, 2026 6_09_49 AM).png",
+    "Drive_sync/___Lex-Novi-Æxentis-Copiæ/---•🌐_🛠️_BUILDERS_GUIDE_📑~/~_🎯 PENDING _⏳--/___POTENTIAL_FIXES_&_PENDING_misc./Listen to what the Builder is describing in his replies/CC chat about app revisions /Screenshot (Aug 11, 2026 6_09_32 AM).png",
+    "Drive_sync/___Lex-Novi-Æxentis-Copiæ/---•🌐_🛠️_BUILDERS_GUIDE_📑~/~_🎯 PENDING _⏳--/___POTENTIAL_FIXES_&_PENDING_misc./Listen to what the Builder is describing in his replies/CC chat about app revisions /Screenshot (Aug 11, 2026 5_59_33 AM).png",
+    "Drive_sync/___Lex-Novi-Æxentis-Copiæ/---•🌐_🛠️_BUILDERS_GUIDE_📑~/~_🎯 PENDING _⏳--/___POTENTIAL_FIXES_&_PENDING_misc./Listen to what the Builder is describing in his replies/CC chat about app revisions /17864577884888961688703565678151.png",
+    "Drive_sync/___Lex-Novi-Æxentis-Copiæ/---•🌐_🛠️_BUILDERS_GUIDE_📑~/~_🎯 PENDING _⏳--/___POTENTIAL_FIXES_&_PENDING_misc./Listen to what the Builder is describing in his replies/CC chat about app revisions /17864549873542436283006864704453.png",
+    "Drive_sync/___Lex-Novi-Æxentis-Copiæ/---•🌐_🛠️_BUILDERS_GUIDE_📑~/~_🎯 PENDING _⏳--/___POTENTIAL_FIXES_&_PENDING_misc./Listen to what the Builder is describing in his replies/CC chat about app revisions /17864549512643124568233854629667.png",
+    "Drive_sync/___Lex-Novi-Æxentis-Copiæ/---•🌐_🛠️_BUILDERS_GUIDE_📑~/~_🎯 PENDING _⏳--/___POTENTIAL_FIXES_&_PENDING_misc./Listen to what the Builder is describing in his replies/CC chat about app revisions /17864549293614520470742738779292.png",
+    "Drive_sync/___Lex-Novi-Æxentis-Copiæ/---•🌐_🛠️_BUILDERS_GUIDE_📑~/~_🎯 PENDING _⏳--/___POTENTIAL_FIXES_&_PENDING_misc./Listen to what the Builder is describing in his replies/CC chat about app revisions /17864549013357979406631073891886.png",
+    "Drive_sync/___Lex-Novi-Æxentis-Copiæ/---•🌐_🛠️_BUILDERS_GUIDE_📑~/~_🎯 PENDING _⏳--/___POTENTIAL_FIXES_&_PENDING_misc./Listen to what the Builder is describing in his replies/CC chat about app revisions /17864540427994963975245820161820.png",
+    "Drive_sync/Secure-Spark-Proof-Folder /raw_database/spark_recommendations/03_ALTERNATIVES_PROPOSAL_V1/vendor-corpora/unsloth-docs/unsloth_training_and_export_guide.md",
+    "Drive_sync/Secure-Spark-Proof-Folder /raw_database/spark_recommendations/03_ALTERNATIVES_PROPOSAL_V1/vendor-corpora/unsloth-docs/unsloth_studio_installation.md",
+    "Drive_sync/Secure-Spark-Proof-Folder /raw_database/spark_recommendations/03_ALTERNATIVES_PROPOSAL_V1/vendor-corpora/unsloth-docs/llama_server_openai_endpoint_guide.md",
+    "Drive_sync/Secure-Spark-Proof-Folder /raw_database/spark_recommendations/03_ALTERNATIVES_PROPOSAL_V1/vendor-corpora/qualcomm-qairt-sdk/snapdragon_npu_llm_exec_recipe.md",
+    "Drive_sync/Secure-Spark-Proof-Folder /raw_database/spark_recommendations/03_ALTERNATIVES_PROPOSAL_V1/vendor-corpora/qualcomm-qairt-sdk/qairt_cpp_api_header_reference.md",
+    "Drive_sync/Secure-Spark-Proof-Folder /raw_database/spark_recommendations/03_ALTERNATIVES_PROPOSAL_V1/vendor-corpora/qualcomm-qairt-sdk/litert_ndk_prebuilt_integration.md",
+    "Drive_sync/Secure-Spark-Proof-Folder /raw_database/spark_recommendations/03_ALTERNATIVES_PROPOSAL_V1/vendor-corpora/qualcomm-qairt-sdk/geniex_runtime_overview.md",
+    "Drive_sync/Secure-Spark-Proof-Folder /raw_database/spark_recommendations/03_ALTERNATIVES_PROPOSAL_V1/vendor-corpora/qualcomm-qairt-sdk/geniex_android_kotlin_install.md",
+    "Drive_sync/Secure-Spark-Proof-Folder /raw_database/spark_recommendations/03_ALTERNATIVES_PROPOSAL_V1/vendor-corpora/qualcomm-qairt-sdk/edge_ai_hub_integration_dossier.md",
+    "Drive_sync/Secure-Spark-Proof-Folder /raw_database/spark_recommendations/03_ALTERNATIVES_PROPOSAL_V1/vendor-corpora/llama-docs/snapdragon_hexagon_htp_operations.md",
+    "Drive_sync/Secure-Spark-Proof-Folder /raw_database/spark_recommendations/03_ALTERNATIVES_PROPOSAL_V1/vendor-corpora/google-android-platform/google_litert_torch_genai_converter.md",
+    "Drive_sync/Secure-Spark-Proof-Folder /raw_database/spark_recommendations/03_ALTERNATIVES_PROPOSAL_V1/vendor-corpora/google-android-platform/gemini_enterprise_agent_platform_notebooks.md",
+    "Drive_sync/Secure-Spark-Proof-Folder /raw_database/spark_recommendations/03_ALTERNATIVES_PROPOSAL_V1/__NÆX-OUTPUT/01-TARGET-DOCs/AUDIT-01-TARGET-DOCs.md",
+    "Drive_sync/Secure-Spark-Proof-Folder /raw_database/spark_recommendations/03_ALTERNATIVES_PROPOSAL_V1/__NÆX-OUTPUT/01-TARGET-DOCs/AUDIT-01-TARGET-DOCs-v3-GOLD-EXTRACTION.md",
+    "Drive_sync/Secure-Spark-Proof-Folder /raw_database/spark_recommendations/03_ALTERNATIVES_PROPOSAL_V1/__NÆX-OUTPUT/01-TARGET-DOCs/AUDIT-01-TARGET-DOCs-v2-COMPLETE.md",
+    "Untitled.canvas"
+  ]
+}

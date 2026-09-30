@@ -1,0 +1,9 @@
+Got it — full picture now:
+
+1. **Before push:** scan the diff for secrets/API keys, refuse to push if any are found.
+2. **CI:** push triggers CI; track pass/fail.
+3. **On green:** auto-merge the PR into `main` — don't wait for manual merge.
+4. **After merge:** leave the branch in place, don't auto-delete it.
+5. **Forked repos:** at the *start of every session* working in a fork — before doing any other work — sync the fork's `main` from its upstream parent repo first, so it's always current before anything else happens (not just merged with upstream periodically).
+
+That's the complete workflow. Confirm and I'll write it to `gh-workflow-convention.md`, replacing the inferred version?

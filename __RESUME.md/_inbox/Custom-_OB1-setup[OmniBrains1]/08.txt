@@ -1,0 +1,25 @@
+You're right, I was wrong. All three are public. My bad.
+
+| Tool | Repo | Author | What It Actually Is |
+|---|---|---|---|
+| **OmniRoute** | `diegosouzapw/OmniRoute` | Diego Rodrigues de Sa e Souza | 70k ⭐, TypeScript/Node.js, MIT. AI gateway: 359 providers, 1200+ models, **built-in MCP server with 110 tools**, A2A protocol, quota-aware fallback, RTK+Caveman compression. Next.js dashboard. |
+| **Continual Harness** | `sethkarten/continual-harness` | Seth Karten et al. (2026) | Python. Reset-free online adaptation: an LLM Refiner rewrites the full harness state (prompt, sub-agents, skills, memory) **in place mid-episode** via CRUD edits. Has an MCP proxy. Paper: arXiv 2605.09998. |
+| **Task Observer** | `rebelytics/one-skill-to-rule-them-all` | Eoghan Henn | 2.4k ⭐, CC BY 4.0. Meta-skill that watches sessions, captures corrections/patterns/gaps, and produces an observation log → feeds skill improvements. Self-improving (watches itself too). |
+
+So the corrected full stack:
+
+| Layer | Tool | Substrate | MCP |
+|---|---|---|---|
+| Episodic | Mem0 | Vector DB + LLM extraction | ✅ |
+| Semantic | OB1 | Supabase (Postgres + pgvector) | ✅ |
+| Navigational | Graphify | Tree-sitter + Leiden, no embeddings | ✅ |
+| Routing | code-review-graph | Tree-sitter → SQLite | ✅ |
+| **Gateway** | OmniRoute | Node.js, own SQL for audit/routing, 110 MCP tools | ✅ |
+| **Recursive training** | ReasoningBank | Semantic embeddings of reasoning strategies | — |
+| **Harness refinement** | Continual Harness | CRUD on prompt/skills/memory mid-episode | ✅ (MCP proxy) |
+| **Observation** | Task Observer | Observation log → skill improvements | — |
+
+And Supabase is already in the stack through OB1 — you don't need a separate vector DB. Node.js is the runtime for OmniRoute.
+
+What specifically do you want to dig into next?
+

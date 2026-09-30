@@ -1,0 +1,31 @@
+Push count first: **four**, not three. I said three before chapter 2A landed, then added a fourth. Commits `6a7de7d` → `0c0aa18` → `53abf06` → `2221aa4`.
+
+## On #33 crashing
+
+The thing to know: **#33 has never run on a device.** Its own PR body says so — *"Not compiled locally… CI is the verifier… Not yet run on device."* CI green means it compiles and links. Nothing more. It's 995 added lines including a whole new STT engine.
+
+So the sequence I gave you earlier had a gap: I said merge #33 first, but I skipped the step where you find out whether it works.
+
+**Test it before merging anything.** CI on #33 produces an APK artifact — install that build, see if it boots and whether the STT engine loads. If it crashes, it gets fixed on its own branch. You do not merge a crash into `main` and then stack my PR on top of it, because then `main` is broken and you're bisecting two changes instead of debugging one.
+
+## Two ways to sequence it
+
+**A — separate, clear attribution (what I'd recommend)**
+
+1. Install #33's APK. Does it boot? Does STT load?
+2. Crashes → fix on `claude/repo-restructure-crash-analysis-j9v9fl`. Don't merge.
+3. Works → merge #33 into `main`
+4. I rebase #34 onto the new `main`, resolve the `switchOn()` conflict, push
+5. Install #34's APK, verify, merge
+
+Two install cycles, but if something breaks you know exactly which change did it.
+
+**B — combined, one test cycle**
+
+I merge #33 into my branch now, resolve the conflict locally, push. CI builds **one APK containing everything**. You install once.
+
+Faster, but if it crashes you don't know whether it was #33's STT engine or my Router change, and you're bisecting inside a single PR.
+
+**I'd take A.** #33 is the large, never-device-tested one — it deserves to fail alone if it's going to fail. My four commits are small and one of them is a manual; they're not what's going to crash your phone.
+
+Say which and I'll set it up. For B I can do the merge and conflict resolution right now.

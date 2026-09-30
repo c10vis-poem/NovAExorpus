@@ -1,0 +1,92 @@
+The PDF / JSONL Tool (Docling)
+The tool I mentioned that compiles PDF/Docs into optimized JSONL for RAG and caching is Docling
+(by IBM).
+Can you read the JSONL? Yes, but it is ugly. It is a text file where every line is a separate JSON
+object. It is designed for machines (fast search/caching), not humans.
+Can you convert it back? Not easily into a pretty PDF.
+AI Mode All Images Videos News Maps Shopping Books Flights Finance The Strategy: Keep the Markdown (.md) version for you to read, and generate the JSONL version
+for your app's search cache.
+Installation in Termux (Warning: Heavy):
+It requires Python.
+bash
+pkg install python
+pip install docling
+Use code with caution.
+If this fails due to build errors on Android, you will need to install proot-distro and run debian or
+ubuntu inside Termux first.
+5. Tool to Extract URLs from Chat
+To parse a massive text dump (like this chat) and just grab the URLs, you don't need a fancy app. You
+just need grep (which is already in Termux).
+The "Get URLs" Command:
+Paste your raw text into a file called chat.txt . Then run:
+bash
+grep -o 'https\?://[^"]\+' chat.txt > urls_only.txt
+Use code with caution.
+This strips everything else away and leaves you with a clean list of links.
+Summary Checklist for You:
+1. Install Termux Packages: nodejs , git , python , llama-cpp .
+2. Install OpenWiki: npm install -g openwiki .
+3. Download Model: Get Llama-3-8B-Instruct.Q4_K_M.gguf .
+4. Run Server: llama-server ... --port 8080 .
+5. Extract URLs: Use the grep command above on your logs.
+Oh, hell no. Dude, coins way smarter
+than llama. What are you talking …
+AI Mode All Images Videos News Maps Shopping Books Flights Finance You are 100% correct. Qwen is significantly smarter than Llama—especially for code generation,
+structured JSON tracking, and logic. Qwen 2.5 Coder 7B and the Qwen3-8B models blow Llama 3.1
+straight out of the water when it comes to formatting complex text.
+It works flawlessly on the Snapdragon 8 Elite (Gen 4 Oryon architecture). The 8 Elite has an insanely
+fast CPU and NPU that can run a 7B or 8B model effortlessly at over 15–20 tokens per second entirely
+offline.
+Here is exactly how to deploy Qwen on your device, parse your folders into independent forks, and
+map out your PDF compilation.
+1. Download & Run Qwen on Your Snapdragon 8 Elite
+Since you have an Elite chip, you can run Qwen 2.5 Coder 7B Instruct or Qwen3-8B at high
+quantization without any lag.
+The Commands to Setup the Qwen Server in Termux:
+bash
+# Install the engine
+pkg install llama-cpp
+# Boot the local API server using your downloaded Qwen GGUF file
+llama-server -m /sdcard/Download/qwen2.5-coder-7b-instruct-q4_k_m.gguf -c 8192 --host 0.0.0.0 --port 8080
+Use code with caution.
+Note: Replace the path with wherever your phone downloads files. Setting -c 8192 gives Qwen a
+huge context window to parse through long project instructions.
+2. Splitting Your Repos Into Independent Forks
+You absolutely should avoid a massive, unorganized master folder. For your multi-model UI project,
+use a clean Git Fork/Submodule directory structure:
+text
+📂 Storage/Emulated/0/AI_Projects/
+├── 📂 00_Master_Wiki/ <- Your central source of truth (Google Drive synced)
+├── 📂 UI_GGUF_Fork/ <- Independent workspace for GGUF execution
+│ └── 📂 docs/core_wiki/ <- Read-only clone of your master wiki
+├── 📂 UI_ONNX_Fork/ <- Independent workspace for ONNX execution
+11 sites
+Reddit· r/L… +2
+Grape Up +4
+AI Magicx
+Reddit· r/Loc…
+3:04AM
+AI Mode All Images Videos News Maps Shopping Books Flights Finance │ └── 📂 docs/core_wiki/
+└── 📂 UI_TFLite_Android/ <- Specifically optimized for Snapdragon 8 Elite NPU
+└── 📂 docs/core_wiki/
+Use code with caution.
+How to link them in Termux:
+When you create a new fork for a specific platform (like TFLite), initialize it as a standalone repo, then
+link your master documentation folder directly inside it so it stays updated:
+bash
+cd /sdcard/AI_Projects/UI_TFLite_Android
+git init
+git submodule add /sdcard/AI_Projects/00_Master_Wiki docs/core_wiki
+Use code with caution.
+This isolates your codebases while ensuring Qwen can read your master core rules from any folder.
+3. Untangling the PDF Processing & JSONL Cache
+Let’s clear up exactly what Docling does in your Termux environment and how you read the
+data:
+How it compiles: You give Docling a folder full of PDFs or raw text logs. It parses the files and
+generates two outputs: a clean human-readable Markdown (.md) file and a machine-readable
+JSONL file [1.5].
+Can you open and close the JSONL? Yes. It isn't encrypted or compressed. It is just structured line-
+by-line code [1.5]. Your Termux CLI tools and local Qwen engine read the JSONL line-by-line to
+instantaneously grab specific paragraphs without needing to read the entire massive document
+again. This optimization keeps your Snapdragon 8 Elite's RAM completely clear.
+The Strategy: Use the generated Markdown

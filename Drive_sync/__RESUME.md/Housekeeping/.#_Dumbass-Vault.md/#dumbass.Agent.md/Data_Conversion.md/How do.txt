@@ -1,0 +1,3 @@
+How do content-addressed pipelines preserve lineage when an intermediate transform runs on a third-party service that doesn't return the input hash?"
+
+The vocabulary is W3C PROV and SLSA provenance/attestation.

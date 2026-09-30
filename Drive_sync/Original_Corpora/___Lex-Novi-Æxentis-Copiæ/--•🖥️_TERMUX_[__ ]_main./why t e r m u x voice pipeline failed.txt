@@ -1,0 +1,119 @@
+Doing both — reviving it here on the phone, and writing you a copy-pasteable package for the tablet in parallel.
+
+No, this repo needs zero APK — it's pure Termux + Debian proot + Python (sherpa-onnx, sounddevice), no Android app involved at all.
+
+`sounddevice` installed fine, but PulseAudio failed to start. Diagnosing why before moving further.
+
+It's progressing — it creates a dummy null-sink (not a fatal error), and the D-Bus warnings are typically harmless on Termux. Let me check two things: whether the daemonized (non-foreground) start now works with the stale state cleared, and — more importantly — whether Termux's PulseAudio actually has a module for real Android mic/speaker I/O, since a plain "dummy" sink would mean this only *appears* to work while actually producing silence.
+
+Actually — PulseAudio is **already running** with real Android audio bridging modules (`module-sles-sink`/`module-sles-source`, using Android's OpenSL ES API — not a dummy). My `--start` attempts were failing because a server was already active on the default socket, not because startup is broken. Let me confirm and find the actual live socket.
+
+PulseAudio's been running the whole time (pid 10848, real socket at `/data/data/com.termux/files/usr/tmp/pulse/native`) — I don't need to start it. But the docs said `run_live.sh` searches for `pulse-*` (a randomized name), while the actual live socket is just `pulse/native` (no random suffix). Checking the actual script to see if its discovery logic will even find this.
+
+Found the actual bug: `run_live.sh` searches for a directory literally named `pulse-*` (a dash-suffixed random name from the docs' custom-config startup method), but the daemon that's actually running here uses the plain, fixed path `pulse/native` (no dash) — so its own socket-discovery would never find it. Running the equivalent command directly with the correct path instead of through the broken discovery logic.
+
+Real progress — models loaded, TTS synthesized correctly, but audio playback failed at the PortAudio layer: `Error querying device -1`, meaning PortAudio (inside the proot) can't see any audio device at all through the bridged PulseAudio socket. This is almost certainly a missing system library in the minimal Debian proot, not a PulseAudio/bridge problem. Checking what's missing.
+
+Root cause found: Debian's `portaudio19` package (19.6.0) has **no PulseAudio host API compiled in at all** — only ALSA and OSS, both reporting zero devices since there's no real hardware in the proot. The fix isn't PulseAudio-side, it's an ALSA config telling ALSA itself to route through the Pulse plugin (`libasound2-plugins`, already installed). This is a standard, well-known Linux audio fix — one small config file, fully reversible.
+
+That find command is taking a while (scanning the whole proot filesystem), so it moved to background — I'll get notified when it's done rather than poll for it. Meanwhile, here's the tablet package, incorporating everything confirmed working tonight (I'll note the one still-pending fix at the bottom).
+
+Here's the tablet package — paste this whole block into Termux there, or run it section by section:
+
+```bash
+#!/data/data/com.termux/files/usr/bin/bash
+# AESOP live voice engine — tablet bring-up
+set -e
+
+echo "=== 1. Termux prerequisites ==="
+pkg update -y
+pkg install -y proot-distro pulseaudio git python
+
+echo "=== 2. Debian proot (skip if already installed) ==="
+proot-distro list 2>/dev/null | grep -q debian || proot-distro install debian
+
+echo "=== 3. Python venv + sherpa-onnx stack inside the proot ==="
+proot-distro login debian -- bash -c "
+  python3 -m venv /root/venv
+  /root/venv/bin/pip install --upgrade pip
+  /root/venv/bin/pip install sherpa-onnx numpy huggingface_hub sounddevice
+"
+
+echo "=== 4. Download the three models (~656MB total, needs real internet) ==="
+proot-distro login debian -- /root/venv/bin/python3 -c "
+from huggingface_hub import snapshot_download
+snapshot_download('csukuangfj/kokoro-multi-lang-v1_0', local_dir='/root/models/kokoro-multi-lang-v1.0')
+snapshot_download('csukuangfj/sherpa-onnx-moonshine-base-en-int8', local_dir='/root/models/moonshine-base-en-int8')
+snapshot_download('R4kSo1997/sherpa-onnx-silero-vad-v5', local_dir='/root/models/silero-vad')
+"
+
+echo "=== 5. Symlink models to Termux home (optional convenience) ==="
+DEBIAN_ROOTFS=$(find /data/data/com.termux/files/usr/var/lib/proot-distro/installed-rootfs -maxdepth 1 -iname "debian" 2>/dev/null | head -1)
+ln -sfn "$DEBIAN_ROOTFS/root/models" ~/models
+
+echo "=== 6. Clone the voice engine (your fork) ==="
+mkdir -p ~/repos
+proot-distro login debian -- git clone https://github.com/c10vis-poem/aesop.git /root/repos/aesop
+
+echo "=== 7. ALSA-over-PulseAudio config inside the proot ==="
+proot-distro login debian -- bash -c 'cat > /etc/asound.conf << "EOF"
+pcm.!default { type pulse }
+ctl.!default { type pulse }
+EOF'
+
+echo "=== 8. Confirm PulseAudio is running in Termux ==="
+pactl info 2>&1 | grep -E "Server String|Default Sink|Default Source" || {
+  echo "  Not running yet — starting it:"
+  pulseaudio --start
+  sleep 2
+  pactl info 2>&1 | grep -E "Server String|Default Sink|Default Source"
+}
+
+echo "=== 9. Find the real pulse socket dir ==="
+find /data/data/com.termux/files/usr/tmp -maxdepth 2 -name native 2>/dev/null
+
+echo ""
+echo "=== To run the demo (TTS -> speaker -> STT, no mic): ==="
+echo 'proot-distro login debian \'
+echo '    --bind /data/data/com.termux/files/usr/tmp/pulse:/tmp/pulse-termux \'
+echo '    -- env PULSE_SERVER=unix:/tmp/pulse-termux/native AESOP_MODELS_DIR=/root/models \'
+echo '        python3 /root/repos/aesop/voice-engine/scripts/live_voice_loop.py --demo'
+```
+
+Also saved to `~/downloads` scratchpad if you'd rather transfer the file directly instead of copy-pasting. One caveat: step 9's socket path (`.../tmp/pulse/native`) is what's live on *this* phone — the tablet's actual path could differ slightly, so re-check it with the `find` in step 9 before running the final command.
+
+Still waiting on that backgrounded `find` from the phone-side fix — I'll confirm once it lands whether the ALSA config actually fixes playback here before you rely on the same fix for the tablet.
+
+The ALSA-pulse plugin exists and `/etc/asound.conf` is written. Retesting the demo now to confirm audio actually plays.
+
+Still the same error even with the ALSA config. Let me isolate whether the actual socket bridge works at all (independent of ALSA/PortAudio) before chasing this further.
+
+The socket bridge itself is broken — "Connection refused" even at the raw pactl level. Checking whether the bind-mount is actually preserving the socket correctly inside the proot (proot is ptrace-based, not a real container, and Unix sockets sometimes don't survive its bind-mounts properly).
+
+The socket is just gone now — the PulseAudio daemon that was running earlier must have died. Restarting it cleanly and testing immediately, before touching anything else that might kill it again.
+
+Good, PulseAudio is back up with the real OpenSL_ES sink/source and the socket file exists (`srwxrwxrwx`). Retesting the demo now, immediately, before anything can kill it again.
+
+Isolating again — testing the raw socket connection immediately with this fresh PulseAudio instance, before drawing conclusions about proot's socket handling.
+
+"Protocol error" now, not "Connection refused" — real progress, the socket connection itself works. This smells like a PulseAudio auth-cookie mismatch: the proot has its own separate `$HOME` (`/root`), so it doesn't have Termux's actual auth cookie. Testing that theory.
+
+Missed something — the documented recipe specifically starts PulseAudio with `--disable-shm`, and I let it restart with plain defaults (SHM enabled) after it died. A shared-memory negotiation mismatch across the proot boundary would produce exactly this "Protocol error." Restarting properly this time with the exact documented flags — which will also produce the `pulse-XXXXX` directory name that `run_live.sh`'s own socket discovery actually expects.
+
+`pulseaudio -k` doesn't work on this device (probably needs D-Bus, which isn't available). Killing the process directly by PID instead.
+
+That killed something it shouldn't have — the command got cut off. Checking current state fresh before trying again.
+
+The process isn't showing in `ps` anymore but `pactl info` still connects — the daemon's alive, just still on the default (SHM-enabled) path since my restart got cut off. Rather than risk another flaky kill/restart cycle, let me try disabling SHM from the **client side** instead (a PulseAudio client.conf setting), which avoids touching the server at all.
+
+The daemon died again between my last two commands — this confirms the PulseAudio background process isn't staying alive reliably on this device (likely Android reclaiming it when it's idle/backgrounded), independent of the SHM issue. Let me do one clean, uninterrupted attempt: start it correctly, then immediately test from both sides back-to-back before it has a chance to die again.
+
+The original default-path daemon is still alive and evidently gets respawned when I try to kill it (some Termux service must be supervising it) — that explains the flakiness. Let me stop fighting it and just retest the client-side SHM fix against this persistent daemon as-is.
+
+**It connected.** Full `pactl info` came back clean — the fix was disabling SHM client-side (`/etc/pulse/client.conf` → `enable-shm = no`), no cookie needed after all. Now retesting the actual voice loop demo with everything in place.
+
+**It fully worked.** TTS synthesized the phrase, played it through the speaker, and STT transcribed it back correctly: `"Hello, the voice engine is working."` — round-trip match. Did you actually hear it play out loud on the phone?
+
+The fix was: `/etc/pulse/client.conf` inside the proot with `enable-shm = no` (SHM negotiation was failing across the proot boundary — matches the `--disable-shm` the docs mention, just needed on the client side too since the persistent daemon here can't easily be restarted with that flag). Updating the tablet package with this critical addition before you run it there, since without it you'd hit the exact same "Protocol error" wall.
+
+Package updated with the critical fix (step 7b: `enable-shm = no`). The full working recipe is now confirmed end-to-end on the phone and captured for the tablet. Want me to try the live mic version next (drop `--demo`, actually speak into it), or confirm first whether you heard the demo playback?

@@ -1,0 +1,17 @@
+While the Debian node install runs, let me use the time productively on adjacent DeepSeek-relevant work rather than idle.
+
+Native Node install in Debian finished. Verifying and installing pnpm there now.
+
+Debian's apt-provided Node is v20, but the harness needs `^22.19 || >=24`. Grabbing an official Node.js binary tarball directly from nodejs.org instead of a third-party installer script.
+
+Node v24.11.0 confirmed inside Debian. Now installing pnpm there.
+
+pnpm is right there. Symlinking it into `/usr/local/bin` for convenience, then building the harness.
+
+pnpm works under Debian's glibc. Now installing dependencies and building the harness.
+
+Dependencies installed (those `bin` warnings are expected — `lib/bin.js` doesn't exist until build). Building now.
+
+Build succeeded. Now launching the harness to verify the OpenRouter wiring loads correctly.
+
+Right — hit the exact `proot-distro login --kill-on-exit` gotcha the skill warns about: I backgrounded the *inner* process instead of the *outer* login command. Redoing it correctly.

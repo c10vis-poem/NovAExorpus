@@ -1,0 +1,5 @@
+Written. Now, to answer your question directly:
+
+**It's global, one place — not per-repo.** The whole convention (including the fork-sync step) lives once in the memory system, which is loaded into every session regardless of which repo I'm working in. I don't need to rediscover or re-confirm it repo-by-repo — that's the entire point of registering it now instead of what happened before.
+
+**What *is* per-repo and per-session is the git operation itself, not the rule.** The instruction "sync fork from upstream at session start" is one global fact I now know. But *running* it is necessarily local: each fork has its own upstream remote and its own drift, so `git fetch upstream && merge/rebase` (or `gh repo sync`) has to be executed separately, fresh, for each fork, each session — there's no way to sync 10 different forks with one command. So: know it once, execute it per-repo-per-session.

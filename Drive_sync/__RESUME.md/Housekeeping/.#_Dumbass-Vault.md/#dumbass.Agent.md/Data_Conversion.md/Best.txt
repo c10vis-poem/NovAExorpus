@@ -1,0 +1,37 @@
+Best tools/platforms for Data Lineage? (Doing a benchmark, in need of recs and feedbacks)
+
+Hi everyone!!!
+
+I'm currently doing a benchmark of Data Lineage tools and platforms, and I'd really appreciate insights from people who've worked with them at scale.
+
+I'm especially interested in tools that can handle complex, large-scale environments with very high data volumes, multiple data sources...
+
+Key criterias I'm evaluating:
+
+* **end-to-end lineage**
+* **vertical lineage** (business > logical > physical layers)
+* **column level lineage**
+* **real-time / near-real time lineage generation**
+* **metadata change capture** (automatic update when theres a change in schemas/data structures etc..)
+* **data quality integration** (incident **propagation**, rules, quality scoring...)
+* **deployment models**
+* **impact analysis & root cause analysis**
+* **automation & ML assisted mapping**
+* **scalability (**for very large datasets and complex pipelines)
+* **governance & security features**
+* **open source VS commercial tradeoffs**
+
+  
+So far, I'm looking at: 
+
+Alation, Atlan, Collibra, Informatica, Apache Atlas, OpenLineage, OpenMetadata, Databricks unity catalog, Coalesce Catalog, Manta, Snowflake lineage, Microsoft Purview. (now trying to group, compare then shortlist the relevant ones)
+
+  
+What are your experiences?
+
+* which tools have actually worked well in large-scale environments?
+* which ones struggled with accuracy, scalability or automation?
+* any tools i should remove/add to the benchmark?
+* anything to keep in mind or consider?
+
+Thanksss in advance, any feedback or war stories would really help!!!

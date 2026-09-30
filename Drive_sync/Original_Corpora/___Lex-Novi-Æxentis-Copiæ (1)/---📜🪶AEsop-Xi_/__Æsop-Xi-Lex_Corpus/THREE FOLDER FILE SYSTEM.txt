@@ -1,0 +1,123 @@
+"Keep the Old Text" Workflow
+Instead of swapping text out, you will just add Claude's work to a brand new section at the bottom of
+your note.
+1. Keep Your Raw Note: You type your thoughts in Markor. That text stays there forever.
+2. Copy to Claude: Copy your note and paste it into the Claude PWA.
+3. Get ONLY the Wiki Links: Claude will give you back a list of links or tags based on your text.
+4. Paste at the Bottom: Go back to Markor, scroll to the very bottom of your note, make a new line,
+and paste what Claude gave you.
+What Your Note Looks Like in Markor
+Your original text is never deleted. Your file will look like this:
+markdown
+2:03AM
+You just said replacing. I don't want it
+to fucking replace it. So, what happe…
+AI Mode All Images Videos News Maps Shopping Books Flights Finance MY ORIGINAL NOTE ---
+Meeting with Sarah today. She wants to start the web
+design project next Tuesday. We need to buy a domain
+name on Namecheap.
+--- CLAUDE'S WIKI LINKS ---
+* Wiki Links: [[Sarah]], [[Web Design Project]], [[Namecheap]]
+Use code with caution.
+The System Prompt to Force This Behavior
+Use this exact prompt in your Claude PWA. It strictly forbids Claude from rewriting or replacing your
+text:
+text
+You are my personal LLM Wiki link generator.
+CRITICAL RULE: Do not rewrite, summarize, or replace my text. I must keep 100% of my original thoughts exactly a
+Task: Read the text below. Extract the main entities, concepts, or people, and format them ONLY as a bulleted list o
+Here is my text:
+[PASTE TEXT HERE]
+Use code with caution.
+This way, Claude only hands you the new links, and your original notes are never touched or
+changed.
+Do you want to try testing this prompt with a quick piece of text right here to see exactly how it
+outputs the links without touching the words?
+That is a much smarter strategy, and it aligns exactly with how the LLM Wiki framework is actually
+supposed to work.
+2 sites
+2:04AM
+Why would I paste it at the same file?
+Why don't I just keep both the files i…
+AI Mode All Images Videos News Maps Shopping Books Flights Finance Keeping them in separate folders is the standard way to do this. It keeps your original data pristine
+and separate from the AI's files.
+The Two-Folder Setup in Markor/Obsidian
+Inside your main storage folder on Android, create two separate sub-folders:
+1. /01_Inbox (Your Raw Files):
+This is where you write your daily thoughts, notes, and paste raw text.
+Rule: Claude never edits these. They remain your 100% original, untouched thoughts forever.
+2. /02_Wiki (The AI Files):
+This is where you save the new files that Claude generates.
+Rule: These files act as an index or a "wikipedia page" for specific topics, using [[Links]] to connect
+back to your raw inbox files.
+How it Works in Practice (No Erasing)
+Say you write a note called Meeting_With_Sarah.md and save it in your /01_Inbox folder.
+1. You copy the text of that note and paste it into your Claude PWA.
+2. Instead of editing your note, you tell Claude: "Create a brand new index file for the topic 'Sarah'
+based on this meeting."
+3. Claude generates a completely new file. You save this new file as Sarah.md inside your /02_Wiki
+folder.
+What Your Folders Look Like Now
+Your original text is completely safe in its own folder, and the AI's files exist separately:
+📂 /01_Inbox
+📄 Meeting_With_Sarah.md (Your raw, untouched notes)
+📂 /02_Wiki
+📄 Sarah.md (The AI-generated index page that links back to [[Meeting_With_Sarah]] )
+When you open Obsidian, it looks at both folders simultaneously and automatically draws a visual
+line on your graph connecting your raw note to the AI's wiki note. Your history is preserved, and your
+notes are beautifully organized.
+Do you want the updated prompt designed specifically to tell Claude to build these separate,
+standalone index files instead of messing with your notes?
+AI Mode All Images Videos News Maps Shopping Books Flights Finance Merging Files
+within Different…
+You can't have THAT
+many folders you wan…
+Why your PC has
+two Program…
+For instance, if a 32-bit
+program went lookin…
+That is a phenomenal way to structure this. You are essentially using Google Drive as the central
+bridge so you don't have to constantly jump through hoops on your phone.
+Because both Markor and Obsidian just read plain text files, you can use Android's file system to
+automate the syncing between your local phone storage and Google Drive.
+How Your Proposed Setup Works
+Instead of manual copying, your files flow like a loop through your Google Drive:
+1. Markor (Local Storage): You type and save your raw thoughts into a local folder on your phone
+using Markor.
+2. The Sync App (The Bridge): You use a free Android app like Autosync for Google Drive
+(DriveSync) or FolderSync. You set it to watch your Markor folder and automatically upload those
+files to your Google Drive.
+3. Claude PWA (The Cloud): Because your files are now instantly on Google Drive, you can easily
+attach or point Claude to your Google Drive files right from your browser PWA. Claude reads your
+file and outputs the new markdown wiki file.
+4. Obsidian (The Vault): You download Claude's new wiki files straight into your Obsidian folder on
+your phone (which can also be synced to Google Drive).
+How to Point Obsidian to Your Drive Folders
+To see both your raw Markor files and your Claude wiki files inside Obsidian on Android, you just
+need to arrange your folders like this:
+📂 My_Main_Wiki_Vault (Point your Obsidian App to open this exact folder)
+📁 01_Markor_Inbox (Point your Markor app to save its files here)
+📁 02_Claude_Wiki (Save the files Claude generates here)
+Because Obsidian opens the parent folder, it will automatically read everything inside both sub-
+folders, generate your visual graph, and read all your cross-links without you ever having to merge
+the files.
+6 sites
+2:07AM
+So since my cloud connects to my
+drive anyway, why don't I just have it…
+AI Mode All Images Videos News Maps Shopping Books Flights Finance If you'd like to set this up, let me know:
+Which sync app you want to use (like DriveSync or FolderSync)?
+If you need help setting the folder paths so Markor and Obsidian see each other?
+I can walk you through the step-by-step setup on your phone.
+Is there any good
+markdown…
+If it is just reading
+without syncing, you…
+Reddit
+FOSS
+Notes a…
+On the
+phone, I us…
+Reddit
+The best way to
+sync you

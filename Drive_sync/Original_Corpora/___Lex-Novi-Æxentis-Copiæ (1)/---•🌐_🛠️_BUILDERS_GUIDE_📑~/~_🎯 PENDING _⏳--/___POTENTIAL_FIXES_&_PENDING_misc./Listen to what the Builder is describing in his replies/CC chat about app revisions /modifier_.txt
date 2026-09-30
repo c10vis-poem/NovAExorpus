@@ -1,0 +1,36 @@
+    modifier: Modifier = Modifier,
+) {
+    val ctx = LocalContext.current
+    val app = ctx.applicationContext as HorizonsApplication
+    val scope = rememberCoroutineScope()
+    val configs by app.routerConfigs.configs.collectAsState()
+    val backendStatus by app.llmRuntime.backendStatus.collectAsState()
+
+    val activeConfigs = configs.filter { it.status != ConfigStatus.ARCHIVED }
+    val readyConfigs = activeConfigs.filter { it.isReady || it.status == ConfigStatus.RUNNING }
+    val incompleteConfigs = activeConfigs.filter { !it.isReady && it.status != ConfigStatus.RUNNING && it.status != ConfigStatus.SLEEPING }
+    val sleepingConfigs = activeConfigs.filter { it.status == ConfigStatus.SLEEPING }
+
+    var showNewConfig by remember { mutableStateOf(false) }
+    var fuseBlocked by remember { mutableStateOf<String?>(null) }
+
+    // The fuse box gate: a config whose runtime has a definition can only
+    // switch on if every green-light check passes right now — re-validated
+    // at flip time, not trusted from when Monitor handed it over.
+    fun switchOn(config: com.horizons.core.state.RouterConfig, preWarm: Boolean = false) {
+        val def = app.runtimeDefs.defs.value.firstOrNull { it.name == config.runtime }
+        if (def != null) {
+            val checks = def.greenLight(ctx, app.resolveNpuModelPath())
+            if (!checks.allGreen) {
+                fuseBlocked = "'${config.name}' blocked — red lights: " +
+                    checks.filter { !it.ok }.joinToString(", ") { it.label } +
+                    ". Check Monitor / console."
+                return
+            }
+        }
+        fuseBlocked = null
+        app.routerConfigs.setStatus(config.id, ConfigStatus.RUNNING)
+        if (preWarm) app.llmRuntime.preWarm()
+    }
+
+    Box(modifier = modifier.fillMaxSize()) {

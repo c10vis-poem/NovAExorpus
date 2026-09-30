@@ -1,0 +1,62 @@
+You're right, I was massively underestimating it. Here's what OB1 actually is:
+
+## OB1 — What It Actually Does
+
+It's not "a Supabase Edge Function that stores facts." It's **an infrastructure layer** with:
+
+- **One database** (Supabase/Postgres + pgvector) — stores thoughts as raw text, vector embeddings, and structured metadata
+- **One AI gateway** (OpenRouter) — handles embeddings and LLM calls for the whole system
+- **One chat channel** — input/output surface
+- **MCP server** with 4 core tools: `search_thoughts`, `list_thoughts`, `thought_stats`, `capture_thought` + read-only aliases for ChatGPT
+- **Agent Memory API** — runtime-neutral recall, write-back, review, inspector, and **recall-trace** API. This is a *governed* memory layer with provenance, use-policy, source-reference, relation, and **audit sidecars**
+- **Schema-Aware Routing** — LLM-powered routing that distributes unstructured text across multiple database tables automatically
+- **SHA-256 content-fingerprint dedup** via `upsert_thought` RPC
+- **Prompt-injection sanitization** on every capture
+- **Row Level Security** for multi-user isolation
+- **Shared MCP Server** — scoped access to parts of your brain for others
+
+## The Ecosystem (This Is the Part I Missed)
+
+| Category | What's In It |
+|---|---|
+| **Recipes — Import** | ChatGPT, Perplexity, Obsidian, X/Twitter, Instagram, Google Takeout, Grok, Blogger, Gmail — all with parsing, dedup, embedding, ingestion |
+| **Recipes — Workflows** | Auto-Capture, Panning for Gold, Aiception (self-improving skills), Schema-Aware Routing, Fingerprint Dedup, Life Engine, Daily Digest, Bring Your Own Context, Work Operating Model, World Model Diagnostic, Research-to-Decision, **OpenClaw Agent Memory**, **OpenClaw Code Review Memory**, **OpenClaw TaskFlow Work Log** |
+| **Skills** | Auto-Capture, Competitive Analysis, Financial Model Review, Deal Memo Drafting, Research Synthesis, Meeting Synthesis, Panning for Gold, Aiception, Work Operating Model, World Model Readiness, OpenClaw Agent Memory |
+| **Schemas** | Agent Memory sidecars: provenance, review, use-policy, source-reference, relation, recall-trace, audit |
+| **Integrations** | Agent Memory API (runtime-neutral) |
+| **Extensions** | Household KB, Home Maintenance, Family Calendar, Meal Planning, Professional CRM, Job Hunt Pipeline |
+
+## How This Changes Your Architecture
+
+The three "OpenClaw" recipes are the big ones for your stack:
+
+1. **OpenClaw Agent Memory** — governed continuity layer. Provenance, use-policy, recall-trace. This is the *audit + governance* layer that I was attributing to OmniRoute's SQL DB. OB1 already does this.
+
+2. **OpenClaw Code Review Memory** — "compounds repo-specific review lessons, maintainer corrections, and false positives." This directly interfaces with your **code-review-graph** tool. It's the *learning* layer on top of structural analysis.
+
+3. **OpenClaw TaskFlow Work Log** — "durable handoff recipe for long-running TaskFlows across agents, models, and channels." This is the *continuity* layer — how state survives across agent/model/channel switches.
+
+And **Schema-Aware Routing** in OB1 is an LLM that distributes unstructured text across multiple tables. That's a routing function *inside* OB1, separate from OmniRoute's model-level routing.
+
+## Corrected Layer Map
+
+| Layer | Tool | What It Actually Handles |
+|---|---|---|
+| Episodic / "what you did" | Mem0 | Session-level action history, LLM-extracted episodic memories |
+| Semantic + Governed / "what things are" + "who said it, when, with what policy" | OB1 | Facts, provenance, use-policy, audit, recall-trace, cross-tool shared memory, schema-aware routing, AI gateway |
+| Navigational / "how you get there" | Graphify | Concept graph, Leiden communities, god nodes, shortest paths — no embeddings |
+| Structural / "what breaks if I touch this" | code-review-graph | AST blast radius, dependency flow, call graphs — SQLite |
+| **Governance + Continuity** (overlapping) | OB1 (OpenClaw recipes) | Agent Memory API, Code Review Memory, TaskFlow Work Log |
+| Gateway / model routing | OmniRoute | 359 providers, 1200+ models, 110 MCP tools, parallel tool_calls |
+| Recursive training | ReasoningBank | Strategy extraction from trajectories, MaTTS parallel scaling |
+| In-place harness mutation | Continual Harness | CRUD on prompt/skills/memory mid-episode via Refiner LLM |
+| Observation | Task Observer | Session watching, correction capture, pattern extraction |
+
+## The Key Overlap I Was Missing
+
+OB1's **Agent Memory schema** (provenance, use-policy, recall-trace, audit) and its **Schema-Aware Routing** mean it's not just "the semantic layer." It's also your **governance layer** and has its own **routing intelligence**. So in your fan-out, OB1 isn't just answering "what are the facts?" — it's also telling you *who said it, under what policy, and which table it belongs in*.
+
+That means OmniRoute's SQL audit DB might be redundant with OB1's recall-trace + audit sidecars. You might be able to consolidate.
+
+What specifically were we working through when it got lost — the fan-out script, the ReasoningBank loop, or the Continual Harness integration?
+

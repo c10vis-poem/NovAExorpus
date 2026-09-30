@@ -1,0 +1,48 @@
+Brakes on. Nothing built, nothing pushed — the only thing that exists is an empty local branch I can drop whenever.
+
+The sequence I've got, in your order:
+1. **Formatting** — how files are laid out *(we're here)*
+2. **You show me** the README + build-doc format you want for ingestion
+3. **We define canon together**, document by document
+4. Canon goes in its own folder; everything trickles down from it
+5. Migration follows canon, not the other way around
+
+One design note on step 4, because it changes the tree: I had canon/pending as *tags*. You're describing it as a **folder** — and that's better. A tag doesn't tell you at a glance what's settled, and promotion is invisible. As a folder, promoting a doc from pending to canon is a `git mv`, which shows up in history as an actual event. Canon sits at root as the authority; every other section references it and nothing overrides it.
+
+That doesn't break the one-axis rule either — `canon/` isn't a parallel tree over the same documents, it's a distinct set: the settled ones.
+
+Before I lay out the mirrored structure, one thing I don't want to guess at:
+
+Understood, and I'm correcting the record on this: **the APK is Priority One.** The corpus work is a means to that end — it exists to make the agent stack go faster. If it becomes the project, it's failed. Noting that in the plan so it doesn't drift again.
+
+The five sorting buckets you just defined are the important new piece — that's not canon/pending, it's five dispositions:
+
+| Bucket | What lands there |
+|---|---|
+| **Canon** | Settled truth. Everything trickles down from this. |
+| **Pending corpora** | Experimental, unproven |
+| **Vault** | Alternative build approaches — might be usable later |
+| **Reverse-engineering** | Salvageable for troubleshooting or failback |
+| **Toss** | Stale/dead — deleted, no folder |
+
+And one ordering call worth making before we start clicking through: **triage before topical filing.** You can't place a document by subject until you know whether it's true. So the five buckets sit at the *top* of Drive during curation, and the tier tree lives *inside* canon — not the reverse.
+
+```
+📁 Drive/NovA-Corpus/
+├── 📁 00-INBOX/            everything you've shipped over lands here, unsorted
+├── 📁 01-CANON/            settled truth — the tier tree lives in here
+│   ├── 📁 tier-1-horizons-ui/
+│   ├── 📁 tier-2-novus-agenti/
+│   ├── 📁 tier-3-nova-claw/
+│   ├── 📁 tier-4-aesop/
+│   └── 📁 (support layers…)
+├── 📁 02-PENDING-CORPORA/  experimental, unproven
+├── 📁 03-VAULT/            alternative builds, keep for later
+└── 📁 04-REVERSE-ENG/      troubleshooting + failback source
+```
+
+Once canon is defined, sub-agents can sweep the rest against it mechanically — that's the part that gets fast, and it's why canon comes first.
+
+Recorded. Plan file now has the priority correction and the five-bucket triage structure in place of the old canon/pending tags.
+
+Whenever you're ready to split-screen it — show me the README/build-doc format you want, and we'll start clicking through the inbox together, one document at a time, sorting into the five buckets before anything gets filed by topic.

@@ -1,0 +1,14 @@
+Got it — you're not asking for new infrastructure, you're saying the protocol already exists (CLAUDE.md + RESUME.md per repo, standing for months) and I should actually be running it, every time, automatically. Fair — that's exactly what "Rule 1" should be. Before I write it: here's the exact text I'd add to `~/.claude/CLAUDE.md`, right under Rule 0.
+
+```
+## RULE 1 — READ THE REPO'S OWN CLAUDE.MD AND RESUME.MD FIRST
+
+Before doing anything else in any of the user's repos — before investigating,
+before answering a question about that project's state — check for and read
+that repo's own CLAUDE.md and RESUME.md. This has been the user's standing
+convention for session handoff and current state across their repos for
+months. It is not optional background reading; it is step one, every
+session, every repo, no exceptions.
+```
+
+Confirm and I'll write it now.

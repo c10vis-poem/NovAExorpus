@@ -1,0 +1,206 @@
+<!DOCTYPE html><html lang='en'><head><meta charset='UTF-8'><style type='text/css'>html,body{padding:4px 8px 4px 8px;font-family:'sans-serif-regular';}h1,h2,h3,h4,h5,h6{font-family:'sans-serif-condensed';}a{color: #388E3C;text-decoration:underline;}img{height:auto;max-width:100%;max-height: 90vh;margin:auto;}html,body{color:#ffffff;background-color:#303030;}a:visited{color:#dddddd;}blockquote{color:#cccccc;}</style><style>video, img { max-width: 100%; } pre { max-width: 100%; overflow: auto; } table, th, td {  border: 1px solid white; border-collapse: collapse; border-spacing: 0; padding: 6px; } .floatl {float: left;} .clear {clear:both;} button:hover,button:active {filter: invert(1);} button { display: inline-block; box-sizing: border-box; border: none; border-radius: 4px; padding: 0 16px; min-width: 64px; height: 36px; font-family: 'Roboto'; font-size: 14px; font-weight: 500;  line-height: 36px; overflow: hidden; outline: none; vertical-align: middle; text-align: center; text-overflow: ellipsis; text-transform: uppercase; box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12); margin: 4px 4px 8px 0px;}    .emojibtn,.fa {font-size:250%; background: transparent; padding: 0px; min-width:0px;}    .sticky {position: sticky; display: inline-block; border: 0px solid white;} body{margin:0;padding:0.5vh 3.5vw} .header_no_underline { text-decoration: none; color: white; } h1 < a.header_no_underline { border-bottom: 2px solid #eaecef; }  h1,h2 { border-bottom: 2px solid #eaecef; } blockquote{padding:0px 14px;border-left:3.5px solid #dddddd;margin:4px 0}p > code { background-color: #D2D2D880; padding: 1.5px 3px; border-radius: 4px; }.video-container > p { margin: 0; }.task-list-item { list-style-type:none; text-indent: -1.4em; } li.task-list-item > pre, li.task-list-item > ul > li { text-indent: 0pt; }p > a { word-break:break-all; }.markor-table-of-contents { border: 1px solid white; border-radius: 2px; } .markor-table-of-contents > h1 { padding-left: 14px; margin-bottom: -8px; border-bottom: 1px solid white; } .markor-table-of-contents-list li { margin-left: -12px; } .markor-table-of-contents-list a { text-decoration: none; }</style><link rel='stylesheet' href='file:///android_asset/prism/themes/prism-tomorrow.min.css'/><link rel='stylesheet' href='file:///android_asset/prism/prism-markor.css'/><link rel='stylesheet' href='file:///android_asset/prism/plugins/toolbar/prism-toolbar.css'/><script src='file:///android_asset/prism/prism.js'></script><script src='file:///android_asset/prism/components.js'></script><script src='file:///android_asset/prism/prism-markor.js'></script><script src='file:///android_asset/prism/plugins/autoloader/prism-autoloader.min.js'></script><script src='file:///android_asset/prism/plugins/toolbar/prism-toolbar.min.js'></script><script src='file:///android_asset/prism/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js'></script><link rel='stylesheet' href='file:///android_asset/prism/plugins/line-numbers/prism-line-numbers-markor.css'/><script src='file:///android_asset/prism/plugins/line-numbers/prism-line-numbers.min.js'></script><script src='file:///android_asset/prism/plugins/line-numbers/prism-line-numbers-markor.js'></script><style> 
+html, body { 
+/* 
+font-family: sans-serif-condensed; 
+font-size: 80%; 
+*/ 
+} 
+</style> 
+ 
+<script type="text/javascript"> 
+function onPageLoaded() { 
+/* 
+if ('format-markdown fileext-md' == 'MarkdownTextConverter') { 
+ window.scrollTo(0, document.body.scrollHeight); 
+} 
+*/ 
+} 
+</script><script> function onPageLoaded_markor_private() {
+usePrism('true', 'false');
+onPageLoaded(); }
+</script></head>
+<body class='format-markdown fileext-md' onload='onPageLoaded_markor_private();'>
+
+<!-- USER DOCUMENT CONTENT -->
+
+
+<h1 id="-gcp-cross-account-secure-data-handshake-protocol" line="0"><a href="#-gcp-cross-account-secure-data-handshake-protocol" class="header_no_underline" line="0">🌌 GCP CROSS-ACCOUNT SECURE DATA HANDSHAKE PROTOCOL</a></h1>
+<h3 id="subsystem-cloud-to-edge-data-ingestion--credit-funded-rag-auditing" line="1"><a href="#subsystem-cloud-to-edge-data-ingestion--credit-funded-rag-auditing" class="header_no_underline" line="1">Subsystem: Cloud-to-Edge Data Ingestion &amp; Credit-Funded RAG Auditing</a></h3>
+<h3 id="version-100-production-blueprint" line="2"><a href="#version-100-production-blueprint" class="header_no_underline" line="2">Version: 1.0.0 (Production Blueprint)</a></h3>
+<hr line="4" />
+<h2 id="1-the-architectural-plan-division-of-labors" line="6"><a href="#1-the-architectural-plan-division-of-labors" class="header_no_underline" line="6">1. THE ARCHITECTURAL PLAN: DIVISION OF LABORS</a></h2>
+<p line="8">To protect your intellectual property behind strict corporate/business workspace walls while absorbing 100% of the heavy query, indexing, and token-processing costs via your personal account&rsquo;s <strong line="8">$1,000 Vertex AI Agent Builder credit pool</strong>, the system uses an asymmetric, cross-organizational IAM handshake.</p>
+<pre line="10"><code line="10">┌──────────────────────────────────────┐          ┌──────────────────────────────────────┐  
+│  BUSINESS / CONTRACTOR RESOURCE TIER │          │      PERSONAL DEVELOPER CREDIT TIER  │  
+│  (Holds Secure GCS Bucket / Raw IP)  │          │      (Houses Vertex AI / Cloud Run)  │  
+├──────────────────────────────────────┤          ├──────────────────────────────────────┤  
+│                                      │          │                                      │  
+│   gs://business-secure-vault-bucket  │          │   Grounded Generation API (Agent)    │  
+│                  │                   │          │                  ▲                   │  
+│                  │                   │          │                  │                   │  
+│                  ▼                   │          │                  │                   │  
+│        [Storage Object Viewer]       │          │          [Data Store Index]          │  
+│                  │                   │          │                  ▲                   │  
+│                  └───────────────────┼──────────┼──────────────────┘                   │  
+│                     (Grant Read-Only │          │ (Vertex AI Discovery Engine SA)      │  
+│                        Permissions)  │          │                                      │  
+└──────────────────────────────────────┘          └──────────────────────────────────────┘  
+</code></pre>
+<h3 id="core-design-principles" line="28"><a href="#core-design-principles" class="header_no_underline" line="28">Core Design Principles:</a></h3>
+<ol line="29">
+<li line="29"><strong line="29">No Data Relocation (Zero-Copy):</strong> Raw data files never physically duplicate or migrate into your personal developer environment. They remain inside the business or contractor&rsquo;s encrypted storage vault, maintaining 100% local IP ownership.</li>
+<li line="30"><strong line="30">Compute-Credit Redirection:</strong> The personal-tier project initiates and manages the indexing, semantic search, and grounding executions. This ensures that <strong line="30">every billing token represents an application application SKU charge</strong> that is absorbed by your personal $1,000 credit pool rather than hitting business or personal debit cards.</li>
+<li line="31"><strong line="31">Instant Access Severance:</strong> If a contractor contract ends or employee clearance is revoked, the business administrator simply removes the Service Account member from the bucket&rsquo;s Access Control List (ACL). Access is terminated instantly at the cloud boundary, leaving the consumer project with empty indexes.</li>
+</ol>
+<hr line="33" />
+<h2 id="2-the-route-map--principals" line="35"><a href="#2-the-route-map--principals" class="header_no_underline" line="35">2. THE ROUTE MAP &amp; PRINCIPALS</a></h2>
+<ul line="37">
+<li line="37"><strong line="37">Credit-Consumer Project (Personal Account):</strong>
+<ul line="38">
+<li line="38"><em line="38">Role:</em> Executes the RAG pipelines, schedules nightly logs analysis, and hosts the Cloud Run gateway.</li>
+<li line="39"><em line="39">Service Account:</em> <code line="39">service-PERSONAL_PROJECT_NUMBER@gcp-sa-discoveryengine.iam.gserviceaccount.com</code> (This is Google&rsquo;s Discovery Engine system identity used to crawl storage paths).</li>
+</ul>
+</li>
+<li line="40"><strong line="40">IP-Owner Project (Business Account or Contractor):</strong>
+<ul line="41">
+<li line="41"><em line="41">Role:</em> Holds the source files, raw code repository logs, and operational specifications.</li>
+<li line="42"><em line="42">Resource:</em> <code line="42">gs://business-secure-vault-bucket/</code> (Standard Google Cloud Storage bucket).</li>
+</ul>
+</li>
+<li line="43"><strong line="43">The Connection Gate:</strong>
+<ul line="44">
+<li line="44"><em line="44">Role:</em> <code line="44">roles/storage.objectViewer</code> (Read-only object access; blocks writing, deleting, or credential modifications).</li>
+</ul>
+</li>
+</ul>
+<hr line="46" />
+<h2 id="3-the-handoff-blueprint-document-step-by-step" line="48"><a href="#3-the-handoff-blueprint-document-step-by-step" class="header_no_underline" line="48">3. THE HANDOFF BluePrint DOCUMENT (Step-by-Step)</a></h2>
+<h3 id="phase-1-retrieve-your-personal-project-number" line="50"><a href="#phase-1-retrieve-your-personal-project-number" class="header_no_underline" line="50">Phase 1: Retrieve Your Personal Project Number</a></h3>
+<ol line="51">
+<li line="51">Log into the Google Cloud Console using your <strong line="51">personal account</strong> (holding the credits).</li>
+<li line="52">Ensure you have selected your active developer project.</li>
+<li line="53">On the Home Dashboard, look at the <strong line="53">Project Info</strong> card and copy the <strong line="53">Project Number</strong> (e.g., <code line="53">8589934592</code>).</li>
+</ol>
+<h3 id="phase-2-assemble-your-service-account-identifier" line="55"><a href="#phase-2-assemble-your-service-account-identifier" class="header_no_underline" line="55">Phase 2: Assemble Your Service Account Identifier</a></h3>
+<p line="56">Construct the email identifier for your personal Vertex AI system agent using your copied Project Number:<br />
+<code line="57">service-PERSONAL_PROJECT_NUMBER@gcp-sa-discoveryengine.iam.gserviceaccount.com</code></p>
+<h3 id="phase-3-business-bucket-configuration-to-be-executed-by-the-business-admin" line="59"><a href="#phase-3-business-bucket-configuration-to-be-executed-by-the-business-admin" class="header_no_underline" line="59">Phase 3: Business Bucket Configuration (To be executed by the Business Admin)</a></h3>
+<p line="60">The owner of the sensitive files must grant your personal service account read-only access to their bucket:</p>
+<ol line="61">
+<li line="61">Open the Google Cloud Console using the <strong line="61">Business Workspace account</strong>.</li>
+<li line="62">Navigate to <strong line="62">Cloud Storage &gt; Buckets</strong> and click on your secure bucket (<code line="62">gs://business-secure-vault-bucket</code>).</li>
+<li line="63">Select the <strong line="63">Permissions</strong> tab and click <strong line="63">Grant Access</strong> (or <strong line="63">Add Principal</strong>).</li>
+<li line="64">Paste the Service Account email created in Phase 2 into the <strong line="64">New Principals</strong> field.</li>
+<li line="65">In the <strong line="65">Select a Role</strong> menu, choose <strong line="65">Cloud Storage &gt; Storage Object Viewer</strong> (<code line="65">roles/storage.objectViewer</code>).</li>
+<li line="66">Click <strong line="66">Save</strong>.</li>
+</ol>
+<h3 id="phase-4-create-the-data-store-in-your-personal-vertex-ai-suite" line="68"><a href="#phase-4-create-the-data-store-in-your-personal-vertex-ai-suite" class="header_no_underline" line="68">Phase 4: Create the Data Store in Your Personal Vertex AI Suite</a></h3>
+<p line="69">Now, connect the secure bucket directly to your credit-funded Agent Builder:</p>
+<ol line="70">
+<li line="70">Return to your <strong line="70">Personal Account</strong> GCP Console.</li>
+<li line="71">Navigate to <strong line="71">Vertex AI Agent Builder &gt; Data Stores</strong>.</li>
+<li line="72">Click <strong line="72">Create Data Store</strong> and choose <strong line="72">Cloud Storage</strong>.</li>
+<li line="73">In the Cloud Storage path field, enter the direct address of the business bucket:<br />
+<code line="74">gs://business-secure-vault-bucket/</code></li>
+<li line="75">Choose <strong line="75">Unstructured documents</strong> (if parsing PDFs, text files, or Markdown notes) and select <strong line="75">Continuous import</strong> to allow real-time changes to stream directly into your local cache indices.</li>
+<li line="76">Click <strong line="76">Create</strong>. Your Vertex AI agent can now safely parse and ground its responses using your business&rsquo;s proprietary manuals without copying them!</li>
+</ol>
+<hr line="78" />
+<h2 id="4-the-automated-handoff-bootstrap-script" line="80"><a href="#4-the-automated-handoff-bootstrap-script" class="header_no_underline" line="80">4. THE AUTOMATED HANDOFF BOOTSTRAP SCRIPT</a></h2>
+<p line="82">Save this script as <code line="82">gcp_cross_account_handshake.sh</code> and make it executable with <code line="82">chmod +x gcp_cross_account_handshake.sh</code>. You can run it inside your Termux shell or local CLI environment to automate the setup process using Google Cloud SDK (<code line="82">gcloud</code>).</p>
+<pre line="84"><code class="language-bash" line="84">#!/usr/bin/env bash  
+# ==============================================================================  
+# AESOP XI: CROSS-ACCOUNT RESOURCE INGESTION &amp; CREDIT HARNESS  
+# Script ID: AX-GCP-CROSS-ACCOUNT-HANDSHAKE-BOOTSTRAP  
+# ==============================================================================  
+set -euo pipefail  
+  
+# Style definitions for clean terminal telemetry output  
+RED='\033[0;31m'  
+GREEN='\033[0;32m'  
+CYAN='\033[0;36m'  
+YELLOW='\033[1;33m'  
+NC='\033[0m' # No Color  
+  
+clear  
+echo -e &quot;\${CYAN}================================================================================&quot;  
+echo -e &quot;🌌 [GCP CROSS-ACCOUNT HANDSHAKE] Initializing Sovereign Connection Pipeline...&quot;  
+echo -e &quot;================================================================================\${NC}&quot;  
+  
+# Ensure gcloud CLI is installed  
+if ! command -v gcloud &amp;&gt; /dev/null; then  
+    echo -e &quot;\${RED}❌ ERROR: Google Cloud SDK (gcloud) is not installed in this shell.\${NC}&quot;  
+    echo -e &quot;👉 Install it via: pkg install google-cloud-sdk (or follow your OS guide).&quot;  
+    exit 1  
+fi  
+  
+# Step 1: Identify Consumer (Personal Account) Project  
+echo -e &quot;\n\${YELLOW}🔑 [STEP 1/3] Fetching Personal Credit-Consumer Project Details...\${NC}&quot;  
+read -p &quot;Enter your PERSONAL GCP Project ID (where the \\$1k credits live): &quot; PERSONAL_PROJECT_ID  
+  
+# Verify active project setup  
+echo -e &quot;Checking configuration status for project: \${CYAN}\$PERSONAL_PROJECT_ID\${NC}...&quot;  
+if ! gcloud config set project &quot;\$PERSONAL_PROJECT_ID&quot; &amp;&gt; /dev/null; then  
+    echo -e &quot;\${RED}❌ ERROR: Project ID invalid or not authenticated via gcloud CLI.\${NC}&quot;  
+    echo -e &quot;👉 Please run 'gcloud auth login' and try again.&quot;  
+    exit 1  
+fi  
+  
+# Extract the literal Project Number  
+PROJECT_NUMBER=\$(gcloud projects list --filter=&quot;projectId=\$PERSONAL_PROJECT_ID&quot; --format=&quot;value(projectNumber)&quot;)  
+if [ -z &quot;\$PROJECT_NUMBER&quot; ]; then  
+    echo -e &quot;\${RED}❌ ERROR: Failed to retrieve project number for \$PERSONAL_PROJECT_ID.\${NC}&quot;  
+    exit 1  
+fi  
+  
+SERVICE_ACCOUNT=&quot;service-\${PROJECT_NUMBER}@gcp-sa-discoveryengine.iam.gserviceaccount.com&quot;  
+echo -e &quot;\${GREEN}✅ Success: Personal Project Number verified: \$PROJECT_NUMBER\${NC}&quot;  
+echo -e &quot;Your Personal Vertex AI Service Account is: \${CYAN}\$SERVICE_ACCOUNT\${NC}&quot;  
+  
+# Step 2: Configure Business/Contractor Bucket Access  
+echo -e &quot;\n\${YELLOW}📁 [STEP 2/3] Configuring Read-Only Access on Business Resource Bucket...\${NC}&quot;  
+read -p &quot;Enter the secure GCS Bucket Name (e.g. business-secure-vault-bucket): &quot; BUCKET_NAME  
+# Trim gs:// prefix if entered by the user  
+BUCKET_NAME=\${BUCKET_NAME#gs://}  
+  
+echo -e &quot;\nTo establish the secure access bridge, choose an execution strategy:&quot;  
+echo -e &quot;1) \${CYAN}Execute Now:\${NC} Run the IAM update directly (Requires being currently logged into gcloud with Business admin credentials).&quot;  
+echo -e &quot;2) \${CYAN}Generate Handoff Block:\${NC} Output a pre-formatted CLI code block you can copy and email to your business admin / contractor.&quot;  
+read -p &quot;Select option [1 or 2]: &quot; EXEC_MODE  
+  
+if [ &quot;\$EXEC_MODE&quot; == &quot;1&quot; ]; then  
+    echo -e &quot;\nApplying policy binding on GCS target bucket: \${YELLOW}gs://\$BUCKET_NAME\${NC}...&quot;  
+    if gcloud storage buckets add-iam-policy-binding &quot;gs://\$BUCKET_NAME&quot; \  
+        --member=&quot;serviceAccount:\$SERVICE_ACCOUNT&quot; \  
+        --role=&quot;roles/storage.objectViewer&quot; &amp;&gt; /dev/null; then  
+        echo -e &quot;\${GREEN}🎉 SUCCESS: Secure cross-account permission bridge established successfully!\${NC}&quot;  
+    else  
+        echo -e &quot;\${RED}❌ ACCESS DENIED: Failed to modify bucket permissions.\${NC}&quot;  
+        echo -e &quot;👉 You may need to use Option 2 and have the Business Administrator run the command.&quot;  
+    fi  
+else  
+    echo -e &quot;\n\${CYAN}--------------------------------------------------------------------------------&quot;  
+    echo -e &quot;📋 BUSINESS ADMIN CODES (EMAIL TO CONTRACTOR OR RUN ON WORKSPACE CONSOLE)&quot;  
+    echo -e &quot;--------------------------------------------------------------------------------\${NC}&quot;  
+    echo -e &quot;Copy and execute this exact command block to grant read-only RAG access:&quot;  
+    echo -e &quot;\n\${YELLOW}gcloud storage buckets add-iam-policy-binding gs://\${BUCKET_NAME} \\&quot;  
+    echo -e &quot;  --member=\&quot;serviceAccount:\${SERVICE_ACCOUNT}\&quot; \\&quot;  
+    echo -e &quot;  --role=\&quot;roles/storage.objectViewer\&quot;\${NC}&quot;  
+    echo -e &quot;\n\${CYAN}Alternative Legacy Utility Command:\${NC}&quot;  
+    echo -e &quot;\${YELLOW}gsutil iam ch serviceAccount:\${SERVICE_ACCOUNT}:objectViewer gs://\${BUCKET_NAME}\${NC}&quot;  
+    echo -e &quot;\${CYAN}--------------------------------------------------------------------------------\${NC}&quot;  
+fi  
+  
+# Step 3: Guidelines for finalization  
+echo -e &quot;\n\${YELLOW}⚡ [STEP 3/3] Finalizing Data Store Creation...\${NC}&quot;  
+echo -e &quot;1. Go to your \${CYAN}Personal Vertex AI Agent Builder\${NC} console.&quot;  
+echo -e &quot;2. Create a new \${CYAN}Data Store\${NC} using \${YELLOW}Cloud Storage\${NC}.&quot;  
+echo -e &quot;3. Point the connection directly to: \${GREEN}gs://\$BUCKET_NAME/\${NC}&quot;  
+echo -e &quot;4. Your Vertex AI system is now fully authorized to crawl, parse, and index your business's files!&quot;  
+echo -e &quot;\${CYAN}================================================================================\${NC}&quot;  
+</code></pre>
+
+
+<!-- USER DOCUMENT CONTENT END -->
+
+</body></html>

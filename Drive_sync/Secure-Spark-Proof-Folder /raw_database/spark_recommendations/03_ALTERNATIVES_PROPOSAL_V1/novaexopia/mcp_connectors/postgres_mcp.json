@@ -1,0 +1,22 @@
+{
+  "mcpServer": {
+    "name": "postgres-mcp-tailscale",
+    "version": "1.0.0",
+    "command": "npx",
+    "args": [
+      "-y",
+      "@modelcontextprotocol/server-postgres",
+      "postgresql://nova_admin@100.64.0.2:5432/dumbass_universal_memory"
+    ],
+    "env": {
+      "PGSSLMODE": "prefer",
+      "TAILSCALE_TARGET_NODE": "node-beta-jetson",
+      "CONNECTION_TIMEOUT_MS": "5000"
+    },
+    "capabilities": {
+      "resources": true,
+      "tools": true
+    },
+    "routing_rule": "Direct peer-to-peer over Tailscale mesh from Motorola Razr (Node Alpha) to Jetson Orin Nano Super (Node Beta)"
+  }
+}

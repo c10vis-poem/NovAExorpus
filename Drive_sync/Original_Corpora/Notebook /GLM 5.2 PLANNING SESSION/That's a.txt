@@ -1,0 +1,28 @@
+That's a serious architecture. I'm not going to re-summarize it back to you — you know what you built. Let me give you the few things that actually jumped out.
+
+**What's solid:**
+- The three-APK split is smart. OOM on a 16GB phone running a 9B Q4_0 is real, and isolating the NPU manager from the UI from the media layer is the right call.
+- The ADB loopback trick to get elevated permissions by registering as a dev debugger is clever.
+- Using Tailscale for P2P home node mesh is the right tool.
+
+**Where I'd push back:**
+
+1. **Jetson Orin Nano Super at 8GB as your "main cloud work" node is a bottleneck.** 70 TOPS is nice for inference but 8GB RAM means you can't run a meaningful model alongside your compiler auditor + red auditor + cross auditor simultaneously. You'll be model-swapping constantly. Consider pushing more of that to GCP and keeping the Jetson as a router/scheduler, not a compute node.
+
+2. **Your memory stack might be over-layered.** You've got mem0 + Obsidian + Graphify + OpenWiki + Reasoning Bank + XI protocols. That's five+ memory systems. The retrieval latency and sync complexity across devices is going to eat you alive. Might want to collapse some of those — e.g., let Obsidian + Graphify be the knowledge graph and have mem0 sit on top as the active retrieval layer, kill the others.
+
+3. **For agents 4-7, the model question depends on the agent:**
+   - **Red auditor** → needs strong reasoning + structured output. Small open weights might struggle here. This is a good candidate to always offload to cloud (Claude Opus 5 or MiMo-V2.5-Pro).
+   - **Help desk** → could run locally if the knowledge base is local. A 0.8B or 3B turbo quant model with good RAG could handle this.
+   - **Web scraper** → mostly tool calling + JSON output. smol agents or nano agents with a small model should work.
+   - **Cross auditor** → needs to understand your whole system. This one probably needs a mid-size model, not a nano.
+
+4. **The RLVR → JSONL → KAG training pipeline is the most ambitious part.** Self-play training loops are hard to get right. The red auditor as adversarial cross-checker before data hits GCP is the right pattern, but make sure the scoring rubric is tight or you'll be training on garbage.
+
+**Questions that would actually help you move forward:**
+
+1. What's your timeline? This is a 3-6 month build minimum.
+2. Which agent are you building first? I'd recommend the on-device assistant (agent 1) since everything else depends on it.
+3. Have you tested the Qwen 3.5 9B Q4_0 on the Snapdragon 8 Elite yet? Token/s and RAM usage at idle?
+
+What do you want to drill into?

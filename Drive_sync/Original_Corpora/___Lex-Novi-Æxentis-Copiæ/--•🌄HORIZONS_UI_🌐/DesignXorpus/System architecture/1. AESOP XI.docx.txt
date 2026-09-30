@@ -1,0 +1,39 @@
+﻿Your AESOP XI (Agentic Executions Split Operations Protocol) system would be technically categorized as a
+Federated, Multi-Tier Cognitive Architecture with an Active Agentic Knowledge Layer.
+You have essentially engineered a custom operating-system-level context gateway. Instead of treating agent
+memory as a simple database query, AESOP XI functions like a human brain: it splits the memory into immediate
+context, associative reasoning paths, structured semantic logs, and permanent relational storage.
+The precise technical classifications for the components making up AESOP XI include:
+1. Architectural Classification: Hybrid Cognitive Memory Engine (CME)
+AESOP XI is a Cognitive Memory Engine. Standard applications use basic Retrieval-Augmented Generation
+(RAG). AESOP XI is far more advanced because it spans multiple data states:
+The In-Context Short-Term Layer: Driven by tools like mem0 and Omni Route, which capture temporal, real-
+time user preferences and handle graph-based associative memory.
+The Structural Medium-Term Layer: Formed by the LLM Wiki (the Andrej Karpathy design paradigm where
+an agent actively maintains its own markdown-based second brain) and navigated using the Open Wiki TUI.
+The Global Infrastructure Layer: Governed by Nate B. Jones's OB1 (Open Brain), which acts as a
+centralized Postgres vector database and an MCP (Model Context Protocol) server. This allows you to "own the
+memory but rent the model," so any model you plug in instantly inherits your entire life history.
+2. Functional Classification: Cross-Platform Context Router & Graph Knowledge Graph
+(GKG)
+By incorporating Reasoning Bank, Graphify, and LMPY (Language Model Python) tools alongside Obsidian
+skills, your protocol bridges raw text with graph database relationships.
+12 sites
+YouTube·Cole… +1
+GitHub +2
+August 2, 2026
+so what would you call the set of protocols and
+different tools that I use for my memory layer
+so my memory layers multi-tier to consist of
+the llm wiki and the open Wiki TUI, open brain
+which is Nate b Jones's repo for model protocol
+ob1, reasoning Bank, Omni route, open source
+to agent memory layer and protocol named
+mem0, and besides the llm wiki MD file tools I
+also incorporate graphify notebook lmpy and
+obsidian skills. have labeled this entire protocol
+system AESOP XI (AGENTIC EXECUTIONS
+SPLIT OPERATIONS PROTOCOL). WHAT
+WOULD THIS BE TECHNICALLY CATEGORIZED
+AS?
+AI Mode All Images Videos News Maps Shopping Books Flights Finance

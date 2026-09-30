@@ -1,0 +1,19 @@
+"""
+===============================================================================
+W5+H ARTIFACT SPECIFICATION
+-------------------------------------------------------------------------------
+WHO:   Terminal Daemon / Executor Model (Qwen 9B / Gemma / Local Engine)
+WHAT:  Local ADB Loopback WebSocket Broker (port 5555 -> internal bridge)
+WHEN:  Invoked on daemon startup prior to spawning unprivileged UI tasks
+WHERE: On-Device / Android 14+ (Motorola Razr Ultra / Snapdragon 8 Elite)
+WHY:   Standard Android userland processes are heavily throttled and sandboxed 
+       by the ActivityManager. Using the loopback debugging port bypasses 
+       background execution limits without requiring full root.
+HOW:   Establishes a local TCP socket to localhost:5555, authenticating via 
+       pre-paired adb keys, and grants shell-level process execution.
+===============================================================================
+PROBLEM SOLVED:
+Prevents Out-Of-Memory (OOM) background kills and SELinux execution blocks on 
+local CLI binaries, node/python servers, and NPU driver handles.
+===============================================================================
+"""

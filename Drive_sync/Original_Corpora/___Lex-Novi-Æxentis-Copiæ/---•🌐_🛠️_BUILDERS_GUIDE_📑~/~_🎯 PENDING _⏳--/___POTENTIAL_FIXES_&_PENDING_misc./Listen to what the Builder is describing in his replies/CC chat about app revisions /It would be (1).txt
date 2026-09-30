@@ -1,0 +1,11 @@
+It would be nice if there were pop-up menus or pop-up selections you know like little pop-up tiles when you clicked on something or like there was a list of commands at the terminal that'd be nice too like a menu 
+
+Or somewhere where you could ask it a question that would be awesome
+
+No sign of a user manual anywhere 
+
+It's pretty vague about the configuration what am I supposed to name it or the model run time or the file path or whatever 
+
+No clear definitions to any of anything anywhere actually that's a good idea once those little pop up menu tabs should have a definition you know a user interface
+
+Once you can figure a runtime in the router on a tile you can't go back and edit at all you just have to create a new one

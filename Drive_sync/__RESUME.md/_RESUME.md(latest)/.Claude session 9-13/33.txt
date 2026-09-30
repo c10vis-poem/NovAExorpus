@@ -1,0 +1,5 @@
+Terrestrial-brain's Supabase swap is a real architecture task (their own `#dumbass` memory spec — mem0/OmniRoute/Reasoning Bank/SQLite/Postgres — which is literally the ecosystem I just installed as skills). I'll scope that properly in a moment. Starting DeepSeek now, as ordered.
+
+Exactly the documented platform gap — `pnpm`'s Rust binary needs glibc, Termux is bionic. The established fix is `proot-distro login debian`. Checking it's available.
+
+I'll wait for that install to finish before continuing with the harness build.

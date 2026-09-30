@@ -1,0 +1,28 @@
+Good, noting that for the writeup — this co-location is temporary, voice layer moves out to Æsc/Æyre later and gets wiped from here. Executing the rename now.
+
+Let me verify the renamed path actually still resolves correctly inside the proot before assuming it's fine — testing end-to-end now.
+
+Found it — there's a **separate, independent clone** of the repo living inside the Debian proot's own filesystem at `/root/repos/aesop` (not a bind-mount of the host path, an actual second copy from `operations.md`'s original setup). That's what `live_voice_loop.py` actually runs from — my edits tonight never touched this copy at all, they only affected the host-side `~/repos/aesop-xi`. Renaming this one too for consistency, then retesting.
+
+`vv`'s path is different in kind — it references the **host** path (`$HOME/repos/aesop-xi/...`), which proot can already see directly without any bind-mount, unlike the internal `/root/repos/` clone. Quick confirmation before moving on.
+
+Path dependencies all fixed and verified. Now the branding pass — checking how many "AESOP" mentions actually need updating to "Æsop-Xi" across the repo's docs.
+
+All are prose/title mentions, no code identifiers — safe to replace directly.
+
+Quick sanity check that git itself is unaffected by the directory rename.
+
+Also confirmed the git conflict is real (`UU RESUME.md` = actually unmerged in git's own eyes). And there's a stray untracked item literally named `aesop` — checking what that is before touching it.
+
+Removing the broken self-referential symlink (nothing depends on it, direct byproduct of the rename), then resolving the actual `RESUME.md` git conflict with a full rewrite per the new convention.
+
+`RESUME.md` now shows clean (`M`, staged) instead of `UU` — the conflict is genuinely resolved, not just papered over.
+
+**Full status of this pass:**
+- Repo renamed both places it needed to be (host `~/repos/aesop-xi` and the separate internal proot clone `/root/repos/aesop-xi`) — verified working via a live `--demo` run after each rename, not assumed.
+- All 6 dependent files outside the repo (`vv`, the voice-pipeline skill + script, `android-termux-operator`'s reference, 2 memory files) updated to the new path.
+- Branding pass done across `README.md`, `ARCHITECTURE.md`, `CLAUDE.md`, `protocol/memory.md`, `protocol/tiers.md` — Æsop-Xi in prose, aesop-xi in paths, consistent with your naming rule.
+- Found and removed a stray broken symlink left over from the rename.
+- `RESUME.md`'s real git conflict (confirmed via `git status` showing `UU`, not just visual markers) resolved with the full rewrite the new convention calls for.
+
+The one thing I haven't touched: the actual GitHub remote still points to `c10vis-poem/aesop.git` — that's a separate, more consequential decision (breaks any external links, though GitHub redirects renamed repos for a while) that I'm not doing without you saying so explicitly.

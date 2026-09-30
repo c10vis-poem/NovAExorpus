@@ -1,0 +1,21 @@
+Got it. Rube Goldberg — that's the word you were reaching for. And understood, the layers aren't redundant, they're modular. mem0 = episodic memory weights, Obi-Wan = recall protocols/guidelines, OmniRoute/localAI = runtime router, Reasoning Bank = cross-check for auditor agents. XI = your orchestration glue. Different jobs, different runtimes, not all running at once.
+
+Now — for the grilling session, I need to know a few things before we start so I'm actually useful and not just pattern-matching:
+
+1. **What's the architecture paper template you have?** Is it a specific format (e.g., ADR, arc42, something custom)? Drop it in and I'll match it.
+
+2. **The 5 repos** — are these already named/scoped, or do you want me to help you figure out the splits? From context I'm pulling:
+   - Repo 1: Main on-device agent (UI APK + terminal APK + media APK)
+   - Repo 2: Home node / cross-auditor / compiler
+   - Repo 3: Red auditor / RLVR training pipeline
+   - Repo 4: Help desk + web scraper
+   - Repo 5: Universal Data Bank / OpenWiki / knowledge graph layer
+   Is that close? Or different?
+
+3. **JSONL manifest schema** — do you have a draft schema, or do you want me to propose one? Things like: id, name, type (tool/skill/repo/agent), dependencies, runtime, protocols, etc.
+
+4. **User manual scope** — is this a manual for *you* to operate the system, or also for future contributors/users? And do you want it in the same repo as the agent it documents, or a dedicated docs repo?
+
+5. **The markdown you stripped down** — ready to paste it now, or do you want me to grill you first based on what you've told me and *then* you bring in the docs?
+
+What do you want to start with — the grilling, the manifest schema, or the repo splits?

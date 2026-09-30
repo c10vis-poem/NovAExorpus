@@ -1,0 +1,1 @@
+yes write it and then where does that get sync get recorded for each branch is that something session why or repo-wide is that global or is that a per Repo basis so we have to do the same action every single repository

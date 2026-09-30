@@ -10,31 +10,81 @@ A skipped or unanswered question is NOT consent. No action — reading,
 searching, or anything else — without an explicit prompt or permitted
 request. State-changing or not, it doesn't matter.
 
-## RULE 2 — READ THE REPO'S OWN CLAUDE.MD AND RESUME.MD FIRST
+## RULE 2 — READ THE REPO'S OWN AGENTS.MD AND RESUME.MD FIRST
 
 Before doing anything else in any of the operator's repos — before
 investigating, before answering a question about that project's state —
-check for and read that repo's own CLAUDE.md and RESUME.md. This has been
-the operator's standing convention for session handoff and current state
-across their repos for months. It is not optional background reading; it is
-step one, every session, every repo, no exceptions.
+check for and read that repo's own AGENTS.md and RESUME.md. Step one,
+every session, every repo, no exceptions.
+
+`AGENTS.md` is the single instruction file for every engine. A repo's
+`CLAUDE.md` is only `@AGENTS.md` plus things only Claude Code can use.
+
+## RULE 3 — DOCUMENTS 00–05 ARE WRONG
+
+`00_DEFINITIVE_MASTER_SPECIFICATION_V3_COMPLETE.md`,
+`01_SOVEREIGN_NODE_AND_APK_TOPOLOGY.md`, `02_DUMBASS_UNIVERSAL_MEMORY_SPEC.md`,
+`03_DUAL_OPERATIONAL_HARNESS_AND_MCP_SPEC.md`,
+`04_ON_DEVICE_INGESTION_AND_W5H_FRAMEWORK.md` and
+`05_FEDERATED_FILE_TREE_TOPOLOGY_MASTER.md` all contain inconsistencies
+and incorrect statements (operator, 2026-09-28). Never cite them as truth.
+The grill-with-docs session replaces them. (The `01_raw_sources/`…
+`05_episodic_logs/` folders are unrelated.)
+
+## RULE 4 — MOST OF THE CORPUS HAS NOT BEEN READ
+
+Fewer than ~150 files have honestly been read and implemented into the
+plan; 1,000+ remain (operator estimate, 2026-09-28; the vault holds ~4,000
+markdown files). No record exists of which files were read —
+`manifest.jsonl` only lists 585 converted files, and `GRILL-MANIFEST.md` is
+empty. Never claim the plan reflects "the corpus". Say which files you
+actually read.
 
 ## GH workflow (every repo)
 
-1. Feature branch (never commit to `main`/`master` directly).
-2. Before every push, scan the diff for secrets/API keys; refuse to push if found.
-3. Push, open a PR, track CI.
-4. On green CI, auto-merge into `main` immediately.
+1. Use the operator's `c10vis-poem` fork of every tool. At session start,
+   sync every fork with upstream so everything is current. A fork with its
+   own commits gets an upstream PR — never a force-sync.
+2. Work on a branch, never directly on `main`/`master`.
+3. At the END of the session — once, not after every change — push.
+   GitHub's secret scanning and push protection are the secret scan (plus
+   the gitleaks CI job); an agent grepping is not a substitute.
+4. CI runs, PR opens, auto-merge into `main` on green.
 5. Leave the branch in place after merge — do not delete it.
-6. Forked repos: at the start of every session, sync the fork's default
-   branch from `upstream` before any other work.
+6. Nothing sits unmerged: every pending change, unpushed commit and open
+   PR is merged or flagged as needing a fix.
+7. Never change these rules or invent exceptions when something breaks —
+   report the problem and ask the operator.
 
-The point of this workflow is that everything reaches `main` — a branch
-that never gets a PR opened, or a PR that never gets merged, is a failure
-of this rule, not a valid alternative to it. Don't let work sit stranded.
+Enforced by `~/bin/sync-forks` (session start) and `~/bin/ship-session`
+(session end) on the operator's phone. The vault syncs through the
+GitSync Portal plugin on the `vault-sync` branch, which goes through the
+same PR → CI → auto-merge gate.
 
-Source: operator-confirmed 2026-09-13, cross-linked in `~/.claude/CLAUDE.md`
-on the operator's device and in the `gh-workflow-convention` memory entry.
+Source: operator-confirmed 2026-09-13, restated and extended 2026-09-28.
+
+## Task observer (every engine)
+
+Run the task-observer skill (`c10vis-poem/aesop-task-observer`) before the
+first tool call of any session and before proposing a plan. Every harness
+carries the skill; observations go to one shared log in this vault
+(`skill-observations/`). Planned: an OmniRoute tool `observation_log` so
+all harnesses write through one endpoint (orchestration contract §3.2,
+aesop-xi PR #18) — not built yet, so each harness runs the skill itself.
+
+## Launch
+
+`bash tools/launch.sh` loads secrets, checks OmniRoute, Terrestrial Brain,
+mem0 and code-review-graph, then starts the engine. Claude Code also loads
+the `router-guard` output style and the `.claude/hooks` SessionStart check —
+those two are the only Claude-Code-only pieces.
+
+## MCP servers
+
+Defined in `.mcp.json` at repo root: `omniroute` (gateway), `mem0`
+(episodic memory), and `terrestrial-brain` (structural memory). All take
+endpoint/credentials from env vars — see `.mcp.json` for the exact
+variable names. Set them locally; never commit values.
 
 ## Mandatory runtime pipeline (all engines)
 
@@ -118,6 +168,23 @@ directly from testing across engines:
 - Claude Code and any local engine (Prime Agent, Codex, dsh) are never active
   in the same repo directory at the same time — running two simultaneously
   causes git-lock and file-write races.
+
+<!-- OPENWIKI:START -->
+
+## OpenWiki
+
+This repository has a generated `openwiki/` evidence index. It is optional just-in-time context, not required startup reading.
+
+- Do not enumerate, preload, or search wikis at task start. Use retrieval when the user asks for it, when unfamiliar architecture or dependency behavior materially affects the task, or when source inspection leaves an important uncertainty. Stop once the question is grounded.
+- When those conditions apply and OpenWiki retrieval tools are available, use `openwiki_search` for just-in-time context and `openwiki_read` for the relevant complete sections. If search returns `workspace_required`, ask which listed workspace to use and retry with its ID.
+- Use `openwiki_list_workspaces` or `openwiki_list_wikis` when workspace membership itself needs to be discovered.
+- If the retrieval tools are unavailable, read `openwiki/quickstart.md` and follow its links to the relevant pages.
+- Treat source code and tests as authoritative. A brief's unknowns and review items are verification gaps, not automatic requirements.
+- Prefer the narrowest quiet validation that proves the changed behavior. Preserve complete failure output.
+
+The scheduled OpenWiki GitHub Actions workflow refreshes the repository wiki. Do not hand-edit generated OpenWiki pages unless explicitly asked; prefer updating source code/docs and letting OpenWiki regenerate.
+
+<!-- OPENWIKI:END -->
 
 ## Agent skills
 

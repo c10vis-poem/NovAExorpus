@@ -1,0 +1,50 @@
+📁 master_build-guide/                      # Root Canonical Workspace
+│
+├── 📁 horizons-ui-v2.0/                    # NODE ALPHA FRONTEND UI / XI LAYER
+│   ├── 📄 README.md                        # UI visual architecture and tile definitions
+│   ├── 📄 skill_manifest.json              # Front-end tool calling & screen vision skills
+│   └── 📁 src/                             # Native Kotlin/Java codebase & game SDK configs
+│
+├── 📁 file-management-and-skills/          # THE PHYSICAL MASTER DATA ENGINE
+│   ├── 📄 master_blueprint.txt             # Global system verification registry hash map
+│   │
+│   ├── 📁 target-docs-curation/            # The Manual Selection Yard (Human-Picked)
+│   │   ├── 📁 qualcomm-qairt-sdk/          # HTP, QAIRT model paths, & NPU quantization specs
+│   │   ├── 📁 android-media-assistant/     # System alert window, vision APIs, & gaming SDK handshakes
+│   │   ├── 📁 llama-kernel-ggml/           # Llama server, GGUF runtimes, & librc libraries
+│   │   └── 📁 unsloth-fine-tuning/         # Low-level dataset parameters & token formatting rules
+│   │
+│   ├── 📁 skill-construction-factory/      # Standardized Capability Conversion Zone
+│   │   ├── 📄 base_skill_guideline.md      # Strict rules for writing modular tool assets
+│   │   ├── 📄 skill_onboarding_schema.json # Target JSON parameter verification model
+│   │   └── 📄 compiled_capabilities.jsonl  # Streaming instruction-tuned dataset repository
+│   │
+│   └── 📁 reasoning-bank-ledger/           # Cryptographic Chain-of-Thought Vault
+│       ├── 📄 active_execution_paths.json  # Suspended/Active intermediate script states
+│       └── 📄 baseline_recovery_matrix.md  # Safe execution states for multi-model recovery loops
+│
+├── 📁 agent-harness-hub/                   # STANDARDIZED AGENT CAPABILITY FACTORY
+│   ├── 📁 pocock-skills/                   # Matt Pocock Spec, Ticket, Code Review Graph setups
+│   ├── 📁 prime-agent/                     # RLM Persistent REPL & Continual Harness structures
+│   └── 📁 ecc-gsd/                         # Enhanced Cognitive Control & Get Shit Done frameworks
+│
+├── 📁 termux-environment/                  # LOCAL DEVELOPMENT CONTEXT & RUNTIMES
+│   ├── 📄 README.md                        # Sandbox limits and terminal tool definitions
+│   └── 📁 open-wiki-cli/                   # Local terminal markdown interface scripts
+│
+├── 📁 nova-claw-novus-agenti/              # LOGIC CORE & HARDWARE ABSTRACTED RUNTIME
+│   ├── 📄 README.md                        # MoE/MoA debating logic and daemon lifecycles
+│   └── 📁 daemons/                         # Shell Daemon and Media Daemon (Screen/VAD/TTS) scripts
+│
+├── 📁 red-agent-auditor/                   # AIR-GAPPED EXCLUSIONARY PERIMETER
+│   ├── 📄 README.md                        # Zero-trust audit procedures and check steps
+│   ├── 📁 security-perimeter/              # Out-of-band script validation environments
+│   └── 📄 nope_data_bank.json              # Exploit profiles, invalid logic loop matrices
+│
+├── 📁 node-beta-jetson/                    # PERSISTENT TENSOR COMPUTE HOST LAYERS
+│   ├── 📄 README.md                        # OS flashing, CUDA kernel allocation metrics
+│   └── 📁 ob1-backend/                     # Nate B. Jones OB1 Postgres schema hooks
+│
+└── 📁 gcp-training-flywheel/               # RLVR EXPORT & CLOUD ORCHESTRATION
+    ├── 📄 cross-account-handshake.sh       # Vertex AI Agent Builder credit routing script
+    └── 📁 grpo-pipelines/                  # Unsloth/Axolotl continuous fine-tuning loops

@@ -1,0 +1,70 @@
+#!/data/data/com.termux/files/usr/bin/bash
+# AESOP live voice engine — tablet bring-up
+# Run this in Termux on the tablet, one block at a time (or the whole thing).
+# Everything here is standard tooling — nothing device-specific except paths.
+
+set -e
+
+echo "=== 1. Termux prerequisites ==="
+pkg update -y
+pkg install -y proot-distro pulseaudio git python
+
+echo "=== 2. Debian proot (skip if already installed) ==="
+proot-distro list 2>/dev/null | grep -q debian || proot-distro install debian
+
+echo "=== 3. Python venv + sherpa-onnx stack inside the proot ==="
+proot-distro login debian -- bash -c "
+  python3 -m venv /root/venv
+  /root/venv/bin/pip install --upgrade pip
+  /root/venv/bin/pip install sherpa-onnx numpy huggingface_hub sounddevice
+"
+
+echo "=== 4. Download the three models (~656MB total, needs real internet) ==="
+proot-distro login debian -- /root/venv/bin/python3 -c "
+from huggingface_hub import snapshot_download
+snapshot_download('csukuangfj/kokoro-multi-lang-v1_0', local_dir='/root/models/kokoro-multi-lang-v1.0')
+snapshot_download('csukuangfj/sherpa-onnx-moonshine-base-en-int8', local_dir='/root/models/moonshine-base-en-int8')
+snapshot_download('R4kSo1997/sherpa-onnx-silero-vad-v5', local_dir='/root/models/silero-vad')
+"
+
+echo "=== 5. Symlink models to Termux home (optional convenience) ==="
+DEBIAN_ROOTFS=$(find /data/data/com.termux/files/usr/var/lib/proot-distro/installed-rootfs -maxdepth 1 -iname "debian" 2>/dev/null | head -1)
+ln -sfn "$DEBIAN_ROOTFS/root/models" ~/models
+
+echo "=== 6. Clone the voice engine (your fork) ==="
+mkdir -p ~/repos
+proot-distro login debian -- git clone https://github.com/c10vis-poem/aesop.git /root/repos/aesop
+
+echo "=== 7. ALSA-over-PulseAudio config inside the proot ==="
+echo "     (portaudio19 on Debian has no native Pulse hostapi — this routes ALSA -> Pulse)"
+proot-distro login debian -- bash -c 'cat > /etc/asound.conf << "EOF"
+pcm.!default { type pulse }
+ctl.!default { type pulse }
+EOF'
+
+echo "=== 7b. CRITICAL: disable SHM client-side inside the proot ==="
+echo "     Without this, connections fail with 'Protocol error' (confirmed on phone tonight)."
+proot-distro login debian -- bash -c 'mkdir -p /etc/pulse && cat > /etc/pulse/client.conf << "EOF"
+enable-shm = no
+EOF'
+
+echo "=== 8. Confirm PulseAudio is running in Termux (real socket, not dummy) ==="
+pactl info 2>&1 | grep -E "Server String|Default Sink|Default Source" || {
+  echo "  Not running yet — starting it:"
+  pulseaudio --start
+  sleep 2
+  pactl info 2>&1 | grep -E "Server String|Default Sink|Default Source"
+}
+
+echo "=== 9. Find the real pulse socket dir (adjust the bind path below if different) ==="
+find /data/data/com.termux/files/usr/tmp -maxdepth 2 -name native 2>/dev/null
+
+echo ""
+echo "=== DONE. To run the demo (TTS -> speaker -> STT, no mic): ==="
+echo 'proot-distro login debian \'
+echo '    --bind /data/data/com.termux/files/usr/tmp/pulse:/tmp/pulse-termux \'
+echo '    -- env PULSE_SERVER=unix:/tmp/pulse-termux/native AESOP_MODELS_DIR=/root/models \'
+echo '        python3 /root/repos/aesop/voice-engine/scripts/live_voice_loop.py --demo'
+echo ""
+echo "For the real mic->speaker live loop, drop --demo."
+echo "NOTE: the pulse socket dir name can vary by device -- re-run step 9 if the path above doesn't exist."

@@ -1,0 +1,9 @@
+Fair — let me separate what's actually in my memory vs. what I just read from a stale doc this session.
+
+**My memory updates today (2026-09-13):** `gh-workflow-convention.md` (written, then edited twice), `ask-dont-investigate.md` (new), and `no-action-without-explicit-order` (moved out of memory into `~/.claude/CLAUDE.md`). Nothing in my actual memory system mentions the corpus/vault at all — that's zero prior entries, not a stale one.
+
+**The corpus reference I used** ("vault is `nova-corpus`, not `OBSIDIAN-Master_Wiki`") came from reading `Horizons-UI/CLAUDE.md` earlier this session — and that file's own embedded state was stamped "verified 2026-08-08." Today's 2026-09-13, so that's 36 days old — stale by its own admission, and its own Rule 0 says not to trust it without checking live state. I read it once and treated it as current instead of re-verifying. Let me actually check now instead of repeating a month-old claim.
+
+Confirmed against live GitHub state — neither of the names in that stale doc is exactly right. The actual repo is **`c10vis-poem/NovA-Corpus`** (not `nova-corpus`, not `OBSIDIAN-Master_Wiki`), last pushed **2026-08-20** (24 days ago), described as: *"Agentic Edge/split operation protocol's filing system. On Device assistant's memory layer and source of truth. Living knowledge graph."*
+
+That matches what you called "the main corpus" in your last message about mirroring it across devices — this is very likely that repo. I haven't opened it yet to check its actual manifest/`AGENTS.md`/`CLAUDE.md` contents or current folder structure, since that's a real read I should do deliberately rather than as a side effect. Want me to go look at what's actually in `NovA-Corpus` now, so we're planning the manifest/mirror work off its real current state instead of another stale assumption?

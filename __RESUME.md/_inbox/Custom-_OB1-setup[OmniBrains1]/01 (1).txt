@@ -1,0 +1,17 @@
+SHA-256 is **built into the runtime**. OB1 runs on Supabase Edge Functions, which run on **Deno** — and Deno has `crypto.subtle` (the Web Crypto API) available globally with zero imports. SHA-256 is just one of the algorithms it supports out of the box.
+
+So you don't install anything. What OB1 ships is the **logic** — the `upsert_thought` RPC (setup step 2.6) that:
+1. Takes the incoming thought text
+2. Computes `crypto.subtle.digest("SHA-256", content)` → 32-byte fingerprint
+3. Checks if that fingerprint already exists in the `thoughts` table
+4. If yes → skip (dedup). If no → insert.
+
+The only thing you need to have done is **run OB1's setup step 2.6** to install that RPC function in your Supabase project. The algorithm itself is just there, part of the Deno runtime, same as `Math` or `JSON` — it's not a package, not a dependency, not something you configure.
+
+In your own orchestration script (wherever you're writing), SHA-256 is also built in:
+- **Node.js**: `require("crypto").createHash("sha256")` — built-in module
+- **Deno**: `crypto.subtle.digest("SHA-256", data)` — global
+- **Postgres**: `digest(content, 'sha256')` via `pgcrypto` extension (enabled by default on Supabase)
+
+You never need to `npm install` or `pip install` anything for SHA-256. It's in every runtime.
+

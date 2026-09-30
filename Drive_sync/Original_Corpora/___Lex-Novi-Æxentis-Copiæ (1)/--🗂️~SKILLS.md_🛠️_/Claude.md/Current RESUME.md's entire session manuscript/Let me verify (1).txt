@@ -1,0 +1,11 @@
+Let me verify a few concrete things before answering — whether GenieX bench actually includes a runnable executable (not just libraries) and re-check the HTP config's chip-version mismatch.
+
+Good news and a correction, both from actually checking:
+
+**GenieX bench is real and runnable** — it's not just orphaned `.so` files, there's an actual executable: `bin/geniex-bench`, plus `lib/qairt/htp-files/libqnnhtpv81.cat` (a compiled HTP context binary). This is a complete, self-contained toolkit you could run against Gemma right now to test real NPU inference, not something that needs building from scratch.
+
+**The correction**: `htp_backend_ext_config.json` isn't reusable as-is for Gemma. Its `graph_names` is `["vit"]` — that's a Vision Transformer graph, not an LLM graph — and it targets `dsp_arch: v73` with `soc_id: 60`, neither of which match this phone's actual chip (confirmed v79 earlier via the Paage.ai teardown). It was generated for a different model on different hardware. You'd need a fresh config with the right `dsp_arch`/`soc_id` and a graph name matching Gemma's actual compiled graph — not a big deal, but not drag-and-drop either.
+
+**On the bigger pipeline question** — you don't need ADB for this, and the `aesop` repo's own docs already anticipated exactly what you're describing: `architecture.md`'s "Extension Points" section literally says the LLM callback in `live_voice_loop.py` is a hardcoded stub waiting to be replaced, and separately says "No HTTP server exists yet; adding one (e.g., Flask/FastAPI wrapping VoiceEngine) would enable remote invocation." So the documented, lightest path is: a small local HTTP/WebSocket server on the phone wrapping the voice engine + Gemma, and DroidDesk's browser on the tablet hits it as a webview UI over your local network. That gets you voice-in → Gemma reasoning → UI feedback without ADB, without a custom APK, and without inventing new architecture — just finishing wiring the two extension points that were already flagged as unfinished.
+
+Given that's a real fork in the road (thin API+webview vs. a proper APK), which do you want — the lightweight Flask/FastAPI + webview route, or do you actually want this to become one of your three planned APKs?

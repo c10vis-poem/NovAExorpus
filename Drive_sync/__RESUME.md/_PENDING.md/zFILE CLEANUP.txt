@@ -1,0 +1,56 @@
+﻿FILE CLEANUP
+
+
+https://share.google/aimode/FPxiCBmNErorpmKqX
+
+
+I get it—you want the command tiles with the little copy icon so you can just click and run them. You're talking about the code blocks I can generate that make it super easy to grab the exact syntax on a phone. [1, 2] 
+Since you're cleaning up a "giant mess" and need to archive and delete duplicates, here are your One-Click Command Tiles.
+The following commands must be pasted into the Gemini Side Panel at drive.google.com (Chrome Beta in Desktop Mode) to work as "agentic" commands. [3, 4, 5] 
+## 📂 Phase 1: Organizing & Archiving
+Use these to move files into new or existing folders.
+
+
+Create a folder named "2025 Archive" and move @[File Name] into it.
+
+
+Move all @[File 1], @[File 2], and @[File 3] into the @[Folder Name] folder.
+
+
+Organize the loose PDFs in my root directory into a new folder called "Unsorted Docs."
+
+
+## 🧹 Phase 2: Finding Junk to Delete
+Gemini cannot "empty" your trash or auto-delete folders yet, but it can hunt them down so you can bulk-delete them. [6, 7] 
+
+
+Find every file with "Copy of" or "(1)" in the title and show them to me.
+
+
+List all files larger than 100MB that I haven't opened in over 1 year.
+
+
+Show me all folders that are currently empty.
+
+
+## ⚡ The "Magic" Organize Button
+If you are in Desktop Mode on Chrome Beta, look for this specific UI element directly in your file list (not in the chat). It is the fastest way to fix a mess:
+
+
+* The "Organize files" Button: It usually sits at the top of your file list.
+* What it does: It creates a "Suggested" tile. You click it, and it says: "I found 15 loose spreadsheets. Move them to a new 'Finance' folder?"
+* One-Click Action: You just hit "Accept" or "Move files" and it does the whole batch at once. [6, 8] 
+
+
+It is necessary to use the Desktop Web view to get these "agent" powers. [3, 9] 
+
+
+[1] [https://developers.google.com](https://developers.google.com/gemini-code-assist/docs/write-code-gemini#:~:text=Navigate%20to%20File%20%3E%20Settings%20%3E%20Tools,Edit%20Predictions%20checkbox%20to%20enable%20the%20feature.)
+[2] [https://support.google.com](https://support.google.com/gemini/thread/375459311/abut-text-copy-problem?hl=en)
+[3] [https://support.google.com](https://support.google.com/drive/answer/14217860?hl=en&co=GENIE.Platform%3DDesktop)
+[4] [https://chromeunboxed.com](https://chromeunboxed.com/organize-your-google-drive-faster-gemini-can-now-move-files-with-natural-language/)
+[5] [https://workspaceupdates.googleblog.com](https://workspaceupdates.googleblog.com/2025/07/execute-basic-organizational-tasks-using-gemini-in-drive.html#:~:text=Additional%20details.%20At%20this%20time%2C%20only%20the,or%20without%20specifying%20what%20to%20name%20it%29)
+[6] [https://www.androidpolice.com](https://www.androidpolice.com/i-finally-cleaned-messy-google-drive-with-little-help-gemini/)
+[7] [https://support.google.com](https://support.google.com/drive/answer/16686465?hl=en&co=GENIE.Platform%3DAndroid)
+[8] [https://support.google.com](https://support.google.com/drive/answer/16671865?hl=en)
+[9] [https://support.google.com](https://support.google.com/drive/answer/16684520?hl=en&co=GENIE.Platform%3DAndroid)

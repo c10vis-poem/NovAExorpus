@@ -1,0 +1,19 @@
+Exactly. And the practical implication is that you need to handle **write ordering** and **schema divergence** explicitly in your script:
+
+**Write ordering matters** because if Graphify's `ingest` runs before code-review-graph's `index`, the graph might have a node that code-review-graph hasn't yet linked to its call edges. You either:
+- Do all four writes in one `Promise.allSettled` (parallel, accept slight inconsistency), or
+- Sequence them: structural first (code-review-graph, Graphify), then semantic (OB1, Mem0) — so the graph is stable before you embed and store it
+
+**Schema divergence is a feature, not a bug.** Same event, four representations:
+
+| Tool | Same event looks like |
+|---|---|
+| Mem0 | "Fixed the auth token expiry bug in session 447" (natural language + embedding) |
+| OB1 | Row in `thoughts` table + embedding + provenance sidecar + use-policy |
+| Graphify | Node `auth_token_expiry` with typed edges `CAUSES` → `session_447`, `RESOLVED_BY` → `patch_892` |
+| code-review-graph | SQLite row: function `validateToken`, callers `[3]`, dependents `[7]`, blast_radius = 11 |
+
+When you merge them in step 3, you're not merging four copies of the same thing — you're merging four **different projections** of the same event. That's why the merged context is richer than any single tool's output.
+
+The one thing to watch: **OB1's SHA-256 fingerprint dedup** and **Mem0's LLM extraction** will both try to decide "is this new or a duplicate?" using different logic. If they disagree, you'll get a duplicate in one store and not the other. You probably want to pick one as the **source of truth for dedup** (OB1's fingerprint is more deterministic) and let Mem0's extraction be the "interpretation layer" on top.
+

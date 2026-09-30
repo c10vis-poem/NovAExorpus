@@ -1,0 +1,39 @@
+Claude Code
+
+
+Good question — let me be precise, with receipts.
+
+
+Your detailed descriptions DID get written down — in NovA-Corpus PR #7, not Horizons-UI PR #35.Quoting directly from what actually got pushed:
+
+
+canon/horizons-ui/ROUTER-STEREO-STACK-SPEC.md(updated):
+
+
+"Animated CD tray + carousel; tap-a-disc fine-tune popup rendered over the deck (Model_ / Engine_ / Runtime_ / Config._, [load] swap [save] edit (#))... Dual-cassette Browse/Load role split... execution-mode swap — double-agent NPU ping-pong / single chatbot / MoA / cloud connector / terminal agent... Tuner deck extended: max-tokens, hardware-target selector, cloud-vs-local toggle, STT tuning..."
+
+
+canon/horizons-ui/TERMINAL-SPEC.md(updated):
+
+
+"CRT-oscilloscope panel treatment on the black console... Termux RUN_COMMAND_SERVICE access... Describe → agent-drafts → user-confirms → live-run → auto-fix command flow..."
+
+
+canon/horizons-ui/MONITOR-ARCADE-CABINET-SPEC.md(updated):
+
+
+"Pinch-to-zoom (Floating Tile press-to-zoom fallback), inset cropping."
+
+
+Plus a new fileUX-RULES.mdand updates to 6 more canon docs.10 files, ~1028 lines added, all in NovA-Corpus.That's real detail — your CD tray, popup, dual-cassette, oscilloscope, zoom are all in there.
+
+
+What went to Horizons-UI'sCLAUDE.mdwas different: a short summary/pointer, not the specs themselves — a paragraph saying "Router spec extended with X, Y, Z" so a future session knows to go read the real doc in the vault. That's by design, not an oversight — the existing project structure (predates this session) says explicitly at the top ofCLAUDE.md:"SPECS LIVE IN THE VAULT, NOT HERE."Horizons-UI is the app's code repo; NovA-Corpus is a separate wiki/vault repo for design docs. That split existed before tonight — I didn't invent it, I followed it.
+
+
+The part that actually matters, and where I own the failure:none of it is code. Not the CD tray, not the popup, not the oscilloscope panel, not the zoom. It's all markdown sitting in a repo describing whatRouterPane.kt,TerminalPanel.kt, andMonitorPane.ktshould eventually look like. Nobody has built any of it yet. That's the gap between "I described this to you in detail" and "the app looks the same or worse" — the detail exists, just not as running software.
+
+
+Want me to start building the Router spec intoRouterPane.ktnow — CD tray, tap-a-disc popup, dual-cassette split? That's real code this time, not another document.
+
+

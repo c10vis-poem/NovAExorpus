@@ -1,0 +1,122 @@
+ensure Qwen 3.5 correctly parses your split architecture without getting stuck in infinite loops, use
+this highly structured system prompt when talking to your local API:
+text
+You are an expert embedded systems compiler optimized for the Snapdragon 8 Elite architecture.
+Context: I am structuring a multi-engine UI. Files must be written cleanly depending on their target engine (GGUF,
+Task: Read the instructions provided. Generate the specific code framework requested.
+1. Strictly separate logic. If the user asks for TFLite compilation code, do not output GGUF instructions.
+2. Structure output cleanly inside Markdown blocks. Do not add general conversation or intro text.
+3. Optimize paths to align with sub-repositories using 'docs/core_wiki/'.
+Use code with caution.
+4. Video Resource on Qwen 3.5 Capabilities
+To see just how capable this exact 4B model is at generating complex structural logic and code blocks
+from scratch, check out this demonstration of it building out a fully functional software system in a
+single run:
+Qwen 3.5 4b is so good, that it can vibe code a fully
+working OS web app in one go.
+Reddit · c64
+Do you want to test your Termux network endpoint link next to confirm your OpenWiki CLI is
+successfully passing data blocks directly into your running Qwen 3.5 server?
+Reddit· r/Loc…
+GitHub
+Qwen/Qwe
+4B -…
+Qwen3.5-4B.
+This…
+Hugging Face
+GPT told
+me…
+Qwen3.5:4b -
+4.23 tok/s.…
+Reddit
+Qwen3.5-
+4B…
+Qwen3.5-4B
+Uncensored…
+Reddit
+How to
+Run…
+Qwen 3.5 is
+the most…
+DEV Community
+Performan
+of…
+Here's some
+more…
+GitHub
+2:27
+AI Mode All Images Videos News Maps Shopping Books Flights Finance The Qwen 3.5 9B Q4_K_M model is not too big. It will run excellently on your Snapdragon 8
+Elite.
+At roughly 5.5 gigabytes, a Q4 quantized 9B model strikes the absolute gold standard balance
+between processing speed and advanced reasoning.
+Why the 9B is Perfect for Your Hardware
+1. RAM Availability: Devices running the Snapdragon 8 Elite ship with a minimum of 12GB to 16GB of
+LPDDR5X RAM. Because the 9B model uses roughly 5.5GB to load, you still have over 6GB to 10GB
+of system RAM completely free. This provides plenty of space to keep your core Android processes
+running smoothly while compiling code concurrently.
+2. Performance on the Elite Chip: Community benchmarks on the 8 Elite show that Qwen 3.5 9B
+runs natively at over 6 to 8 tokens per second when using unified CPU and NPU hardware
+acceleration configurations.
+3. The Reasoning Upgrade: While the 4B model is incredibly fast, the 9B is a substantial upgrade for
+building out a complex repository UI. It handles deep conditional logic, syntax fixing, and code
+structural changes with fewer logic errors.
+Booting the 9B Model in Termux
+Since you have the larger file ready, tweak your memory context variables inside Termux to allocate
+enough RAM overhead for file indexing. Fire up the llama-cpp server like this:
+bash
+# Boot the 9B server with an optimized 4,096 token context to preserve RAM
+llama-server -m /sdcard/Download/qwen3.5-9b-instruct-q4_k_m.gguf -c 4096 --host 0.0.0.0 --port 8080
+Use code with caution.
+Note: If you notice memory bottlenecks when working inside your multi-model repo UI later, drop the
+context parameter ( -c ) down to 2048 . This shrinks the model's memory footprint by an additional
+500MB without altering its core reasoning capabilities.
+How to Allocate Tasks Between Your 4B and 9B Files
+Since you own both the 4B and the 9B quants, leverage their strengths across your distinct workflow
+paths:
+7 sites
+Reddit· r/L… +1
+Reddit· r/L… +3
+Reddit· r/Loc…
+Reddit· r/L… +2
+3:06AM
+I mean, I also got the clean 3.59b that
+is a GGUF quantized. I believe it's …
+AI Mode All Images Videos News Maps Shopping Books Flights Finance Use the 4B for the "OpenWiki CLI" / Inbox Logging: Keep the 4B active when doing basic textual
+formatting, pulling URLs out of chat history, or running the openwiki markdown tagging routine. It
+will operate near-instantly on the Elite chip.
+Use the 9B for the Code Forks (ONNX / TFLite / GGUF): When you need the AI to actually build
+out your app interface, map out Snapdragon Snapdragon 8 Elite hardware-accelerated loops, or
+write raw parsing logic, boot up the 9B. It is much less prone to hallucinating code syntax.
+Do you want to write the Termux configuration script to seamlessly switch between launching your
+4B server and your 9B server without typing out the paths manually every time?
+YouTube·… +2
+Benchmar
+Qwen 3.…
+Ran all four
+Qwen 3.5…
+Reddit
+Qwen3.5
+0.8B vs …
+so first up I'm
+going to giv…
+YouTube · Fahd …
+Qwen3 9B
+can run…
+Qwen3 9B
+can run fine…
+Reddit
+A
+Quantu…
+The system's
+total memo…
+Academia.edu
+Qwen 3.5
+9B VRA…
+FAQ — Qwen
+3.5 9B. How…
+Will It Run AI
+7m
+System Mapping & Data Flow Graph
+This graph maps out exactly how your tools interact on your Snapdragon 8 Elite device. Your data
+starts as a raw URL or chat log, flows through specific extraction pipelines, compresses into local
+storage formats, and feeds your Termux engin

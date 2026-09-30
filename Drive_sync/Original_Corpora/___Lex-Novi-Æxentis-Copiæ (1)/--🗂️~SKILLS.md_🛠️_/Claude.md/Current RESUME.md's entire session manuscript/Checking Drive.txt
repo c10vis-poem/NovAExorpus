@@ -1,0 +1,7 @@
+Checking Drive first.
+
+**Drive**: good sign — lots of files (10+ distinct docs/folders) all show modification timestamps clustered within the last ~30 minutes (21:02–21:34 today). That pattern matches an active bulk restore in progress, not new damage. Looks like it's recovering the way you expected.
+
+On session state — I can't verify the exact numbers you quoted, but this session has genuinely accumulated a lot (the whole PulseAudio/proot debugging chain, the file audits, the Drive check). DroidDesk installs are long, output-heavy, and mostly independent of tonight's voice-pipeline work, so starting them fresh is the more efficient call. Before handing off, let me save tonight's hard-won fixes to memory so nothing has to be rediscovered.
+
+Saved. Everything needed to pick this up cold — the Moonshine 10s-cliff root cause, the PulseAudio SHM/proot bridge fix, and the working manual invocation — is now in memory, plus the tablet script is sitting in `~/downloads`. My recommendation: start a fresh session for the DroidDesk builds on both devices. It's a long, mostly self-contained install that doesn't need tonight's investigation context carried along, and the fixes that *do* matter are now durable. Want me to hand off, or keep going here?

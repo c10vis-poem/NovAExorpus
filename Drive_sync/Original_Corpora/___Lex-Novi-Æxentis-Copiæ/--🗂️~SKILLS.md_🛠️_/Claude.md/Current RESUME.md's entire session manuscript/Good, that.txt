@@ -1,0 +1,4 @@
+Good, that simplifies things — same structure, just wrong name. Two things I need before touching it, since a rename can have real blast radius (the `aesop-voice-pipeline` skill I built tonight hardcodes paths like `/root/repos/aesop/voice-engine/scripts/live_voice_loop.py`):
+
+1. **Exact correct name/spelling** — I've seen "AESOP-Xi" and "Æsop-Xi" (with the ligature) both come up in different contexts tonight; I don't want to guess which is canonical.
+2. **Scope** — do you want just the branding/text updated in docs (README/ARCHITECTURE/CLAUDE.md say the new name, repo path stays `~/repos/aesop`), or an actual directory/repo rename (which means I also need to update the hardcoded paths in tonight's voice-pipeline skill, or it breaks)?

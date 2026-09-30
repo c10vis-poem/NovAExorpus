@@ -1,0 +1,47 @@
+---
+tags: []
+created: '2026-08-28'
+title: '2026-08-28_GLM.setup.guide'
+---
+
+
+
+----
+The Complete Setup Sequence
+# ─── 1. PREREQUISITES ───
+pkg update && pkg upgrade -y
+pkg install nodejs-lts git python -y
+pip install uv
+
+# ─── 2. OPENWIKI (GLM 5.2 file administrator) ───
+npm install -g openwiki
+export OPENROUTER_API_KEY="sk-or-v1-your-key-here"
+echo 'export OPENROUTER_API_KEY="sk-or-v1-your-key-here"' >> ~/.bashrc
+openwiki personal --init
+# → Select OpenRouter provider
+# → Enter your API key
+# → Enter model: z-ai/glm-5.2
+# → Add ~/novae-xorpus as a git-repo connector
+# → Set scope to your AESOP XI architecture focus
+
+# ─── 3. OBSIDIAN SKILLS (Claude Code plugin) ───
+# Inside Claude Code:
+# /plugin marketplace add kepano/obsidian-skills
+# /plugin install obsidian@obsidian-skills
+
+# ─── 4. NOTEBOOKLM-PY (Claude Code skill + Python API) ───
+pip install "notebooklm-py[browser]"
+playwright install chromium
+notebooklm skill install
+
+# ─── 5. GRAPHIFY (Claude Code skill) ───
+uv tool install graphifyy
+graphify install
+
+# ─── 6. VERIFY ───
+openwiki personal --update "Initial synthesis from novae-xorpus docs"
+# → GLM 5.2 reads your 93+ files and writes the wiki
+# → Check ~/.openwiki/wiki/ for output
+
+# Point Obsidian at the wiki:
+# Open Obsidian → Open folder as vault → ~/.openwiki/wiki/

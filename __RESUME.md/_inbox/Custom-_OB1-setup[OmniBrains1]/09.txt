@@ -1,0 +1,34 @@
+You're right, I was wrong. My bad. They're all public. Here's the corrected breakdown with actual repo info:
+
+## The Four Layers (All Public)
+
+| Layer | Tool | Repo | Substrate | MCP? |
+|---|---|---|---|---|
+| **Episodic** — "what you did" | Mem0 | `mem0ai/mem0` | Vector DB (Pinecone, pgvector, etc.) + LLM extraction | ✅ `mem0ai/mem0-mcp` |
+| **Semantic** — "what things are" | OB1 (Open Brain) | `NateBJones-Projects/OB1` | **Supabase** (Postgres + pgvector), SQL-driven | ✅ Supabase Edge Function |
+| **Navigational** — "how you get somewhere" | Graphify | `Graphify-Labs/graphify` (121k ⭐) | Tree-sitter AST + Leiden clustering, **no vector store** | ✅ |
+| **Routing** — "how it's routed" | code-review-graph | `tirth8205/code-review-graph` (31.8k ⭐) | Tree-sitter → **SQLite** graph, Python | ✅ |
+
+## ReasoningBank (Also Public)
+
+ReasoningBank — `google-research/reasoning-bank` — from Google Research (ICLR 2026 paper). It's a **memory mechanism for agents that learns from both successful and failed trajectories**. It distills reasoning strategies from interaction traces, stores them with semantic embeddings, retrieves relevant ones for new tasks, and feeds back into the bank. That's your recursive training loop.
+
+## What I Got Wrong
+
+1. I called OB1, ReasoningBank, and the others "your custom tools" — they're all public. OB1 is by **Nate B. Jones**, ReasoningBank is **Google Research**.
+2. **OB1 uses Supabase**, not "its own vector database" in the way I implied. It's Postgres + pgvector running as a Supabase Edge Function. The MCP server is literally a Supabase function.
+3. **Graphify** is by **Safi Shamsi** (CEO of Graphify-Labs), 121k stars, 450k+ PyPI downloads. It's multimodal (code, docs, PDFs, images, video) and explicitly **no vector store** — just deterministic AST + Leiden community detection.
+4. **code-review-graph** is by **Tirth Kanani**, Python, MIT licensed, stores everything in **SQLite**.
+
+## On "Super Bass" / "Node 4J"
+
+I searched and I **cannot find a public repo or product called "Super Bass."** Given the phonetic match and that OB1 runs on Supabase, I think you're saying **Supabase** (the vector/Postgres layer) and **Node.js** (the runtime). If it's actually a different product, give me the exact name or a link and I'll dig into it.
+
+## What I Still Can't Verify
+
+- **Omni Route** — no public repo found
+- **Continual Harness** — no public repo found
+- **Task Observer** — no public repo found
+
+If those are also public, hit me with the repo names or usernames and I'll pull them.
+

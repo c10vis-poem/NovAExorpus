@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AesopXiToolUsageGuardrails",
+  "version": "3.0.0",
+  "subsystem": "aesop-xi/policies/",
+  "description": "Explicit operational constraints, immutable path gates, and permission scopes for tools invoked by autonomous agents.",
+  "immutable_paths": [
+    "01_raw_sources/**",
+    "raw/**",
+    "**/01_raw_sources/**",
+    "master_manifest.jsonl",
+    "**/NAMING-CANON.md"
+  ],
+  "tool_classes": {
+    "read_only": {
+      "requires_clearance_token": false,
+      "allowed_tools": [
+        "view_file",
+        "grep_search",
+        "ast_parse_map",
+        "read_manifest",
+        "read_recall_cache"
+      ]
+    },
+    "mutating_local": {
+      "requires_clearance_token": true,
+      "minimum_priority": 40,
+      "allowed_tools": [
+        "write_file",
+        "update_file",
+        "append_to_manifest",
+        "update_wiki_md",
+        "generate_chunk_jsonl"
+      ],
+      "forbidden_operations": [
+        "delete_root_directory",
+        "overwrite_raw_source",
+        "modify_red_sandbox_externally"
+      ]
+    },
+    "system_execution": {
+      "requires_clearance_token": true,
+      "minimum_priority": 60,
+      "allowed_tools": [
+        "execute_bash",
+        "adb_loopback_command",
+        "spawn_subdaemon",
+        "qualcomm_qnn_benchmark"
+      ],
+      "command_blacklist_patterns": [
+        "rm\\s+-rf\\s+/",
+        "rm\\s+-rf\\s+\\*",
+        "mkfs.*",
+        "dd\\s+if=.*of=/dev/.*",
+        "curl\\s+.*\\|\\s+bash",
+        ":\\(\\)\\s*\\{\\s*:\\|:&\\s*\\};:",
+        "reboot"
+      ]
+    }
+  },
+  "enforcement": {
+    "default_action": "FAIL_CLOSED",
+    "log_violations": true,
+    "violation_ledger": "aesop-xi/state/audit_ledger.db"
+  }
+}

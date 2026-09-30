@@ -7,7 +7,7 @@ and this file is the resolution.
 | Name | What it is |
 |---|---|
 | **NovÆxorpus** | The vault repo / universal Data Bank |
-| **NovÆxenti** | Agent logic |
+| **NovusÆxenti** | Agent logic |
 | **NovÆxopia** | Agent tools, harness, engine — the "claw" aspect |
 | **Æsop-Xi** | Memory layer, context formatting, tool and context orchestration, and protocols — ethical operations and agent protocols |
 | **Horizons-Ui** | The UI |
@@ -16,18 +16,19 @@ and this file is the resolution.
 
 ## URL and repo names
 
-Anything that becomes a URL, a repo, a package, or a path uses the **lowercase
-single-letter form** — `Æ` becomes `ae`.
+Anything that becomes a URL, a repo, a package, or a path keeps the
+display name's capitals and flattens `Æ` to `AE` — **never all lowercase**
+(operator, 2026-09-28).
 
 | Canon | URL / repo |
 |---|---|
 | NovÆxorpus | `NovAExorpus` |
-| NovÆxenti | `novaexenti` |
+| NovusÆxenti | `NovusAExenti` |
 | NovÆxopia | `NovAExopia` |
-| Æsop-Xi | `aesop-xi` |
-| Horizons-Ui | `horizons-ui` |
-| Æsc | `aesc` |
-| Æyre | `aeyre` |
+| Æsop-Xi | `AEsop-Xi` |
+| Horizons-Ui | `Horizons-Ui` |
+| Æsc | `AEsc` |
+| Æyre | `AEyre` |
 
 Display names keep the ligature. Only the machine-readable form flattens it.
 
@@ -39,7 +40,7 @@ two separated words the `c` reads as a `z` instead, which is what the `x` fixes.
 
 The vault repo **keeps its hyphen**: `NovAExorpus`. This is deliberate and is
 not an inconsistency to be tidied away. The others run together —
-`novaexenti`, `NovAExopia` — and `aesop-xi` keeps the hyphen its display name
+`NovusAExenti`, `NovAExopia` — and `AEsop-Xi` keeps the hyphen its display name
 already has.
 
 ## Superseded spellings
@@ -50,7 +51,7 @@ in a source; do not use them going forward.
 | Found as | Canon |
 |---|---|
 | `NovA-Corpus`, `Nova Corpus`, `NÆX`, `NovÆcorpus` | **NovÆxorpus** |
-| `NovÆgenti`, `Novus Agenti`, `NovusÆxenti`, `Novæ-Corpus` | **NovÆxenti** |
+| `NovÆgenti`, `Novus Agenti`, `Novæ-Corpus`, `NovÆxenti` | **NovusÆxenti** |
 | `NovÆcopia Vincet`, `Omni Claw`, `OMNI.CLAW`, `NovÆcopia` | **NovÆxopia** |
 | `AESOP XI`, `AESOP_XI`, `aesop`, `Agentic Executions Split Operations Protocol` | **Æsop-Xi** |
 | `Horizons UI`, `horizons-ui`, `com.horizons.ui` | **Horizons-Ui** |

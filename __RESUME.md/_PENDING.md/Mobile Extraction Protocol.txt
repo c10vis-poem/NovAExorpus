@@ -1,0 +1,268 @@
+﻿Mobile Extraction Protocol
+Before diving into the restructure, execute this updated mobile address bar bookmarklet to back up this conversation thread cleanly. This ensures your precise hardware pathways and layer definitions are preserved:
+
+
+javascript:(function(){let text=Array.from(document.querySelectorAll('p,li,h1,h2,h3,pre code')).map(el=>el.innerText).join('\n\n');let textarea=document.createElement('textarea');textarea.value=text;document.body.appendChild(textarea);textarea.select();document.execCommand('copy');document.body.removeChild(textarea);alert('Canonical thread telemetry captured to mobile clipboard!');})();
+
+________________
+Master Blueprint Guide: .ReadMe (Canonical Guide)
+Save this payload as the root README.md file within your master data compilation directory. This establishes the true structural hierarchy of your physical data assets before any code compilation begins.
+________________
+🌌 Master Build Guide: Canonical Architecture & Multi-Node Executions Template
+Hardware Layer Integration: [NovA-Claw / Novus-Agenti] Mesh Core
+System Protocol Classification: AESOP XI (Agentic Executions Split Operations Protocol)
+________________
+🛑 0. Zero-Trust Architecture Manifesto
+The building agent assigned to this repository operates under a strict, human-enforced Zero-Trust, Zero-Failure Framework. The previous development phase plateaued due to unsupervised execution states, unverified file writes, and cascading tool hallucinations within un-audited model iterations.
+Core Enforcement Rules:
+1. Human-Conduit Air-Gap: The human-in-the-loop (HITL) serves as the exclusive, air-gapped data conduit. No automated runtime, daemon, or model loop may write code, modify files, or alter persistent states across branches without manual validation followed by an isolated Red Agent Auditor pass.
+2. Decoupled Node Isolation (One Agent, One Repo): Every functional layer of the stack is strictly compartmentalized into its own standalone repository. Models initialized with Qualcomm/Snapdragon hardware-level documentation shall remain blind to the Horizons UI visual layouts or the Red Agent evaluation rule sheets.
+3. Canonical Synchronization: Any modification made to an individual node's repository must be audited by the HITL, verified by the Red Agent, updated inside the local tracking directory, and only then daisy-chained out to peer branches as a global source of truth.
+________________
+📑 1. Core Architecture Matrix (The W5+H Schema)
+WHO (Entities & Agents)
+* The Human-In-The-Loop (HITL): The absolute root authority vector supplying intent, selective data curation, and final manual verification.
+* Novus-Agenti (The Brain Core): A composite, multi-model execution core operating across specialized Mixture-of-Experts (MoE) and Mixture-of-Agents (MoA) topologies.
+* NovA-Claw (The Execution Body): A hardware-abstracted runtime utilizing local background daemons, native scripts, Android APK hooks, permissions, and enterprise cloud connectors to map raw reasoning plans to device execution.
+* The Red Agent Auditor (The Sentinel): An out-of-band validator tasked with checking model execution traces against the zero-trust Nope Data Bank.
+WHAT (The Tri-Tailed Memory Engine & Voice Infrastructure)
+* Tier 1 (Episodic Context): Managed via mem0 to track short-term preferences, user habit modifications, and ambient state keys.
+* Tier 2 (Structural Knowledge): Grounded inside an Open Wiki CLI terminal utility shifting downstream into a persistent, human-readable Obsidian Vault folder structure.
+* Tier 3 (Analytical Powerhouse): Driven via notebooklm-py and Graphify to programmatically load and scan deep context networks using automated cloud APIs.
+* The Bare-Metal Voice Subsystem: A native Android audio engine running Moonshine Small ONNX (STT) and Kokoro-82m/Sherpa ONNX (TTS) with Silero VAD over a localized Llama server runtime. It bypasses Termux's constrained audio pipelines via a Llama -> QAIRT -> GGML -> Kotlin Kernel -> librc runtime path to hit the Snapdragon NPU directly over the HTP SDK gateway.
+* Core Data Transport: Anchored by Nate B. Jones's OB1 (Open Brain Protocol) server operating over local Postgres instances, routing all queries seamlessly through the Omni Route layer.
+WHERE (The Heterogeneous Edge Network)
+* Node Alpha (Moto RAZR Ultra 2025): The primary localized heavy-lifter. Leverages 16GB RAM (with up to 11.5GB dynamically allocated for runtime weights), Snapdragon 8 Elite SoC, and a Hexagon NPU running the native Java/Kotlin Horizons UI APK for ambient ingress, tool execution, and voice-layer processing.
+* Node Beta (Nvidia Jetson Orin Nano Super 8GB): Headless Ubuntu Core housing the OB1 vector backend, local dev environments, and heavy CUDA tensor workloads (60-70 TOPs).
+* Node Gamma (Rubik Pi 3 Dragonwing): Workstation host running a Qualcomm SoC (14 TOPs) linked to a dual-monitor environment to drive the main visual OS layout.
+* The Mesh Tunnel: Orchestrated as a secure, ad-hoc P2P network using Tailscale tunnels and wired lines over your home WiFi network.
+WHEN (Lifecycle Operations)
+* The Inference Heartbeat: Local execution occurs in discrete, continuous step-loops. Each thought evaluates its own output before generating a follow-up action.
+* The Audit Intercept: The Red Agent Auditor halts execution scripts and terminal commands prior to system tool execution or persistent storage mutations.
+* The Cloud Flywheel: Sanitized execution logs are written to .jsonl formats nightly and pushed to secure GCP storage buckets to feed automated model fine-tuning arrays.
+WHY (The System Objectives)
+* Sovereignty: To maintain 100% ownership of execution data traces, context history, and personal preferences without enterprise data leaking out.
+* Reliability: To prevent the cognitive decay and hallucination loops common in long-running stateless cloud agent tasks.
+HOW (Data Flow & Tool Control Execution)
+
+
+[ Intent Ingress ] ──► ( HORIZON UI ) ──► ( Novus-Agenti Core )
+                                              │
+                                              ▼
+                                     [ OMNI ROUTE GATEWAY ]
+                                              │
+              ┌───────────────────────────────┼───────────────────────────────┐
+              ▼                               ▼                               ▼
+      ( Tier 1: mem0 )             ( Tier 2: Open Wiki )            ( Tier 3: notebooklm )
+              │                               │                               │
+              └───────────────────────────────┼───────────────────────────────┘
+                                              │
+                                              ▼
+                                     ( NovA-Claw Runtime )
+                                              │
+                                              ▼
+                                  ( RED AGENT AUDITOR LOOP )
+                                              │
+                   ┌──────────────────────────┴──────────────────────────┐
+                   ▼                                                     ▼
+        [ PASS: Commit & Stream ]                             [ FAIL: Re-Route Plan ]
+                   │                                                     │
+    ┌──────────────┴──────────────┐                                      ▼
+    ▼                             ▼                            ( Return to Novus-Agenti )
+( Obsidian Vault )        ( GCP Bucket JSONL )
+
+________________
+📂 2. Master Repository & Data Directory Blueprint
+This represents your canonical filesystem structure. Every folder functions as a decoupled development ecosystem containing its own local .ReadMe, independent skill configurations, an isolated LLM wiki metadata file, an Obsidian graph layer, and programmatic notebook pipelines.
+
+
+📁 master_build-guide/                      # Root Canonical Workspace
+│
+├── 📁 horizons-ui/                         # NODE ALPHA FRONTEND UI / XI LAYER
+│   ├── 📄 README.md                        # UI visual architecture and tile definitions
+│   ├── 📄 skill_manifest.json              # Front-end tool calling & screen vision skills
+│   ├── 📄 llm_wiki.md                      # Metadata tracking front-end state parameters
+│   └── 📁 src/                             # Native Kotlin/Java codebase & game SDK configs
+│
+├── 📁 aesop-xi-memory/                     # COGNITIVE TRANSLATION & ROUTING FABRIC
+│   ├── 📄 README.md                        # Memory layer coordination specifications
+│   ├── 📄 skill_manifest.json              # Vector storage, caching, & search parameters
+│   ├── 📄 llm_wiki.md                      # Dynamic context token weight maps
+│   ├── 📁 ob1-backend/                     # Nate B. Jones OB1 Postgres schema hooks
+│   └── 📁 omni-route/                      # Context routing logic matrices
+│
+├── 📁 termux-environment/                  # LOCAL DEVELOPMENT CONTEXT & RUNTIMES
+│   ├── 📄 README.md                        # Sandbox limits and terminal tool definitions
+│   ├── 📄 skill_manifest.json              # Shell scripting and package management rules
+│   ├── 📄 llm_wiki.md                      # Active environment trace variables
+│   └── 📁 open-wiki-cli/                   # Local terminal markdown interface scripts
+│
+├── 📁 file-management-system/              # THE PHYSICAL MASTER DATA ENGINE
+│   ├── 📄 README.md                        # Storage indexing and ingestion laws
+│   ├── 📄 skill_manifest.json              # Automated folder parsing and matching parameters
+│   ├── 📄 llm_wiki.md                      # Static file tree validation checksums
+│   └── 📁 target-docs/                     # Curation yard for cherry-picked user inputs
+│
+├── 📁 github-ci-cd/                        # AUTOMATED REPOSITORY ORCHESTRATION
+│   ├── 📄 README.md                        # Git branching rules and pipeline conditions
+│   ├── 📄 skill_manifest.json              # Commit automation and change-log parsing rules
+│   ├── 📄 llm_wiki.md                      # GitHub API validation metrics
+│   └── 📁 workflows/                       # GitHub Actions compilation scripts
+│
+├── 📁 skill-building-protocol/            # STANDARDIZED AGENT CAPABILITY FACTORY
+│   ├── 📄 README.md                        # Skill onboarding and restriction guidelines
+│   ├── 📄 skill_manifest.json              # Evaluation parameters for skill validation
+│   └── 📄 llm_wiki.md                      # Registry tracking verified agent tools
+│
+├── 📁 nova-claw-novus-agenti/              # LOGIC CORE & HARDWARE ABSTRACTED RUNTIME
+│   ├── 📄 README.md                        # MoE/MoA debating logic and daemon lifecycles
+│   ├── 📄 skill_manifest.json              # Local permission maps & root utility access
+│   ├── 📄 llm_wiki.md                      # Live running model weight parameters
+│   └── 📁 daemons/                         # Model loading, network routing, and recovery scripts
+│
+├── 📁 red-agent-auditor/                   # AIR-GAPPED EXCLUSIONARY PERIMETER
+│   ├── 📄 README.md                        # Zero-trust audit procedures and check steps
+│   ├── 📄 skill_manifest.json              # Trace verification and script parser routines
+│   ├── 📄 llm_wiki.md                      # Logic checking trace maps
+│   ├── 📁 security-perimeter/              # Out-of-band script validation environments
+│   └── 📄 nope_data_bank.json              # Exploit profiles, invalid logic loop matrices
+│
+├── 📁 node-beta-jetson/                    # PERSISTENT TENSOR COMPUTE HOST LAYERS
+│   ├── 📄 README.md                        # OS flashing, CUDA kernel allocation metrics
+│   ├── 📄 skill_manifest.json              # Vector hosting and remote execution parameters
+│   └── 📄 llm_wiki.md                      # NVMe storage usage benchmarks
+│
+├── 📁 node-gamma-rubik-pi/                 # DISPLAY ENVIRONMENT SERVER LAYERS
+│   ├── 📄 README.md                        # Hardware ribbon setup and UI rendering paths
+│   ├── 📄 skill_manifest.json              # Dual-monitor scaling and window mapping skills
+│   └── 📄 llm_wiki.md                      # Qualcomm SoC telemetry tracking registers
+│
+└── 📁 global-documentation-vault/          # CORE RESOURCE & SDK ENCYCLOPEDIA
+   ├── 📁 unsloth-docs/                    # Unsloth fine-tuning optimization specs
+   ├── 📁 qairt-docs/                      # Qualcomm AI Runtime SDK reference libraries
+   ├── 📁 google-dev-docs/                 # Android media and assistant system documentation
+   ├── 📁 llama-docs/                      # Llama server configuration manual sets
+   └── 📄 master_blueprint.txt             # Global ground-truth validation index
+
+________________
+⚙️ 3. Skill Construction & Dataset Loading Protocol
+To guarantee zero-failure data ingestion, every curated document and new tool definition added to the repository must follow this sequence before model integration:
+1. The Skill Definition Phase
+Skills must be written as discrete, modular files. No tool configuration may mix operational categories (e.g., an Android Media SDK screen vision hook must never contain lines parsing code structures from Unsloth fine-tuning docs).
+2. Validation Schema Requirement
+Every capability layout requires an associated JSON check file defining:
+* Strict parameter input expectations.
+* Verifiable JSON-RPC output structures matching the manual audit format.
+* Fixed processing limits (CPU usage profiles, maximum network socket time-outs).
+3. Verification Pipeline Flow
+1. Save the parsed data or new skill code directly into file-management-system/target-docs/.
+2. Run an isolated evaluation run within a local Termux testing folder.
+3. Pass the generated telemetry logs manually to your air-gapped security-perimeter/ workspace.
+4. If and only if you verify the output achieves a flawless score against nope_data_bank.json, approve the changes to be committed to the branch and daisy-chained across your system.
+________________
+Prioritised Execution Blueprint: Phase 1 Data Restructure
+To cleanly break away from Claude’s context plateau without breaking your working front-end UI structures, execute these initial file management steps in your Termux terminal environment.
+
+
+       ┌─────────────────────────────────────────────────────────┐
+      │            PHASE 1 RESTRUCTURE: STEP SEQUENCE           │
+      └────────────────────────────┬────────────────────────────┘
+                                   │
+                                   ▼
+      ┌─────────────────────────────────────────────────────────┐
+      │ STEP 1: ISOLATE THE KNOWLEDGE STAGING ENVIRONMENT       │
+      └────────────────────────────┬────────────────────────────┘
+                                   │
+                                   ▼
+      ┌─────────────────────────────────────────────────────────┐
+      │ STEP 2: FORK CANONICAL FRONT-END INTERFACE STRUCTURES   │
+      └────────────────────────────┬────────────────────────────┘
+                                   │
+                                   ▼
+      ┌─────────────────────────────────────────────────────────┐
+      │ STEP 3: CONFIGURE LOCAL FILE SYSTEM VERIFIERS           │
+      └─────────────────────────────────────────────────────────┘
+
+Step 1: Isolate the Knowledge Staging Environment
+Initialize the master guide folder structure on your phone's local storage path to clear out historical text junk from previous development models:
+
+
+mkdir -p master_build-guide/{horizons-ui,aesop-xi-memory,termux-environment,file-management-system,github-ci-cd,skill-building-protocol,nova-claw-novus-agenti,red-agent-auditor,node-beta-jetson,node-gamma-rubik-pi,global-documentation-vault}
+
+Move your curated, cherry-picked documents (Unsloth, QAIRT, Llama docs, Android Developer references) into their target folders inside global-documentation-vault/ manually using your terminal file explorer. Do not use an automated script; maintain absolute human oversight over your training base.
+Step 2: Fork Canonical Front-End Interface Structures
+Isolate your preferred UI tile configuration and baseline Java/Kotlin home screen code inside the staging zone. Create a dedicated structural check file named horizons-ui/agent_manifest.json to lock out cross-contamination:
+
+
+{
+ "assigned_layer": "HORIZONS_UI_FRONTEND",
+ "layer_permissions": [
+   "android.permission.BIND_VOICE_INTERACTION",
+   "android.permission.SYSTEM_ALERT_WINDOW",
+   "android.permission.BATTERY_STATS"
+ ],
+ "hardware_pathway": "BARE_METAL_NPU_OFFLOAD",
+ "security_isolation_status": "MANUAL_AUDIT_REQUIRED",
+ "cross_contamination_block": true
+}
+
+Step 3: Configure Local File System Verifiers
+To manage your skills exactly as designed, deploy this structural validation utility inside your local Termux workspace path as file-management-system/audit_layer_bounds.py. This script runs locally to verify that every folder contains its mandatory asset files before any branch updates are approved:
+
+
+#!/usr/bin/env python3
+"""
+AESOP XI SYSTEM INTEGRITY AUDITOR
+Enforces strict single-agent repository constraints across directory trees.
+"""
+
+import os
+import sys
+
+TARGET_DIRECTORIES = [
+   "horizons-ui", "aesop-xi-memory", "termux-environment", 
+   "file-management-system", "github-ci-cd", "skill-building-protocol", 
+   "nova-claw-novus-agenti", "red-agent-auditor", "node-beta-jetson", 
+   "node-gamma-rubik-pi", "global-documentation-vault"
+]
+
+def verify_structural_alignment():
+   print("⏳ [LOCAL ENGINE] Initiating Zero-Trust File Structure Verification...")
+   missing_assets = 0
+   
+   for folder in TARGET_DIRECTORIES:
+       if not os.path.isdir(folder):
+           print(f"❌ ERROR: Canonical workspace folder '{folder}' is missing.")
+           missing_assets += 1
+           continue
+           
+       # Global documentation vault holds references; other folders require structural manifests
+       if folder == "global-documentation-vault":
+           continue
+           
+       # Verify mandatory multi-tool components are anchored locally
+       manifest_file = os.path.join(folder, "skill_manifest.json")
+       wiki_file = os.path.join(folder, "llm_wiki.md")
+       
+       if not os.path.exists(manifest_file):
+           print(f"⚠️ Layer anomaly found: Creating clean skill_manifest.json inside '{folder}'")
+           with open(manifest_file, "w") as f:
+               f.write('{\n  "layer_skills": [],\n  "mcp_routing_enabled": false\n}')
+               
+       if not os.path.exists(wiki_file):
+           print(f"⚠️ Layer anomaly found: Initializing clear llm_wiki.md inside '{folder}'")
+           with open(wiki_file, "w") as f:
+               f.write(f"# Local Agent Wiki Meta: {folder.upper()}\n\n## Current Status\n* Isolated context bound active.")
+
+   if missing_assets > 0:
+       print(f"❌ Audit halted. Fix the {missing_assets} missing folders before processing storage states.")
+       sys.exit(1)
+   else:
+       print("✅ SUCCESS: Ground-truth directory architecture matches master specifications.")
+
+if __name__ == "__main__":
+   verify_structural_alignment()
+
+________________
+Now that the master repository directory layout is established, your files management system boundaries are defined, and your zero-trust structural validators are locked in:
+Would you like to write the complete JSON schemas for the specialized skill building protocols to structure your text data before passing it to models, or should we define the manifest file configuration parameters for the nova-claw-novus-agenti daemon to control model offloading onto your Snapdragon NPU?

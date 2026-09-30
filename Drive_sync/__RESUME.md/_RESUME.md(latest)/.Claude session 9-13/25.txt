@@ -1,0 +1,3 @@
+Correction first: I misread branch protection earlier — `required_signatures` is actually **false** on both `novae-xorpus` and `novus-aeyre` (I was reading the presence of the JSON sub-object as "enabled" instead of checking `.enabled` itself). Signing was never actually required. I'll fix that in memory after this lands. Creating the PR and merging now per your instruction.
+
+Both checks passed (`check` and `secret-scan`, both SUCCESS). Merging now.

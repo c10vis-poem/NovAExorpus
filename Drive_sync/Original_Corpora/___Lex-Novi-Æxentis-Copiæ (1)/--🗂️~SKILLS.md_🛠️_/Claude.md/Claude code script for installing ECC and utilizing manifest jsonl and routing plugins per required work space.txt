@@ -1,0 +1,11 @@
+# Agent Execution Rules & Architecture
+Operating environment: high-performance Android multi-agent framework.
+
+## Core System Tools
+- **Orchestration Layer**: Route tool calls through the **ECC Framework** (`@ECC`). Use ECC sub-agent skills whenever available.
+- **Memory / Indexing**: Reference `manifest.jsonl` at the root directory to map the universal data bank before searching files.
+- **Anthropic Plugins**: Utilize localized `knowledge-work-plugins` schema hooks for environment, repository, and code-graph reviews.
+
+## Workspace Commands
+- Build/Verify Manifest: `python wiki_admin.py`
+- Active Sub-Agents Check: `/plugin list`

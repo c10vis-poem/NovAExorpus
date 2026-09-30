@@ -1,0 +1,54 @@
+CLAUDE.md updated with the discovered-assets section. Now the flash-session metaprompt — self-contained, copy-pasteable, no file dependency needed to kick it off.
+
+Here's the copy-paste for the flash session — paste this verbatim to kick it off next time:
+
+---
+```
+Flash session: ECC + Pocock skills + honey-for-devs tune-up.
+
+Context: ECC is a real, ready-to-go Claude Code plugin at ~/repos/ECC-aesop
+(.claude-plugin/plugin.json exists) that has never actually been installed via
+the plugin system — confirmed against ~/.claude/plugins/installed_plugins.json,
+which lists only 3 unrelated plugins (mattpocock-skills, obsidian, watch).
+
+Do this, in order:
+1. Install ECC for real via the plugin system (not just referencing the cloned
+   repo) and verify it actually registers — check installed_plugins.json
+   afterward, don't just assume the install command succeeded.
+2. Review what ECC actually provides (67 agents, 281 skills per its own
+   plugin.json description) against what's already installed
+   (mattpocock-skills, obsidian-skills) — flag real overlap before assuming
+   ECC replaces or duplicates anything.
+3. Tune up Pocock skills and honey-for-devs (~/repos/NoVa-honey-for-devs) —
+   confirm what's actually usable now vs. what needs wiring.
+4. This is a flash session — don't update RESUME.md or unresolved.md files for
+   this; if anything genuinely unresolved comes out of it, add it to
+   ~/novae-xorpus/unresolved.md directly (numbered, dated) since that's not
+   scoped to one repo anyway.
+
+Read ~/repos/aesop-xi/CLAUDE.md's "Discovered assets" section for related
+context (geniex-bench, whisper-parakeet, mcp.json) before starting.
+```
+---
+
+Now the blind run — spawning a genuinely fresh agent (no memory of this conversation) to cold-read the current state, same test as before but against everything that's changed since: the rename, the novae-xorpus restructure, AGENTS.md, MASTER-RESUME.md, the symlinks, and this new CLAUDE.md section.
+
+All three done: the flash-session metaprompt is above (copy that verbatim next time), aesop-xi's `CLAUDE.md` now has the full discovered-assets section, and a fresh cold-read agent is running against the entire current state — this repo, the new novae-xorpus structure, the symlinks, and the auto-generated MASTER-RESUME.md. I'll relay exactly what it finds, including anything broken, once it completes.
+
+Two real problems, one serious — fixing now before we close out.
+
+Now the more serious one — nothing from tonight was actually committed. Fixing that and adding the missing hook explanation before committing everything for real.
+
+Committed locally (data-loss risk resolved), but the push was rejected — the remote branch has commits I don't have locally. Pulling to integrate safely before pushing, not forcing.
+
+This matters — there are 6 real remote commits I had zero visibility into: someone built a bridge daemon (`aesopd`) + supervised `llamad` with actual NPU/Hexagon accelerator offload. Merging carefully now, not rebasing (preserves history, easier to reason about conflicts).
+
+Clean merge, no conflicts. Pushing now to make this actually safe.
+
+**Blind-run results — real findings, both fixed:**
+1. `README.md` genuinely contradicted itself (intro said "four memory types," a separate section header three paragraphs down still said "three types" with a 3-row table) — RESUME.md had falsely claimed this was fixed. Fixed for real now.
+2. **Bigger one: nothing from tonight had actually been committed.** Fixed, and pushing it turned up something important — 6 real commits already sitting on the remote that I never had visibility into: a bridge daemon (`aesopd.py`), a supervised `llamad` with actual NPU/Hexagon offload, and a `termux-helper` skill. Merged clean, pushed, and logged in `unresolved.md` (#11) since it's directly relevant to Task 5 — whoever built that may have already done most of the work "salvage the APK as terminal daemon" describes.
+
+Also fixed: the `post-commit` hook referenced `AGENTS.md` "for why this exists" but AGENTS.md never actually said why — added that section, including the real caveat that `MASTER-RESUME.md` reflects last-*commit* state, not live edits.
+
+Everything's committed and pushed. Good place to stop — say the word for the flash session whenever you're ready, the metaprompt above is self-contained.

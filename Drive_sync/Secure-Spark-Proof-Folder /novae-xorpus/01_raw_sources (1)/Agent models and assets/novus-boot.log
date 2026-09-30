@@ -1,0 +1,89 @@
+20:33:26.351 session_start pid=10928 android=36 device=motorola/motorola razr ultra 2025
+20:33:26.360 onCreate_enter
+20:33:26.363 onCreate_after_super
+20:33:26.367 crashrecorder_installed
+20:33:26.502 appstate_loaded
+20:33:26.505 clifford_started
+20:33:26.506 cloud_refreshed
+20:33:26.507 tts_boot_init_skipped_by_design
+20:33:26.515 onCreate_exit_ok
+20:33:26.766 session_start pid=11025 android=36 device=motorola/motorola razr ultra 2025
+20:33:26.769 onCreate_enter
+20:33:26.771 onCreate_after_super
+20:33:26.773 onCreate_skip_non_main_process
+20:33:26.890 session_start pid=11025 android=36 device=motorola/motorola razr ultra 2025
+20:33:26.891 CliffordService_started
+20:33:27.333 MainActivity_onCreate_enter
+20:33:27.339 MainActivity_after_super
+20:33:27.346 MainActivity_runtime_perms_requested
+20:33:27.348 MainActivity_before_setContent
+13:00:51.624 session_start pid=10880 android=36 device=motorola/motorola razr ultra 2025
+13:00:51.635 onCreate_enter
+13:00:51.640 onCreate_after_super
+13:00:51.645 crashrecorder_installed
+13:00:51.787 appstate_loaded
+13:00:51.791 clifford_started
+13:00:51.794 cloud_refreshed
+13:00:51.794 tts_boot_init_skipped_by_design
+13:00:51.802 onCreate_exit_ok
+13:00:52.062 session_start pid=10969 android=36 device=motorola/motorola razr ultra 2025
+13:00:52.065 onCreate_enter
+13:00:52.066 onCreate_after_super
+13:00:52.068 onCreate_skip_non_main_process
+13:00:52.185 session_start pid=10969 android=36 device=motorola/motorola razr ultra 2025
+13:00:52.187 CliffordService_started
+13:01:00.151 session_start pid=11117 android=36 device=motorola/motorola razr ultra 2025
+13:01:00.153 onCreate_enter
+13:01:00.154 onCreate_after_super
+13:01:00.157 crashrecorder_installed
+13:01:00.289 appstate_loaded
+13:01:00.293 clifford_started
+13:01:00.296 cloud_refreshed
+13:01:00.297 tts_boot_init_skipped_by_design
+13:01:00.305 onCreate_exit_ok
+13:01:00.568 session_start pid=11191 android=36 device=motorola/motorola razr ultra 2025
+13:01:00.571 onCreate_enter
+13:01:00.572 onCreate_after_super
+13:01:00.574 onCreate_skip_non_main_process
+13:01:00.694 session_start pid=11191 android=36 device=motorola/motorola razr ultra 2025
+13:01:00.695 CliffordService_started
+13:01:01.586 MainActivity_onCreate_enter
+13:01:01.588 MainActivity_after_super
+13:01:01.590 MainActivity_runtime_perms_requested
+13:01:01.591 MainActivity_before_setContent
+16:03:30.456 session_start pid=26791 android=36 device=motorola/motorola razr ultra 2025
+16:03:30.460 onCreate_enter
+16:03:30.462 onCreate_after_super
+16:03:30.464 onCreate_skip_non_main_process
+16:03:30.584 session_start pid=26791 android=36 device=motorola/motorola razr ultra 2025
+16:03:30.585 CliffordService_started
+16:03:40.367 session_start pid=26874 android=36 device=motorola/motorola razr ultra 2025
+16:03:40.370 onCreate_enter
+16:03:40.372 onCreate_after_super
+16:03:40.373 crashrecorder_installed
+16:03:40.506 appstate_loaded
+16:03:40.509 clifford_started
+16:03:40.510 session_start pid=26791 android=36 device=motorola/motorola razr ultra 2025
+16:03:40.512 cloud_refreshed
+16:03:40.512 CliffordService_started
+16:03:40.513 tts_boot_init_skipped_by_design
+16:03:40.519 onCreate_exit_ok
+21:56:52.278 session_start pid=28469 android=36 device=motorola/motorola razr ultra 2025
+21:56:52.285 onCreate_enter
+21:56:52.295 onCreate_after_super
+21:56:52.300 crashrecorder_installed
+21:56:52.517 appstate_loaded
+21:56:52.524 clifford_started
+21:56:52.528 cloud_refreshed
+21:56:52.530 tts_boot_init_skipped_by_design
+21:56:52.543 onCreate_exit_ok
+21:56:52.935 session_start pid=28674 android=36 device=motorola/motorola razr ultra 2025
+21:56:52.939 onCreate_enter
+21:56:52.941 onCreate_after_super
+21:56:52.945 onCreate_skip_non_main_process
+21:56:53.096 session_start pid=28674 android=36 device=motorola/motorola razr ultra 2025
+21:56:53.098 CliffordService_started
+21:56:54.254 MainActivity_onCreate_enter
+21:56:54.258 MainActivity_after_super
+21:56:54.266 MainActivity_runtime_perms_requested
+21:56:54.270 MainActivity_before_setContent

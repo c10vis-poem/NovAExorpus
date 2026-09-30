@@ -1,0 +1,5 @@
+Transmuting to the UI (The ASCII Trick)
+When the code serves data to your Horizons UI frontend, you can use the standard Unicode character \u00C6 (for upper-case Æ) or
+\u00E6 (for lower-case æ) in your string resources.
+Because Android UI layouts support crisp vector rendering, you can pick a font for your app splash screen where the Æ looks razor-
+sharp.

@@ -1,0 +1,18 @@
+You're right to flag it — let me pull the actual original text instead of trusting my own paraphrase. Here's what you said near the start of this session, verbatim:
+
+> "So yeah finish up the voice there the desktops and then work on on device agent like you were saying in conjunction with open Wiki on device... once those are all going we can get the pocock skills the ECC the anthropic plugins implemented start getting some jsonl markers and files can and Enterprise knowledge base that I have configured into tools and skills and get the grill session going probably at this like the same time... and the repo structure is going to be the next so after that's all done I'm going to start building the first apks and on device agents and the on-device agents I'm going to shoot for all for them smol Nano and turbo quant varieties..."
+
+Reconstructing that order as best I can:
+
+1. Voice line
+2. Desktops (DroidDesk)
+3. On-device agent + OpenWiki (together, not separate steps)
+4. Pocock skills + ECC + **Anthropic plugins** (marketplace — this is missing from what I wrote)
+5. JSONL markers/files + Enterprise knowledge base → configured into tools/skills (also missing)
+6. Grill session (roughly concurrent with #4/#5)
+7. **Repo structure** (explicitly named as its own next step after the grill outputs — also missing)
+8. Build first APKs + on-device agents (nano/turbo-quant models for cross-audit/RAG — this is different from "salvaging an existing APK as a terminal daemon," which only showed up in your most recent restatement)
+
+That's a real gap between this and what I wrote — Anthropic plugins, the JSONL/Enterprise-KB step, and "repo structure" as its own item are all missing from the current `RESUME.md`. "Honey-for-devs," "on-device help desk," and "salvaging the existing APK" only appeared in your later restatement, not this original one.
+
+Rather than merge these myself and risk getting it wrong a third time — can you give me the correct full order directly? I'd rather have it exact from you than reconstruct it again.

@@ -1,0 +1,93 @@
+Yes, you absolutely need both. They are the twin halves of your local data routing layer.
+The Open Wiki CLI is the execution engine that scans your files and writes updates. The Reasoning Bank Ledger is the structured state database that tells the CLI exactly what to write, where to resume after a crash, and how the models are thinking.
+Without both locked down, you cannot run your Priority 4 local Claude Code verification loops.
+------------------------------
+## Part 1: The Canonical Reasoning Bank Schema (/file-management-and-skills/reasoning-bank-ledger/active_execution_paths.json)
+Save this structural configuration layout as your baseline ledger file. It explicitly categorizes running thoughts, model disagreements, and hardware recovery metrics for your asymmetric dual-model workspace.
+
+{
+  "ledger_metadata": {
+    "protocol_class": "AESOP_XI_REASONING_BANK",
+    "schema_version": "1.2.0",
+    "last_checkpoint_timestamp": 0
+  },
+  "active_sessions": {
+    "session_id_alpha_temp": {
+      "lifecycle_state": "SUSPENDED_PENDING_HUMAN_AUDIT",
+      "model_context_routing": {
+        "executor_model_id": "local_small_execution_agent",
+        "query_model_id": "local_large_query_model"
+      },
+      "chain_of_thought_stack": [
+        {
+          "step_sequence_id": 1,
+          "agent_node_id": "NOVUS_AGENTI_BRAIN",
+          "thought_process_log": "Analyzing raw user speech ingress. User requested verification of localized Markor files. Cross-checking short-term habit tokens via mem0 cache.",
+          "tool_intent_selected": "termux_open_wiki_cli.scan_vault"
+        },
+        {
+          "step_sequence_id": 2,
+          "agent_node_id": "MOA_DEBATE_LAYER",
+          "thought_process_log": "Executor Model generated tentative folder write script. Query Model flagged potential syntax mismatch vs baseline QAIRT hardware guidelines. Halting execution path for validation check.",
+          "disagreement_detected": true
+        }
+      ],
+      "hardware_telemetry_snapshot": {
+        "npu_offload_status": "ACTIVE_HTP_PATHWAY",
+        "allocated_memory_bytes": 8589934592,
+        "snapdragon_power_state": "BOOSTED_VIA_GAME_SDK"
+      },
+      "failback_recovery_parameters": {
+        "is_cloud_failover_active": false,
+        "fallback_provider": "OPEN_ROUTER_API",
+        "last_known_stable_checkpoint": "STEP_01_MEM0_ALIGNMENT"
+      }
+    }
+  }
+}
+
+------------------------------
+## Part 2: Open Wiki CLI JSON-RPC Command Protocol (/termux-building-skills/open-wiki-cli/command_protocol.json)
+Save this JSON-RPC schema configuration inside your Termux management layer. This establishes the strict, machine-readable syntax your terminal scripts and Claude Code testing sandboxes will use to mutate files, verify notes, and append logs to your Obsidian folders.
+
+{
+  "$schema": "https://json-schema.org",
+  "title": "AESOP_XI_Open_Wiki_CLI_JSON_RPC_Specification",
+  "description": "Strict command schemas for local Termux terminal workspace management.",
+  "type": "object",
+  "properties": {
+    "jsonrpc": { "type": "string", "enum": ["2.0"] },
+    "method": { 
+      "type": "string", 
+      "enum": [
+        "wiki.vault.scan_mutations",
+        "wiki.note.append_sanitized",
+        "wiki.reasoning_bank.commit_state",
+        "wiki.blueprint.hash_verify"
+      ] 
+    },
+    "params": {
+      "type": "object",
+      "properties": {
+        "source_directory_path": { "type": "string" },
+        "target_file_name": { "type": "string" },
+        "payload_content_markdown": { "type": "string" },
+        "human_verification_flag_attached": { "type": "boolean" },
+        "associated_session_id": { "type": "string" }
+      },
+      "required": ["associated_session_id"]
+    },
+    "id": { "type": "integer" }
+  },
+  "required": ["jsonrpc", "method", "params", "id"]
+}
+
+------------------------------
+## Phase 3 & 4 Ready Checklist
+With these twin structural files saved into your master_build-guide/ tree, your local testing boundaries are completely defined. You are officially prepared to run your on-device verification pipeline:
+
+   1. Test the State Tracker: Confirm your terminal tools can read and write to active_execution_paths.json without formatting breakages.
+   2. Execute a Simulated CLI Command: Format a test input using your new JSON-RPC method list (wiki.note.append_sanitized) to prove that your script handles raw input parsing exactly as designed.
+
+I can help you build the functional Python parser script that links these two protocols so your Open Wiki CLI can automatically read the Reasoning Bank and execute the target tasks. Would you like to map out that execution file next?
+

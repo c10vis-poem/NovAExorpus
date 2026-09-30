@@ -1,0 +1,5 @@
+Already down — it's in the plan file, not just this conversation. But you're right that a plan file is temporary scaffolding, not the actual durable record. Once we're out of plan mode and building `NovA-Corpus` for real, this needs to land in the project's actual `CLAUDE.md`/`GLOSSARY.md` — same treatment as the Gemini/pending-corpora rule, which is already flagged that way. Marking this one the same so it doesn't get lost in the handoff.
+
+Marked — it'll carry into the project's actual `CLAUDE.md`/`GLOSSARY.md` the moment we start building for real, not just live in the plan file.
+
+Where next — back to the README/build-doc format for ingestion, or keep going on the memory architecture?

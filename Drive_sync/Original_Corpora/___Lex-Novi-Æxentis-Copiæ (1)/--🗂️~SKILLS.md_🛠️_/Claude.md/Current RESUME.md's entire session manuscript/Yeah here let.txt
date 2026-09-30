@@ -1,0 +1,20 @@
+Yeah here let me combine too and I'll State them in order then you can reconfirm with me. 
+First I want to start with a little preface that's going to help close out the session before the end of this session we're going to have the resume MD completely updated for blind agent audit pass. We're going to resolve any missing files plugins or documentation gaps as far as the global session is concerned and get those filled up taking care of. We're going to resolve any inconsistencies contradictions or false claims and stale documents or pointers still in this repose files 
+
+Once that's taken care of we'll have a completed resume MD and unresolved MD as well as a working cloud MD within the repo and resolved global gaps and we can conclude with the resume hand off which will include any architecture MD issues that still need to be resolved this will resume will also cover what all these files are and what unresolved MD is and how to reference it against the resume document itself 
+
+As far as the unresolved MD they should be given numbers right for each item. 
+Of course the resume MD is going to be priority One in a session as far as how Claude MD is going to point towards it so that'll show current session state what it still needs to cover it'll also cover the upcoming to-do list like the one that we're exactly going over right now and then it'll also flag any unresolved that are are to be addressed in the next session as well 
+
+Unresolved MD is fairly self-explanatory basically a list in chronological order from oldest to newest of issues that got flagged items on the to-do list that never were implemented that still need to be persistent gaps or architecture holes that were flagged don't have to worry about any priority ruling on any of these since the resume MD files are going to point to whatever's pertinent for that sessions instance the only thing that we might need to incorporate is referencing this in an upcoming housekeeping rule set that we're going to have to implement across the entire database 
+
+Once the #d.u.m.b.a.s.s* is up and running we're going to have to have a strict files keeping data retrieval memory layer and housekeeping protocols with stringent adherence guidelines implemented through Aesop XI 
+*Dumbass>[database & universal memory bank across split services](referenced by the Builder as #dumbass or 'the dumbass' or simply 'dumbass' ie: "make sure the dumbass is up to date" or "make sure x file references this pathway in the dumbass", "have you checked dumbass to make sure it's housekeeping protocols are up to date?" etc) 
+
+Note: I have the time and the compute for it I think I'm going to spend a flash session as far as tuning up the ECC pocock skills honey for devs plugins I'm most likely going to have you install ECC making sure it's wired before we shut this thing down and then the next session will open up with the global clot MD pointer as it's hand off I'll probably have you make me a metaprompt I can copy and paste instead of updating any kind of file as well since it's only going to be a flash session just to make sure all that shit's tuned up that way when I move forward I'm actually going to have a beefed up Claude agent
+
+Pending order of operations for that ASAP XI repository resume.md,
+
+Droid desk open Wiki installation files management agent wiring and voice layer pipeline. These are all basically congruent with one session scope if one of them isn't completed then the rest aren't really either 
+
+Once the open Wiki the desktop the on device files management agent are completed then the remaining compilation of the databank complete with Jason l markers and conversion to markdown pipelines can be implemented that way the entire database can be ready for the grill session so closing out task 2 would be making sure that the newly compiled Data Bank is uniform across the repository the obsidian vault on device and cloud formats

@@ -1,0 +1,7 @@
+Good catch — that belongs in `~/.claude/CLAUDE.md` (this Claude Code instance's own always-loaded instructions), not the memory system, which I only *recall* when it seems relevant rather than always enforcing. Fixing that now.
+
+Now creating the instance-level `CLAUDE.md`:
+
+Done — moved out of memory, into `~/.claude/CLAUDE.md` as Rule 0, loaded for every session on this instance rather than something I only recall when it seems relevant.
+
+One open question I'm *asking* rather than acting on: the GH workflow convention (feature branch → signed commit → PR) is still sitting in the memory system. Want that moved into `CLAUDE.md` too, or is memory the right home for that one since it's more "how you like git handled" than a hard behavioral override?

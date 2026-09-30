@@ -1,0 +1,35 @@
+Read the nanobot notebook in full now. It's a Colab teaching notebook, not a framework — but it's a good base, and I can see exactly why it fits the housekeeper role:
+
+**What it actually contains:** a `Provider` abstraction (real OpenAI-compatible client + a zero-dependency `MockProvider` for testing without an API key), a `Tool`/`ToolRegistry` where a `@tool` decorator auto-derives the JSON schema from Python type hints, a `Memory` class with per-session history and token-budget compaction, an `Agent` running the actual tool-call loop, a `Skill` dataclass (`name`/`description`/`instructions`/`tools`) that loads by appending instructions to the system prompt and registering its tools — structurally the same shape as your `SKILL.md` convention — and an `MCPServer` stand-in showing how external tools plug in. Four demo tools ship built-in: calculator, clock, sandboxed Python exec, and a stub web search.
+
+**The part that matters for the housekeeper specifically:** it has a hook system — `AuditHook` (logs every tool call), `TimingHook`, `CensorHook` (rewrites output before it's returned) — already built and demonstrated. That's most of what a Red-Agent-style watcher needs to do to something else's tool calls, for free, in about 40 lines.
+
+**What needs hardening before it's real, not just a demo:** memory is an in-process dict — wiped on restart, no persistence, so it'd need wiring to whichever backend wins below. The Python-exec tool restricts builtins but still calls `exec()` directly — fine for a tutorial, not fine unsandboxed on a box doing real work. And the MCP piece is a mock shape, not a real client.
+
+I can't write the actual custom script right now — still in plan mode, file writes are off the table except the plan itself. Logging it as the concrete next build item once we're out.
+
+Now, the overlap claim — I did the reading, and it doesn't hold up the way you described it:
+
+**OB1 and mem0 aren't complementary — they're the same job.** Both are full memory-layer products (OB1: Postgres+pgvector+MCP server+its own skills/extensions/recipes taxonomy; mem0: its own hybrid semantic+BM25+entity retrieval, CLI, SDK, self-hosted server, YC-backed). Running both as "the" universal memory layer means two competing backends, not one thing overlapping nicely with itself. That's a pick-one decision, not something that resolves on its own.
+
+**reasoning-bank isn't a backend at all.** It's Google's ICLR research-paper code release — no server, no API, no MCP, direct-Python-import only, built for two specific benchmarks (WebArena, SWE-bench). What's reusable is the *pattern* — the Title/Description/Content memory-item schema, and learning from failed trajectories, not just successful ones (which neither OB1 nor mem0 currently do). It's a technique to layer on top of whichever backend wins, not a third competing system.
+
+**The `OmniRoute` fork still isn't your Omni Route** — it's an LLM API gateway, unrelated to memory entirely. It can't overlap with a memory stack because it doesn't do memory.
+
+**The one convergence that's real:** OB1 and mem0 both ship as Claude Agent Skills (`SKILL.md`/`skills/` folders, `npx skills add`). Whichever one you pick plugs into your skills system identically. That's the actual overlap — not graphify/notebooklm-py/llm-wiki, which none of these three touch internally; those are tools you're layering on top separately.
+
+Directionally right, and it fixes a real blind spot: a single auditor model can't catch its own failure mode, since whatever it consistently gets wrong, it gets wrong every time it checks itself. A mixture of independently-sourced models (different families, not just different prompts on one model) catches things a lone auditor structurally can't — that's the actual mechanism behind ensemble/consensus auditing, not just "more compute = more confidence."
+
+Two things I'd push on before it's a design, not just a good instinct:
+
+**Scope it to high-stakes decisions, not all traffic.** "Zero-fail" sounds like it wants to audit everything, but running an ensemble pass on every tool call and every commit is the same trap as the corpus work almost fell into — the audit stack becomes the project instead of serving it, and the cost (multiple model calls per check) compounds fast. I'd apply MoA/consensus specifically to the things that actually warrant it: promoting a document from pending → canon, anything touching a frozen path, anything the Red Agent would otherwise reject alone. Routine traffic gets a single-pass check.
+
+**Decide what happens on disagreement now, not when it first happens.** If the ensemble splits, does it auto-reject (matches your zero-trust posture — fail closed), or escalate to you as HITL? You already established that you're the sole conduit *to* the Red Agent — this is the mirror question of what comes back *out* when the auditors don't agree with each other.
+
+One connection worth making: you've already forked **NovA-crewAI**, which is built specifically for orchestrating multiple role-playing agents collaborating on one task — that's a closer fit for this than building the consensus/voting logic from scratch.
+
+This is a refinement to `red-agent-auditor/`'s internal design, not a new folder — still `designed-only`, but worth recording as the working shape rather than a vague future idea.
+
+Logged — the MoA/consensus refinement for `red-agent-auditor/`, both open design questions (scope, disagreement resolution), and the crewAI connection.
+
+Where do you want to go next — keep building out `recursive-training/` and the audit design, or shift back to the README/build-doc format you wanted to show me for ingestion?

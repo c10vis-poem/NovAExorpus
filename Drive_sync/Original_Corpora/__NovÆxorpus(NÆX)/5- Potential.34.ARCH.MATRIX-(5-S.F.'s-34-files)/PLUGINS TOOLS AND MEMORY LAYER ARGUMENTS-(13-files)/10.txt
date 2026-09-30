@@ -1,0 +1,13 @@
+You're right that I hadn't actually read the full README — I only had the one-line tagline from the Drive listing snippet, not the document itself. That's exactly the shallow-read problem this whole session has been about avoiding. Let me actually go read it before saying anything else.
+
+You were right, and I owe you a real correction: I was arguing from a one-line tagline in a Drive listing snippet, not the actual document. Now that I've read it —
+
+**It has a real memory subsystem.** From the tech-stack table: *"Memory: SQLite FTS5 full-text + int8-quantized vector embeddings, typed decay"* — full-text search combined with vector similarity, and "typed decay" is exactly the anti-bloat mechanism you described (memory entries age out by type rather than growing unbounded). It's opt-in and controllable per-request (there's a documented `x-omniroute-no-memory` header to disable it on demand).
+
+**It's genuinely cross-session and cross-provider.** It supports MCP (stdio/HTTP/SSE) *and* A2A (agent-to-agent, JSON-RPC 2.0 + SSE) — so multiple agents and multiple providers can share state through it, not just one client talking to one backend.
+
+**The "cooldown" piece is real but is connection-level, not agent-level** — worth being precise here since it's a different mechanism than the memory-decay one: circuit breakers, key cooldowns, and model lockouts are about backing off a failing API key or provider (rate-limits, auth failures), a separate system from the memory typed-decay. Both are real, they're just two different resilience mechanisms, not one.
+
+So I was wrong to say it "has nothing to do with memory" — it demonstrably does, and it's a much closer fit to the architecture's Omni Route role than I credited. Correcting the plan record now.
+
+Correction's logged. The plan now reflects that OmniRoute has a genuine memory subsystem (SQLite FTS5 + vector embeddings + typed decay), MCP/A2A support making it real cross-session, cross-provider infrastructure — not the unrelated gateway I'd assumed from a listing snippet. Still open, and worth settling when you're ready: whether it gets extended to also handle executor/query core-dispatch, or whether that stays a separate piece routing through it.

@@ -1,0 +1,40 @@
+You're right. OB1 is just a repo of SQL files, TypeScript, and instructions. You build the whole thing yourself. Here's the actual install list:
+
+## What You Need to Install/Do for OB1
+
+| # | What | How | Where It Lives |
+|---|---|---|---|
+| 1 | **Supabase account + project** | Sign up at supabase.com, create project | Cloud |
+| 2 | **OpenRouter account + API key** | Sign up at openrouter.ai | Cloud |
+| 3 | **Supabase CLI** | `brew install supabase/tap/supabase` (Mac) / `scoop install supabase` (Win) / `npm install -g supabase` (Linux) | Local |
+| 4 | **Local project folder** | `mkdir open-brain && cd open-brain` | Local |
+| 5 | **Supabase init + link** | `supabase init` → `supabase link --project-ref YOUR_REF` | Local → Cloud |
+| 6 | **SQL migrations** | Run in Supabase SQL editor: `create extension if not exists vector;` + the `thoughts` table + RLS policies + `match_thoughts` function + `upsert_thought` RPC | Cloud (Postgres) |
+| 7 | **Edge Function code** | `supabase functions new open-brain-mcp` then `curl` the two files from the repo: `server/index.ts` + `server/deno.json` | Local → deployed to Cloud |
+| 8 | **Secrets** | `supabase secrets set MCP_ACCESS_KEY=...` + `supabase secrets set OPENROUTER_API_KEY=...` | Cloud |
+| 9 | **Deploy** | `supabase functions deploy open-brain-mcp --no-verify-jwt` | Cloud |
+| 10 | **Client connection** | `claude mcp add --transport http open-brain ...` or JSON config for Cursor/VS Code | Local (your AI client) |
+
+So the actual **software you install** is just:
+- **Supabase CLI** (one binary)
+- **Supabase cloud project** (free tier)
+- **OpenRouter API key** (pay-per-use)
+
+Everything else is SQL you paste and TypeScript you download and deploy. No `pip install`, no `npm install` for OB1 itself. The Edge Function runs on Deno (Supabase's runtime) — you don't install Deno locally.
+
+## Full Stack Install List (All Eight Tools)
+
+| Tool | Install Command | Runtime |
+|---|---|---|
+| **OB1** | Supabase CLI + cloud project + SQL + deploy (above) | Deno (Supabase Edge) |
+| **Mem0** | `pip install mem0ai` or `npm install mem0ai` | Python or Node |
+| **Graphify** | `pip install graphify` | Python |
+| **code-review-graph** | `pip install code-review-graph` (or clone + `pip install -e .`) | Python |
+| **Neo4j** | `brew install neo4j` / `docker run neo4j` / desktop installer | JVM (Java) |
+| **OmniRoute** | `git clone` + `npm install` + `npm run dev` | Node.js |
+| **ReasoningBank** | `pip install reasoning-bank` (or clone `google-research/reasoning-bank`) | Python |
+| **Continual Harness** | `pip install continual-harness` (or clone `sethkarten/continual-harness`) | Python |
+| **Task Observer** | It's a **skill file** (SKILL.md) — copy into your client's skills directory, no install | N/A (prompt) |
+
+So your actual local runtimes are: **Python** (for Graphify, code-review-graph, ReasoningBank, Continual Harness, Mem0), **Node.js** (for OmniRoute), **Java/JVM** (for Neo4j), and **Supabase CLI** (for OB1 deployment). That's it.
+

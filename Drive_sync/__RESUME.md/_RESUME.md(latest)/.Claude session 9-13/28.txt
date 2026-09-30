@@ -1,0 +1,31 @@
+Let me confirm scope before touching 7 more repos — this matches something I already have data on.
+
+Correcting: drop `raw-databank` (it's part of the vault/corpus, not a separate base repo). That leaves 6 confirmed: Horizons-UI, novus-aeyre, novus-aesc, novus-aexenti, novaexopia, aesop-xi. What's the 7th?
+
+Got it — you'd already named it: swap `raw-databank` back out for `novae-xorpus` itself, which is already done. So the seven are: **novae-xorpus (✓ done)**, Horizons-UI, novus-aeyre, novus-aesc, novus-aexenti, novaexopia, aesop-xi — 6 left. Cloning and updating those now.
+
+All tiny — plenty of room. Cloning all 6.
+
+Per Rule 1, reading each repo's own CLAUDE.md/AGENTS.md and RESUME.md before touching anything.
+
+Same exact wording — applying the identical patch to both.
+
+Now `aesop-xi`, keeping its existing session-handoff/git-workflow prose and adding the rules alongside them.
+
+All 6 files edited. Now running the GH workflow on each: branch, key-scan, push, PR, CI, auto-merge.
+
+Missed `novus-aeyre` — fixing that now before proceeding.
+
+Now running the full GH workflow across all 6: branch → secret-scan → push → PR → wait CI → merge.
+
+PostToolUse:Bash says: Tip: Run /ultrareview before you push to catch bugs with a cloud-based multi-agent review — 3 free reviews left.
+
+The commits actually failed — no `user.email`/`user.name` configured, so `git commit` errored out silently in the loop and the pushes just pushed empty branches identical to `main`. Let me set identity and redo this properly.
+
+All 6 committed and pushed. Now opening PRs and auto-merging on green.
+
+5 of 6 are done — `Horizons-UI`, `novus-aeyre`, `novus-aesc`, `novus-aexenti`, `novaexopia` all merged clean.
+
+**`aesop-xi` is blocked, and not by my change.** Its CI's "Shell script syntax check" fails on a pre-existing bug: `tools/run_audit.sh` has CRLF line endings, and `bash -n` chokes on the `\r` in `do\r` at line 40 — completely unrelated to the CLAUDE.md edit in this PR. I'm not merging past a failing required check just because it's not my fault. PR is open at `c10vis-poem/aesop-xi#9`, branch pushed, waiting on you: want me to fix the CRLF issue in `run_audit.sh` as a separate fix (in its own branch/PR, not bundled into this one), or leave `aesop-xi` as the one exception on an as-needed basis like you mentioned earlier?
+
+That earlier background poll (checking PR/CI status across all 6 repos) finished on its own — nothing new there, I already got the same status directly and reported it above. Still waiting on you for `aesop-xi`: fix the pre-existing CRLF bug in `tools/run_audit.sh` now, or leave that PR open/blocked for later?

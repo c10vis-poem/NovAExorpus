@@ -1,0 +1,48 @@
+Claude Code
+
+
+All six read in full. Quick synthesis before you brief me — this is the picture the vault currently paints, so you can tell me what's stale vs. current:
+
+
+What the app is (the workbench model).Horizons boots completely empty — no auto-loading, no background model detection. Every heavy piece (browser, terminal, inference engine) is a decoupled process beneath a thin, stable Kotlin UI shell. Core law:"Daemons stay dumb, the user is the loader."Three-step loop:Land(Settings/Armory — file registers inert) →Verify(Monitor'sgreenLight(), 4 checks: binary presence, exec bit, asset availability, model plugged in) →Flip(Router re-checks at the instant of ignition, closes the circuit or fails naturally — no lockout, no brick wall).
+
+
+Authority chain (series circuit):Settings supplies → Terminal forges the parameter packet (plain text file, never executes) → Monitor verifies live at flip time, stores nothing → Router carries current, never argues → Archives stores verified profiles, recovery restores from there.
+
+
+Rule 7 — the thing that broke the last build:behavioral metaphors ("fuse box," "10-amp fuse," "breaker") are interaction-design language, never enforcement code. Visual metaphors (Aiwa CD player = Router GUI, arcade cabinet = Monitor GUI, matrix cascade = Terminal) are literal, locked build specs. Confusing the two directions is what produced the old hardcodedAssetCheckblocker.
+
+
+Parameter packet — four layers:Weights / Runtime / Engine / Communication.RuntimeDefis supposed to be shaped to these;temperature/verbosity/coresare currently hardcoded or read by nothing.
+
+
+Two named open conflicts the docs refuse to silently resolve:
+
+
+STT engine — Whisper base vs. Moonshine, undecided, needs on-device CPU/GPU measurement (your later note said we're not using Moonshine base and you want to look at WhisperKit Android — that's new information relative to these docs).
+
+
+First ~90s crash trigger — unproven; prime suspect is Android LMK (no stack trace) vs. a daemon serve-first regression (daemon probing for a model at start and suiciting when none is plugged in, which is documented as the fix but "suspected regressed").
+
+
+Biggest trap flagged in AGENT-BRIEF.md:several other docs in the repo (FEATURE-SPEC.md,HORIZONS_UI_ARCHITECTURE.md) describedifferent, wrongapps and are explicitly marked poison — not to build from.
+
+
+One thing worth flagging:SOURCE-PRECEDENCE.mdrankspending-corpora/transcripts/*(the operator's line-by-line corrected PDFs)abovethese locked visual specs — rank 2 vs rank 4 — and I haven't touched that folder. Also, these vault docs are dated 2026-08-05/06 and describe things as still DRAFT/designed-only, while your CLAUDE.md resume block (dated same day) claims branch/PR state has since moved (main has the correct HomeGrid, PR #33+#34 merged) — so there's likely drift between this vault snapshot and where things actually are right now.
+
+
+Go ahead with your intro — what to ignore, what to focus on, what you're adding.
+
+
+All the rank-2 material and locked specs are read. Two large source docs remain unread in full:pending-corpora/transcripts/neuromesh-aesop-xi-master-plan-2026-08-02.md(3,495 lines) andpending-corpora/transcripts/omniroute-documentation.md(3,386 lines) — both are OCR'd PDF transcripts, dense and expensive to read whole (the 432-line architecture thread alone ran ~26k tokens). Both are already compressed intoMASTER-BUILD-BLUEPRINT.md(§0–2, §6, §10–11, §14), andomniroute-documentation.mdis tagged "verified — read directly" in that doc's own source table, meaning someone already did this pass. Before I burn six figures of tokens on those two, say whether you want the full raw read or the canon compression is good enough for now.
+
+
+Everything else is read in full:SOURCE-PRECEDENCE,STATE-OF-EXISTENCE,MASTER-BUILD-BLUEPRINT,WHAT-IT-IS,FEATURE-INVENTORY,AGENT-BRIEF, the Gemini architecture thread, metaphor-drift analysis, dynamic-params proposal,PARAMETER-PACKET, all three locked visual specs (Router/Monitor/Terminal),HOME-REDESIGN-SPEC,CRASH-ANALYSIS-2026-07-31,CLOCK-FACE.
+
+
+The thing most relevant to what you actually asked about earlier (loading the Genie SDK / any file / any runtime / any model from device storage via Terminal or Settings) is now well-documented across three sources: it's the SAF file-picker + "Open With" intent-catcher pattern in Settings (§WHAT-IT-IS §3, FEATURE-INVENTORY 3.2/3.3,built-unverified), the model-residency rule (absolute-path load from an external device folder, drag-and-drop swap,designed-onlyat FEATURE-INVENTORY 14.2), and the Gemini thread's explicit confirmation that this is just standard Android SAF + intent-filter plumbing, not something exotic.
+
+
+Ready for your intro/corrections whenever you want to give them.
+
+

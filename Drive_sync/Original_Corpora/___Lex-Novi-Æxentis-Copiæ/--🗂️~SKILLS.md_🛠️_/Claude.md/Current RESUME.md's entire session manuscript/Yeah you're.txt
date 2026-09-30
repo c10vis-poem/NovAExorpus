@@ -1,0 +1,7 @@
+Yeah you're supposed to be utilizing the handoff documents like every session. whatever environment we're in. 
+Don't you always do that? That's flawed Claude if not. In fact what environment are you writing to exactly anyway.
+
+From the workflow I would guess that you are in the Aesop repo correct so that thing needs to be like anytime you rewrite something or write a hand off document they should get completely it's like a new document it's been months since I've touched that thing none of that is ever if there's still some tasks you need to go over them with me first of all that's you should have already done that at the very beginning of the session when you found them and then second of all for not going to address them then just get rid of them or tell me what they are and we can leave them hanging but I'm pretty sure we don't need them 
+Also doesn't that ASAP repo should have cloud skills and agent skills voice stack it should have npu access on device agent that open Wiki should all be like this and there's special coated open Wiki version especially specifically for this setup 
+Because yeah that's exactly what I'm doing with this session we're going to rewire the open Wiki get that running get my open router key in the glm model hook back into it get the Droid desk installed get the voice layer completed and verified finish out the rest of my corpus repo if we have time we'll end up downloading or uploading that ECC for cloud code and the pocock grill me skills for next session
+and to clarify http is 0art of n3x5 session as well

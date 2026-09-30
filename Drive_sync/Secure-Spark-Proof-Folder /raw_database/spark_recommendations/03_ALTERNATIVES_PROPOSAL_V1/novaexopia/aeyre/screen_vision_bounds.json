@@ -1,0 +1,50 @@
+{
+  "device_profile": "Motorola_Razr_Ultra_2025_Snapdragon_8_Elite",
+  "native_displays": {
+    "internal_unfolded": {
+      "width": 1080,
+      "height": 2640,
+      "refresh_rate_hz": 165,
+      "dpi": 413,
+      "aspect_ratio": "22:9"
+    },
+    "external_cover": {
+      "width": 1056,
+      "height": 1066,
+      "refresh_rate_hz": 165,
+      "dpi": 417,
+      "aspect_ratio": "1:1"
+    }
+  },
+  "vlm_ingest_pipeline": {
+    "max_resolution_width": 1024,
+    "max_resolution_height": 1024,
+    "color_format": "RGB_888",
+    "downsampling_filter": "LANCZOS4",
+    "compression_quality": 85,
+    "min_detection_box_px": [100, 100],
+    "capture_rate_fps": 2.0,
+    "dedup_sha256_cache_enabled": true
+  },
+  "coordinate_bounds": {
+    "status_bar_exclusion_px": 84,
+    "navigation_bar_exclusion_px": 120,
+    "active_canvas_bounds": {
+      "top": 84,
+      "left": 0,
+      "right": 1080,
+      "bottom": 2520
+    },
+    "horizons_ui_viewport": {
+      "top": 84,
+      "left": 0,
+      "width": 1080,
+      "height": 2436
+    }
+  },
+  "ocr_trigger_rules": {
+    "min_confidence_score": 0.85,
+    "auto_caption_delay_ms": 350,
+    "vlm_backend": "qwen-3-4b-vl-local"
+  }
+}

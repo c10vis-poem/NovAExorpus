@@ -1,0 +1,13 @@
+This is exactly the feedback that's been missing — real device, real state. Let me address one thing first so you're not hunting for something that isn't there.
+
+**The manual isn't in that build.** It's on PR #34, which hasn't been merged or built yet. You're running an APK from before it. Nothing broken — it just hasn't shipped to you.
+
+Now, your screenshots show a real bug I can pin down precisely. Look at the detail column:
+
+```
+binary ort_engine        om.horizons/files/ort_engine
+asset libonnxruntime.so  zons/files/libonnxruntime.so
+binary llama-server      ound in app dirs or Download
+```
+
+Those aren't paths — they're the **last 28 characters** of paths. `"not found in app dirs or Download"` became `"ound in app dirs or Download"`. Checking.

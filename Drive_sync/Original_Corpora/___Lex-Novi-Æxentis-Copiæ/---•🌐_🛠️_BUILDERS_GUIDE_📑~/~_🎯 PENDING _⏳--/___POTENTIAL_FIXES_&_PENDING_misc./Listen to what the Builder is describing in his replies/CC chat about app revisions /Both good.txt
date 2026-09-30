@@ -1,0 +1,32 @@
+Both good points.
+
+**On the redundancy — you're right, I split one flow into two chapters.** Chapter 2 is "where things go," 2A is "find what you have and put it there." They're the same procedure with a different starting point. It should be one chapter where downloading is an optional step zero, and everything from "identify what you've got" onward is shared. That's a cleanup, not a rewrite — worth doing next session.
+
+**On the agent versus the manual — the manual is the expensive part, and you can't skip it.**
+
+Here's why: an agent answering *"how do I load a GGUF into the Router"* has to get that knowledge from somewhere. Only two options:
+
+- **From the manual** → the agent is a thin retrieval layer, and answers are grounded
+- **From its own weights** → it hallucinates, guaranteed. No public model has ever seen Horizons' room layout, your `RuntimeDef` fields, or the Termux-can't-reach-Hexagon rule
+
+So writing the agent *instead of* the manual isn't an option. It'd confidently invent a settings screen that doesn't exist — the exact failure mode that put this repo where it is.
+
+**But the agent on top of the manual is genuinely cheap, and it's already most of the way built.** Two reasons:
+
+1. `ManualStore.query()` already does section lookup and keyword search. That's the retrieval primitive.
+2. The manual is ~600 lines — roughly 8–10k tokens. **That fits whole into any decent context window.** No RAG, no chunking, no embeddings, no vector store. You just hand the agent the entire document as its system prompt and it answers from that.
+
+What's actually left is one entry in the existing 26-tool dispatch — a `manual` tool that returns matching sections — plus a system prompt that says *answer only from this document; if it isn't in there, say so.* That last clause is what keeps it honest.
+
+Rough shape of the effort:
+
+| Piece | State |
+|---|---|
+| The manual itself | ~600 lines, written |
+| Retrieval (`ManualStore`) | built |
+| Tool entry in `AgentLoop` | ~15 lines |
+| Grounded system prompt | ~10 lines |
+
+So: **less work than the manual, by a lot** — and the reason it's less work is that the manual already exists. Writing the manual first was the load-bearing decision, and making it a *file* rather than a UI screen is what makes the agent possible at all.
+
+One caveat worth stating: the agent is only as truthful as the manual. Every `[PLANNED]` and `[UNVERIFIED]` tag I put in there matters more once an agent is reading it aloud with confidence — those tags are what stop it promising features that don't exist yet.
