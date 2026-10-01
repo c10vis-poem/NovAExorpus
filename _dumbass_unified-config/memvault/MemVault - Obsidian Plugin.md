@@ -86,7 +86,7 @@ Sync your Obsidian vault with OneDrive Personal/Consumer
 # Nextcloud Sync
 Bidirectional sync between Obsidian and Nextcloud using hash-based change detection.
 # Air Sync
-Keep your vault in sync across devices without managing sync—sync only what changed, preserve conflicting edits, and use your own Google Drive, OneDrive, or Dropbox.
+Keep your vault in sync across  without managing sync—sync only what changed, preserve conflicting edits, and use ydevicesour own Google Drive, OneDrive, or Dropbox.
 # Git Sync
 Sync your vault across all devices using your own GitHub account. Free forever.
 # BRAT

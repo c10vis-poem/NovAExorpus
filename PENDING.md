@@ -2,6 +2,16 @@
 
 Durable cross-session backlog. Not rewritten each session — items persist until resolved or explicitly dropped.
 
+## Routines
+last-housekeeping: never
+- Roll _recaps/ older than 30 days into a monthly summary, delete the originals
+- Audit repos: uncommitted / unpushed / stray branches → merge or discard with the builder
+- Review the task-observer observation log
+- Check cloud billing (VM disks)
+- Builder reminders: (add here)
+
+## Backlog
+
 - **RESUME.md's "PHASES 1-4 COMPLETE" is wrong.** 585 files cleaned is nowhere near real scope — the two original source folders in `Drive_sync` total 5,000+ files. Needs correction and a real re-ingestion pass, not just a status-line fix.
 - **Other 6 repos still POINTER.md stubs.** `novus-aexenti`, `NovAExopia`, `aesop-xi`, `horizons-ui`, `novus-aesc`, `novus-aeyre` haven't had their own ingestion pass — only `NovAExorpus` itself has real `clean_md`/`wiki_md` content.
 - **`NovAExopia/horizons-ui/` was built from Document 05** (the nested-repo model), which is superseded now that RFMC (flat 8-repo model, `Drive_sync/LlmWiki/Repo-Files-Map-core/`) is the actual direction. Needs reconciling once the new standalone Horizons UI repo exists.
@@ -35,7 +45,6 @@ Durable cross-session backlog. Not rewritten each session — items persist unti
 - mem0 + TB actually writing during sessions; mem0 vault export; mem0 self-hosting on VM.
 - Honey-for-devs setup wizard; Graphify integration; NotebookLM integration.
 - OmniRoute MCP round-trip test; web UI dashboards on VM; `bootstrap.sh` still points at localhost.
-- `restructure/drive-file-tree` branch (250+ corpus files); `master` remote branch — review before deletion.
 - Source docs in `~/storage/shared/Documents/9-18-26/` unread.
 - `vault-ci.yml` workflow; shell alias `cc`; global `~/.claude/CLAUDE.md` rewrite.
 - "Rename repo to NovAEcorpus" — conflicts with NAMING-CANON (NovÆxorpus / `NovAExorpus`); confirm or drop.
@@ -44,13 +53,17 @@ Durable cross-session backlog. Not rewritten each session — items persist unti
 
 ## Added 2026-09-29
 
-- **PR #21 blocked by gitleaks.** One GitHub token sits in an archived Drive filename. The operator is to confirm it's gone or commit `.gitleaksignore` (RESUME.md item 1).
-- **GitHub `master` branch:** 6 unmerged commits. Review, move anything worth keeping into `main`, delete it.
 - **Continual Harness read unfinished.** See `grill/continual-harness-read-ledger.md` "Not yet read".
-- **aesop-xi CLAUDE.md:** remove the invented ReasoningBank "crash recovery" line and review its agent-written hard rules.
-- **AGENTS.md still says "Honey applies universally", and the SessionStart hook still enables Honey.** The operator dropped Honey.
+- **aesop-xi CLAUDE.md:** false ReasoningBank/Continual Harness lines fixed in aesop-xi PR #20 (2026-09-30); Honey rule restored in PR #21. Its other agent-written hard rules still need the operator's review.
 - **`_dumbass_unified-config/` unread.**
 - **Task-observer review outstanding.**
-- **PR #7 (`restructure/drive-file-tree`):** open since 2026-09-06, deletes about 37,000 lines. Operator to review.
 - **aesop-xi local clone:** branch `feat/memory-stack-canonical-2026-09-15` is 1 commit ahead with uncommitted `tools/bootstrap.sh` and an untracked `tools/aesop-tmux.sh`. Not this session's work; needs the operator's call.
 - **OmniRoute local clone:** uncommitted `.source/dynamic.ts`, and the clone is dated 2026-08-15. Sync the fork before relying on it.
+
+## Done 2026-09-30
+
+- PR #21 merged after adding `.gitleaksignore` (8 reviewed findings); the scan on `main` passed.
+- PR #7 closed and its branch deleted (built from Document 05; would have re-deleted `01-sources/` and `tools/check.py`).
+- GitHub branches cut to `main` only. `master` preserved as tag `archive/master-2026-09-06` (its 2026-09-05 decisions are not carried into `main`, per the operator).
+- GitSync Portal now syncs straight to `main` (`syncBranch`); push protection plus the gitleaks job on `main` still apply. First sync hit a DNS error on the phone; retry pending.
+- AGENTS.md (vault + aesop-xi): false ReasoningBank crash-recovery and Continual Harness auto-rollback claims corrected; stale VM IP removed. Honey stays (operator: leave Honey and OmniRoute alone). OmniRoute turns ReasoningBank, Continual Harness and the memory layers on and off; while running each is its own MCP server (operator, 2026-09-30).

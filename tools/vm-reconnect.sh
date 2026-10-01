@@ -1,6 +1,6 @@
 #!/data/data/com.termux/files/usr/bin/bash
 # vm-reconnect.sh — Reconnect and fix all VM services from phone
-# Run: bash ~/repos/NovAExorpus/tools/vm-reconnect.sh
+# Run: bash ~/storage/shared/Documents/NovAExorpus/tools/vm-reconnect.sh
 set -euo pipefail
 
 GCLOUD="$HOME/google-cloud-sdk/bin/gcloud"

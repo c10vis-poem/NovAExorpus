@@ -95,22 +95,25 @@ these layers in order before writing files or running commands.
 
 | # | Layer | Name | Interface | Endpoint |
 |---|-------|------|-----------|----------|
-| 0 | Execution + routing | OmniRoute | HTTP gateway daemon | `http://34.31.112.77:20128` |
+| 0 | Execution + routing | OmniRoute | HTTP gateway daemon | VM `:20128` |
 | — | Judgment | Continual Harness | OmniRoute internal | via OmniRoute |
 | — | Execution ledger | Reasoning Bank | OmniRoute internal | via OmniRoute |
 | 1 | Token saver | honey-for-devs | MCP tool / skill / text-strip | per-engine |
 | 2 | Orchestration | task-observer | CLI / file-gen (Claude Code only) | per-engine |
 | 3 | Code intel | code-review-graph | MCP Server (stdio) | local binary |
 | 4 | Episodic memory | mem0 | MCP Server (HTTP) | `mcp.mem0.ai` |
-| 5 | Structural memory | terrestrial-brain | MCP Server (HTTP) | `http://34.31.112.77:8000` |
+| 5 | Structural memory | terrestrial-brain | MCP Server (HTTP) | VM `:8000` |
+
+The VM's external IP changes on every start; `~/bin/vm on` prints it.
 
 **OmniRoute** is the execution layer, memory retrieval layer, and routing
 layer. It distributes requests, retrieves memory context, and makes
 routing decisions. Continual Harness provides the judgment — it watches
-agents and their refinements mid-run, optimizes routing, and auto-rolls
-back on error. Reasoning Bank records every agent execution step, maps
-logic pathways, and enables crash recovery. Both are OmniRoute internals, not
-standalone services.
+agents and their refinements mid-run and optimizes routing. Reasoning Bank judges each finished
+task and distils lessons for similar tasks later. Neither does crash
+recovery or automatic rollback (verified in source 2026-09-30). OmniRoute
+decides when they and the memory layers turn on and off; while running,
+each is its own MCP server (operator, 2026-09-30).
 
 **OmniRoute fallback:** if OmniRoute is unreachable, fall back to direct
 execution and log a warning. All other memory layers remain active via

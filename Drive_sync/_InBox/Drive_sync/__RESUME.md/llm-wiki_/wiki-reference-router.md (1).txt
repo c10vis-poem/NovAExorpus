@@ -1,0 +1,16 @@
+﻿________________
+
+
+name: wiki-reference-router description: Use when an agent needs to retrieve factual knowledge, schemas, or protocols from local multi-format references without modifying raw files.
+Wiki Reference Router Skill
+Purpose & Scope
+Governs how agents locate, parse, and cite multi-format documents housed inside references/ directories across repositories. The instructions inside this skill remain pure Markdown, while referenced assets may include .md, .txt, .csv, .json, .yaml, or code files.
+Operational Directives
+1. Never Assume Monolithic Markdown:
+   * Raw references are preserved in their native format under references/. Do not expect all references to be converted to .md.
+2. Deterministic Lookup Chain:
+   * Step 1: Read the local MAP.md to identify which reference folder holds the target domain.
+   * Step 2: Open the specific target reference file (e.g., references/aesop_protocols.md, references/termux_wiki.txt, references/horizons_frontend.json).
+   * Step 3: Extract only the requested facts, tables, or code signatures without dumping whole files into conversational memory.
+3. Immutability Guarantee:
+   * References are read-only. Never write, update, or append notes directly to references/ files. Any synthesized conclusions must be written to 02_wiki_md/ or episodic logs.

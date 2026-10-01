@@ -16,3 +16,5 @@ session_context: long Termux/Obsidian/OpenWiki/dsh session
 **Suggested improvement:** Enforce via a harness hook (SessionStart/PreToolUse gate) rather than instructions; consolidate the two workspaces (quarantine, no delete) and pin the path in CLAUDE.md.
 
 **Principle:** Instruction-only activation for a meta-skill decays under task load; it needs a mechanical trigger.
+
+**Recurrence 2026-09-30:** Same failure again. The session opened with `/android-termux-operator` and `/ask-matt`, and task-observer was not invoked until the operator called it out. The CLAUDE.md trigger line was in context the whole time. This is the third instance (0002, 0006, and now this one), so the fix has to be a structural barrier, not more wording: a SessionStart hook that injects the protocol output itself.

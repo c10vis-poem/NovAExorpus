@@ -1,0 +1,139 @@
+﻿To bypass the glitchy OpenWiki TUI and prevent the "Claude Code hallucinating inside Claude Code" runtime loop, we need to strip OpenWiki down to its structural file components and run your official premium Claude Code setup as the master execution client.
+Before starting your projects, you need to plug in the specific Data-to-Image / Render MCP layout and map the secondary skills directly into your Master Corpus Repository.
+________________
+Step 1: Initialize the Master Corpus Repository Layout
+Instead of using an external app, your repository acts as the host directory for your tools, data, and schemas. Run these commands in your terminal to initialize your new structure:
+
+
+
+
+# 1. Create your clean master corpus root directory
+mkdir -p ~/master-corpus-repo/.agent/skills
+mkdir -p ~/master-corpus-repo/.agent/manifests
+mkdir -p ~/master-corpus-repo/MAPmd
+mkdir -p ~/master-corpus-repo/visual_artifacts
+
+
+cd ~/master-corpus-repo
+git init
+
+
+________________
+Step 2: Implement the Render MCP Server (The .png Exploit)
+The tool that converts massive logs, data frameworks, and source directories into high-resolution visual artifacts is called the Render MCP Server. It renders data tables or raw text blocks into flat .png image strings. [1, 2]
+Since you are running the official premium Claude Code client, you register this tool directly in your system's global mcp.json file. This tells Claude Code how to automatically invoke the python converter over your large files. [3]
+1. Open your Claude Code configuration:
+* * macOS/Linux: nano ~/.config/Claude/claude_desktop_config.json or ~/.claude_code.json depending on your global environment setup.
+* Windows: Open %APPDATA%\Claude\claude_desktop_config.json. [4, 5]
+* 2. Add the Render MCP definition directly to your server array:
+
+
+
+
+{
+ "mcpServers": {
+   "render-text-to-artifact": {
+     "command": "python",
+     "args": [
+       "-m", "mcp_server_render_artifact",
+       "--output-dir", "~/master-corpus-repo/visual_artifacts"
+     ]
+   },
+   "claude-video-timeline": {
+     "command": "npx",
+     "args": ["-y", "@higgsfield/mcp-video-extractor"]
+   }
+ }
+}
+
+
+________________
+Step 3: Hardcode Your Skills Manifest Into the Repository
+To prevent the model from guessing how to execute tasks, you must save your secondary skills directly inside your .agent/skills/ directory as explicit, immutable markdown and JSON parameter files.
+Create a master contract definition file at ~/master-corpus-repo/.agent/skills/orchestration_manifest.json:
+
+
+
+
+{
+ "pipeline_contract": "MANDATORY",
+ "data_ingestion_layer": {
+   "text_file_max_tokens": 1500,
+   "on_token_overflow": "TRIGGER_RENDER_MCP",
+   "output_format": "visual_artifacts/.png"
+ },
+ "skills_mapping": {
+   "mem0_search": "Query episodic conversation threads local to repo directory.",
+   "mem_vault": "Write distilled factual extractions back to Obsidian Markdown logs.",
+   "notebook_lmpy": "Pass repository manifest.jsonl files through local python RAG filters.",
+   "graphify_ast": "Enforce code-review-graph tree-sitter lookups prior to compilation execution."
+ }
+}
+
+
+________________
+Step 4: Building the Target Mapping Script (Graphify Orchestration)
+To prevent Claude Code from randomly running wild inside your directory, create an execution blueprint at ~/master-corpus-repo/MAPmd/pipeline_orchestration.md. This layout instructs the agent exactly how to orchestrate the tools using the data pipeline:
+
+
+
+
+---
+type: Pipeline_Orchestration_Contract
+target_repositories: 7
+compilation_targets: 3_APKs
+execution_mode: STRICT_DETERMINISTIC
+---
+
+
+# MANDATORY INGESTION AND EXTRACTION SEQUENCE
+
+
+Every compilation task must follow this flow before altering local repository arrays:
+
+
+1. **Token Ingestion Control (.png Exploit):**
+  - If a source log, documentation block, or database schema file exceeds 1,500 words, do not parse it as text. 
+  - Invoke `render-text-to-artifact` to compile the data into a high-density, sharp PNG.
+  - Read the data visually using Claude Vision to analyze the compilation stack trace, reducing token utilization by up to 60%.
+
+
+2. **Video Script Synchronization (Claude-Video):**
+  - When extracting build instructions from media paths or video logs, call `claude-video-timeline`.
+  - Sync the structural audio transcript timeline with visual frame tracking to log exact parameters.
+
+
+3. **Structural Analysis View:**
+  - Query `code-review-graph` to build out the structural tree-sitter call paths.
+  - Run `graphify` to convert those paths into markdown nodes compatible with your **Obsidian Desktop Graph View**.
+
+
+4. **Write-Back Integrity:**
+  - Log the execution metrics into `.agent/manifests/master_manifest.jsonl`.
+  - Push the outcome string down to your local **PostgreSQL instance** to verify its SHA-256 fingerprint against your system's cross-repo memory.
+
+
+________________
+Step 5: Booting Up Your Safe Claude Code Framework
+Now that your mcp.json is loaded with your text-to-image render tools, your files are mapped out, and your contract markdown files are saved inside your repo root, you completely bypass the glitchy OpenWiki TUI. [1]
+Launch your premium Claude Code terminal client inside your clean directory:
+
+
+
+
+cd ~/master-corpus-repo
+claude
+
+
+When you enter your session, you command the agent:
+"Initialize the workspace. Read the strict execution contracts stored inside .agent/skills/orchestration_manifest.json and MAPmd/pipeline_orchestration.md. Utilize the Render MCP tool to ingest our setup assets as images before mapping out our 7 target project repositories."
+Claude Code will instantly hook into the active MCP tools, locking itself inside your hardcoded boundary definitions. It will operate purely as your builder tool, referencing the Obsidian visual node graphs while you begin your build projects. [3]
+
+
+
+
+[1] https://www.reddit.com
+[2] https://aslitools.com
+[3] https://medium.com
+[4] https://mcpservers.org
+[5] https://modelcontextprotocol.io
