@@ -1,0 +1,95 @@
+﻿Let's focus strictly on retrieving and building the PostgreSQL SHA-256 Content-Addressable Storage (CAS) backend database. This code sets up the tables, registers the required native cryptographic extensions, and creates the background trigger that computes file hashes on-the-fly to enforce local deduplication. [1]
+________________
+Step 1: Install PostgreSQL Locally
+Before running any script, ensure the PostgreSQL database application is installed on your primary machine. [2]
+* * Ubuntu / Debian / Linux:
+sudo apt update
+sudo apt install postgresql postgresql-contrib
+
+* macOS (via Homebrew):
+brew install postgresql@16
+brew services start postgresql@16
+
+* Windows: Download and run the native installer package from the Official PostgreSQL Website. Ensure you select the Command Line Tools and the pgAdmin dashboard options during installation. [2]
+* ________________
+Step 2: Establish the Database & Cryptographic Extension
+Log into your local Postgres server terminal wrapper to create your database instance:
+
+
+# Enter the interactive psql terminal as the default superuser
+psql -U postgres
+
+Inside the active SQL terminal prompt, run these exact setup directives to construct your workspace and initialize pgcrypto. This internal cryptographic engine provides native, low-latency binary and hex hashing methods right inside the file-system thread: [1]
+
+
+-- 1. Create your dedicated system memory engine
+CREATE DATABASE terrestrial_brain_master;
+
+-- 2. Switch context into your newly established instance
+\c terrestrial_brain_master;
+
+-- 3. Load the core cryptographic module required for SHA-256 hashing
+CREATE EXTENSION IF NOT EXISTS pgcrypto;
+
+________________
+Step 3: Run the Immutable SHA-256 CAS Schema
+Now execute this specific block to build your universal_cas_store (the deduplicating filing cabinet) and the relational tracking logs. [1]
+The accompanying trigger uses a BEFORE INSERT rule. Your code-review and memory tools simply insert plain string text—Postgres intercepts the write, computes the exact 64-character hexadecimal SHA-256 thumbprint, and updates the row attributes automatically: [1]
+
+
+-- Create the main deduplicated storage drawer
+CREATE TABLE IF NOT EXISTS universal_cas_store (
+   sha256_hash CHAR(64) PRIMARY KEY,
+   content TEXT NOT NULL,
+   created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Create the relational index mapping your 7 repositories and 3 APK builds
+CREATE TABLE IF NOT EXISTS agent_trajectories (
+   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+   repo_name VARCHAR(255) NOT NULL,       
+   target_apk VARCHAR(50),                
+   memory_type VARCHAR(50) NOT NULL,      -- 'episodic', 'static', 'ast_graph'
+   sha256_hash CHAR(64) REFERENCES universal_cas_store(sha256_hash),
+   metadata JSONB DEFAULT '{}',
+   logged_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Construct the background calculation mechanism
+CREATE OR REPLACE FUNCTION process_cas_sha256()
+RETURNS TRIGGER AS $$
+BEGIN
+   -- Force lower-case hex representation of the string's SHA-256 signature
+   NEW.sha256_hash := encode(digest(NEW.content, 'sha256'), 'hex');
+   RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+-- Bind the trigger execution to the CAS store
+CREATE TRIGGER trigger_generate_cas_hash
+   BEFORE INSERT ON universal_cas_store
+   FOR EACH ROW
+   EXECUTE FUNCTION process_cas_sha256();
+
+________________
+Step 4: Validate the Insertion & Non-Duplication Rule
+To double-check that your new filing cabinet is performing deduplication flawlessly before you hook it up to your external tools, run this verification check right inside your psql window:
+
+
+-- Try writing a sample piece of repo rule text
+INSERT INTO universal_cas_store (content) 
+VALUES ('Rule: Always optimize Gradle build dependencies on module 2')
+ON CONFLICT (sha256_hash) DO NOTHING;
+
+-- Review what was saved
+SELECT * FROM universal_cas_store;
+
+You will see that Postgres has populated the sha256_hash field with a string (like 8c3d1a...) despite you never passing a hash to the INSERT query.
+If your code or agent attempts to insert that exact same text snippet again across any of your 7 repositories, ON CONFLICT DO NOTHING triggers. Postgres ignores the duplicated string, keeping your storage clean, and allowing your tools to write a simple pointer reference. [1]
+Now that your database tables and triggers are actively up and running, what is your next step?
+   *    * Do you want the Python database connector script (psycopg2) to wire this newly built PostgreSQL instance to your local tool wrappers?
+   * Or should we move to setting up the manifest file parameters inside your .agent/ repository folders?
+   * 
+
+[1] https://www.postgresql.org
+[2] https://www.youtube.com

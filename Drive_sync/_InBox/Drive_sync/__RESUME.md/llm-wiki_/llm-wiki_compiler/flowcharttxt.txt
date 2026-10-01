@@ -1,0 +1,33 @@
+flowchart LR
+    subgraph Sources["📁 Raw Sources (you own)"]
+        M1["meetings/"]
+        M2["strategy/"]
+        M3["research/"]
+        M4["notes/"]
+    end
+
+    subgraph Commands["⚡ Commands"]
+        INIT["/wiki-init<br/>samples files<br/>proposes structure"]
+        CAPTURE["/wiki-capture<br/>link + context"]
+        COMPILE["/wiki-compile<br/>batch compilation"]
+        INGEST["/wiki-ingest<br/>single file, interactive"]
+        SEARCH["/wiki-search<br/>find anything"]
+        LINT["/wiki-lint<br/>health check"]
+    end
+
+    subgraph Wiki["📖 Compiled Wiki (LLM owns)"]
+        INDEX["INDEX.md"]
+        T1["topics/retention.md"]
+        T2["topics/onboarding.md"]
+        T3["topics/..."]
+        C1["concepts/..."]
+        SCHEMA["schema.md"]
+    end
+
+    Sources -->|"383 files · 13 MB"| COMPILE --> Wiki
+    Sources -->|"1 link + context"| CAPTURE --> Wiki
+    Sources -->|"1 file"| INGEST --> Wiki
+    INIT -->|"creates config +<br/>article structure"| COMPILE
+    Wiki -->|"13 articles · 161 KB<br/>84% fewer tokens"| LLM["🤖 Your LLM Agent<br/>reads wiki, not raw files"]
+    LINT -.->|"checks"| Wiki
+    SEARCH -.->|"searches"| Wiki

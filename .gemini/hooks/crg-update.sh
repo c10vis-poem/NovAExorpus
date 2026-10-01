@@ -5,6 +5,6 @@ set -euo pipefail
 
 cat > /dev/null || true
 
-code-review-graph update --skip-flows --repo "/data/data/com.termux/files/home/repos/NovAExorpus" >/dev/null 2>&1 || true
+code-review-graph update --skip-flows --repo "/data/data/com.termux/files/home/storage/shared/Documents/NovAExorpus" >/dev/null 2>&1 || true
 echo '{"suppressOutput": true}'
 exit 0

@@ -8,6 +8,8 @@ QAIRT-QNN/
 
 # Personal records — Google Drive only, never the repo
 Large_plan-PDF's/
+# Claude session recaps — readable in Obsidian, never synced
+_recaps/
 
 # On-device repo mirror inside the vault (a copy of this repo; how repos are
 # mapped/linked into the corpus is decided in the grill session)

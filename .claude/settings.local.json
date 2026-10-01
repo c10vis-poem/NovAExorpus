@@ -1,0 +1,8 @@
+{
+  "enabledMcpjsonServers": [
+    "omniroute",
+    "mem0",
+    "terrestrial-brain",
+    "code-review-graph"
+  ]
+}

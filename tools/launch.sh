@@ -5,7 +5,7 @@
 # Usage:
 #   bash tools/launch.sh          — full pipeline with router-guard
 #   bash tools/launch.sh --agent corpus-architect  — with specific agent
-#   alias cc="bash ~/repos/NovAExorpus/tools/launch.sh"
+#   alias cc="bash ~/storage/shared/Documents/NovAExorpus/tools/launch.sh"
 
 set -euo pipefail
 
@@ -20,7 +20,7 @@ export MEM0_MCP_TOKEN="${MEM0_MCP_TOKEN:-}"
 export OMNIROUTE_MCP_URL="${OMNIROUTE_MCP_URL:-http://34.31.112.77:20128}"
 export OMNIROUTE_API_KEY="${OMNIROUTE_API_KEY:-}"
 
-cd ~/repos/NovAExorpus
+cd ~/storage/shared/Documents/NovAExorpus
 
 # Pre-flight: check layer health (non-blocking)
 echo "[launch] Checking layers..."
