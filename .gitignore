@@ -61,3 +61,6 @@ _quarantine/
 
 # Local cleanup-tool output (Drive file indexes, duplicate copies), not vault content
 __RESUME.md/_whatisit/files_cleanup/
+
+# Oracle benchmark set: includes all-rights-reserved diagrams (marineengine.com, NVIDIA) — private use only, never sync to the public repo
+benchmarks/oracle/

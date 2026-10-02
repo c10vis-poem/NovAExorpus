@@ -1,88 +1,63 @@
-  Session files: [[AGENTS]] · [[PENDING]] · [[MAP]] · [[GRILL-MANIFEST]] · [[NAMING-CANON]]
+Session files: [[AGENTS]] · [[PENDING]] · [[MAP]] · [[GRILL-MANIFEST]] · [[NAMING-CANON]]
 
-# RESUME.md — Session Ledger
+# RESUME.md — Session Ledger (rewritten every session)
 
-Repository: NovÆxorpus (`c10vis-poem/NovAExorpus`), the master wiki and vault.
-Last session: 2026-09-28 → 2026-09-29 (phone, Claude Code, Opus 5.5). It ended mid-grill, at the operator's call, to start fresh.
-This file is rewritten top to bottom at the end of every session. Anything unresolved also goes to `PENDING.md`.
+Repository: NovÆxorpus (`c10vis-poem/NovAExorpus`, PUBLIC), the master wiki and vault.
+**Last session: 2026-10-02** (phone, Claude Code, Opus 5.5, personal account). It covered workspace and enforcement, then the NPU server and benchmark. Full ledger: `~/.claude/session-work/2026-10-02/SESSION-LOG.md`.
+*This is a mid-session rewrite (the wrap-up gate fired on a mention). The real wrap-up rewrites it again.*
 
 ## NEXT SESSION — START HERE
+The Stop gate requires a status for each numbered item: `resume-item <n> done|blocked "<evidence / what's needed>"`.
 
-1. Open Claude Code in the vault: `cd ~/storage/shared/Documents/NovAExorpus && claude`. It loads `AGENTS.md` by itself.
-2. Read this file, `grill/DECISIONS.md` (today's decisions), `grill/research-notes-2026-09-29.md` (sourced facts on OmniRoute, ReasoningBank, the Continual Harness paper and the Æsop-Xi doc conflicts) and `CONTEXT.md` (the glossary). The OB1 and Continual Harness code facts are in `grill/ob1-read-ledger.md` and `grill/continual-harness-read-ledger.md`. Don't re-read sources those files already cover; read only what they list as unread.
-3. Work the open items below in order, then resume `/grill-with-docs`. The agenda is `GRILL-MANIFEST.md`; the grill was on the Continual Harness definition.
+1. **Run the tier-1 NPU benchmark, with the phone prepped** (plugged in, extra browsers and apps closed): `cd ~/tools/npu-bench && python3 bench.py --tier 1 /storage/emulated/0/Download/Qwen3.5-0.8B-Q4_0.gguf ~/downloads/Qwen3.5-2B-Q4_0.gguf /storage/emulated/0/Documents/Models/gemma-4-E2B_q4_0-it.gguf /storage/emulated/0/Download/SmolVLM2-2.2B-Instruct-Q8_0.gguf`. Results go to `docs/NPU-BENCHMARKS.md` + `benchmarks/results/`.
+2. **Finish the skill-observation bookkeeping:** 5 were actioned on 2026-10-01 (0003, 0010, 0011, 0013, 0014). Nine are still open (0001, 0002, 0004–0009, 0012) plus 0015 and 0016 from today. Check each against the hooks built since (H1 Stop gate, H2 sync-on-use, H5 secrets), mark them point by point, and write `last-review-date.txt`.
+3. **Build the next benchmark pieces:** the QAIRT route in the server shim (bundles: Qwen3-VL-4B, InternVL3.5-4B, SmolLM2), vision input (`geniex_vlm_*` + mmproj), then tiers 2 and 3 and the role map.
+
+## STATE (verified 2026-10-02)
+- **Enforcement (all live, user-level settings, so every session in every repo):**
+  - H1 RESUME gate + the **Stop gate** (`stop-gate.sh`). The Stop gate blocks turn end until RESUME is read, the START HERE items have a status, task-observer has run, no ENFORCEMENTS requirement is pending, and in wrap-up mode RESUME.md is rewritten.
+  - H1b housekeeping reminder; H2 sync-on-use; H3 session ledger; H4 ship-session; H5 secrets; H6 ENFORCEMENTS gate; H7 classifier (keyword rows; `CLASSIFY_URL` slot unused).
+  - Operator override = `#skip-enforce` typed by the user only.
+  - New rows 2026-10-02: vault, graphify, voice, bench.
+  - Hook sources + the exact live registrations (`settings.hooks.json`) are in aesop-xi `deploy/phone/hooks/` (PR #34 merged).
+- **Workspace:** `additionalDirectories` = vault, aesop-xi, NovA-skills, aesop-task-observer, NoVa-honey-for-devs, NovA-code-review-graph, obsidian-skills, graphify, NovA-terrestrial-brain. The `claude()` launcher in `~/.zshrc` adds `--add-dir` for all 9 (their skills/agents). `CLAUDE_CODE_ADDITIONAL_DIRECTORIES_CLAUDE_MD=1` loads their CLAUDE.md. Start sessions in the repo you work in for its own hooks and `.mcp.json`.
+- **NPU:**
+  - `npu-serve` → GenieX **v0.7.1** (sha verified) on the NPU at `127.0.0.1:18181/v1`, through a C shim over `libgeniex.so`. Proven to be GenieX, not llama-server. Defaults are `npu`, not hybrid.
+  - Placement is decided per model: Unsloth's Qwen 3.5 files keep `ssm_out` in Q5_K, so those weights run on the CPU (38 handoffs per token; 2B NPU 12.7 vs CPU 34 tok/s). Gemma E2B is clean (NPU 18 vs CPU 9.4).
+  - QAIRT bundles decode about 2× faster than llama.cpp (AI Hub S25 numbers).
+  - Facts: `~/.claude/NPU-ON-DEVICE.md`. Guide: `docs/LOCAL-AI-GUIDE.md`. Build log: `docs/NPU-SERVE-BUILD-LOG.md`.
+- **AI Hub CLI:** `proot-distro login debian -- /root/venvs/qai-hub/bin/qai-hub-models info|perf|fetch …` (needs Python <3.14). Chipset for this phone: `qualcomm-snapdragon-8-elite-for-galaxy` (HTP v79, soc 69).
+- **Models (fingerprinted; byte-identical duplicates removed; cross-chip variants kept on purpose):**
+  - Qwen 3.5 0.8B / 2B / 9B (Unsloth); bartowski 9B (better NPU mix)
+  - InternVL3.5-8B Q4_0 (good fit, 4.8 GB)
+  - Qwen3-VL-4B bundle (8 Elite) and 8B bundle (X2 Elite, v81; test-load it)
+  - SmolLM2-1.7B bundle (8 Elite), Qwen3-1.7B bundle (X Elite)
+  - SmolVLM2-2.2B Q8_0
+  - Whisper large-v3-turbo QNN-ONNX (8 Elite for Galaxy)
+  - deepspeech2 TFLite (needs LiteRT)
+- **Benchmark:** `~/tools/npu-bench/bench.py`. Records runtime / mode, placement verdict (full HTP or partial, naming the CPU weights) and provenance (uploader, sha, as downloaded vs requantized).
+  - Tiers: T1 = Oracle app (help desk / install guide: photo part-ID → manual → part number → where to buy); T2 = routing / tools / planning / frontier hand-off; T3 = vision+language.
+  - Oracle photo set: 23 items in `benchmarks/oracle/` (git-ignored: private-use diagrams; includes the 1985 Johnson 9.9 J10RCOM gearcase).
+
+## DECISIONS 2026-10-02
+- The fork rule doesn't cover release binaries: forks don't carry releases, so GenieX tarballs come from qualcomm/GenieX releases with checksum verification.
+- Never say "won't run" from labels: test-load cross-chip variants. Delete only SHA-identical duplicates.
+- "Make it work, per model": requant, other uploaders, QAIRT bundles, AI Hub Workbench (free compute), HF, Vertex (credits).
+- H5/H6 stay keyword-based until the grill session. Overrides belong to the operator only.
+- Wrap-up order: rewrite RESUME → operator runs GitSync → "push now" / wrap up → the ship step merges vault-sync.
 
 ## OPEN ITEMS, IN ORDER
-
-Done 2026-09-30: PR #21 merged, PR #7 closed, branches cut to `main` only, GitSync on `main`, false AGENTS.md / aesop-xi lines fixed (aesop-xi PR #20). See PENDING.md "Done 2026-09-30".
-
-1. **Finish reading the Continual Harness code.**
-   - Fork: `c10vis-poem/AEsops-continual-harness` @ `bbab97a`, clone at `~/repos/AEsops-continual-harness`. Paper: arXiv 2605.09998.
-   - Ledger: `grill/continual-harness-read-ledger.md`. It lists what is read (core harness, `agents/`, `utils/stores/`, docs, run scripts, containers) and what isn't: the rest of `utils/`, `server/`, `tests/`, and the game environment code.
-   - Findings so far, all verified in source:
-     - The code "sandbox" hands model-written code `__import__`, so any skill can take over the host, and there's no timeout (`agents/PokeAgent.py:491, 586`).
-     - Trajectory logs drop tool results and mark every step a success (`agents/PokeAgent.py:2924-2937`), so the Refiner never sees tool failures.
-     - Every self-evolved "create" is reported as failed; self-evolved new skills get no code.
-     - There is no rollback feature, but the pieces exist (per-field change history, a file for every prompt version, backups).
-     - Recovery that does exist (verified 2026-09-30): zip backups on each objective; restore only by hand (`run.py --backup-state` / `--load-checkpoint`, `run.py:430-437`); `run_cli.py` auto-restarts crashed external CLI agents with `--resume`, checkpoints every 60 s, stops after 5 straight failures (`run_cli.py:791, 810, 855`).
-     - A fixed system prompt versus rewritable strategy is a real guardrail.
-     - Objective completion is self-declared; emulator milestones are the only ground truth.
-2. **Resume the grill:** what the Continual Harness is for us, then the rest of `GRILL-MANIFEST.md`.
-
-## WHAT HAPPENED THIS SESSION
-
-- **OB1 fork read in full.** Every file in `c10vis-poem/OB1` @ `238df6c` has a row in `grill/ob1-read-ledger.md`, with a summary at the end. Merged to `main` (#22, #25).
-- **Grill decisions** (`grill/DECISIONS.md`):
-  - OmniRoute keeps its own SQLite and memory tables.
-  - The four memory layers (mem0, OB1, Graphify, code-review-graph) are separate MCP servers.
-  - ReasoningBank is an OmniRoute plugin with its own judge and store.
-    - It judges against ground truth, never the agent's word. That covers the task outcome and whether the pipeline ran properly: routing, ignored tools, unused skills, the mem0 write, the OB1/Supabase row, and whether the expected path was followed.
-    - It keeps ReasoningBank's own lesson-writing rules and its own model settings.
-    - It has no crash recovery.
-  - Æsop-Xi (Agentic Executions Split Operation Protocol) is the home of the whole runtime system.
-  - The on-device Auditor only flags prompts that weren't done as told; it stores nothing.
-  - ECC is parked.
-- **CONTEXT.md** now defines Æsop-Xi, ReasoningBank and Auditor.
-- **33 vendor files restored** to `02_wiki_md/vendors/github/`. They had been moved into the gitignored nested `NovAExorpus/` folder.
-- **ECC parked** at `~/.claude/ecc-parked/` (its README explains how to bring it back). It no longer loads from `~/.claude/rules/`, and its "mandatory agents" block is out of `~/.claude/CLAUDE.md`.
-- **Claude memory notes added:**
-  - push, PR and merge once, at session end;
-  - no invented hard rules and no "canonical" in docs;
-  - ECC parked;
-  - the Auditor.
-- **PRs:** #22, #25, #24, #26 and #28 merged. #24 was empty, because #23 had merged `main` *into* `happy-ending-unresolved-updates`. #26 and #28 carry this session's docs. #27 was closed as a duplicate of #28. Open: #21 (secret scan) and #7 (operator review).
-
-## OPERATOR TO-DO
-
-1. Register the session hooks (makes `sync-forks` / `ship-session` automatic). Paste in Claude Code:
-   `! f=~/.claude/settings.json; jq '.hooks.SessionStart=[{"hooks":[{"type":"command","command":"jq -r .session_id | { read -r s; nohup ~/bin/sync-forks \"$s\" >/dev/null 2>&1 & }","timeout":10}]}] | .hooks.SessionEnd[0].hooks+=[{"type":"command","command":"jq -r .session_id | { read -r s; nohup ~/bin/ship-session \"$s\" >/dev/null 2>&1 & }","timeout":10}]' $f > $f.tmp && mv $f.tmp $f && jq '.hooks|keys' $f`
-
-## VM REFERENCE
-
-- Instance `omniroute-brain`, zone `us-central1-a`, project `project-alchemist-490416`. From the phone: `~/bin/vm on|off|status|ssh`.
-- The external IP is ephemeral and changes on every start (`vm on` prints it). `34.31.112.77` in `tools/launch.sh` and `router-guard.sh` is stale.
-- Idle auto-off after 30 minutes; 4 AM backstop.
-
-## ENVIRONMENT NOTES
-
-- `!` works only inside the Claude Code chat box. In a plain Termux shell, paste the command without it.
-- zsh: never name a loop variable `path`, because it overwrites `PATH`.
-- GitSync Portal syncs through the GitHub API to `vault-sync`, on startup only. The vault's local `.git` is a leftover.
-- Claude Code MCP connections that failed this session: `omniroute` (invalid URL in its config) and `terrestrial-brain` (timeout).
+1. The START HERE items above.
+2. Ship the pending aesop-xi branch `feat/stop-gate-resume-enforce` (worktree `~/repos/.wt-aesop-xi-wrapup`: RESUME-in-wrap-up check + 4 ENFORCEMENTS rows) on the next "push now".
+3. Operator fetches: mmproj for SmolVLM2 2.2B and InternVL3.5 8B; Intern3.5-VL-4B QAIRT bundle for 8 Elite for Galaxy.
+4. Requant Qwen 3.5 files to pure Q4_0 (`llama-quantize --pure`; phone, GitHub runner or Vertex) and compare with bartowski's mix.
+5. TFLite / LiteRT setup (deepspeech2, Gemma mobile).
+6. Vault code-review-graph build crash (long filename under `Drive_sync/`, stat before ignore). Fix in the fork.
+7. Check three leftover worktrees from 2026-10-01 (`~/.claude/session-work/2026-10-01/wt-*`) for unmerged work.
+8. Voice: operator runs `vv cancel`; try `/voice tap`.
+9. **Grill session:** H5/H6 per-tool blocks; H7 auto-classifier (longer timeout, model reads skill descriptions); post-task flagging via task-observer + Reasoning Bank; keyword mention-vs-command false triggers; Hermes, dsh, terrestrial-brain (VM unreachable); llm-wiki / OmniRoute / dumbass config; plus the 2026-10-01 grill agenda (aesop-xi PR #18, wiki agent home, custom-skill home, Continual Harness).
+10. Gemma 4 fine-tune: our own LoRA job on Vertex (managed SFT is Gemini-only and not exportable) → GGUF Q4_0. Start from QAT checkpoints.
 
 ## HANDOFF SOURCES
-
-Read this session:
-- **Vault:** AGENTS.md, CONTEXT.md, RESUME.md, PENDING.md, `recovered/2026-09-26-ob1/` (README, the continual-harness plugin draft, the orchestration contract via grep), `_dumbass_unified-config/continual_harness/POINTER.md`, `02_wiki_md/vendors/POINTER.md`.
-- **OB1:** the whole fork.
-- **Continual Harness:** as listed in its ledger.
-- **aesop-xi:** AGENTS.md, CLAUDE.md, RESUME.md.
-- **OmniRoute:** AGENTS.md, `docs/routing/AUTO-COMBO.md` (partly), and a search of the source for "Continual Harness" and "Reasoning Bank" (0 hits).
-- **reasoning-bank:** README, the judge prompts, the lesson-writing prompts, and the SWE-Bench outcome code.
-- **GitHub:** state of PRs #7, #21, #23 and #24, and the gitleaks logs.
-
-Not read:
-- documents 00–05;
-- `_dumbass_unified-config/` (beyond one pointer file);
-- MAP.md, MASTER-CLAUDE.md, MASTER-RESUME.md, SOURCE-RETRIEVAL-MAP.md;
-- most of the vault (AGENTS.md Rule 4).
+Read this session: RESUME (old), ENFORCEMENTS.md, hooks README, INVENTORY.md, WRAP-UP.md, NPU-ON-DEVICE.md, LOCAL-AI-GUIDE.md, resume-gate.sh, enforce-gate.sh, classify.sh (head), git-gate.sh, task-observer + android-termux-operator skills, Claude Code docs (memory, skills, voice), GenieX docs + `geniex.h` (d8852590, v0.7.1), llama.cpp #22352 / PR #22334, transcript b6ab92d6 (review, H1–H7 and observation-edit passages), Vendor-Registries docs (Qwen 3.5 release, InternVL3.5 paper, AI Hub READMEs, GenieX Quickstart / Android install, Gemma 4 ×3, Vertex SFT; partly via helpers), PENDING.md (structure + key lines).
+Not read: most of transcript b6ab92d6; vault docs 00–05; Hexagon SDK; ECC.
