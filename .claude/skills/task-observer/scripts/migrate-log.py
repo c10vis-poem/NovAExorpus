@@ -64,12 +64,20 @@ REVIEW_FLAGS = {
     "date-not-iso",
 }
 
+# Fields the target format requires on every file (SKILL.md, File format).
+# Reported, never fabricated: a placeholder would hide the missing judgement
+# the field exists to make visible.
+MANDATORY_TARGET_FIELDS = ("status", "siblings_checked")
+
 ENTRY_RE = re.compile(r"^### Observation (\d+):[ \t]*(.*)$")
 LABEL_RE = re.compile(r"^\*\*([A-Za-z][A-Za-z /-]*):\*\*[ \t]*(.*)$")
 ISO_DATE_RE = re.compile(r"(\d{4}-\d{2}-\d{2})")
 STATUS_RE = re.compile(r"^(OPEN|ACTIONED|DECLINED|SUPERSEDED)\b(.*)$", re.I)
 NEW_SKILL_RE = re.compile(r"^New skill candidate:\s*(.+)$", re.I)
-SKILL_NAME_RE = re.compile(r"^([A-Za-z0-9][A-Za-z0-9._-]*)$")
+# A skill name is a bare token or a scoped `plugin:skill` identifier — the
+# literal string the Skill tool takes on platforms that namespace plugin
+# skills (e.g. `dev-workflow:next`). The colon is part of the name.
+SKILL_NAME_RE = re.compile(r"^([A-Za-z0-9][A-Za-z0-9._-]*)(:[A-Za-z0-9][A-Za-z0-9._-]*)?$")
 
 
 def split_top_level(text, seps=";"):
@@ -90,10 +98,23 @@ def split_top_level(text, seps=";"):
 
 
 def slugify(title, maxlen=60):
-    s = title.lower()
-    s = re.sub(r"[^a-z0-9]+", "-", s).strip("-")
+    """Kebab-case slug that keeps SOME signal from any script.
+
+    The directory listing is the index, so a slug must carry the title's
+    meaning in every language: ASCII-only stripping turned a Korean corpus
+    into thirteen `untitled` files. Latin accents are folded to their base
+    letters (NFKD, combining marks dropped); other scripts keep their word
+    characters, since modern filesystems and git handle UTF-8 names.
+    """
+    import unicodedata
+    s = unicodedata.normalize("NFKD", title)
+    s = "".join(ch for ch in s if not unicodedata.combining(ch))
+    s = unicodedata.normalize("NFC", s).lower()   # recompose (Hangul jamo -> syllables)
+    # word characters of any script stay; everything else becomes a hyphen
+    s = re.sub(r"[^\w]+", "-", s, flags=re.UNICODE).replace("_", "-").strip("-")
     if len(s) > maxlen:
-        s = s[:maxlen].rsplit("-", 1)[0]
+        cut = s[:maxlen].rsplit("-", 1)[0]
+        s = cut or s[:maxlen]
     return s or "untitled"
 
 
@@ -265,7 +286,10 @@ def parse_skill(raw, area, known_skills, flags):
     # clean single-skill case: promote the qualifier into an empty area field
     if len(names) == 1 and not area and len(quals) == 1 and names[0] in quals:
         return names, [], quals[names[0]], {}
-    if quals:
+    # An unparseable name is already flagged above; the qualifier flag is
+    # for genuine qualifiers, so do not raise it a second time for the same
+    # cause (one malformed token used to produce two review flags).
+    if any(k not in ("_unparsed",) for k in quals):
         flags.append("skill-qualifiers-need-review")
     return names, [], area, quals
 
@@ -379,6 +403,16 @@ def id_floor_from(paths):
 
 
 def main():
+    # The report prints observation titles, which are log content in any
+    # script; never let the console's encoding decide whether a completed
+    # conversion exits 0 (a cp1252 console raised UnicodeEncodeError on a
+    # title containing an arrow AFTER every file had been written).
+    for stream in (sys.stdout, sys.stderr):
+        if hasattr(stream, "reconfigure"):
+            try:
+                stream.reconfigure(errors="replace")
+            except (ValueError, AttributeError):
+                pass
     ap = argparse.ArgumentParser()
     ap.add_argument("logs", nargs="+")
     ap.add_argument("--check", action="store_true", help="parse and report only")
@@ -433,6 +467,19 @@ def main():
     print(f"\nneeds human review: {len(needs_review)}/{len(records)}")
     print(f"parsed losslessly:  {len(records)-len(needs_review)}/{len(records)}")
 
+    # Source fidelity and target conformance are two success criteria. The
+    # lines above answer the first; a field the legacy format never defined
+    # is exactly the one they cannot report on. Enumerate the target's own
+    # mandatory fields, not the mapping table in migration.md.
+    headers = [render(r).split("\n---", 1)[0] for r in records]
+    print("\ntarget conformance (mandatory frontmatter, converted set):")
+    for field in MANDATORY_TARGET_FIELDS:
+        have = sum(1 for h in headers if f"\n{field}:" in h)
+        note = ""
+        if field == "siblings_checked" and have < len(records):
+            note = " — the first review's sibling backfill populates this; nothing else will"
+        print(f"  {field:<18}{have}/{len(records)}{note}")
+
     if not args.convert:
         return
 
@@ -449,6 +496,11 @@ def main():
     with open(os.path.join(arch, ".id-floor"), "w") as fh:
         fh.write(f"{floor}\n")
 
+    slugs = [slugify(r["title"]) for r in records]
+    collapsed = sum(1 for x in slugs if x == "untitled")
+    if records and collapsed / len(records) > 0.2:
+        print(f"\nWARNING: {collapsed}/{len(records)} slugs collapsed to 'untitled' — "
+              "the listing is no longer an index; check the titles' script and the slug rule")
     print(f"\nwrote {len(records)} files to {out}/")
     print(f"id floor: {floor}  (-> {os.path.join(arch, '.id-floor')})")
     flagged = [r for r in records if set(r["flags"]) & REVIEW_FLAGS]

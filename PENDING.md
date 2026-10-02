@@ -3,12 +3,31 @@
 Durable cross-session backlog. Not rewritten each session — items persist until resolved or explicitly dropped.
 
 ## Routines
-last-housekeeping: never
+last-housekeeping: 2026-10-01
 - Roll _recaps/ older than 30 days into a monthly summary, delete the originals
 - Audit repos: uncommitted / unpushed / stray branches → merge or discard with the builder
 - Review the task-observer observation log
 - Check cloud billing (VM disks)
 - Builder reminders: (add here)
+
+## Added 2026-10-02
+- **H7 classifier: automatic skill matching (grill, with H5/H6).** `classify.sh` asks `$CLASSIFY_URL` first and falls back to the ENFORCEMENTS keyword rows if there's no answer in 2 s (it falls back, it doesn't fail). Plan: point it at a model that reads the prompt plus every skill's description, so new skills are covered without hand-written rows. Raise the 2 s timeout to whatever the model needs (candidate: local `npu-serve` :18181, if the tier-1 benchmark shows it is fast enough).
+- **Post-task flagging (after the task-observer + Reasoning Bank pipeline works).** After task completion, a hook reviews which skills or rows *should* have fired and didn't. It feeds that back to the classifier and proposes new ENFORCEMENTS rows, so the list grows from real misses instead of by hand.
+- **Keyword false triggers (grill):** rows fire on mentions as well as commands ("brand new" → naming; "wrap up" mentioned in passing → wrap-up mode). Needs command-vs-mention handling.
+- **Resume the parked skill-observation review** (started 2026-10-01, 4 decision groups, never finished; `last-review-date.txt` = never).
+- **Vault code-review-graph build crashes** on a long filename under `Drive_sync/` (stat before ignore). Fix in the fork or rename the file.
+- **NPU benchmark (3 tiers + role map) in progress:** `~/tools/npu-bench/bench.py`, results in `docs/NPU-BENCHMARKS.md`. Next: QAIRT route in the server shim, vision input (`geniex_vlm_*` + mmproj), TFLite/LiteRT setup, pure-Q4_0 requant of the Qwen 3.5 files.
+
+## Added 2026-10-01
+- NPU speed gap: v0.3.14 16–23 tok/s vs ~45–50 target; v0.7.1 DSP-queue failure from Termux. ADB test steps in RESUME.md.
+- GenieX HTTP wrapper (NPU in the browser / for tools) — not built.
+- aesop-xi PR #18 (orchestration contract) — held for the grill.
+- Wiki agent home + forks decision (see RESUME grill agenda); custom skills' final home; vault-only corpus scripts' home.
+- Voice: Tab-to-talk (Android STT) stops at the first pause; offline Moonshine has a 10 s cap; VAD never wired; nothing speaks the output (speak exists). `talk` built, untested with the mic.
+- Small dead-path fixes listed in ~/.claude/INVENTORY.md (awaiting the operator's OK).
+- ECC review: stale ecc-dashboard / nanoclaw launchers; ECC CI fix ships on PR #7's branch.
+- Qwen 3.5 9B on the NPU — untested.
+- Recaps: `_recaps/` older than 30 days get rolled into a monthly summary during housekeeping.
 
 ## Backlog
 
@@ -21,6 +40,7 @@ last-housekeeping: never
 ## Added 2026-09-28
 
 - **Session-end discipline isn't enforced.** RESUME.md must be rewritten top to bottom every session and unresolved items moved here — no hook checks it. Needs a structural check (grill topic 11 / launch script).
+  - *2026-10-02: partly enforced — `stop-gate.sh` blocks wrap-up until RESUME.md is rewritten. Moving unresolved items here is still unchecked.*
 - **Operator's own MEMORY.md** — enterprise-wide, separate from Claude's memory; RESUME / AGENTS / MEMORY / PENDING from the other six base repos to sync into this corpus repo (grill topic 3).
 - **Hooks not registered yet** — `sync-forks` / `ship-session` need the operator's paste (classifier blocks the agent).
 - **Old Claude memory + ECC rules** — archive line not run yet.
