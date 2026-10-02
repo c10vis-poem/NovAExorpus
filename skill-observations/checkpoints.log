@@ -8,3 +8,5 @@
 2026-09-30 18:44 [home] session-start scan: files=8
 2026-10-01 14:14 [home] session-start scan: files=10 parsed=10
 2026-10-01 17:35 [home] session-start scan: files=13 parsed=13
+2026-10-02 08:36 [addir-test] session-start scan: files=12 parsed=12
+2026-10-02 08:37 [addir-test] session-start scan: files=13 parsed=12

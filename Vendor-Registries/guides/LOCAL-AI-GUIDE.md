@@ -52,7 +52,7 @@ npu-ask "Explain what an NPU is in two sentences."
 
 ```
 ai-web                 # default Qwen 2B
-ai-web /storage/emulated/0/Documents/Models/gguf/Qwen3.5-9B-Q4_0.gguf
+ai-web /storage/emulated/0/Documents/Models/Qwen3.5-9B-Q4_0.gguf
 ai-stop                # when done (frees the RAM)
 ```
 - It opens `http://127.0.0.1:8081` in your browser: a full chat page with history, built into llama.cpp's server.
