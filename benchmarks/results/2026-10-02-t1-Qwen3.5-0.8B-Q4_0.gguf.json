@@ -1,0 +1,200 @@
+{
+ "model": "Qwen3.5-0.8B-Q4_0.gguf",
+ "path": "/storage/emulated/0/Documents/Models/gguf/Qwen3.5-0.8B-Q4_0.gguf",
+ "date": "2026-10-02 05:08",
+ "tier": 1,
+ "runtime": "GenieX llama.cpp",
+ "mode": "npu",
+ "provenance": {
+  "sha256": "444406ddd926550c724ec18d5120a9d40ded44908a063b0e66e9a7e5464c652c",
+  "uploader": "Unsloth",
+  "name": "Qwen3.5-0.8B",
+  "modified": "as downloaded"
+ },
+ "placement": {
+  "htp_v79": true,
+  "htp0_session": true,
+  "splits_per_token": 38,
+  "cpu_splits": 19,
+  "cpu_weights": [
+   "ssm_out.weight",
+   "token_embd.weight"
+  ],
+  "verdict": "partial: CPU runs ssm_out.weight",
+  "model_buffers_mib": {
+   "CPU": 198.93,
+   "CPU_REPACK": 24.75,
+   "HTP0": 462.32
+  }
+ },
+ "speed": [
+  {
+   "n_prompt_target": 128,
+   "runs": [
+    {
+     "ttft_s": 0.49,
+     "total_s": 87.2,
+     "prompt_tokens": 184,
+     "gen_tokens": 256,
+     "prefill_tps": 390.7,
+     "decode_tps": 3.0
+    },
+    {
+     "ttft_s": 0.51,
+     "total_s": 81.9,
+     "prompt_tokens": 184,
+     "gen_tokens": 256,
+     "prefill_tps": 378.2,
+     "decode_tps": 3.1
+    },
+    {
+     "ttft_s": 0.53,
+     "total_s": 79.2,
+     "prompt_tokens": 184,
+     "gen_tokens": 216,
+     "prefill_tps": 362.8,
+     "decode_tps": 2.7
+    }
+   ],
+   "median_prefill_tps": 378.2,
+   "median_decode_tps": 3.0,
+   "median_ttft_s": 0.5
+  },
+  {
+   "n_prompt_target": 512,
+   "runs": [
+    {
+     "ttft_s": 1.57,
+     "total_s": 94.1,
+     "prompt_tokens": 710,
+     "gen_tokens": 256,
+     "prefill_tps": 459.3,
+     "decode_tps": 2.8
+    },
+    {
+     "ttft_s": 1.56,
+     "total_s": 103.3,
+     "prompt_tokens": 710,
+     "gen_tokens": 256,
+     "prefill_tps": 466.5,
+     "decode_tps": 2.5
+    },
+    {
+     "ttft_s": 1.44,
+     "total_s": 110.5,
+     "prompt_tokens": 710,
+     "gen_tokens": 256,
+     "prefill_tps": 505.9,
+     "decode_tps": 2.3
+    }
+   ],
+   "median_prefill_tps": 466.5,
+   "median_decode_tps": 2.5,
+   "median_ttft_s": 1.6
+  },
+  {
+   "n_prompt_target": 2048,
+   "runs": [
+    {
+     "ttft_s": 7.14,
+     "total_s": 111.7,
+     "prompt_tokens": 2790,
+     "gen_tokens": 256,
+     "prefill_tps": 396.3,
+     "decode_tps": 2.4
+    },
+    {
+     "ttft_s": 5.41,
+     "total_s": 94.8,
+     "prompt_tokens": 2790,
+     "gen_tokens": 256,
+     "prefill_tps": 520.8,
+     "decode_tps": 2.9
+    },
+    {
+     "ttft_s": 5.12,
+     "total_s": 97.9,
+     "prompt_tokens": 2790,
+     "gen_tokens": 256,
+     "prefill_tps": 551.0,
+     "decode_tps": 2.8
+    }
+   ],
+   "median_prefill_tps": 520.8,
+   "median_decode_tps": 2.8,
+   "median_ttft_s": 5.4
+  }
+ ],
+ "tasks": [
+  {
+   "id": "t1-cmd-fetch",
+   "pass": false,
+   "ttft_s": 0.89,
+   "total_s": 3.6,
+   "answer": "It does not appear in the DOCUMENT."
+  },
+  {
+   "id": "t1-cmd-perf",
+   "pass": true,
+   "ttft_s": 0.8,
+   "total_s": 17.5,
+   "answer": "The command that prints the performance metrics is:\n\n```bash\nqai-hub-models perf Qwen3.5-2B\n```\n\nThis is directly quoted from the DOCUMENT under the section \"Print performance and accuracy metrics\"."
+  },
+  {
+   "id": "t1-unsure-speed",
+   "pass": true,
+   "ttft_s": 0.85,
+   "total_s": 3.7,
+   "answer": "It is not mentioned in the document."
+  },
+  {
+   "id": "t1-runtime-gguf",
+   "pass": true,
+   "ttft_s": 0.69,
+   "total_s": 27.0,
+   "answer": "Based on the DOCUMENT provided, the runtime that runs any GGUF model is:\n\n**llama_cpp**\n\nThe document states: \"Swapping models is mostly a matter of changing the model_name and the runtime_id... There are two runtimes: llama_cpp \u2014 runs any GGUF model. Supports NPU / GPU / CPU compute units via compute_unit.\""
+  },
+  {
+   "id": "t1-runtime-chipset",
+   "pass": true,
+   "ttft_s": 0.74,
+   "total_s": 35.3,
+   "answer": "Based on the DOCUMENT provided, the runtime that is NPU-only and requires an explicit chipset on Android is:\n\n**qairt**\n\n*Reasoning from Document:* The text states, \"There are two runtimes: **llama_cpp** \u2014 runs any GGUF model. Supports NPU / GPU / CPU compute units via compute_unit. **qairt** (Qualcomm AI Engine Direct) \u2014 runs Qualcomm AI Hub Models. NPU-only, requires an explicit chipset on Andro"
+  },
+  {
+   "id": "t1-unsure-android",
+   "pass": false,
+   "ttft_s": 0.72,
+   "total_s": 5.0,
+   "answer": "The provided DOCUMENT does not contain the answer to the question."
+  },
+  {
+   "id": "t1-maven",
+   "pass": true,
+   "ttft_s": 0.73,
+   "total_s": 50.8,
+   "answer": "It is not mentioned in the document.\n\nThe document lists the command `pip install qai-hub-apps` as the first step to install the CLI and fetch the app source, followed by the instructions to run the app via `adb install -t build/outputs/apk/debug/app-debug.apk` on the device. However, neither of these steps explicitly identifies or quotes the specific **Maven Central artifact** (e.g., `com.qualcom"
+  },
+  {
+   "id": "t1-cmd-adb",
+   "pass": true,
+   "ttft_s": 0.69,
+   "total_s": 5.5,
+   "answer": "adb install -t build/outputs/apk/debug/app-debug.apk"
+  },
+  {
+   "id": "t1-unsure-ram",
+   "pass": true,
+   "ttft_s": 0.73,
+   "total_s": 24.2,
+   "answer": "It is not mentioned in the document.\n\nThe document provides the required hardware specifications for the device, such as the **NPU** (Qualcomm Snapdragon 8 Elite), **GPU** (Adreno), and **CPU** (ARM64-v8a), but it does not state the required **RAM** capacity to run the app."
+  },
+  {
+   "id": "t1-json-fetch",
+   "pass": true,
+   "ttft_s": 0.78,
+   "total_s": 15.2,
+   "answer": "{\n  \"model\": \"Qwen3.5-2B\",\n  \"runtime\": \"geniex_llamacpp\",\n  \"precision\": \"q4_0\"\n}"
+  }
+ ]
+}

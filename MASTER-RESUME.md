@@ -1,6 +1,6 @@
 # Master RESUME overview (auto-generated — do not hand-edit)
 
-Regenerated: 2026-10-02T11:30:55Z
+Regenerated: 2026-10-02T15:51:18Z
 Source: NovAExorpus/tools/regenerate_masters.sh
 
 One overview across every attached project. Edit each project's own

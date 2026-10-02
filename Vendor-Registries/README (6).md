@@ -1,116 +1,128 @@
-# [SmolLM2-1.7B-Instruct: Compact language model capable of solving a wide range of tasks while being lightweight](https://aihub.qualcomm.com/models/smollm2_1_7b_it)
+<p align="center">
+  <a href="https://primeintellect.ai">
+    <picture>
+      <source media="(prefers-color-scheme: light)" srcset="https://github.com/user-attachments/assets/40c36e38-c5bd-4c5a-9cb3-f7b902cd155d">
+      <source media="(prefers-color-scheme: dark)" srcset="https://github.com/user-attachments/assets/6414bc9b-126b-41ca-9307-9e982430cde8">
+      <img alt="Prime Intellect" src="https://github.com/user-attachments/assets/6414bc9b-126b-41ca-9307-9e982430cde8" width="312" style="max-width: 100%;">
+    </picture>
+  </a>
+</p>
 
-A 1.7B parameter instruction-tuned variant of SmolLM2, fine-tuned for conversational and instruction-following tasks, optimized for efficient on-device inference on Qualcomm Snapdragon platforms.
+<h3 align="center">
+Prime Agent: A Self-Improving RLM Harness
+</h3>
 
-This is based on the implementation of SmolLM2-1.7B-Instruct found [here](https://huggingface.co/HuggingFaceTB/SmolLM2-1.7B-Instruct).
-This repository contains scripts for optimized on-device export suitable to run on Qualcomm® devices. More details on model performance across various devices, can be found [here](https://aihub.qualcomm.com/models/smollm2_1_7b_it).
+<p align="center">
+  <a href="#install">Documentation</a> &bull;
+  <a href="https://github.com/PrimeIntellect-ai/verifiers">Verifiers</a> &bull;
+  <a href="https://github.com/PrimeIntellect-ai/prime-rl">PRIME-RL</a>
+</p>
 
-Qualcomm AI Hub Models uses [Qualcomm AI Hub Workbench](https://workbench.aihub.qualcomm.com) to compile, profile, and evaluate this model. [Sign up](https://myaccount.qualcomm.com/signup) to run these models on a hosted Qualcomm® device.
+<p align="center">
+  <a href="https://github.com/PrimeIntellect-ai/prime-agent/actions/workflows/ci.yml">
+    <img src="https://github.com/PrimeIntellect-ai/prime-agent/actions/workflows/ci.yml/badge.svg" alt="CI" />
+  </a>
+  <a href="https://arxiv.org/abs/2608.23552">
+    <img src="https://img.shields.io/badge/arXiv-2608.23552-b31b1b.svg" alt="arXiv" />
+  </a>
+</p>
 
-## Quick Start
+<p align="center">
+  <a href="https://trendshift.io/repositories/104249?utm_source=repository-badge&amp;utm_medium=badge&amp;utm_campaign=badge-repository-104249" target="_blank" rel="noopener noreferrer">
+    <img src="https://trendshift.io/api/badge/repositories/104249" alt="PrimeIntellect-ai%2Fprime-agent | Trendshift" width="250" height="55" />
+  </a>
+</p>
 
-Use our lightweight command-line interface to inspect and download SmolLM2-1.7B-Instruct:
+Prime Agent is an open-source coding and research agent for general and long-running work. It is designed around two core abstractions:
 
-```bash
-pip install qai_hub_models_cli # (the CLI is also available with the qai-hub-models package)
+- The **[Recursive Language Model (RLM)](https://www.primeintellect.ai/blog/rlm)** treats context as variables (*prompt-as-a-variable*) and tools like recursive subagents as function calls (*programmatic tool /sub-agent calling*) inside a persistent REPL.
+- The **[Continual Harness](https://arxiv.org/abs/2605.09998)** stores supplemental prompts, memories, skill descriptions, and reusable subagent specifications as durable state that Prime Agent can refine through small, evidence-backed updates, local to the session by default.
 
-# Inspect the model and list the available download options
-qai-hub-models info SmolLM2-1.7B-Instruct
+## Install
 
-# Print performance and accuracy metrics
-qai-hub-models perf SmolLM2-1.7B-Instruct
-qai-hub-models numerics SmolLM2-1.7B-Instruct
-
-# Download a ready-to-deploy asset
-qai-hub-models fetch SmolLM2-1.7B-Instruct --runtime geniex_qairt --precision w4a16
-```
-See the [CLI README](../../../../cli/README.md)
-for the full list of commands and filters.
-
-## Deploying SmolLM2-1.7B-Instruct on-device
-
-Follow the [GenieX quickstart](https://geniex.aihub.qualcomm.com/en/get-started/quickstart) to install GenieX and deploy the model on a target device.
-
-See the [LLM-on-Genie](https://github.com/qualcomm/ai-hub-apps/tree/main/tutorials/llm_on_genie) tutorial to run with the Genie runtime. Note: Genie support will be deprecated soon.
-
-
-## Setup
-### 1. Install the package
-Install the base package, then use the `qai-hub-models` CLI to install this
-recipe's dependencies:
-```bash
-# NOTE: 3.10 <= PYTHON_VERSION < 3.14 is supported.
-pip install qai-hub-models
-qai-hub-models install smollm2_1_7b_it
-```
-
-### 2. Configure Qualcomm® AI Hub Workbench
-Sign-in to [Qualcomm® AI Hub Workbench](https://workbench.aihub.qualcomm.com/) with your
-Qualcomm® ID. Once signed in navigate to `Account -> Settings -> API Token`.
-
-With this API token, you can configure your client to run models on the cloud
-hosted devices.
-```bash
-qai-hub configure --api_token API_TOKEN
-```
-Navigate to [docs](https://workbench.aihub.qualcomm.com/docs/) for more information.
-
-## Run CLI Demo
-Run the following simple CLI demo to verify the model is working end to end:
+Install the latest build with the one-command installer (every push to the `rust` branch publishes a fresh rolling beta; the stable channel ships on release):
 
 ```bash
-qai-hub-models demo smollm2_1_7b_it
+curl -fsSL https://app.primeintellect.ai/prime-agent/install.sh | sh
 ```
-More details on the CLI tool can be found with the `--help` option. See
-[demo.py](demo.py) for sample usage of the model including pre/post processing
-scripts. Please refer to our [general instructions on using
-models](../../../#getting-started) for more usage instructions.
 
-## Export for on-device deployment
-To run the model on Qualcomm® devices, you must export the model for use with an edge runtime such as
-TensorFlow Lite, ONNX Runtime, or Qualcomm AI Engine Direct.
-Export the pre-quantized model (published on AI Hub) for on-device deployment:
-```bash
-qai-hub-models export smollm2_1_7b_it --checkpoint DEFAULT_W4A16
-```
-`--checkpoint` also accepts `DEFAULT` (the model's default precision).
+On Windows, install from PowerShell:
 
-Optionally, quantize your own variant first and export the resulting checkpoint:
-```bash
-python -m qai_hub_models.models.smollm2_1_7b_it.quantize --precision w4a16 --output-dir ./quantized_checkpoint
-qai-hub-models export smollm2_1_7b_it --checkpoint ./quantized_checkpoint
+```powershell
+irm https://app.primeintellect.ai/prime-agent/install.ps1 | iex
 ```
-Additional options are documented with the `--help` option.
+
+The sh one-liner also works under Git Bash on Windows. Both installers publish the same layout (the launcher under `$HOME\.local\bin`, the payload under `$HOME\.local\share\prime-agent`) and read the same release channel: darwin (arm64/x64), linux (arm64/x64), and windows (x86_64, `win32-x64`).
+
+The served installer and everything it downloads — the version pointers, the platform tarballs, the checksums — come from the same domain: no GitHub URL is on the user path.
+
+## Why Prime Agent
+
+Prime Agent combines a persistent Python control environment with durable harness state, so useful working context and reusable operating patterns can outlive a single chat window.
+
+- **Everything is programmatic:** a persistent Python REPL is the built-in model tool; file operations, shell commands, tool use, subagents, and context management happen through code.
+- **Subagents are built in:** `rlm.spawn(...)` spawns real child agents for parallel or background work and returns their results programmatically.
+- **The harness can improve:** `/refine` reviews the current trajectory and can apply small, evidence-backed updates to supplemental harness state. It never rewrites the immutable base system prompt, and recorded snapshots support rollback.
+- **Skills are executable:** skills are importable Python packages, and the built-in skill creator can turn recurring workflows into project or personal skills.
+- **Sessions run in the background:** daemon-backed agents keep running when the terminal disconnects and can be reattached later.
+- **Agents communicate directly:** running agents can exchange messages and orchestrate one another without routing everything through the user.
+- **Long tasks keep moving:** automatic compaction, persistent goals, heartbeats, schedules, autonomous mode, and retained subagents preserve progress across turns and terminal sessions.
+
+## Getting Started
+
+Start Prime Agent from the repository or directory you want it to work in:
+
+```bash
+cd /path/to/project
+prime-agent
+```
+
+On first launch, run `/login` to choose a subscription or API-key provider. Prime Agent works in the current directory and can run commands and modify files there. Use a disposable clone, clean worktree, or another checkpoint you can inspect and restore.
+
+> [!WARNING]
+> Prime Agent executes model-generated Python and project commands with your user permissions. Its worker and kernel processes improve lifecycle isolation and recovery; they are **not** a security sandbox. Review changes and use trusted repositories, instructions, and skills only. Run untrusted code or instructions in an external sandbox or restricted environment.
+
+Useful commands:
+
+```bash
+prime-agent agents                   # Browse running, idle, and saved sessions
+prime-agent attach <agent>           # Reattach to a running session
+prime-agent --resume [path|id]       # Browse sessions or resume one directly
+prime-agent status                   # Inspect background service state
+prime-agent doctor [--fix]           # Inspect or repair background services
+prime-agent update [--force]         # Update Prime Agent
+prime-agent shutdown [--force]       # Stop every agent, worker, and background service
+```
+
+## Built for Long-Running Work
+Prime Agent is built for long-running work, especially for evaluations in research. These features are available in the TUI, and when run autonomously.
+
+- **Continual Harness:** `/refine` can persist focused, reviewable lessons as supplemental prompts, memories, reusable skill descriptions, or subagent specifications, with recorded refinement history. It does not replace packaging and reviewing new executable skills.
+- **Direct agent-to-agent communication:** running agents and retained subagents can discover one another, exchange messages, and steer active work.
+- **Daemon-backed continuity:** active sessions, Python REPL state, schedules, and subagents keep running when the terminal detaches and can be reattached later.
+- **Heartbeats and schedules:** `/heartbeat`, `rlm_heartbeat`, and `prime-agent schedule` can re-enter a session periodically or at a specific time.
+- **Persistent goals:** `/goal` keeps an objective and its progress active across turns until it is completed, paused, or cleared.
+- **Bounded autonomous mode:** `/autonomous` continues within configured turn, token, and time budgets and can run user-defined quality gates. A passed gate checks only what that gate verifies; reaching a limit does not imply task success.
+
+## Contributing
+
+Start with a GitHub Discussion for [general questions](https://github.com/PrimeIntellect-ai/prime-agent/discussions/categories/general), [bug reports](https://github.com/PrimeIntellect-ai/prime-agent/discussions/categories/bug-reports), and [feature requests](https://github.com/PrimeIntellect-ai/prime-agent/discussions/categories/feature-requests). Maintainers promote accepted work into Issues, and pull requests are reviewed from maintainers and vouched contributors.
 
 ## License
-* The license for the original implementation of SmolLM2-1.7B-Instruct can be found
-  [here](https://huggingface.co/HuggingFaceTB/SmolLM2-1.7B-Instruct/blob/main/README.md).
 
-## References
-* [SmolLM2: When Smol Goes Big -- Data-Centric Training of a Small Language Model](https://arxiv.org/abs/2502.02737)
-* [Source Model Implementation](https://huggingface.co/HuggingFaceTB/SmolLM2-1.7B-Instruct)
+Prime Agent is fully open source and released under the [MIT License](LICENSE).
 
-## Community
-* Join [our AI Hub Slack community](https://aihub.qualcomm.com/community/slack) to collaborate, post questions and learn more about on-device AI.
-* For questions or feedback please [reach out to us](mailto:ai-hub-support@qti.qualcomm.com).
+## Citation
 
-## Usage and Limitations
+If you use this codebase in your research, please cite Prime Agent:
 
-This model may not be used for or in connection with any of the following applications:
+```bibtex
+@article{karten2026prime,
+  title={Prime Agent: A Self-Improving RLM Harness},
+  author={Karten, Seth and Zhang, Alex L. and Thomas, Kevin and Müller, Sebastian and Bakouch, Elie and Auras, Daniel and Senghaas, Mika and Obeid, Fares and Dunas, Konstantin and Hagemann, Johannes and Jaghouar, Sami},
+  journal={arXiv preprint arXiv:2608.23552},
+  year={2026}
+}
+```
 
-- Accessing essential private and public services and benefits;
-- Administration of justice and democratic processes;
-- Assessing or recognizing the emotional state of a person;
-- Biometric and biometrics-based systems, including categorization of persons based on sensitive characteristics;
-- Education and vocational training;
-- Employment and workers management;
-- Exploitation of the vulnerabilities of persons resulting in harmful behavior;
-- General purpose social scoring;
-- Law enforcement;
-- Management and operation of critical infrastructure;
-- Migration, asylum and border control management;
-- Predictive policing;
-- Real-time remote biometric identification in public spaces;
-- Recommender systems of social media platforms;
-- Scraping of facial images (from the internet or otherwise); and/or
-- Subliminal manipulation
+Available at [https://arxiv.org/abs/2608.23552](https://arxiv.org/abs/2608.23552).

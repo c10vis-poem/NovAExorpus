@@ -10,13 +10,25 @@ last-housekeeping: 2026-10-01
 - Check cloud billing (VM disks)
 - Builder reminders: (add here)
 
+## Added 2026-10-02 (afternoon)
+- **[TOP] GitSync stuck in a 'remote changing' loop (2026-10-02 evening).** Nothing since 04:38 reached `vault-sync` (RESUME, PENDING, AGENTS, both guides, observations 0019–0021 are local only). Fix it first next session: diagnose GitSync, or push the vault with git directly in wrap-up mode.
+- **wiki-admin open decisions** (guide `docs/WIKI-ADMIN-GUIDE.md` §10): where obsidian-wiki writes (`OBSIDIAN_VAULT_PATH`: vault root vs a subfolder); link `~/wiki-admin` memory to the main memory dir; Obsidian skills load twice (links in `~/.claude/skills/` + `obsidian@obsidian-skills` plugin) — remove the links?
+- **OpenWiki leftovers:** ~/AGENTS.md + ~/CLAUDE.md deleted by operator 2026-10-02 (backup in $TMPDIR/ow). Decide: delete `~/.openwiki/` (1.1 GB old DB) and the duplicate clone `~/openwiki`.
+- **OmniGlyph** built (`~/bin/omniglyph`, fork NvAEx-OmniGlyph v1.4.0), not switched on. Decide: user-wide `ANTHROPIC_BASE_URL` + background service, or OmniRoute's `omniglyph` engine. Fable 5 only by default; Remote Control may hide behind any proxy. Full round trip (reply text) not yet captured.
+- **Render MCP** (fork NvAEx-render-mcp-server, render.com) cloned only: needs `pkg install golang`, build, `RENDER_API_KEY`, `claude mcp add`.
+- **NotebookLM:** operator runs `notebooklm login` once (CLI 0.8.4 from fork; skill in vault `.claude/skills/notebooklm`).
+- **Disk bloat (~22 GB, read-only survey 2026-10-02):** `~/.cache/uv` 8.2 GB and `~/.npm` 5.7 GB (rebuildable caches); `~/gemma-12b/gemma-4-12b-it-qat-q4_0.gguf` same size as the `Models/gguf` copy (hash-check, then cut one); `~/gemma-e2b/` + `~/downloads/gemma-4-E2B-it-qat-UD-Q4_K_XL.gguf` (two copies of an E2B build); `~/downloads` x86/Windows installers. Dedup rule: model identity, not whole-file hash (memory feedback_same_model_bytes_differ); keep the newest version.
+- **Kokoro TTS** `tts_speak.py` fails on the multi-lang v1.0 model (needs lexicon/lang). Kokoro v1.1 was deleted by mistake (restorable: k2-fsa sherpa-onnx tts-models `kokoro-multi-lang-v1_1.tar.bz2`).
+- **Observation file `0018-resume-gate-and-enforce-gate-deadlock.md` is 0 bytes** (created 08:36 by another process) — fill or remove.
+- **npu-serve:** add InternVL 2B (X Elite bundle ran 27.5 tok/s, prefill 1,528 here); tool calls; multi-image.
+
 ## Added 2026-10-02
 - **H7 classifier: automatic skill matching (grill, with H5/H6).** `classify.sh` asks `$CLASSIFY_URL` first and falls back to the ENFORCEMENTS keyword rows if there's no answer in 2 s (it falls back, it doesn't fail). Plan: point it at a model that reads the prompt plus every skill's description, so new skills are covered without hand-written rows. Raise the 2 s timeout to whatever the model needs (candidate: local `npu-serve` :18181, if the tier-1 benchmark shows it is fast enough).
 - **Post-task flagging (after the task-observer + Reasoning Bank pipeline works).** After task completion, a hook reviews which skills or rows *should* have fired and didn't. It feeds that back to the classifier and proposes new ENFORCEMENTS rows, so the list grows from real misses instead of by hand.
 - **Keyword false triggers (grill):** rows fire on mentions as well as commands ("brand new" → naming; "wrap up" mentioned in passing → wrap-up mode). Needs command-vs-mention handling.
 - **Resume the parked skill-observation review** (started 2026-10-01, 4 decision groups, never finished; `last-review-date.txt` = never).
 - **Vault code-review-graph build crashes** on a long filename under `Drive_sync/` (stat before ignore). Fix in the fork or rename the file.
-- **NPU benchmark (3 tiers + role map) in progress:** `~/tools/npu-bench/bench.py`, results in `docs/NPU-BENCHMARKS.md`. Next: QAIRT route in the server shim, vision input (`geniex_vlm_*` + mmproj), TFLite/LiteRT setup, pure-Q4_0 requant of the Qwen 3.5 files.
+- **NPU benchmark (3 tiers + role map) in progress:** `~/tools/npu-bench/bench.py`, results in `docs/NPU-BENCHMARKS.md`. QAIRT route + vision input DONE 2026-10-02 (all 6 models). Next: TFLite/LiteRT setup, pure-Q4_0 requant of the Qwen 3.5 files.
 
 ## Added 2026-10-01
 - NPU speed gap: v0.3.14 16–23 tok/s vs ~45–50 target; v0.7.1 DSP-queue failure from Termux. ADB test steps in RESUME.md.
@@ -45,7 +57,7 @@ last-housekeeping: 2026-10-01
 - **Hooks not registered yet** — `sync-forks` / `ship-session` need the operator's paste (classifier blocks the agent).
 - **Old Claude memory + ECC rules** — archive line not run yet.
 - **Other six repos: CLAUDE.md → AGENTS.md** and GitHub renames to `NovusAExenti`, `AEsop-Xi`, `AEsc`, `AEyre`, `Horizons-Ui` — after the grill.
-- **OpenWiki replacement** — fork + read `jatinmayekar/openwiki-for-claude-code`, install, remove OpenWiki MCP/TUI/workflow.
+- ~~**OpenWiki replacement**~~ DONE 2026-10-02: plugin from fork NvAEx-openwiki-for-claude-code (in ~/wiki-admin), MCP removed, CLI uninstalled, vault AGENTS block removed. Leftovers in 'Added 2026-10-02 (afternoon)'.
 - **OB1 Obsidian plugin + OmniRoute Obsidian plugin** — none exist; build (grill topics 5/7).
 - **MemVault** — operator setting up; decide if its folder is public.
 - **Nested `/NovAExorpus/` repo mirror in the vault (3.1 GB)** — ignored for now; replace with maps/links to every repo.
