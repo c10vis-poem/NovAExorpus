@@ -1,0 +1,148 @@
+﻿________________
+
+
+source: "Multi-Source Extraction: setup.txt, Graphify-CRG.md, PROPOSAL-V2.md, gcp_cross_account_handshake.pdf" cleaned: "2026-09-20" converter: "non-1:1 condensation pass" category: "SYSTEM_OPERATIONAL_BLUEPRINT" tags: ["memory-pipeline", "omniroute", "vertex-ai", "crg", "mem0", "terrestrial-brain", "continual-harness", "obsidian"]
+Unified Memory Pipeline & Multi-Tier Routing Architecture
+1. Executive System Blueprint
+This blueprint maps the decoupled, non-bloating multi-tier memory and execution pipeline across on-device edge hardware (Motorola Razr Ultra, Jetson Nano Super, Rubik Pi 3) and cloud infrastructure (Google Cloud Vertex AI Agent Platform).
+┌────────────────────────────────────────────────────────────────────────────────────────┐
+│                                 EDGE CLIENT / ORCHESTRATOR                             │
+│                      [ Claude Code CLI / Termux Æsc / Qwen 3.5 9B ]                     │
+└───────────────────────────────────────────┬────────────────────────────────────────────┘
+                                            │
+                                            ▼
+┌────────────────────────────────────────────────────────────────────────────────────────┐
+│                              GUARD & COMPRESSION LAYERS                                 │
+│  - router-guard.md      : System Persona enforcing 5-layer pipeline compliance          │
+│  - honey-for-devs       : RTK + Caveman stacked compression (saves 15-95% context tokens)│
+│  - task-review/observer : Generates plan before coding; logs writes to /vault/memories/ │
+└───────────────────────────────────────────┬────────────────────────────────────────────┘
+                                            │
+                                            ▼
+┌────────────────────────────────────────────────────────────────────────────────────────┐
+│                     OMNIROUTE MEMORY EXTRACTION GATEWAY (Port 20128)                    │
+│  - Intercepts all prompt/response streams                                               │
+│  - Classifies: chat | tool_call | reasoning_trace | factual_query | task_result         │
+│  - Extracts RLVR trajectories into Reasoning Bank (05_episodic_logs/trajectories/)      │
+│  - Anchors Continual Harness mid-run prompt optimizations against core invariants       │
+└──────┬────────────────────┬────────────────────┬────────────────────┬──────────────────┘
+       │                    │                    │                    │
+       ▼                    ▼                    ▼                    ▼
+┌──────────────┐    ┌──────────────┐     ┌──────────────┐     ┌────────────────────────┐
+│  mem0 (MCP)  │    │  CRG (MCP)   │     │  OB1 (MCP)   │     │   VERTEX AI SEARCH     │
+│ (Episodic)   │    │ (Code AST)   │     │   (Static)   │     │ (Master Knowledge Base)│
+│              │    │              │     │              │     │                        │
+│ Tracks fast  │    │ SQLite FTS5  │     │ Postgres DB  │     │ GCS Unstructured Store │
+│ session state│    │ Tree-sitter  │     │ Schemas, docs│     │ 100% token costs billed│
+│ and user     │    │ blast radius │     │ and invariant│     │ to $1K personal Vertex │
+│ preferences  │    │ (0.425s sync)│     │ truth tables │     │ credit pool via IAM    │
+└──────┬───────┘    └──────┬───────┘     └──────┬───────┘     └────────────────────────┘
+       │                   │                    │
+       ▼                   ▼                    ▼
+┌────────────────────────────────────────────────────────────────────────────────────────┐
+│                              LOCAL STORAGE & VISUAL WIKI                                │
+│  - ~/.mem0/ & ~/vault/memories/episodic/                                               │
+│  - .code-review-graph/graph.db                                                         │
+│  - ~/.ob1/ (Postgres / 500GB SSD on Jetson Nano)                                       │
+│  - Obsidian Vault Graph View (Agent Skill Graph plugin + symlinked OpenWiki)           │
+└────────────────────────────────────────────────────────────────────────────────────────┘
+________________
+
+
+2. Definitive Space Allocation & Writing Matrix
+Subsystem
+	Storage Location
+	Write Trigger
+	Read Trigger
+	mem0
+	~/.mem0/ (SQLite/Chroma) + ~/vault/memories/episodic/
+	Session feedback, user preferences, dynamic variables
+	On query formulation before tool dispatch
+	Terrestrial Brain (OB1)
+	PostgreSQL + pgvector on Node Beta (Jetson 500GB SSD)
+	Architectural shifts, hard constraints, data schemas
+	On planning and system design verification
+	Code Review Graph (CRG)
+	.code-review-graph/graph.db
+	Claude Stop event (0.425s subsecond AST parse)
+	smart-grep-hook.sh (PreToolUse) before raw grep
+	honey-for-devs
+	In-memory token serializer; logs to ~/.honey/logs/
+	Outbound tool payloads exceeding token thresholds
+	Prior to dispatching payloads through OmniRoute
+	task-observer
+	~/vault/memories/static/ & ~/vault/memories/plans/
+	Plan generation and static memory write-backs
+	Session audit and retrospective evaluation
+	Reasoning Bank
+	~/novae-xorpus/05_episodic_logs/trajectories/*.jsonl
+	OmniRoute response stream completion
+	Offline RLVR training & Continual Harness analysis
+	Continual Harness
+	~/.omniroute/harness/active_rules.json
+	Periodic evaluation window (300s)
+	OmniRoute prompt wrapper (shielded by Unmodifiable Anchor)
+	Vertex AI Knowledge Base
+	gs://business-secure-vault-bucket/ -> Discovery Engine
+	Ingestion batch updates / continuous import
+	Cross-cutting semantic queries across corpus
+	________________
+
+
+3. Local Setup & Execution Commands
+Step 1: Install & Configure Core Services
+# 1. Install OmniRoute, Mem0 MCP, and CRG globally
+npm install -g omniroute @mem0/mcp code-review-graph@latest
+
+
+# 2. Install Graphify (ensure uv or pipx in Debian proot/Linux)
+pipx install graphifyy
+pipx install "notebooklm-py[browser]"
+
+
+# 3. Create Vault Directory Trees
+mkdir -p ~/vault/notes ~/vault/sources ~/vault/memories/episodic ~/vault/memories/static ~/.claude/output-styles ~/.claude/scripts
+Step 2: Wire Claude Code Output Style & Interceptor Hook
+# Copy router guard output style
+cp aesop-xi/tools/output-styles/router-guard.md ~/.claude/output-styles/router-guard.md
+
+
+# Copy smart grep interceptor and make executable
+cp aesop-xi/tools/smart-grep-hook.sh ~/.claude/scripts/smart-grep-hook.sh
+chmod +x ~/.claude/scripts/smart-grep-hook.sh
+
+
+# Register MCP servers into ~/.claude/settings.json
+cp aesop-xi/tools/claude-settings-mcp.json ~/.claude/settings.json
+Step 3: Launch Local Memory Mesh
+# Run master bootstrap launcher
+bash aesop-xi/scripts/launch-memory-mesh.sh
+________________
+
+
+4. Cloud Setup: Vertex AI Cross-Account IAM Handshake
+To ground queries against the multi-gigabyte master corpus without carrying raw files in edge memory, route queries to Google Cloud Vertex AI while redirecting all costs to the personal $1,000 credit pool.
+Step 1: Execute Bootstrap Handshake
+# Run the automated cross-account handshake script
+bash aesop-xi/scripts/gcp-cross-account-handshake.sh
+Step 2: Grant Read-Only Storage Access
+From the Google Cloud Console of the project holding the raw bucket (gs://business-secure-vault-bucket), run:
+gcloud storage buckets add-iam-policy-binding gs://business-secure-vault-bucket \
+  --member="serviceAccount:service-PERSONAL_PROJECT_NUMBER@gcp-sa-discoveryengine.iam.gserviceaccount.com" \
+  --role="roles/storage.objectViewer"
+Step 3: Create Vertex Data Store
+1. Open Vertex AI Agent Builder > Data Stores under the Personal Project.
+2. Select Cloud Storage -> Point to gs://business-secure-vault-bucket/.
+3. Choose Unstructured documents with Continuous import.
+4. Configure the local @google-cloud/vertex-search-mcp connector to query this datastore on demand.
+________________
+
+
+5. Visual Graph & Tool Graph Wiring (Obsidian)
+1. Agent Skill Graph: Symlink agent skills directly into Obsidian:
+ln -s ~/.claude/skills ~/vault/.claude-skills
+2. OpenWiki Repos: Symlink OpenWiki output into notes:
+ln -s ~/repos/Novus-Agenti/openwiki ~/vault/notes/novus-agenti
+3. Graphify AST Export:
+graphify ./your-repo --output-dir ~/vault/notes/Codebase-Graph --obsidian
+4. In Obsidian, open Graph View. The graph renders codebase dependencies (Graphify), architectural notes (OpenWiki), episodic memories (mem0), and agent skills as an interactive, connected knowledge web.

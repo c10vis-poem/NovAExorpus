@@ -1,0 +1,79 @@
+﻿This is exactly where your architecture achieves total alignment. By forcing every single component to live right inside the repository workspace, you make your entire AI state 100% version-controlled, portable, and easily shareable via Git Sync. [1]
+This design turns your Main Corpus Repo into the absolute central registry (the nervous system) that manages your seven distinct software workspaces using high-density MAPmd (Mapping Markdown) templates and explicit manifest JSONL pointers. [2]
+Here is how all seven components partition their storage natively inside your repositories without conflicting or creating database corruption across multiple devices:
+________________
+The In-Repo Data Partition Layout
+When you open any of your 7 repositories, the hidden .agent/ control directory serves as the dedicated runtime home for every single tier of your stack:
+
+
+[ Active Repository Root / ]
+├── app/ (Android Source / Build logic)
+└── .agent/                                 <── THE IN-REPO PERSISTENCE CORE
+   ├── manifest.jsonl                      <── Local asset registry pointers
+   ├── MAPmd/                              <── Mapping Markdown topological blueprints
+   │
+   ├── mem0/
+   │   └── episodic_history.db             <── PGLite (Wasm in-repo Postgres)
+   ├── terrestrial_brain/
+   │   └── system_matrix.db                <── PGLite / SHA-256 CAS local ledger
+   ├── crg/
+   │   └── ast_cache.db                    <── Tree-sitter SQLite relational schema
+   ├── graphify/
+   │   └── workspace_topology.json         <── Structural node connectivity graph
+   ├── reasoningbank/
+   │   └── trajectory_rules.jsonl          <── Task-level strategy playbook cards
+   └── continual_harness/
+       ├── skills.json                     <── Evaluated contract definitions
+       └── task_observer_audit.jsonl       <── Task Observer's execution history logs
+
+________________
+How Every Layer Manages Its Own Storage
+1. Mem0 & Terrestrial Brain (The Local Postgres Engines)
+* * The In-Repo Implementation: Instead of calling out to a massive standalone software server running on your system's desktop background, both components utilize PGLite. This is an incredibly powerful, zero-configuration engine that embeds PostgreSQL 17 right inside the local execution thread via WebAssembly. [1]
+* The SHA-256 CAS Loop: When Terrestrial Brain goes to write a code adjustment or project parameter, it initializes its PGLite instance pointing directly to .agent/terrestrial_brain/system_matrix.db. It computes the text block's SHA-256 hash. If it matches a hash already in that file, it records a relational line instead of duplicating the heavy raw characters. Because it is a simple file on disk, GitSync moves your entire relational Postgres database seamlessly across devices. [1]
+* 2. code-review-graph & Graphify
+* * The In-Repo Implementation: code-review-graph writes its sub-millisecond Tree-sitter query caches directly to .agent/crg/ast_cache.db.
+* The Cross-Repo Link: Graphify generates structural context records inside .agent/graphify/. It populates your master workspace graph. [3]
+* 3. ReasoningBank, Continual Harness, & Task Observer
+* * The In-Repo Implementation: Because these layers are responsible for high-level enforcement and checking your workflow logic, they write to clean, row-by-row append-only files (trajectory_rules.jsonl, skills.json, and task_observer_audit.jsonl).
+* The Multi-Device Audit: If an execution fails on your laptop, Task Observer logs the precise failure pattern directly to that repository's local file. When you push via Git, your desktop machine pulls the repository, scans the text update, and knows exactly what strategy broke before it even executes its first command.
+* ________________
+Connecting the Nervous System to the Main Corpus Repo
+Your plan to use the Main Corpus Repo as the master directory is brilliant. It handles the cross-repo indexing through standard relational files:
+1. The Manifest JSONL Pointer System: Your Main Corpus Repo contains a master index card tracking file (master_manifest.jsonl). A row in that file bridges your workspaces together:
+{"repo_id": "apk_module_2", "local_path": "~/dev/repo-two", "current_sha256": "a3f9b2...", "mapmd_target": "docs/blueprints/repo_two_map.md"}
+
+2. The MAPmd Relational Matrix: Inside your Main Corpus, your specialized MAPmd folder holds highly structured architectural files. These are simple Markdown documents written with explicit frontmatter syntax blocks. They outline cross-repo dependencies, API signatures, and deployment blueprints: [2]
+---
+type: MAPmd_Dependency_Bridge
+source_repo: repo_one_core_api
+target_apk: repo_three_android_build
+shared_sha256_constraints: [8c3d1a..., f4e2b9...]
+---
+# Architectural Alignment Rules
+- This APK module depends on the structural interfaces mapped by Graphify in Repository 1.
+
+How OmniRoute Binds It Together Natively
+Because everything is a predictable file template within your repo path, your OmniRoute configuration template uses dynamic relative paths: [4]
+
+
+{
+ "mcpServers": {
+   "universal-repo-memory": {
+     "command": "python",
+     "args": [
+       "-m", "omniroute_repo_pipeline",
+       "--target-dir", "./.agent"
+     ]
+   }
+ }
+}
+
+When Hermes runs a command, OmniRoute looks at the repository path you are currently working in, immediately finds the local embedded PGLite files, extracts the exact code structural graph and episodic vectors, passes them through the ReasoningBank filter, and commands Claude Code to safely execute the build without leaking token space or introducing data confusion. [1]
+Now that the complete file distribution structure is mapped directly inside your workspace paths, would you like me to generate the automated Git Hooks shell script (.git/hooks/post-commit)? This script will automatically update your manifest.jsonl files and re-sync your local PGLite database states every time you complete a codebase modification or APK verification loop across devices.
+
+
+[1] https://x.com
+[2] https://pharmasug.org
+[3] https://dev.to
+[4] https://github.com

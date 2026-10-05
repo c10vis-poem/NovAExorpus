@@ -1,4 +1,4 @@
-﻿03_WORKSPACE_FILE_TREES_AND_TOPOLOGY_SYNTHESIS.md
+03_WORKSPACE_FILE_TREES_AND_TOPOLOGY_SYNTHESIS.md
 Master Synthesis & Cross-Reference of Proposed File Trees & Repository Layouts
 Source Subfolders: 2- PRPSD-34.FILE TREE-(2-S.F.'s-15-files) (Folders 1BvhX2r7ifb7RS_hBpXPZfkgNePMDYOfo and 1BUwLDYBw7R2YZ61Jypg97N76PHBzbwU0)
 Scope: Exhaustive architectural cross-reference of all 15 proposed file trees, workspace maps, and memory layouts against the established Living Master Canon.

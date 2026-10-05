@@ -10,9 +10,29 @@ last-housekeeping: 2026-10-01
 - Check cloud billing (VM disks)
 - Builder reminders: (add here)
 
+## Added 2026-10-05
+- **Grill session (all of these are drafts/inputs, not decisions):**
+  - Vault restructure into the 00–10 layout (`_#Repository-layout.txt`, PRIORITY ONE with `Master_dumbass_plan-session/`). `__RESUME.md/` gets dissolved into it. Draft: `~/.claude/session-work/2026-10-05/VAULT-RESTRUCTURE-PLAN.md`.
+  - Where each wiki tool writes in 00–10; `OBSIDIAN_VAULT_PATH`; one manifest schema (6 conflicting ones found); where `Drive_sync/LlmWiki` lands.
+  - Wiki-admin agent DRAFT in `~/wiki-admin/AGENTS.md`. The real roles of the files-admin and Oracle agents (`file_administrator.yaml` / `oracle_helpdesk.yaml` are wrong, per the operator).
+  - Wiki corpus inventory to build from: `~/.claude/session-work/2026-10-05/WIKI-SYNTHESIS.md` (+ `agent-wiki-{A..K}.md`, incl. each batch's "Chat — mine later" list for extracting scripts/skills from chats).
+  - Stop-hook enforcement of the subagent protocol; packaging H1–H7 as installable; the `CLAUDE.md`-trigger design (now AGENTS.md).
+- **Vault cleanups awaiting the operator's yes:** delete the 12 `MASTER-*.conflict-android-*` files (Zip has copies); remove `WebView/` (Android browser cache) from the vault and gitignore it; delete the 2 empty files (`Untitled.md`, `.md`); move `_quarantine/` (3 GB) and `qairt_/` (87 MB) out of the vault; a hook that blocks agent writes in Documents outside `01-inbox/` and the pinned root files.
+- **Missing tools named in the docs** (not on disk): `compile_manifest.py`, `doc_to_skill_and_tool.py`, `system_housekeeper.sh`, `boot.sh`, `htp_partition_calc.py`, `smart-grep-hook.sh`. The `.migrate` BM25 index uses pickle: replace it.
+- **NvAEx-agentk:** the operator creates the GitHub org `NvAEx-agentk`; then transfer `c10vis-poem/NvAEx-agentk` in as `NvAEx-agentk/skills`, add the org front page, update the links. Branch protection after the first CI run.
+- **GCP VM:** the operator is leaning toward retiring it. Copy anything needed off first, then delete it (stops the billing; the plaintext OpenRouter key goes with it).
+- **New vault repo secret:** the re-created `NovAExorpus` repo needs `VAULT_DISPATCH_TOKEN` set again (operator: zsh `read -rs "T?token: "` then `printf %s "$T" | gh secret set VAULT_DISPATCH_TOKEN -R c10vis-poem/NovAExorpus; unset T`). Then run the master-files workflow once and check that the MASTER files have real content.
+- **APK session** `125f2d23` (`cd ~/agent-stack && claude --resume 125f2d23-df2c-4a1b-823c-45acfa0cf8af`; its own handoff is `~/agent-stack/RESUME.md`). Open there:
+  - Confirm package IDs `com.aethx.aesc` (AEthX-AEsc; permanent, it goes into `termux-packages` `properties.sh:467`) and `com.clovix.aeyre` (CloviX-AEyre).
+  - Horizons UI's name and ID in the same style: it's now **Hyperion-XI** (2026-10-05), so the ID is still to be picked.
+  - Reverse-engineering plugin: type `/plugin install android-reverse-engineering@android-reverse-engineering-skill` on its own line, then `/reload-plugins` (the install never ran there; the toolchain — jadx, apktool, dex2jar, Java 21 — is installed).
+  - The Æsc package build starts once the IDs are locked.
+- **Hardware brainstorm** (private): parked in `~/.claude/session-work/2026-10-04/SESSION-LOG.md` (prior-art search to do). Never into a repo.
+- **Observation review:** 0022–0025 new this session (open), on top of the older open ones.
+
 ## Added 2026-10-02 (afternoon)
-- **[TOP] GitSync stuck in a 'remote changing' loop (2026-10-02 evening).** Nothing since 04:38 reached `vault-sync` (RESUME, PENDING, AGENTS, both guides, observations 0019–0021 are local only). Fix it first next session: diagnose GitSync, or push the vault with git directly in wrap-up mode.
-- **wiki-admin open decisions** (guide `docs/WIKI-ADMIN-GUIDE.md` §10): where obsidian-wiki writes (`OBSIDIAN_VAULT_PATH`: vault root vs a subfolder); link `~/wiki-admin` memory to the main memory dir; Obsidian skills load twice (links in `~/.claude/skills/` + `obsidian@obsidian-skills` plugin) — remove the links?
+- ~~**[TOP] GitSync stuck in a 'remote changing' loop**~~ resolved 2026-10-05: the vault repo was re-created fresh, and `vault-sync` + GitSync's `lastSyncedCommit` reset to the new commit.
+- **wiki-admin open decisions** (guide `docs/WIKI-ADMIN-GUIDE.md` §10): where obsidian-wiki writes (`OBSIDIAN_VAULT_PATH`: vault root vs a subfolder); ~~link `~/wiki-admin` memory to the main memory dir~~ (done 2026-10-04, symlink); Obsidian skills load twice (links in `~/.claude/skills/` + `obsidian@obsidian-skills` plugin) — remove the links?
 - **OpenWiki leftovers:** ~/AGENTS.md + ~/CLAUDE.md deleted by operator 2026-10-02 (backup in $TMPDIR/ow). Decide: delete `~/.openwiki/` (1.1 GB old DB) and the duplicate clone `~/openwiki`.
 - **OmniGlyph** built (`~/bin/omniglyph`, fork NvAEx-OmniGlyph v1.4.0), not switched on. Decide: user-wide `ANTHROPIC_BASE_URL` + background service, or OmniRoute's `omniglyph` engine. Fable 5 only by default; Remote Control may hide behind any proxy. Full round trip (reply text) not yet captured.
 - **Render MCP** (fork NvAEx-render-mcp-server, render.com) cloned only: needs `pkg install golang`, build, `RENDER_API_KEY`, `claude mcp add`.
@@ -56,11 +76,11 @@ last-housekeeping: 2026-10-01
 - **Operator's own MEMORY.md** — enterprise-wide, separate from Claude's memory; RESUME / AGENTS / MEMORY / PENDING from the other six base repos to sync into this corpus repo (grill topic 3).
 - **Hooks not registered yet** — `sync-forks` / `ship-session` need the operator's paste (classifier blocks the agent).
 - **Old Claude memory + ECC rules** — archive line not run yet.
-- **Other six repos: CLAUDE.md → AGENTS.md** and GitHub renames to `NovusAExenti`, `AEsop-Xi`, `AEsc`, `AEyre`, `Horizons-Ui` — after the grill.
+- ~~**Other six repos: CLAUDE.md → AGENTS.md**~~ (done 2026-10-05; Horizons/Hyperion-OXiLm renamed to `Hyperion-XI`). Still open: GitHub renames to `NovusAExenti`, `AEsop-Xi`, `AEsc`, `AEyre` — after the grill.
 - ~~**OpenWiki replacement**~~ DONE 2026-10-02: plugin from fork NvAEx-openwiki-for-claude-code (in ~/wiki-admin), MCP removed, CLI uninstalled, vault AGENTS block removed. Leftovers in 'Added 2026-10-02 (afternoon)'.
 - **OB1 Obsidian plugin + OmniRoute Obsidian plugin** — none exist; build (grill topics 5/7).
 - **MemVault** — operator setting up; decide if its folder is public.
-- **Nested `/NovAExorpus/` repo mirror in the vault (3.1 GB)** — ignored for now; replace with maps/links to every repo.
+- ~~**Nested `/NovAExorpus/` repo mirror in the vault (3.1 GB)**~~ moved out to `Documents/NovAExorpus-nested-mirror/` (2026-10-05).
 - **Stale VM IP `34.31.112.77`** in `tools/launch.sh`, `router-guard.sh`, `.mcp.json` defaults.
 - **OmniRoute on the VM runs the npm build, not the c10vis-poem fork.**
 - **Terrestrial Brain VM unit file has the OpenRouter key in plaintext, world-readable** — rotate the key.

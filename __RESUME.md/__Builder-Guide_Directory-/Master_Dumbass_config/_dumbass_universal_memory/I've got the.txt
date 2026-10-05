@@ -1,0 +1,208 @@
+I've got the full picture now.
+  Here's what I was doing right
+  before the crash.
+  What I was doing (session
+  18a82005, crash point ~08:44 Sep
+  26)
+  I was reading through the entire
+  OB1 (OpenClaw Brain) corpus —
+  c10vis-poem/OB1, your fork of
+  NateBJones-Projects/OB1 — to
+  design how it fits into the
+  D.U.M.B.A.S.S. stack. I'd cloned
+  the repo to a scratchpad and was
+  methodically reading every schema,
+   integration, skill, and recipe,
+  recording findings in
+  scratchpad/READING-NOTES.md (now
+  160 lines).
+  Where it stopped
+  At the crash I was 27 of 51
+  recipes read, all of skills/ and
+  integrations/ done. The last
+  substantive exchange: you asked
+  "couldn't I do all of this with
+  less than 2 gigs of RAM, why not
+  just use my phone?" and I'd
+  answered that yes, most OB1 worker
+   jobs are small Node/Python
+  scripts calling OpenRouter +
+  Supabase over the network —
+  backups, daily audit, enrichment,
+  entity extraction, typed-edge
+  classification, and Obsidian
+  import all run fine on the phone
+  in Termux; the only weaknesses are
+   Android's background-work
+  scheduling, the few Deno recipes
+  that hit the glibc wall, and
+  keeping backups out of the public
+  vault. I recommended starting on
+  the phone and adding a free
+  e2-micro only if scheduling proves
+   unreliable, with the brain itself
+   staying on Supabase Free so
+  captures work from any device.
+  The key design findings already
+  locked in (in READING-NOTES.md)
+  Architecture decision — Supabase
+  Free, not self-host:
+  - The `local-brain-no-mcp` recipe
+  proves self-hosted Supabase works,
+   but needs ~8GB RAM / ~5GB disk
+  and its `upsert_thought(p_content,
+   p_embedding, p_metadata)`
+  signature is **incompatible** with
+   every OB1 component that calls
+  `rpc("upsert_thought",{p_content,p
+  _payload})`. Its README claim that
+   "cloud recipes work with base-URL
+   swap" is **false** for that RPC.
+  - Supabase Free gives unlimited
+  PostgREST API requests but only
+  **500k Edge Function
+  calls/month**. One recipe measured
+   1.83M invocations/week from 4 MCP
+   functions because each MCP tool
+  call ≈ 4 HTTP invocations.
+  - **Therefore OmniRoute must hit
+  PostgREST RPCs directly**
+  (match_thoughts / agent-memory
+  tables with the service key) and
+  compute embeddings itself — never
+  route per-call recall through the
+  MCP edge function or
+  agent-memory-api edge fn, or it
+  burns the quota.
+  Code verdict across the corpus:
+  - OB1-team code (server,
+  agent-memory-api, open-brain-rest,
+   schemas) = UUID-correct.
+  - alanshurafa ExoCortex-ported
+  code (enhanced-mcp, smart-ingest,
+  rest-api) = BIGINT assumptions →
+  needs a UUID port before "fully
+  functional." Fixes already exist
+  as open PRs upstream (#367, #429,
+  #473) — adopt, don't re-port.
+  - **Every OB1 component hardcodes
+  `openrouter.ai` base URLs** → a
+  cross-cutting fork patch is owed:
+  add `OPENROUTER_BASE`/`EMBEDDING_A
+  PI_BASE`/`CHAT_API_BASE` env so
+  everything routes through
+  OmniRoute. The k8s version already
+   has this pattern.
+  - The `_shared/helpers.ts` has **3
+   drifted generations** (rest-api
+  oldest, enhanced-mcp middle,
+  smart-ingest newest) → one
+  canonical `_shared` module is owed
+   = union of guards + env.
+  Bugs found and checked against
+  code:
+  - The enrichment script overwrites
+   real provenance
+  (`enrich-thoughts.mjs:450-504`) —
+  replaces true capture source with
+  the LLM's guess. Fork fix: write
+  guess to
+  `metadata.detected_source_type`
+  only.
+  - The adaptive-capture code writes
+   columns no schema has (`tags`,
+  `project`, `due_date`) → its
+  insert 400s.
+  - The auto-capture-claude-code
+  hook is **broken on main**: its
+  parser expects plaintext
+  `Human:/Assistant:` but Claude
+  Code transcripts are JSONL, so it
+  captures nothing; and it's
+  registered on `Stop` (every turn)
+  not `SessionEnd`. Fix exists in
+  upstream PR #388.
+  - The fingerprint-dedup-backfill
+  recipe's JS normalization **does
+  not match** the SQL canonical
+  normalization (extra stripping of
+  punctuation/possessives/plurals) →
+   backfilled fingerprints diverge,
+  later identical captures create
+  dups.
+  - Three+ drifted copies of the
+  sensitivity regex patterns.
+  - The aiception skill's two copies
+   give **opposite rules** on
+  multi-line skill descriptions.
+  - `SOURCE FIELD DRIFT`:
+  `metadata.source` vs
+  `metadata.source_type` vs
+  top-level `source_type` column —
+  provenance scripts only look at
+  one, missing rows tagged the other
+   ways. Contract: always write
+  both.
+  Keepers (reuse, don't rebuild):
+  - `provenance-chains`: traces why
+  a thought exists, grades derived
+  artifacts → cleanest scored signal
+   for the Reasoning Bank. Its
+  `eval.mjs` LLM grader (0–5 scores)
+   = verifiable reward signal for
+  the Continual Harness (RLVR-ish).
+  - `typed-edge-classifier`: labels
+  supports/contradicts/supersedes/de
+  pends_on with a hard spending cap
+  → the contradiction/supersession
+  signal the Reasoning Bank
+  consumes; runs as an off-hours
+  worker.
+  - `openclaw-code-review-memory` +
+  `openclaw-taskflow-work-log`
+  contracts → reuse for the CRG
+  code-review loop and to replace
+  free-form RESUME.md session
+  handoffs with governed writeback.
+  - `work-operating-model` exports
+  SOUL.md → direct fit for seeding
+  the operator model into Hermes/dsh
+   (your Step 1).
+  - `n-agentic-harnesses` → the
+  evaluation checklist for the
+  D.U.M.B.A.S.S. orchestration
+  contract (fan-out to 4 memory
+  layers = tool calls under one
+  orchestrator, not multi-agent).
+  Obsidian plugin gap (verified):
+  OB1 has no Obsidian plugin in
+  main, any of alanshurafa's 127
+  branches, or any of 370 upstream
+  PR heads. cbolden15/open-brain has
+   one but it's a separate
+  local-first product talking to its
+   own runtime, not OB1/Supabase. An
+   OB1↔Obsidian plugin must be
+  built/adapted — next step is
+  checking TB's existing Obsidian
+  plugin (which already targets a
+  Supabase brain).
+  Where to resume
+  The stated next reads were:
+  work-operating-model-activation
+  (generates the SOUL.md files
+  Hermes uses), then the wiki
+  recipes, atomizer, lint-sweep,
+  weekly-digest, and the import
+  recipes — with the 9.5k-line
+  repo-learning-coach last. The
+  proposal/design doc itself hadn't
+  been written yet; I was still in
+  the evidence-gathering pass, with
+  all findings accumulating in
+  scratchpad/READING-NOTES.md.
+  Want me to resume reading from
+  work-operating-model-activation,
+  or do you want me to start
+  drafting the design proposal from
+  the findings so far?

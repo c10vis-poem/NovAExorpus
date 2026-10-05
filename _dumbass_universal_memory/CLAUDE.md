@@ -1,1 +1,0 @@
-/data/data/com.termux/files/home/repos/novus-aexenti/CLAUDE.md
