@@ -29,7 +29,7 @@ last-housekeeping: 2026-10-01
   - Planning session in the wiki-admin agent (now the grill session, RESUME item 1).
   - Close the wiki-admin open decisions (guide §10): 2b–2e still open.
   - Restart the NPU work one model at a time with the operator (InternVL 2B first).
-  - Housekeeping (due since end of week): recaps, branch audit, observation review, billing, disk.
+  - Housekeeping (due since end of week): roll up `_recaps/`, branch audit, observation review, billing, disk.
 
 ## Added 2026-10-02 (afternoon)
 - ~~**[TOP] GitSync stuck in a "remote changing" loop**~~ resolved 2026-10-05: `main`, `vault-sync` and GitSync's `lastSyncedCommit` aligned on the same commit; the local index was reset to it.
