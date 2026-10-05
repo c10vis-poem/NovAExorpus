@@ -22,13 +22,14 @@ last-housekeeping: 2026-10-01
 - **NvAEx-agentk:** the operator creates the GitHub org `NvAEx-agentk`; then transfer `c10vis-poem/NvAEx-agentk` in as `NvAEx-agentk/skills`, add the org front page, update the links. Branch protection after the first CI run.
 - **GCP VM:** the operator is leaning toward retiring it. Copy anything needed off first, then delete it (stops the billing; the plaintext OpenRouter key goes with it).
 - **New vault repo secret:** the re-created `NovAExorpus` repo needs `VAULT_DISPATCH_TOKEN` set again (operator: zsh `read -rs "T?token: "` then `printf %s "$T" | gh secret set VAULT_DISPATCH_TOKEN -R c10vis-poem/NovAExorpus; unset T`). Then run the master-files workflow once and check that the MASTER files have real content.
-- **APK session** `125f2d23` (`cd ~/agent-stack && claude --resume 125f2d23-df2c-4a1b-823c-45acfa0cf8af`; its own handoff is `~/agent-stack/RESUME.md`). Open there:
-  - Confirm package IDs `com.aethx.aesc` (AEthX-AEsc; permanent, it goes into `termux-packages` `properties.sh:467`) and `com.clovix.aeyre` (CloviX-AEyre).
-  - Horizons UI's name and ID in the same style: it's now **Hyperion-XI** (2026-10-05), so the ID is still to be picked.
-  - Reverse-engineering plugin: type `/plugin install android-reverse-engineering@android-reverse-engineering-skill` on its own line, then `/reload-plugins` (the install never ran there; the toolchain — jadx, apktool, dex2jar, Java 21 — is installed).
-  - The Æsc package build starts once the IDs are locked.
+- **APK session** to resume: `cd ~/agent-stack && claude --resume 125f2d23-df2c-4a1b-823c-45acfa0cf8af` (its own handoff: `~/agent-stack/RESUME.md`).
 - **Hardware brainstorm** (private): parked in `~/.claude/session-work/2026-10-04/SESSION-LOG.md` (prior-art search to do). Never into a repo.
 - **Observation review:** 0022–0025 new this session (open), on top of the older open ones.
+- **Carried from the 2026-10-04 START HERE** (deferred 2026-10-05):
+  - Planning session in the wiki-admin agent (now the grill session, RESUME item 1).
+  - Close the wiki-admin open decisions (guide §10): 2b–2e still open.
+  - Restart the NPU work one model at a time with the operator (InternVL 2B first).
+  - Housekeeping (due since end of week): recaps, branch audit, observation review, billing, disk.
 
 ## Added 2026-10-02 (afternoon)
 - ~~**[TOP] GitSync stuck in a 'remote changing' loop**~~ resolved 2026-10-05: the vault repo was re-created fresh, and `vault-sync` + GitSync's `lastSyncedCommit` reset to the new commit.
