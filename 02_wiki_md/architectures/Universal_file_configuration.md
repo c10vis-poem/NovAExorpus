@@ -1,4 +1,4 @@
-﻿# Canonical 8-Repository Mirror Specification
+# Canonical 8-Repository Mirror Specification
 
 
 **Scope**: Master directory topology and ingestion contracts across the exact 8 canonical repositories.  

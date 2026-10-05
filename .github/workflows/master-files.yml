@@ -1,0 +1,46 @@
+name: Master files
+# Rebuilds MASTER-AGENTS.md and MASTER-RESUME.md when any base repo's AGENTS.md
+# or RESUME.md changes on main. Base repos ping this with repository_dispatch
+# (their notify-vault workflow); the vault's own changes trigger it via push.
+on:
+  repository_dispatch:
+    types: [base-repo-updated]
+  push:
+    branches: [main]
+    paths: [AGENTS.md, RESUME.md]
+  workflow_dispatch:
+
+concurrency:
+  group: master-files
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          token: ${{ secrets.VAULT_DISPATCH_TOKEN }}
+      - name: Build master files
+        env:
+          GH_TOKEN: ${{ secrets.VAULT_DISPATCH_TOKEN }}
+        run: bash tools/build_masters.sh
+      # The PR is opened with the token (not GITHUB_TOKEN) so the vault's CI runs on it.
+      - name: Open PR if anything changed (auto-merge on green CI)
+        env:
+          GH_TOKEN: ${{ secrets.VAULT_DISPATCH_TOKEN }}
+          FROM: ${{ github.event.client_payload.repo || github.repository }}
+        run: |
+          git add MASTER-AGENTS.md MASTER-RESUME.md
+          if git diff --cached --quiet; then echo "No change."; exit 0; fi
+          branch="auto/master-files-${GITHUB_RUN_ID}"
+          git config user.name "master-files bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git switch -c "$branch"
+          git commit -m "chore(masters): rebuild after change in $FROM"
+          git push -u origin "$branch"
+          gh pr create --base main --head "$branch" \
+            --title "chore(masters): rebuild after change in $FROM" \
+            --body "Automatic rebuild of MASTER-AGENTS.md / MASTER-RESUME.md."
+          gh pr merge "$branch" --auto --squash --delete-branch

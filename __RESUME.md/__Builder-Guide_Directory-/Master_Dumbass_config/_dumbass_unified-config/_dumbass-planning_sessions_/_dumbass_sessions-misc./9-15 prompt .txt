@@ -1,0 +1,16 @@
+﻿* Every File I reference here needs to be READ COMPLETELY 
+* Your main workspace is the main device storage>Documents>NovAExorpus subfolder
+* The NovA-Corpus needs to be mined for any valuable data and resources before the folder is erased and the repo terminated 
+* canon/STATE-OF-EXISTENCE.md should NOT exist. Is about five or six other .md methods for persistent session State and current build information 
+* I copied the files from my drive into drive-sync for easier transfer, safer editing and sharing plus automatic obsidian vault sync
+* Read review and IMPLEMENT The LlmWiki Folder and the HTP Folder
+* LlmWiki inside Drive_sync is your main reference source for the entire corpus
+* There's a __RESUME.md in the on device corpus subfolder. USE IT. Eventually I'm going to have the files all synced properly so on device will have an _INBOX.md folder for on device files management current information 
+* Until then The _RESUME.md(latest) inside the subfolder is the first folder you should review from the on device folders.
+* Inside _RESUME.md(latest)> [Claude session 9-13] is where you left off. [9-09 to 9-13] the latest tools skills and data collection TO BE UPDATED AND IMPLEMENTED THROUGHOUT THE CORPUS], [9-09-2026] Your analysis of the results of the LlmWiki folder materials, 5 out of the remaining files are more handoff docs and projects spec and future scope docs. Universal fileconfiguration.md is some basic overview and a couple new changes to the corpus
+* _PENDING.md> these all need addressed and implemented
+* We need a 1to1 chat session about each item in this folder and what to do with it.NOT POP UP BLOCK Q’s
+* My on device Obsidian Vault is already synced to the NovAExorpus subfolder. The NovAExorpus repo needs it as well so that any changes to each are reflected universally 
+* novae-xorpus Repo needs name change to NovAExorpus
+* Claude should already have clean my ai harness, honey 4 devs, mem0 and a buttload of other assets already wired, by the end of this multi session chat this environment will have all of these and MORE
+* START W THE RESUME files and work down from there. Always Top to Bottom

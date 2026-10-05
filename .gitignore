@@ -64,3 +64,10 @@ __RESUME.md/_whatisit/files_cleanup/
 
 # Oracle benchmark set: includes all-rights-reserved diagrams (marineengine.com, NVIDIA) — private use only, never sync to the public repo
 benchmarks/oracle/
+
+# Personal billing exports — never in the public repo
+*BILLING*.csv
+*billing*.csv
+
+# Saved Google page with embedded API keys (gitleaks 2026-10-05) — keep on device only
+__RESUME.md/1U5IWlrh3zPde_qKLw7r8o6GfolZ3KKvT.html

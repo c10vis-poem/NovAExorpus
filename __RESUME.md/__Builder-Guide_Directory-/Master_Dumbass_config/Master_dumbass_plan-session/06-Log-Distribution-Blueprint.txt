@@ -1,0 +1,43 @@
+﻿This is where the separation between transient state (quick, messy run-logs) and durable truth (clean markdown and relational metrics) keeps your system from descending into chaos.
+They do not all dump raw text files into your main corpus repository. If they did, your GitSync loop would lock up constantly with merge conflicts between your 7 different repositories. Instead, they divide their logging storage based on what type of data they handle.
+Here is exactly where each of the 4 layers writes its logs and data, and how they utilize your local PostgreSQL instance:
+The Log Distribution Blueprint
+
+
+                      ┌──────────────────────────────────────────────┐
+                     │            OMNIROUTE TOOL EXECUTION          │
+                     └──────────────────────┬───────────────────────┘
+                                            │
+     ┌──────────────────────┬───────────────┴───────┬──────────────────────┐
+     ▼                      ▼                       ▼                      ▼
+┌───────────┐         ┌──────────────┐        ┌──────────────┐       ┌──────────────┐
+│   Mem0    │         │  Terrestrial │        │ code-review- │       │   Graphify   │
+│ (Episodic)│         │  Brain (PG)  │        │ graph (AST)  │       │ (Obsidian)   │
+└─────┬─────┘         └──────┬───────┘        └──────┬───────┘       └──────┬───────┘
+     │                      │                       │                      │
+     ▼                      ▼                       ▼                      ▼
+• SQLite Local DB      • PostgreSQL CAS        • Relational SQLite    • Main Corpus Vault
+• ~/.mem0/history.db   • Central Disk Server   • ./.crg/ast_cache.db  • .md structural maps
+• Fast-expiry JSON     • Deduplicated Truth    • Temporary Cache      • Static Docs & JSONL
+
+________________
+1. Where Each Server Writes Natively
+Tier 1: Mem0 (Episodic Interaction)
+* Where it writes: It writes to a local, isolated database hidden at ~/.mem0/history.db or a designated state directory on your machine.
+* The Shape of Data: It logs conversational fragments, short-term user preferences, and rapid task adjustments as quick, raw vector/text keys. It never touches your main corpus repo folder directly, which keeps temporary conversational garbage out of your Git logs.
+Tier 2: Terrestrial Brain (Durable System Truth)
+* Where it writes: It writes directly into your central, machine-local PostgreSQL Database Engine.
+* The Shape of Data: This is where your SHA-256 CAS layer is running. It stores the strict architectural truth cards, global constraints, and project configurations. It keeps a relational mapping log connecting your 7 different repository folders to their respective APK profiles. It uses disk space inside your global system database clusters, completely isolated from your project workspace directories.
+Tier 3: code-review-graph (Deterministic Code AST)
+* Where it writes: It writes a hidden cache directory (e.g., ../.crg/ast_cache.db) locally inside the specific repository directory you are actively compiling.
+* The Shape of Data: Because Tree-sitter needs sub-millisecond query access to function boundaries, file imports, and type systems, it stores strict index tables in a local workspace SQLite database. This folder is explicitly added to your .gitignore file, meaning it tracks your code graph instantly on that specific machine but never gets pushed via Git Sync to your other devices (which will recalculate their own local AST states when they boot).
+Tier 4: Graphify (Topological Visual Index)
+* Where it writes: This is the only tool that writes directly inside your main corpus repository and Obsidian folders.
+* The Shape of Data: Graphify translates language and structural structures directly into clean, human-readable Markdown nodes (.md) and metadata maps (manifest.jsonl, skill.json). This is precisely what hooks into your Obsidian Desktop visualization and Notebook-LM inputs. Because it outputs standard file formats, your GitSync seamlessly carries these structural records across your devices.
+________________
+2. How They Interface with the PostgreSQL Server
+Only Terrestrial Brain reads and writes to the centralized PostgreSQL instance continuously. However, the other tools use it as an occasional reference point:
+* During Retrieval: When OmniRoute runs its mandatory extraction pass, Terrestrial Brain checks the local PostgreSQL instance to fetch strict system rules and verify the current task footprint against previous SHA-256 signatures.
+* During Compilation / Write-Back: Once Continual Harness compiles an APK and Task Observer logs the final metrics, it pushes a summary string to Terrestrial Brain. Terrestrial Brain computes the SHA-256 hash. If that compilation output or failure block matches an existing record, Postgres maps a relational thread to it. If it’s entirely new, it stores it as a new master truth row.
+This configuration prevents your repositories from bloating. Your temporary tool states remain hidden in localized caches, your visual documentation stays synchronized in plain markdown inside your Obsidian Vault, and your heavy multi-device operational ledger stays safe inside an efficient PostgreSQL environment.
+Now that we have separated the storage locations, would you like the PostgreSQL configuration guide to set up database access rules so your seven repositories can safely push data to it, or should we map out the GitIgnore configuration pattern to make sure your hidden AST caches don't pollute your master corpus?

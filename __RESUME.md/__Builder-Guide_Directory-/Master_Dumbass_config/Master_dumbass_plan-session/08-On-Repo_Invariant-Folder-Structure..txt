@@ -1,0 +1,54 @@
+﻿You are completely correct. That is exactly how you tie this setup together across different physical machines.
+By forcing ReasoningBank and Continual Harness to write their execution logs, strategic choices, and code-review modifications right inside your local repository directories, your GitSync loop naturally becomes your multi-device context transport. When you commit code and sync your repo to your other devices, your agent's hard-learned strategies sync along with it.
+________________
+1. The On-Repo Invariant Folder Structure
+To do this, you change the default serverless paths. Instead of letting tools write to global user folders like ~/.mem0 or global database paths, you configure them to point to a standard .agent/ context folder inside each of your 7 repositories:
+
+
+[ Your Repository Root / ]
+├── app/ (Your Android/APK Source Code)
+├── build.gradle
+└── .agent/                       <── THE REPO PERSISTENCE CORE
+   ├── tracking.jsonl            <── Manifest JSONL files
+   ├── skills.json               <── Continual Harness output
+   └── reasoningbank/
+       ├── memory.json           <── In-repo Strategy Vault (Replaces hidden DB)
+       └── trajectories.jsonl    <── Task Observer & audit trail
+
+________________
+2. How the Whole Pipeline Works on the Repo File Level
+A. ReasoningBank Strategy Storage (.agent/reasoningbank/memory.json)
+The google-research/reasoning-bank framework natively supports storing experiences as clean text vectors. By mapping its storage to .agent/reasoningbank/memory.json inside your project root, the strategies are completely exposed to Git. [1]
+Instead of an invisible SQLite file, it writes explicit strategy blocks: [1, 2]
+
+
+{
+ "trajectory_id": "9b1deb4d",
+ "task_type": "apk_gradle_dependency_clash",
+ "learned_strategy": "When Kotlin version mismatches occur on Device 2, skip episodic lookups and force code-review-graph to rewrite the build.gradle dependencies.",
+ "status": "SUCCESS"
+}
+
+B. Continual Harness Output (.agent/skills.json & MEMORY.md)
+As your Continual Harness executes its test cycles to compile your 3 APKs, it writes the final, verified operational rules directly into your repo's .agent/skills.json file. [3]
+C. Where PostgreSQL Fits in a Multi-Device Git Loop
+If your strategies and logs are in the repository, you might wonder: What is PostgreSQL actually doing now?
+The local machine's PostgreSQL SHA-256 CAS database serves as your local high-speed processing engine. It does not act as the master sync device.
+1. The Write-Back: When Continual Harness or ReasoningBank finishes a task and writes the text update to your .agent/ folder files, a file-watcher trigger automatically copies that text string down to your local machine's PostgreSQL server.
+2. The Local Deduplication: Postgres hashes the incoming text string using SHA-256. If you have duplicate logs across your 7 repos on that machine, Postgres links them together, giving you high-speed indexing and zero disk waste while you are actively coding.
+3. The Multi-Device Handshake: When you switch to your laptop and pull the repository via GitSync, the new Markdown and JSON files appear in your .agent/ folder. The moment OmniRoute boots up on the laptop, it scans the updated .agent/ folder and populates the laptop's local PostgreSQL database instance with the newly synced SHA-256 fingerprints.
+________________
+3. The Strict Setup Chain
+This configuration guarantees that no matter what machine you move to, the logic loop remains unbreakable:
+1. Ingestion & Sync: Your GitSync carries your updated repository files and your .agent/ memory records across your physical hardware.
+2. The OmniRoute Block: Hermes triggers a tool use through OmniRoute. OmniRoute scans the in-repo files natively.
+3. The Extraction Filter: OmniRoute passes the files directly into ReasoningBank. ReasoningBank processes the JSON logs on-repo, strips out text clutter, and presents a single, clean structural strategy block to the model.
+4. The Code Build: Claude Code acts strictly as a builder sub-agent to change the source files and compile the APKs.
+5. The Final Commit: Task Observer logs the final result straight back into .agent/trajectories.jsonl, pushes the string metadata down to your local PostgreSQL instance for indexing, and stages the repo files for your next GitSync pass.
+By moving your strategy parameters out of hidden local system files and placing them cleanly inside version-controlled repository folders, you create a truly universal databank that follows you across every single device you own.
+To lock down this in-repo strategy setup, do you want to map out the exact path configurations inside your master OmniRoute configuration profile to make sure it looks for the .agent/ directory relative to whatever repository path you are currently working in?
+
+
+[1] https://github.com
+[2] https://github.com
+[3] https://github.com
