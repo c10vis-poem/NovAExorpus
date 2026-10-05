@@ -21,7 +21,7 @@ last-housekeeping: 2026-10-01
 - **Missing tools named in the docs** (not on disk): `compile_manifest.py`, `doc_to_skill_and_tool.py`, `system_housekeeper.sh`, `boot.sh`, `htp_partition_calc.py`, `smart-grep-hook.sh`. The `.migrate` BM25 index uses pickle: replace it.
 - **NvAEx-agentk:** the operator creates the GitHub org `NvAEx-agentk`; then transfer `c10vis-poem/NvAEx-agentk` in as `NvAEx-agentk/skills`, add the org front page, update the links. Branch protection after the first CI run.
 - **GCP VM:** the operator is leaning toward retiring it. Copy anything needed off first, then delete it (stops the billing; the plaintext OpenRouter key goes with it).
-- **New vault repo secret:** the re-created `NovAExorpus` repo needs `VAULT_DISPATCH_TOKEN` set again (operator: zsh `read -rs "T?token: "` then `printf %s "$T" | gh secret set VAULT_DISPATCH_TOKEN -R c10vis-poem/NovAExorpus; unset T`). Then run the master-files workflow once and check that the MASTER files have real content.
+- **Master-files token:** `VAULT_DISPATCH_TOKEN` can push but cannot open PRs. Re-make it with Contents + Pull requests write and re-set it in all 7 repos (RESUME item 0). Repo-history erase is operator-run (RESUME item 0b).
 - **APK session** to resume: `cd ~/agent-stack && claude --resume 125f2d23-df2c-4a1b-823c-45acfa0cf8af` (its own handoff: `~/agent-stack/RESUME.md`).
 - **Hardware brainstorm** (private): parked in `~/.claude/session-work/2026-10-04/SESSION-LOG.md` (prior-art search to do). Never into a repo.
 - **Observation review:** 0022–0025 new this session (open), on top of the older open ones.
@@ -32,7 +32,7 @@ last-housekeeping: 2026-10-01
   - Housekeeping (due since end of week): recaps, branch audit, observation review, billing, disk.
 
 ## Added 2026-10-02 (afternoon)
-- ~~**[TOP] GitSync stuck in a 'remote changing' loop**~~ resolved 2026-10-05: the vault repo was re-created fresh, and `vault-sync` + GitSync's `lastSyncedCommit` reset to the new commit.
+- ~~**[TOP] GitSync stuck in a "remote changing" loop**~~ resolved 2026-10-05: `main`, `vault-sync` and GitSync's `lastSyncedCommit` aligned on the same commit; the local index was reset to it.
 - **wiki-admin open decisions** (guide `docs/WIKI-ADMIN-GUIDE.md` §10): where obsidian-wiki writes (`OBSIDIAN_VAULT_PATH`: vault root vs a subfolder); ~~link `~/wiki-admin` memory to the main memory dir~~ (done 2026-10-04, symlink); Obsidian skills load twice (links in `~/.claude/skills/` + `obsidian@obsidian-skills` plugin) — remove the links?
 - **OpenWiki leftovers:** ~/AGENTS.md + ~/CLAUDE.md deleted by operator 2026-10-02 (backup in $TMPDIR/ow). Decide: delete `~/.openwiki/` (1.1 GB old DB) and the duplicate clone `~/openwiki`.
 - **OmniGlyph** built (`~/bin/omniglyph`, fork NvAEx-OmniGlyph v1.4.0), not switched on. Decide: user-wide `ANTHROPIC_BASE_URL` + background service, or OmniRoute's `omniglyph` engine. Fable 5 only by default; Remote Control may hide behind any proxy. Full round trip (reply text) not yet captured.
