@@ -2,7 +2,7 @@
 Durable facts about this repo. Dated; newest first. Updated at session wrap-up.
 
 ## 2026-10-05
-- **Repo re-created with no history** (operator: "delete the old shit") after private files had been in the public history. GitSync's `vault-sync` and `lastSyncedCommit` were reset to the new first commit.
+- **Private files were removed** from the public repo (PR #34); old commits still hold them until the operator runs the fresh-repo step (RESUME item 0b). `main`, `vault-sync` and GitSync's `lastSyncedCommit` were aligned 2026-10-05.
 - **Private material never goes in here.** Personal memory, legal/financial, unfiled designs, billing → `Documents/private-memory/` (outside the vault, never synced). `*BILLING*.csv` is gitignored.
 - **MASTER-AGENTS.md / MASTER-RESUME.md** are built on GitHub by `.github/workflows/master-files.yml` (`tools/build_masters.sh`) whenever a base repo's AGENTS.md or RESUME.md changes on main (base repos' `notify-vault.yml`, secret `VAULT_DISPATCH_TOKEN`). No timer. Never hand-edit them. `MASTER-CLAUDE.md` is retired.
 - **AGENTS.md is the only instruction file** (no CLAUDE.md in any base repo).
