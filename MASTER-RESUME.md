@@ -63,9 +63,16 @@ Not read directly: most of `__RESUME.md/` and `Drive_sync/` (the readers covered
 
 ---
 
-## aesop-xi  (`RESUME.md` @ 72fda7f)
+## aesop-xi  (`RESUME.md` @ 2bb39dd)
 
 ### RESUME.md — Session Ledger
+
+#### Next session (from 2026-10-08, session 34c3e229)
+- Branches `hooks-to-top-level` (hooks moved to `hooks/`; H2 blocking sync, change-log + /ok push, H8 ci-ready, documents-guard merged) and `raw-condensed` ship at wrap-up (workstream 3/4).
+- PR #18 (orchestration contract) stays open for the grill; #33 gets closed.
+- Fix: `hooks/tests/test-ship-v2.sh` fails 14/18 on main too. H8: compare required check names with real job names.
+- Last of workstream 4: rename the repo to `Aesop-Xi` and every hook path that points at `~/repos/aesop-xi`.
+Full plan, run as parallel subagent workstreams: vault `NovAExorpus/RESUME.md` START HERE.
 
 Repository: `aesop-xi` (orchestration repo)
 Last session: 2026-10-02 (phone, Claude Code). Full ledger: `~/.claude/session-work/2026-10-02/SESSION-LOG.md`. Master handoff: vault `RESUME.md`.
@@ -163,9 +170,14 @@ Per Document 05, this repo's content source is `___Lex-Novi-Æxentis-Copiæ/--�
 
 ---
 
-## novus-aeyre  (`RESUME.md` @ 578a0f4)
+## novus-aeyre  (`RESUME.md` @ e030b78)
 
 ### RESUME.md — novus-aeyre
+
+#### Next session (from 2026-10-08, session 34c3e229)
+- Branch `pending-fold`: `unresolved.md` folded into PENDING.md; ships at wrap-up.
+- 4 old local branches whose PRs merged get deleted (workstream 4).
+Full plan, run as parallel subagent workstreams: vault `NovAExorpus/RESUME.md` START HERE.
 
 **Last updated:** 2026-09-07
 **Branch:** `restructure/drive-file-tree`
