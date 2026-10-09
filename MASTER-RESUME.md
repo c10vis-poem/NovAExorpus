@@ -6,60 +6,57 @@ Edit the repo's own `RESUME.md`, never this file.
 
 ---
 
-## NovAExorpus  (`RESUME.md` @ a440343)
+## NovAExorpus  (`RESUME.md` @ 03e65f3)
 
 Session files: [[AGENTS]] · [[PENDING]] · [[MEMORY]] · [[MAP]] · [[NAMING-CANON]]
 
 ### RESUME.md — Session Ledger (rewritten every session)
 
-Repository: NovÆxorpus (`c10vis-poem/NovAExorpus`, PUBLIC). Private files removed 2026-10-05; history not yet erased (item 0b).
-**Last session: 2026-10-04/05** (phone, Claude Code, Opus 5.5, session `edd68643`, started in `~`).
-It covered the vault privacy cleanup, the master-files workflow, AGENTS.md only, Hyperion-XI, the wiki corpus search and the wiki-admin agent draft.
-Reports you can open: `Documents/Session-reports/2026-10-05/` (01 = wiki search results).
+Repository: NovÆxorpus (`c10vis-poem/NovAExorpus`, PUBLIC).
+**Last session: 2026-10-08** (phone, Claude Code, Opus 5.5, session `34c3e229`, started in `~`).
+It covered: eson + honey hook fix, PDF move to the keep (1,046 → 12 in the vault), NovA-Corpus condensed swap, vault tools fixed, hooks H2 blocking / H8 CI / change-log review, NvAEx-Recaps (recaps + secrets), LiteDoc, grill inputs, PR triage.
+Everything from that session, with every report: `~/.claude/session-work/2026-10-08/` (start with `WRAPUP-QUEUE.md`).
+
+#### How to run this session: subagents in tandem
+Every START HERE item below is a **workstream** written so one orchestrator can hand it to a subagent unchanged. Standing order (`~/.claude/CLAUDE.md`): independent workstreams run in parallel; each subagent writes its progress file FIRST (`~/.claude/session-work/<date>/agent-<topic>.md`: Plan / Last action / Findings / Blocked) and updates it after every step. The orchestrator answers "where is X" from those files. Nothing ships mid-session: every change is recorded by `change-log.sh`; at `/wrapup` the operator reviews it and types `/ok push`.
+Parallel-safe groups: **A** = items 2, 3, 4 (GitHub + repos) · **B** = items 5, 6 (vault files; never two vault-moving agents at once) · **C** = item 1 (operator-led) · item 0 first, alone.
 
 #### NEXT SESSION — START HERE
 The Stop gate requires a status for each numbered item: `resume-item <n> done|blocked "<evidence / what's needed>"`.
 
-0. **Fix the master-files token, then prove it works.** The pings and builds work, but `VAULT_DISPATCH_TOKEN` can't open PRs ("Resource not accessible by personal access token"). The operator makes a token that has **Contents + Pull requests: read and write** on NovAExorpus (or a classic token with `repo`) and re-sets it in all 7 repos (zsh: `read -rs "T?token: "`, then the `gh secret set` loop, then `unset T`). Then run the Master files workflow once and check that `MASTER-AGENTS.md` / `MASTER-RESUME.md` have real content.
-0b. **Repo history (operator runs; Claude Code's safety check blocked it as irreversible):** old commits still hold the removed private files. To erase them: `gh repo rename NovAExorpus-old -R c10vis-poem/NovAExorpus`, create a fresh public `NovAExorpus`, push today's `main` as a single commit, re-set the secret, re-point GitSync, then `gh repo delete c10vis-poem/NovAExorpus-old`. Ask Claude to prepare the exact commands.
-1. **Grill session** (`wiki-admin`, Pocock chain typed by the operator: `/setup-matt-pocock-skills` → `/grill-with-docs` → `/to-spec` → `/to-tickets` → `/implement`). Inputs: the PRIORITY ONE docs (`_#Repository-layout.txt` + `Master_dumbass_plan-session/`), `Documents/Session-reports/2026-10-05/`, the wiki-admin agent draft (`~/wiki-admin/AGENTS.md`), PENDING "Added 2026-10-05".
-2. **Vault cleanups awaiting the operator's yes** (PENDING "Added 2026-10-05"): the conflict copies, `WebView/`, the empty files, `_quarantine/` + `qairt_/` out, the Documents write-guard hook.
-3. **NPU work, one model at a time WITH the operator** (`docs/NPU-FINDINGS-2026-10-02.md` §4): reboot, check the clock caps, InternVL 2B first. Carried over, not started.
-4. **Housekeeping** (overdue): recaps rollup, 7-repo branch audit, observation review (0022–0025 new), cloud billing / VM retirement, ~22 GB disk.
+0. **Carry-over check (first, alone; haiku).** Open `~/.claude/session-work/2026-10-08/WRAPUP-QUEUE.md`. Every `[ ]` line not shipped at the 2026-10-08 wrap-up becomes part of items 2–6 below; mark `[x]` what the `## Shipped` section of `_recaps/2026-10-08-34c3e229.md` proves shipped. Done = each open line assigned to an item.
+1. **Grill session (operator-led; wiki-admin).** The operator types `/ask-matt` → `/setup-matt-pocock-skills` → `/grill-with-docs` → `/to-spec` → `/to-tickets` → `/implement`. Single input list: `~/wiki-admin/GRILL-INPUTS.md` (PRIORITY ONE docs, 2026-10-05 reports, 2026-10-08 additions: repos/ mirrors, 2x2 converter/checker design, OmniRoute compression + vision plugin, observation-review staged skills, aesop-xi PR #18 contract, hooks H1–H8 review). Agents assist; they do not decide.
+2. **NPU job queue, then NPU runs (opus orchestrator; cloud subagents + Fable advisor).** Restart the plan in `~/.claude/session-work/2026-10-08/agent-npu-queue.md` (stopped at step 0 by a usage limit): jobs/results in `NvAEx-Recaps/npu/`, `npu-run` + `npu-queued` daemon on the phone, `npu/ORCHESTRATOR.md`, one real test (Qwen3.5-0.8B, npu + CPU baseline). Rules: `~/.claude/NPU-ON-DEVICE.md` (read fully; no "needs a computer"), `docs/NPU-FINDINGS-2026-10-02.md` §4. Qwen 3.5 only. Then the orchestrator runs the model queue (InternVL 2B first) with no operator present. Done = test job result with NPU-proof lines + CPU baseline.
+3. **PRs and CI (sonnet).** Source: `~/.claude/session-work/2026-10-08/pr-triage-report.md` + the operator's answers in `WRAPUP-QUEUE.md`. Merge: NovA-terrestrial-brain#3, termux-app#2, termux-packages#6, termux-gui-bash#1 (adopt; add CI first). Fix then merge: honey #1/#2 + NovA-skills#1 (required check `check` matches no job), obsidian-skills#1. Close: aesop-xi#33, openwiki#2/#3, OB1#1, ai-hub-merovingian-models-#1. Leave open: aesop-xi#18 (grill), Horizon-s-home-grid#1 + Hyperion-XI#4 (3-APK build). ECC: not touched. Then improve H8 `ci-ready.sh` to check required names against real job names. Done = triage table all closed/merged/left-by-decision.
+4. **Repos (sonnet).** (a) `repos/` folder in this vault = live mirrors of the 6 base repos, built by `master-files.yml` on each `notify-vault`; retire MASTER-AGENTS/MASTER-RESUME + `tools/build_masters.sh`; delete the stale `AEsc/ AEsop-Xi/ AEyre/ NovAExopia/ NovusAExenti/ projects/` folders after a unique-content check (unique → keep). Needs `VAULT_DISPATCH_TOKEN` set in all 7 repos (operator). (b) `ship-session.sh` copies each recap into `NvAEx-Recaps/recaps/<repo>/` for every repo touched; CI + branch protection on NvAEx-Recaps. (c) Renames (last): 19 `NovA-`/`NoVa-` repos → `NvAEx-<rest>`, `aesop-xi` → `Aesop-Xi`, local folders + every hook/launcher/`nvaex-repos.sh` path; delete `c10vis-poem/NovA-Corpus` + `~/repos/NovA-Corpus` (unique content already saved); delete the 44 old branches. (d) Fix two `ship-session.sh` gaps found at the 2026-10-08 wrap-up: a worktree that never appears under "Repos touched" in the recap is skipped (AEthX-AEsc `pending-fold` in `.wt-AEthX-AEsc-pending` was missed); `~/wiki-admin` is skipped as "origin not a c10vis-poem fork" (check its origin and the ORIGIN_RE match). Done = mirrors present + recaps flowing + renames verified by a hook test run + both gaps covered by a ship test.
+5. **Vault cleanup (sonnet; group B).** Fold the vault's 12 `*unresolved*` files into `PENDING.md`, then delete them. The 12 PDFs still in the vault (fail: fused tokens): re-run through the 2x2 design once the grill builds `check2.py`. Report (do not delete) the 82 exact duplicates in `clean_md/`. Done = 0 unresolved files; PENDING has their items.
+6. **Observations (sonnet; group B).** 29 logged, 13 open (0001, 0005–0007, 0012, 0015–0017, 0023, 0024, 0028, 0029, + 0018 empty). Staged: `skill-updates/2026-10-08/`. Fix 0001/0006/0015 in the operator's forks (task-observer = `aesop-task-observer`, honey = `NoVa-honey-for-devs`). Proposed rules become hooks in `aesop-xi/hooks/` only after checking H1–H8 (obs 0029). Done = each open observation actioned, parked with a condition, or handed to the grill.
 
-#### STATE (verified 2026-10-05)
-- **Privacy:** personal memory files, every copy of the unfiled-designs "Device Stack" doc, a subscriptions list and a billing CSV were removed from GitHub (PR #34). Old commits still hold them (item 0b). One saved Google page with embedded keys is gitignored (device only). Originals: `Documents/private-memory/` (outside the vault).
-- **Master files:** `.github/workflows/master-files.yml` + `tools/build_masters.sh` build MASTER-AGENTS/RESUME from every base repo's main. They're triggered by each base repo's `notify-vault.yml`; no timer. `MASTER-CLAUDE.md` is retired; the phone post-commit hook is removed.
-- **AGENTS.md only** in all 6 base repos + `~/wiki-admin` (Claude Code reads it natively). The Stop gate checks it at wrap-up, along with MEMORY.md per touched repo and the PENDING update.
-- **Hyperion-OXiLm → Hyperion-XI** (repo + clone).
-- **Wiki toolkit (chosen 2026-10-02):** OpenWiki for Claude Code, obsidian-wiki, wiki-compiler (+ nocode, anydoc, NotebookLM, graphify, Obsidian skills). The wiki lives in this vault. The wiki-admin agent is a DRAFT.
-- **Launchers:** `wiki-admin`, `nvaex`, `nvaex-all` (all 7 repos read/write).
-- **Device:** `Documents/Zip/` = exact vault backup (15 GB); nested mirror moved to `Documents/NovAExorpus-nested-mirror/`.
-- **Public toolkit repo** `c10vis-poem/NvAEx-agentk` (MIT, plugin `nvaex`, skill `subagent-protocol`).
+#### STATE (verified 2026-10-08)
+- **Hooks (live in `~/.claude/hooks/`, sources `aesop-xi/hooks/`, moved from `deploy/phone/hooks/`):** H2 `sync-on-use.sh` now BLOCKS until the fork is synced (17 tests); `change-log.sh` records every change, `review-changes.sh` + `/ok push` gate every push (20 tests); H8 `ci-ready.sh` blocks wrap-up / auto-merge without CI + required checks; `documents-guard` merged into change-log (nothing blocked). `test-ship-v2.sh` fails 14/18 on origin/main too (pre-existing).
+- **NvAEx-Recaps (private):** `recaps/<7 repos>/`, `recaps/ROLLUP.md`, sops+age secrets `secrets/secrets.enc.yaml`, CLI `nvaex-secret` (get/set/list/push/edit). Only the phone's age key can decrypt: add a second key. No CI yet.
+- **Vault tools:** `tools/clean.py` + `tools/check.py` fixed (vault-root layout, mutool, `type: condensed`, sources in the keep, canary); `.migrate/` complete (pickle → JSON BM25; `dedup.py` runs `git rm`: operator approval); `generate_jsonl_markers.py` = independent chunk cross-check. LiteDoc (fork, v3.3.0 CLI) installed: `litedoc`. `mutool`, `sops`, `age`, `eson` installed.
+- **Keep (`Documents/Merovingian's_keep/`):** `vault-pdfs/` (970 PDFs), `_salvage/NovA-Corpus/` (+ `originals/`, HomeGrid.kt), `vault-moved/_quarantine/` (3.0 GB).
+- **Disk:** 136 GB free (17.7 GB caches/duplicates + 8.3 GB Qwen3-VL bundles deleted).
+- **Cloud:** project-alchemist-490416 kept; billing off, $0.
 
-#### DECISIONS 2026-10-05
-- PRIORITY ONE: `_#Repository-layout.txt` + `Master_dumbass_plan-session/`. The restructure is grill work; `__RESUME.md/` dissolves into the 00–10 layout. The device vault ends up an exact mirror of this repo.
-- Documents outside the vault stays outside; never pull it into the vault.
-- No CLAUDE.md in repos; the only one is the user-level `~/.claude/CLAUDE.md`.
-- RESUME.md is the handoff: no separate handoff docs.
-- The master files rebuild only on change, never on a timer.
-- `file_administrator.yaml` / `oracle_helpdesk.yaml` are wrong; real roles come from the grill.
-- Replies to the operator stay short.
+#### DECISIONS 2026-10-08
+- PDFs live only in the keep unless no text version exists.
+- `unresolved.md` retired: open items go to each repo's PENDING.md. "canon", POINTER.md and the `NovA-` prefix are removed whenever touched.
+- The vault gets live repo mirrors (`repos/`); no MASTER-* files.
+- Two converters + two checkers on four PDF engines (MuPDF, pdf.js, pypdf, Poppler); no tool checks its own output.
+- Qwen models: Qwen 3.5 only. Render MCP dropped (forks kept). Context-as-image through OmniRoute.
+- Nothing is pushed until the operator reviews the session's change list (`/ok push`).
 
 #### OPEN ITEMS, IN ORDER
-1. The START HERE items above.
-2. The APK session: `cd ~/agent-stack && claude --resume 125f2d23-df2c-4a1b-823c-45acfa0cf8af` (package IDs `com.aethx.aesc` / `com.clovix.aeyre` awaiting confirmation).
-3. NvAEx-agentk: the operator creates the GitHub org; then transfer the repo in as `NvAEx-agentk/skills`.
-4. wiki-admin decisions 2b–2e (Obsidian skills loading twice, OmniGlyph, Render MCP, delete `~/.openwiki/`).
-5. Everything else in `PENDING.md`.
-
-#### RESUMING ON THE OTHER ACCOUNT (same phone)
-Sessions are stored on the phone: `claude auth logout`, then `claude auth login`, then `cd <start folder> && claude --resume <id>`.
-This session: `cd ~ && claude --resume edd68643-a1df-46c4-a17b-3ef5a61d291f`.
+1. START HERE above.
+2. APK session: `cd ~/agent-stack && claude --resume 125f2d23-df2c-4a1b-823c-45acfa0cf8af`.
+3. NvAEx-agentk org transfer (operator creates the org).
+4. Everything else in `PENDING.md`.
 
 #### HANDOFF SOURCES
-Read this session: this RESUME (old) + PENDING, `_#Repository-layout.txt`, all of `Master_dumbass_plan-session/` (00–13), `docs/WIKI-ADMIN-GUIDE.md`, `WRAP-UP.md`, `stop-gate.sh`, `git-gate.sh`, `regenerate_masters.sh`, the base repos' CLAUDE/AGENTS/MEMORY files, the Claude Code memory docs (AGENTS.md section), the 11 reader reports, the GitSync plugin settings.
-Not read directly: most of `__RESUME.md/` and `Drive_sync/` (the readers covered the usable artifacts; chats only listed), `planner.md` (reader A), docs 00–05.
+Read this session: old RESUME.md + PENDING "Added 2026-10-05", `~/.claude/hooks/README.md`, `stop-gate.sh`, `ship-session.sh`, `session-ledger.sh`, `enforce-prompt.sh`, `sync-on-use.sh`, `NPU-ON-DEVICE.md`, `NPU-FINDINGS-2026-10-02.md` §4, `01-WIKI-SEARCH-RESULTS.md` §3, `WIKI-ADMIN-GUIDE.md` §6/§10, OmniGlyph + OmniRoute READMEs, every subagent report in `session-work/2026-10-08/`.
+Not read: the PRIORITY ONE plan docs (00–13) beyond file names; `Master_dumbass_plan-session` content; most of `Drive_sync/`.
 
 ---
 
