@@ -1,8 +1,8 @@
 ---
 source: Three-APK Architecture
-type: pdf
-cleaned: 2026-09-10
-cleaner: tools/clean.py (mutool)
+type: condensed
+condensed_from: NovA-Corpus/condensed/three-apk-architecture-v2 (2026-08-20)
+original_moved_to: Merovingian's_keep/_salvage/NovA-Corpus/originals/
 ---
 
 NOVÆ-CORPUS / PRESENTATION LAYER — 2026-08-14
@@ -53,7 +53,6 @@ Flagged, not resolved: Horizons UI's own model router (with OpenRouter fallback)
 routing layer from OmniRoute. Worth deciding whether this router calls OmniRoute or duplicates its
 
 job before all three APKs exist — cheaper to settle now than after.
-
 
 Horizons UI is not self-sufficient — but it isn't device-blind either. As a standard Android APK it already
 holds normal app-level access (file picker/uploader, storage, network/WebSocket) — that's baseline, not
@@ -114,7 +113,6 @@ f
 f
 )
 
-
 VOICE STACK,
 
 NAMED DIRECTLY
@@ -146,15 +144,15 @@ shell access,no sandbox
 
 Horizons UI(Presentation)
 
-Daemon 1 · Shell
+Daemon 1 · Shell 
 
-Access(Accessibility
+Access(Accessibility 
 
 Service)
 
-Daemon 2 · Speech &
+Daemon 2 · Speech & 
 
-Vision(Accessibility
+Vision(Accessibility 
 
 Service)
 
@@ -182,6 +180,5 @@ document ends before any daemon name is re-established. This artifact uses funct
 Speech & Vision) for that reason — not because the source is silent, but because what it does say on this point
 
 isn't trustworthy. Flagged per standing rule rather than silently dropped.
-
 
 captured from session · reference material, not a build-out session on its own

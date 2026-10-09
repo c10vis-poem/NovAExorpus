@@ -71,3 +71,10 @@ benchmarks/oracle/
 
 # Saved Google page with embedded API keys (gitleaks 2026-10-05) — keep on device only
 __RESUME.md/1U5IWlrh3zPde_qKLw7r8o6GfolZ3KKvT.html
+
+# Android browser cache
+WebView/
+Crashpad/
+
+# Python bytecode
+__pycache__/

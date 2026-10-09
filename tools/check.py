@@ -9,8 +9,7 @@ Uses DISJOINT extractors from tools/clean.py:
   - Text: clean.py uses open().read(); check.py uses byte read + encoding probe
 The tool that cleaned a file does not get a vote on whether the cleaning was good.
 """
-import os, re, sys, hashlib, unicodedata
-from pathlib import Path
+import datetime, difflib, os, re, sys, unicodedata
 
 def find_dirs():
     docs = "/storage/emulated/0/Documents"
@@ -20,28 +19,54 @@ def find_dirs():
             break
     else:
         raise FileNotFoundError("NovAExorpus dir not found")
-    for e in os.listdir(novae):
-        if "Repo" in e and os.path.isdir(os.path.join(novae, e)):
-            repos = os.path.join(novae, e)
-            break
-    else:
-        raise FileNotFoundError("Repos dir not found")
-    raw_dir = os.path.join(repos, "raw_database", "raw")
-    originals_dir = os.path.join(repos, "raw_database", "02_MY_ORIGINALS")
-    clean_dir = os.path.join(repos, "novae-xorpus", "clean_md")
-    audit_dir = os.path.join(repos, "novae-xorpus", "audit")
-    return raw_dir, originals_dir, clean_dir, audit_dir
+    # The old Repos/ level is gone: raw_database/, clean_md/, audit/ sit at the vault root.
+    raw_db = os.path.join(novae, "raw_database")
+    return (novae, os.path.join(raw_db, "raw"), os.path.join(raw_db, "02_MY_ORIGINALS"),
+            os.path.join(raw_db, "Dump", "zip"), os.path.join(novae, "clean_md"),
+            os.path.join(novae, "audit"))
 
-RAW_DIR, ORIGINALS_DIR, CLEAN_DIR, AUDIT_DIR = find_dirs()
+VAULT, RAW_DIR, ORIGINALS_DIR, DUMP_DIR, CLEAN_DIR, AUDIT_DIR = find_dirs()
+# check_one()/render() name sources relative to SRC and cleaned files under CLEAN.
+SRC, CLEAN = VAULT, CLEAN_DIR
+TODAY = datetime.date.today().isoformat()
+
+
+# ---------------------------------------------------------------- normalising
+
+# Zero-width marks and the BOM.  They carry no content, so they must not create
+# a false difference — but a BOM left sitting inside a markdown body is worth
+# saying out loud, so it is reported separately.
+_INVISIBLE = dict.fromkeys(map(ord, "​‌‍⁠﻿­᠎"), None)
+
+_LIGATURES = {"Æ": "AE", "æ": "ae", "Œ": "OE", "œ": "oe", "ß": "ss",
+              "Ø": "O", "ø": "o", "Đ": "D", "đ": "d", "Ł": "L", "ł": "l",
+              "Ð": "D", "þ": "th", "Þ": "Th"}
+
+
+def fold(s):
+    """Unicode -> comparable ASCII-ish.  Applied to both sides, always."""
+    s = unicodedata.normalize("NFKC", s).translate(_INVISIBLE)
+    s = "".join(_LIGATURES.get(c, c) for c in s)
+    s = unicodedata.normalize("NFKD", s)
+    return "".join(c for c in s if not unicodedata.combining(c))
+
+
+_NOTALNUM = re.compile(r"[^a-z0-9]+")
+
 
 def squash(s):
-    """Fold Unicode to ASCII, lowercase, strip non-alphanumeric. For containment checks.
-    Does NOT concatenate - preserves token boundaries so atoms can be compared individually."""
-    s = unicodedata.normalize("NFD", s)
-    s = s.encode("ascii", "ignore").decode("ascii")
-    s = s.lower()
-    s = re.sub(r"[^a-z0-9]", " ", s)
-    return s
+    """Every separator gone.  'CHIP SM8750' and 'CHIPSM8750' both become
+    'chipsm8750', so a value welded to its neighbour is still found.  This is
+    what makes the fused-token blind spot visible."""
+    return _NOTALNUM.sub("", fold(s).lower())
+
+
+def wordstream(s):
+    """Every separator collapsed to one space, wrapped in spaces.  Word
+    boundaries survive here, so comparing this against squash() says whether a
+    boundary was destroyed."""
+    return " " + _NOTALNUM.sub(" ", fold(s).lower()).strip() + " "
+
 
 def extract_pdf_pypdf(pdf_path):
     """PDF extraction using pypdf (DISJOINT from clean.py's mutool)."""
@@ -49,7 +74,7 @@ def extract_pdf_pypdf(pdf_path):
     reader = PdfReader(pdf_path)
     parts = []
     for page in reader.pages:
-        parts.append(page.extract_text())
+        parts.append(page.extract_text() or "")
     return "\n".join(parts)
 
 def extract_docx_stdlib(docx_path):
@@ -113,10 +138,96 @@ def sniff_file(filepath):
 def get_source_file(clean_file_path):
     """Extract the source filename from the YAML frontmatter."""
     with open(clean_file_path, "r", encoding="utf-8") as f:
-        content = f.read(500)
-    m = re.search(r"source:\s*(.+)", content)
+        content = f.read(8192)
+    fm = re.match(r"---\n(.*?)\n---", content, re.S)
+    m = re.search(r"^source:\s*(.+)", fm.group(1) if fm else content[:500], re.M)
     if m:
-        return m.group(1).strip()
+        return m.group(1).strip().strip("\"'")
+    return None
+
+def find_source(source_name, *dirs):
+    """Find the source in raw/, 02_MY_ORIGINALS/ or Dump/zip/ by the bare filename
+    clean.py writes, or as a path (absolute or vault-relative)."""
+    p = os.path.join(VAULT, source_name)
+    if os.path.isfile(p):
+        return p
+    for search_dir in dirs:
+        p = os.path.join(search_dir, source_name)
+        if os.path.isfile(p):
+            return p
+    # Originals moved out of the vault: PDFs to the keep's vault-pdfs/ (same
+    # vault-relative path), NovA-Corpus originals to _salvage/.../originals/.
+    keep = os.path.join(os.path.dirname(VAULT), "Merovingian's_keep")
+    mirror = os.path.join(keep, "vault-pdfs")
+    for search_dir in (VAULT,) + dirs:
+        p = os.path.join(mirror, os.path.relpath(search_dir, VAULT), source_name)
+        if os.path.isfile(os.path.normpath(p)):
+            return os.path.normpath(p)
+    salvage = os.path.join(keep, "_salvage", "NovA-Corpus", "originals")
+    base = os.path.basename(source_name)
+    for root, _, files in os.walk(salvage):
+        if base in files:
+            return os.path.join(root, base)
+    return None
+
+
+def kind_of(path):
+    k = sniff_file(path)
+    return "text" if k == "xml" else k
+
+
+def _read_bytes_text(path):
+    with open(path, "rb") as f:
+        bom = f.read(3) == b"\xef\xbb\xbf"
+    return extract_text_bytes(path).lstrip("\ufeff"), "byte read + encoding probe", {"bom": bom}
+
+
+# Each extractor -> (text, how it was read, meta).  None of them is clean.py's.
+EXTRACTORS = {
+    "pdf": lambda p: (extract_pdf_pypdf(p), "pypdf PdfReader.extract_text()", {}),
+    "docx": lambda p: (extract_docx_stdlib(p), "stdlib zipfile + xml.etree", {}),
+    "html": lambda p: (extract_html_bs4(p), "BeautifulSoup4 get_text()", {}),
+    "text": _read_bytes_text,
+}
+
+# Extraction is byte-faithful only for plain text.  An exact line-level audit
+# is valid there and nowhere else.
+EXACT = {"text"}
+
+
+# ------------------------------------------------------- the documented spec
+#
+# Transcribed by hand from README.md -> "The one job".  This is the *policy*,
+# not clean.py's implementation of it.  A line counts as furniture only if it
+# is made of nothing but these fragments; anything else that went missing is a
+# finding, whatever the cleaner called it.
+
+CHROME = [
+    ("browser/app chrome", re.compile(
+        r"Use code with caution\.?|Ask anything|AI Mode"
+        r"|All\s+Images\s+Videos\s+News\s+Maps\s+Shopping\s+Books\s+Flights\s+Finance"
+        r"|Try without personalization|Search Labs|Sign in"
+        r"|Show more|Show less|\bMore\b|\bTools\b"
+        r"|\d+\s+sites?\b", re.I)),
+]
+PAGE_NUMBER = ("page number", re.compile(r"^\s*(?:page\s+)?[-–—]?\s*\d{1,4}\s*(?:/\s*\d{1,4}\s*)?[-–—]?\s*$", re.I))
+
+
+def furniture_class(line, kind):
+    """Name the furniture rule a line falls under, or None if it is content."""
+    if not line.strip():
+        return "blank line"
+    if kind == "pdf" and PAGE_NUMBER[1].match(line):
+        return PAGE_NUMBER[0]
+    residue = line
+    hit = None
+    for name, rx in CHROME:
+        new = rx.sub(" ", residue)
+        if new != residue:
+            hit = name
+        residue = new
+    if hit and not re.sub(r"[^\w]", "", residue):
+        return hit
     return None
 
 
@@ -596,120 +707,95 @@ def render(rel, clean_path, verdict, findings, notes, kind, extractor, meta):
     return "\n".join(L) + "\n"
 
 
+def canary_check(clean_files):
+    """Truncate the first checkable clean file to half its body and require a FAIL."""
+    for clean_path in clean_files:
+        source_name = get_source_file(clean_path)
+        source_path = source_name and find_source(source_name, RAW_DIR, ORIGINALS_DIR, DUMP_DIR)
+        if not source_path:
+            continue
+        _fm, body = read_clean(clean_path)
+        if len(body) < 400:
+            continue
+        rel = os.path.relpath(source_path, SRC)
+        verdict, *_ = check_one(rel, clean_path, body[: len(body) // 2])
+        if verdict == "FAIL":
+            return f"ok (half of {os.path.basename(clean_path)} -> FAIL)"
+        return f"BROKEN: half of {os.path.basename(clean_path)} got {verdict}, expected FAIL"
+    return "skipped (no checkable pair in this run)"
+
+
 def main():
+    """python3 tools/check.py [--dry-run] [CLEAN_MD ...]  (default: every file in clean_md/)"""
     dry_run = "--dry-run" in sys.argv
-    
-    os.makedirs(AUDIT_DIR, exist_ok=True)
-    # Remove existing POINTER.md
-    pointer = os.path.join(AUDIT_DIR, "POINTER.md")
-    if os.path.exists(pointer):
-        os.remove(pointer)
-    
+    picked = [a for a in sys.argv[1:] if not a.startswith("--")]
+    clean_files = picked or [os.path.join(CLEAN_DIR, f) for f in sorted(os.listdir(CLEAN_DIR))
+                             if f.endswith(".md") and f != "POINTER.md"]
+
     print("Phase 2 RLVR Validation - Corpus Verify")
     print(f"Raw:    {RAW_DIR}")
     print(f"Clean:  {CLEAN_DIR}")
-    print(f"Audit:  {AUDIT_DIR}")
-    print()
-    
-    clean_files = [f for f in os.listdir(CLEAN_DIR) if f.endswith(".md")]
+    print(f"Audit:  {AUDIT_DIR}" + (" (dry run, nothing written)" if dry_run else ""))
     print(f"Clean files to verify: {len(clean_files)}")
     print()
-    
-    results = []
-    passed = 0
-    failed = 0
-    warnings = 0
-    
-    for clean_file in sorted(clean_files):
-        clean_path = os.path.join(CLEAN_DIR, clean_file)
-        source_name = get_source_file(clean_path)
-        
-        if not source_name:
-            warnings += 1
-            results.append((clean_file, "NO_SOURCE", "No source in frontmatter"))
-            print(f"  [  WARN] {clean_file[:60]:<60} no source in frontmatter")
-            continue
-        
-        source_path = find_source(source_name, RAW_DIR, ORIGINALS_DIR)
-        if not source_path:
-            warnings += 1
-            results.append((clean_file, "SOURCE_NOT_FOUND", source_name))
-            print(f"  [  WARN] {clean_file[:60]:<60} source not found: {source_name}")
-            continue
-        
-        # Extract source text using DISJOINT extractor
-        source_type = sniff_file(source_path)
-        ext = os.path.splitext(source_name)[1].lower()
-        
-        try:
-            if source_type == "pdf" or ext == ".pdf":
-                source_text = extract_pdf_pypdf(source_path)
-            elif source_type == "docx" or ext == ".docx":
-                source_text = extract_docx_stdlib(source_path)
-            elif source_type == "html":
-                source_text = extract_html_bs4(source_path)
-            else:
-                source_text = extract_text_bytes(source_path)
-        except Exception as e:
-            warnings += 1
-            results.append((clean_file, "EXTRACT_ERROR", str(e)))
-            print(f"  [  WARN] {clean_file[:60]:<60} extract error: {e}")
-            continue
-        
-        # Read clean text (strip frontmatter)
+
+    # Canary: the checker's own output is checked too. A real pair is cut in half; if the
+    # checker does not FAIL it, this run's verdicts cannot be trusted and nothing is reported.
+    canary = canary_check(clean_files)
+    print(f"Canary: {canary}")
+    if canary.startswith("BROKEN"):
+        sys.exit(2)
+    print()
+
+    rows = []
+    for clean_path in clean_files:
+        clean_file = os.path.basename(clean_path)
         with open(clean_path, "r", encoding="utf-8") as f:
-            clean_content = f.read()
-        # Strip frontmatter
-        if clean_content.startswith("---"):
-            parts = clean_content.split("---", 2)
-            if len(parts) >= 3:
-                clean_body = parts[2]
-            else:
-                clean_body = clean_content
-        else:
-            clean_body = clean_content
-        
-        # Check containment
-        result = check_containment(source_text, clean_body)
-        
-        if result["coverage"] >= 80.0:
-            passed += 1
-            status = "PASS"
-            print(f"  [  PASS] {clean_file[:60]:<60} {result['coverage']}% coverage")
-        elif result["coverage"] >= 50.0:
-            warnings += 1
-            status = "WARN"
-            print(f"  [  WARN] {clean_file[:60]:<60} {result['coverage']}% coverage, {result['missing_count']} atoms missing")
-        else:
-            failed += 1
-            status = "FAIL"
-            print(f"  [  FAIL] {clean_file[:60]:<60} {result['coverage']}% coverage, missing: {result['missing'][:5]}")
-        
-        results.append((clean_file, status, result))
-    
+            head = f.read(2048)
+        if re.match(r"---\n(?:.*\n)*?type:\s*condensed\s*\n", head):
+            # A deliberate summary: shorter than its source by design, so containment does not apply.
+            rows.append((clean_file, "CONDENSED", "summary, not checked for containment"))
+            print(f"  [CONDENSED] {clean_file[:60]:<60} summary, not checked for containment")
+            continue
+        source_name = get_source_file(clean_path)
+        source_path = source_name and find_source(source_name, RAW_DIR, ORIGINALS_DIR, DUMP_DIR)
+        if not source_path:
+            why = "no source in frontmatter" if not source_name else "source not found: " + source_name
+            rows.append((clean_file, "NO-SOURCE", why))
+            print(f"  [NO-SOURCE] {clean_file[:60]:<60} {why}")
+            continue
+        _fm, body = read_clean(clean_path)
+        rel = os.path.relpath(source_path, SRC)
+        verdict, findings, notes, kind, extractor, meta, _ = check_one(rel, clean_path, body)
+        fails = [f for f in findings if f[0] == "FAIL"]
+        rows.append((clean_file, verdict, "%d fails" % len(fails)))
+        print(f"  [{verdict}] {clean_file[:60]:<60} {len(fails)} fails")
+        for _sev, klass, name, _detail in fails[:5]:
+            print(f"      {klass}: {name[:160]}")
+        if not dry_run:
+            os.makedirs(AUDIT_DIR, exist_ok=True)
+            dest = os.path.join(AUDIT_DIR, os.path.splitext(clean_file)[0] + ".check.md")
+            with open(dest, "w", encoding="utf-8") as f:
+                f.write(render(rel, clean_path, verdict, findings, notes, kind, extractor, meta))
+
+    count = lambda p: sum(1 for r in rows if p(r[1]))
     print()
     print("--- Summary ---")
-    print(f"Total:   {len(results)}")
-    print(f"Passed:  {passed}")
-    print(f"Warning: {warnings}")
-    print(f"Failed:  {failed}")
-    
+    print(f"Total:   {len(rows)}")
+    print(f"PASS:    {count(lambda v: v.startswith('PASS'))}")
+    print(f"FAIL:    {count(lambda v: v.startswith('FAIL'))}")
+    print(f"Other:   {count(lambda v: not v.startswith(('PASS', 'FAIL')))}")
+
     if not dry_run:
-        # Write audit report
         report_path = os.path.join(AUDIT_DIR, "rlvr_verification_report.md")
         with open(report_path, "w", encoding="utf-8") as f:
             f.write("---\nsource: tools/check.py (pypdf/zipfile+xml.etree/BeautifulSoup4)\ntype: rlvr-audit\n---\n\n")
             f.write("# Phase 2 RLVR Verification Report\n\n")
-            f.write(f"Total: {len(results)} | Passed: {passed} | Warning: {warnings} | Failed: {failed}\n\n")
-            f.write("| File | Status | Coverage | Missing Atoms |\n")
-            f.write("|------|--------|----------|---------------|\n")
-            for clean_file, status, result in results:
-                if isinstance(result, dict) and "coverage" in result:
-                    missing = ", ".join(result.get("missing", [])[:5])
-                    f.write(f"| {clean_file} | {status} | {result['coverage']}% | {missing} |\n")
-                else:
-                    f.write(f"| {clean_file} | {status} | - | {result} |\n")
+            f.write("| File | Verdict | Detail |\n|------|---------|--------|\n")
+            for row in rows:
+                f.write("| %s | %s | %s |\n" % row)
         print(f"\nReport written to: {report_path}")
+    return 1 if any(r[1].startswith("FAIL") for r in rows) else 0
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())

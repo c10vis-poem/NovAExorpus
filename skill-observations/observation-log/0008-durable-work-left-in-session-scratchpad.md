@@ -1,7 +1,7 @@
 ---
 id: 8
 title: "Multi-hour research output written only to the session scratchpad and lost at session end"
-status: open
+status: actioned
 type: open-source
 skill: [task-observer]
 proposes_skill: []
@@ -11,8 +11,8 @@ area: "session-end handoff / durable persistence of deliverables"
 date: 2026-09-27
 session_context: "Next session could not find a prior multi-hour repo deep-dive; transcript 18a82005 (2026-09-25..26) shows reading notes and plugin drafts written to $TMPDIR scratchpad, which was deleted; memory notes never mention the main subject"
 parked_until:
-resolved:
-resolution:
+resolved: 2026-10-08
+resolution: "Point 1 already live (hooks/archive-scratchpad.sh); points 2-3 staged as CLAUDE.md additions A and E at skill-updates/2026-10-08/claude-md/CLAUDE.md.additions.md (weekly review)"
 reference:
 ---
 

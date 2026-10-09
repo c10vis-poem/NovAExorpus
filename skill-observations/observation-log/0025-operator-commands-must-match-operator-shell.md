@@ -1,7 +1,7 @@
 ---
 id: 25
 title: "Gave the operator a bash-only command in a zsh terminal; it silently stored empty secrets"
-status: open
+status: actioned
 type: open-source
 skill: [android-termux-operator]
 proposes_skill: []
@@ -11,8 +11,8 @@ area: "commands handed to the operator to run"
 date: 2026-10-05
 session_context: "Setting a GitHub Actions secret in 7 repos from the operator's terminal"
 parked_until:
-resolved:
-resolution:
+resolved: 2026-10-08
+resolution: "Staged for android-termux-operator at skill-updates/2026-10-08/android-termux-operator (weekly review)"
 reference:
 ---
 

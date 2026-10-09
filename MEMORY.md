@@ -9,3 +9,9 @@ Durable facts about this repo. Dated; newest first. Updated at session wrap-up.
 - **Target layout:** `__RESUME.md/__Builder-Guide_Directory-/Master_Dumbass_config/_#Repository-layout.txt` (00-governance … 10-exports), PRIORITY ONE together with `Master_dumbass_plan-session/`. `__RESUME.md/` is the work queue and dissolves into the layout during/after the grill. Docs 00–05 at the root are wrong (AGENTS Rule 3).
 - **Device vault = exact mirror of this repo** (end goal): no nested copies, duplicates or extras. `Documents/Zip/` is a full backup copy (refreshed 2026-10-05). The nested mirror was moved to `Documents/NovAExorpus-nested-mirror/`.
 - **GitSync** syncs on Obsidian startup only (no timer). It writes `*.conflict-android-*` copies when a file changes on both sides.
+
+## 2026-10-08
+- PDFs moved to `Merovingian's_keep/vault-pdfs/` (1,046 → 12 in the vault); rule: PDFs live in the keep unless no text version exists.
+- NovA-Corpus condensed versions replaced their originals (17 docs, `type: condensed` frontmatter); originals in `_salvage/NovA-Corpus/originals/`.
+- `tools/clean.py` + `tools/check.py` work again (vault-root layout, mutool, keep-aware source lookup, canary); `.migrate/` complete, BM25 index is JSON.
+- `_quarantine/` → keep `vault-moved/`; `WebView/` deleted + gitignored; `qairt_/` stays (gitignored, referenced by NPU-ON-DEVICE.md).

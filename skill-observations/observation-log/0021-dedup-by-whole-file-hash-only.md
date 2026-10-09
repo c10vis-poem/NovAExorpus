@@ -1,7 +1,7 @@
 ---
 id: 21
 title: "Duplicate detection treated whole-file SHA as the only test of 'same model'"
-status: open
+status: actioned
 type: open-source
 skill: []
 proposes_skill: []
@@ -11,8 +11,8 @@ area: "model/file dedup methodology"
 date: 2026-10-02
 session_context: "Byte-identical scan of Models/, ~/downloads, ~/models and proot roots"
 parked_until:
-resolved:
-resolution:
+resolved: 2026-10-08
+resolution: "Already applied in live ~/.claude/CLAUDE.md lines 107-109 (Duplicates = same model identity); found by weekly review presence check"
 reference:
 ---
 

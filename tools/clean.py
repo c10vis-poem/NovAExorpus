@@ -17,14 +17,8 @@ def find_raw_dir():
             break
     else:
         raise FileNotFoundError("NovAExorpus dir not found")
-    for e in os.listdir(novae):
-        if "Repo" in e and os.path.isdir(os.path.join(novae, e)):
-            repos = os.path.join(novae, e)
-            break
-    else:
-        raise FileNotFoundError("Repos dir not found")
-    raw_db = os.path.join(repos, "raw_database")
-    return os.path.join(raw_db, "raw"), repos
+    # The old Repos/ level is gone: raw_database/ and clean_md/ sit at the vault root.
+    return os.path.join(novae, "raw_database", "raw"), novae
 
 RAW_DIR, REPOS_DIR = find_raw_dir()
 MUTOOL = "/data/data/com.termux/files/usr/bin/mutool"
@@ -58,17 +52,17 @@ cleaner: tools/clean.py (mutool)
 def extract_pdf_mutool(pdf_path):
     """Extract text from PDF using mutool (mupdf). This is the CLEANING extractor.
     The verification pass must use pypdf (disjoint per Hard Rule 5)."""
-    try:
-        result = subprocess.run(
-            [MUTOOL, "draw", "-F", "text", pdf_path],
-            capture_output=True, text=True, timeout=60
-        )
-        if result.returncode == 0:
-            return result.stdout
-        else:
-            return f"[PDF extraction error: {result.stderr[:200]}]"
-    except Exception as e:
-        return f"[PDF extraction error: {e}]"
+    # Raise rather than write an error string as the cleaned content: main() counts
+    # it under Errors and no bogus clean_md file is produced.
+    if not os.path.exists(MUTOOL):
+        raise FileNotFoundError(f"{MUTOOL} missing (pkg install mupdf-tools)")
+    result = subprocess.run(
+        [MUTOOL, "draw", "-F", "text", pdf_path],
+        capture_output=True, text=True, timeout=60
+    )
+    if result.returncode != 0:
+        raise RuntimeError(f"mutool failed: {result.stderr[:200]}")
+    return result.stdout
 
 def extract_docx_python(docx_path):
     """Extract text from DOCX using python-docx."""
@@ -94,7 +88,8 @@ def extract_docx_python(docx_path):
                 parts.append("| " + " | ".join(cells) + " |")
         return "\n\n".join(parts)
     except Exception as e:
-        return f"[DOCX extraction error: {e}]"
+        # Raise (as extract_pdf_mutool does) so main() counts an error and writes nothing.
+        raise RuntimeError(f"DOCX extraction error: {e}") from e
 
 def extract_html(html_path):
     """Extract text from HTML using stdlib html.parser."""
@@ -143,7 +138,8 @@ def extract_html(html_path):
         parser.feed(content)
         return "".join(parser.parts)
     except Exception as e:
-        return f"[HTML extraction error: {e}]"
+        # Raise (as extract_pdf_mutool does) so main() counts an error and writes nothing.
+        raise RuntimeError(f"HTML extraction error: {e}") from e
 
 def sniff_file(filepath):
     """Detect actual file type by magic bytes."""
@@ -299,9 +295,30 @@ def process_file(filepath, filename, clean_md_dir):
     return slug, doc_type, len(content)
 
 # --- Main ---
+def scan_clean_md(clean_md_dir):
+    """Return (raw filenames already named by a clean_md `source:`, count of clean_md files
+    that duplicate another exactly once the `cleaned:` date line is ignored)."""
+    sources, seen, dups = set(), set(), 0
+    for name in os.listdir(clean_md_dir):
+        path = os.path.join(clean_md_dir, name)
+        if not (name.endswith(".md") and os.path.isfile(path)):
+            continue
+        with open(path, "r", encoding="utf-8", errors="replace") as f:
+            lines = f.read().split("\n")
+        if lines and lines[0] == "---":
+            for line in lines[1:]:
+                if line == "---":
+                    break
+                if line.startswith("source:"):
+                    sources.add(os.path.basename(line[7:].strip().strip("'\"")))
+        h = hashlib.sha256("\n".join(l for l in lines if not l.startswith("cleaned:")).encode()).digest()
+        dups += h in seen
+        seen.add(h)
+    return sources, dups
+
 def main():
     raw_dir = RAW_DIR
-    clean_md_dir = os.path.join(REPOS_DIR, "novae-xorpus", "clean_md")
+    clean_md_dir = os.path.join(REPOS_DIR, "clean_md")
     
     # Also process 02_MY_ORIGINALS and Dump/zip
     originals_dir = os.path.join(os.path.dirname(raw_dir), "02_MY_ORIGINALS")
@@ -356,7 +373,13 @@ def main():
     print(f"Total files: {len(all_files)} | After dedup: {len(deduped)} | Skipped dups: {skipped}")
     print()
     
+    # Never re-clean a source that already has a clean_md file (that is what made the _N copies).
+    done, dup_count = scan_clean_md(clean_md_dir)
+    already = 0
     for filepath, filename in deduped:
+        if filename in done:
+            already += 1
+            continue
         try:
             slug, doc_type, size = process_file(filepath, filename, clean_md_dir)
             if slug:
@@ -375,6 +398,8 @@ def main():
     print(f"--- Summary ---")
     print(f"Processed: {processed}")
     print(f"Skipped:   {skipped}")
+    print(f"Already cleaned (skipped): {already}")
+    print(f"Exact duplicates already in clean_md (ignoring cleaned: date): {dup_count}")
     print(f"Errors:    {errors}")
     print(f"By type:   {stats}")
 

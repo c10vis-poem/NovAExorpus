@@ -1,8 +1,8 @@
 ---
 source: NovA-Corpus Diagnostic
-type: pdf
-cleaned: 2026-09-10
-cleaner: tools/clean.py (mutool)
+type: condensed
+condensed_from: NovA-Corpus/condensed/nova-corpus-diagnostic (2026-08-20)
+original_moved_to: Merovingian's_keep/_salvage/NovA-Corpus/originals/
 ---
 
 D E V I C E & V A U L T F I N D I N G S
@@ -52,7 +52,6 @@ Why your sessions keep dying
 You were right that something killed it. You were watching the wrong indicator.
 
 ••••••••••••••••••
-
 
 DIAGNOSED
 
@@ -136,8 +135,7 @@ Claude Code writes every conversation to disk as it happens. A
 
 kill costs you the connection, never the conversation. The one
 
-
-that died is 914 KB of transcript in ~/.claude/projects/…/ ,
+that died is 914 KB of transcript in ~/.claude/projects/…/ ,
 
 covering 02:06 → 02:29 UTC.
 
@@ -169,9 +167,9 @@ home directory, not shared storage — which is exactly why every p
 
 search missed them:
 
-/data/data/com.termux/files/usr/tmp/handoff-nova-corpus-2026-08-10.md
+/data/data/com.termux/files/usr/tmp/handoff-nova-corpus-2026-08-10.md 
 
-/data/data/com.termux/files/usr/tmp/handoff-nova-corpus-2026-08-11.md
+/data/data/com.termux/files/usr/tmp/handoff-nova-corpus-2026-08-11.md 
 
 Both are now copied into the vault under NovA-Corpus/ and verifie
 
@@ -188,7 +186,6 @@ housekeeping, without warning. Those two files were the only survivin
 a session that cost $50+ before you checkpointed it. They were one clea
 
 from gone.
-
 
 RECORDED
 
@@ -208,7 +205,7 @@ very same parent folder.
 
 That's now written to memory so no future session has to guess
 
-or ask you again. Current contents: 421 MB, 335 markdown
+or ask you again. Current contents: 421 MB, 335 markdown
 
 files, project material under NovA-Corpus/ .
 
@@ -259,7 +256,6 @@ no bisync configured
 
 ROOT CAUSE
 This is your "uploaded it but it never got wired up"
-
 
 obsidian-cli
 The skill repo is fully installed and its skills are loaded and
@@ -335,7 +331,6 @@ filesystem. Git runs there, but there are no symlinks and no
 
 reliable permission bits, so the repo will want core.filemode
 
-
 p
 p
 
@@ -350,17 +345,17 @@ BLOCKER
 81 files
 The vault is already full of duplicates before any sync starts
 
-Two files in the vault root, both 30.3 MB, same checksum — byte-fo
+Two files in the vault root, both 30.3 MB, same checksum — byte-fo
 
 identical copies of one arXiv paper under two different Drive-man
 
 names:
 
-a62ed23df49755b60a11044706c8ad74   " Continual Harness- …2605.09998v1
+a62ed23df49755b60a11044706c8ad74   " Continual Harness- …2605.09998v1 
 
 a62ed23df49755b60a11044706c8ad74   "2605.09998v1 (2) 1.pdf"
 
-That's 60.6 MB of a 421 MB vault spent storing one document twice
+That's 60.6 MB of a 421 MB vault spent storing one document twice
 
 leading space in the first filename — it broke one of the investigati
 
@@ -396,7 +391,6 @@ these, because it genuinely cannot tell which side is
 
 authoritative. So it errors out — or it picks wrong and mints a
 
-
 p
 g
 
@@ -431,7 +425,7 @@ terms
 
 Every failed attempt has been an attempt at what comes after
 
-step 3, without ever doing step 2.
+step 3, without ever doing step 2.
 
 Still open
 
@@ -452,7 +446,6 @@ write the full plan first and change nothing. Given this has
 fallen apart before, staged work with a check after each step is
 
 the cautious read — but that's your call, not mine.
-
 
 NOT STARTED
 
@@ -515,7 +508,6 @@ living there.
 
 md5 / checksum
 A short fingerprint calculated from a file's contents. Two files
-
 
 with the same fingerprint are identical byte for byte — which
 
