@@ -1,7 +1,7 @@
 ---
 id: 2
 title: task-observer's own CLAUDE.md trigger line did not cause invocation before the session's first tool call
-status: open
+status: superseded
 type: open-source
 skill: [task-observer]
 proposes_skill: []
@@ -10,8 +10,8 @@ area: activation trigger
 date: 2026-09-18
 session_context: "Global CLAUDE.md contains an explicit line: 'Invoke the task-observer skill before the first tool call of any session and before writing or proposing a plan. Description matching alone under-triggers this meta-skill — this line is the enforceable trigger.' The skill was not invoked until ~2 hours and dozens of tool calls into the session, only after the user asked directly whether it was hooked up. Only skill-invocation call this session prior to it was for an unrelated skill (android-termux-operator, via an explicit /command)."
 parked_until:
-resolved:
-resolution:
+resolved: 2026-10-08
+resolution: "by 0006 (0006 records the same CLAUDE.md-trigger failure recurring, and stop-gate.sh lines 46-50 now enforce load+scan)"
 reference:
 ---
 

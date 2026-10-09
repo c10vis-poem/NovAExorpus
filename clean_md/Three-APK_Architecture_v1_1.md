@@ -1,8 +1,8 @@
 ---
 source: Three-APK Architecture (v1) (1).pdf
-type: pdf
-cleaned: 2026-09-11
-cleaner: tools/clean.py (mutool)
+type: condensed
+condensed_from: NovA-Corpus/condensed/three-apk-architecture-v1 (2026-08-20)
+original_moved_to: Merovingian's_keep/_salvage/NovA-Corpus/originals/
 ---
 
 NOVÆ-CORPUS / PRESENTATION LAYER — 2026-08-14
@@ -53,7 +53,6 @@ Flagged, not resolved: Horizons UI's own model router (with OpenRouter fallback)
 routing layer from OmniRoute. Worth deciding whether this router calls OmniRoute or duplicates its
 
 job before all three APKs exist — cheaper to settle now than after.
-
 
 Horizons UI is not self-sufficient — but it isn't device-blind either. As a standard Android APK it already
 holds normal app-level access (file picker/uploader, storage, network/WebSocket) — that's baseline, not
@@ -113,6 +112,5 @@ f
 f
 f
 )
-
 
 captured from session · reference material, not a build-out session on its own

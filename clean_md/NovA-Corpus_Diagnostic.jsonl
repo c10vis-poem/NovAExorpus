@@ -1,0 +1,255 @@
+{"id": "nova-corpus-diagnostic#p1#b0", "text": "D E V I C E & V A U L T F I N D I N G S\nNovA-Corpus Diagnostic", "metadata": {"source": "nova-corpus-diagnostic", "page": 1, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p1#b1", "text": "Everything found while looking into remote control, the dropped session,", "metadata": {"source": "nova-corpus-diagnostic", "page": 1, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p1#b2", "text": "and why the Obsidian master wiki keeps falling apart — written out plainly,", "metadata": {"source": "nova-corpus-diagnostic", "page": 1, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p1#b3", "text": "with the evidence behind each claim.", "metadata": {"source": "nova-corpus-diagnostic", "page": 1, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p1#b4", "text": "12 AUG 2026\nMOTOROLA RAZR ULTRA 2025 · ANDROID 16\nTERMUX · CLAUDE CODE 2.1.228", "metadata": {"source": "nova-corpus-diagnostic", "page": 1, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p1#b5", "text": "Act on this now", "metadata": {"source": "nova-corpus-diagnostic", "page": 1, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p1#b6", "text": "One item. It has nothing to do with the wiki, and it doesn't keep.", "metadata": {"source": "nova-corpus-diagnostic", "page": 1, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p1#b7", "text": "CRITICAL", "metadata": {"source": "nova-corpus-diagnostic", "page": 1, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p1#b8", "text": "git / credentials", "metadata": {"source": "nova-corpus-diagnostic", "page": 1, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p1#b9", "text": "A live GitHub token is sitting in a config file in plaintext", "metadata": {"source": "nova-corpus-diagnostic", "page": 1, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p1#b10", "text": "Your obsidian-skills fork has a personal access token baked dire", "metadata": {"source": "nova-corpus-diagnostic", "page": 1, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p1#b11", "text": "URL, stored unencrypted in ~/repos/obsidian-skills/.git/config", "metadata": {"source": "nova-corpus-diagnostic", "page": 1, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p1#b12", "text": "https://c10vis-poem:ghp_PZUS\n@github.com/c10vis-poem/", "metadata": {"source": "nova-corpus-diagnostic", "page": 1, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p1#b13", "text": "Anything that can read your home directory can read that token an", "metadata": {"source": "nova-corpus-diagnostic", "page": 1, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p1#b14", "text": "GitHub. It was also pulled into a chat transcript when the repo con", "metadata": {"source": "nova-corpus-diagnostic", "page": 1, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p1#b15", "text": "In plain terms: that string is a password for your GitHub account, wri", "metadata": {"source": "nova-corpus-diagnostic", "page": 1, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p1#b16", "text": "ordinary text file instead of a vault. Go to github.com/settings/tokens,", "metadata": {"source": "nova-corpus-diagnostic", "page": 1, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p1#b17", "text": "one, and store it with a credential helper rather than pasting it into the", "metadata": {"source": "nova-corpus-diagnostic", "page": 1, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p1#b18", "text": "in this report can wait. This shouldn't.", "metadata": {"source": "nova-corpus-diagnostic", "page": 1, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p1#b19", "text": "Why your sessions keep dying", "metadata": {"source": "nova-corpus-diagnostic", "page": 1, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p1#b20", "text": "You were right that something killed it. You were watching the wrong indicator.", "metadata": {"source": "nova-corpus-diagnostic", "page": 1, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p1#b21", "text": "••••••••••••••••••", "metadata": {"source": "nova-corpus-diagnostic", "page": 1, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p2#b22", "text": "DIAGNOSED", "metadata": {"source": "nova-corpus-diagnostic", "page": 2, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p2#b23", "text": "android / power", "metadata": {"source": "nova-corpus-diagnostic", "page": 2, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p2#b24", "text": "The wake lock was held. It was never going to save you.", "metadata": {"source": "nova-corpus-diagnostic", "page": 2, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p2#b25", "text": "A Termux wake lock is a partial wake lock: it stops the CPU", "metadata": {"source": "nova-corpus-diagnostic", "page": 2, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p2#b26", "text": "from going to sleep. It does nothing to stop Android from killing", "metadata": {"source": "nova-corpus-diagnostic", "page": 2, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p2#b27", "text": "the process outright. Those are two separate mechanisms, and", "metadata": {"source": "nova-corpus-diagnostic", "page": 2, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p2#b28", "text": "it was the second one that ate your session when you switched", "metadata": {"source": "nova-corpus-diagnostic", "page": 2, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p2#b29", "text": "to the tablet and Termux dropped into the background.", "metadata": {"source": "nova-corpus-diagnostic", "page": 2, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p2#b30", "text": "Two likely killers, both consistent with what happened:", "metadata": {"source": "nova-corpus-diagnostic", "page": 2, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p2#b31", "text": "CAUSE\nFIX\nREACHABLE FROM", "metadata": {"source": "nova-corpus-diagnostic", "page": 2, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p2#b32", "text": "HERE?", "metadata": {"source": "nova-corpus-diagnostic", "page": 2, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p2#b33", "text": "Motorola battery", "metadata": {"source": "nova-corpus-diagnostic", "page": 2, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p2#b34", "text": "management —", "metadata": {"source": "nova-corpus-diagnostic", "page": 2, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p2#b35", "text": "aggressive by default on", "metadata": {"source": "nova-corpus-diagnostic", "page": 2, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p2#b36", "text": "this device", "metadata": {"source": "nova-corpus-diagnostic", "page": 2, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p2#b37", "text": "Settings → Apps → Termux", "metadata": {"source": "nova-corpus-diagnostic", "page": 2, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p2#b38", "text": "→ Battery → Unrestricted", "metadata": {"source": "nova-corpus-diagnostic", "page": 2, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p2#b39", "text": "No — GUI only", "metadata": {"source": "nova-corpus-diagnostic", "page": 2, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p2#b40", "text": "Phantom process killer", "metadata": {"source": "nova-corpus-diagnostic", "page": 2, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p2#b41", "text": "(Android 12+) reaping", "metadata": {"source": "nova-corpus-diagnostic", "page": 2, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p2#b42", "text": "Termux child processes", "metadata": {"source": "nova-corpus-diagnostic", "page": 2, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p2#b43", "text": "settings put global", "metadata": {"source": "nova-corpus-diagnostic", "page": 2, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p2#b44", "text": "settings_enable_monitor_ph", "metadata": {"source": "nova-corpus-diagnostic", "page": 2, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p2#b45", "text": "antom_procs false via adb", "metadata": {"source": "nova-corpus-diagnostic", "page": 2, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p2#b46", "text": "or Shizuku", "metadata": {"source": "nova-corpus-diagnostic", "page": 2, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p2#b47", "text": "No — blocked", "metadata": {"source": "nova-corpus-diagnostic", "page": 2, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p2#b48", "text": "Both settings were probed and both refused:", "metadata": {"source": "nova-corpus-diagnostic", "page": 2, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p2#b49", "text": "SecurityException , because getCurrentUser() requires the", "metadata": {"source": "nova-corpus-diagnostic", "page": 2, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p2#b50", "text": "INTERACT_ACROSS_USERS permission that Termux doesn't hold.", "metadata": {"source": "nova-corpus-diagnostic", "page": 2, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p2#b51", "text": "So the current state of either one is genuinely unknown.", "metadata": {"source": "nova-corpus-diagnostic", "page": 2, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p2#b52", "text": "Being straight about confidence: which one killed it has not been", "metadata": {"source": "nova-corpus-diagnostic", "page": 2, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p2#b53", "text": "proven. What has been proven is that \"wake lock is held\" can be", "metadata": {"source": "nova-corpus-diagnostic", "page": 2, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p2#b54", "text": "true while the session still dies — so that notification isn't the", "metadata": {"source": "nova-corpus-diagnostic", "page": 2, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p2#b55", "text": "reassurance it looks like. Battery management is the likelier culprit", "metadata": {"source": "nova-corpus-diagnostic", "page": 2, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p2#b56", "text": "on a Razr and the easier fix, so start there.", "metadata": {"source": "nova-corpus-diagnostic", "page": 2, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p2#b57", "text": "RECOVERABLE", "metadata": {"source": "nova-corpus-diagnostic", "page": 2, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p2#b58", "text": "session 136ea897", "metadata": {"source": "nova-corpus-diagnostic", "page": 2, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p2#b59", "text": "The session that dropped is not gone", "metadata": {"source": "nova-corpus-diagnostic", "page": 2, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p2#b60", "text": "Claude Code writes every conversation to disk as it happens. A", "metadata": {"source": "nova-corpus-diagnostic", "page": 2, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p2#b61", "text": "kill costs you the connection, never the conversation. The one", "metadata": {"source": "nova-corpus-diagnostic", "page": 2, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p3#b62", "text": "that died is 914 KB of transcript in ~/.claude/projects/…/ ,", "metadata": {"source": "nova-corpus-diagnostic", "page": 3, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p3#b63", "text": "covering 02:06 → 02:29 UTC.", "metadata": {"source": "nova-corpus-diagnostic", "page": 3, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p3#b64", "text": "claude --resume 136ea897-fae7-4217-b685-78109cbd63ec", "metadata": {"source": "nova-corpus-diagnostic", "page": 3, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p3#b65", "text": "For the record, it died mid-sentence hunting your handoff file.", "metadata": {"source": "nova-corpus-diagnostic", "page": 3, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p3#b66", "text": "Its last words were \"there's both a Download and a Downloads", "metadata": {"source": "nova-corpus-diagnostic", "page": 3, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p3#b67", "text": "folder — two different places, classic trap. Searching all of it:\" —", "metadata": {"source": "nova-corpus-diagnostic", "page": 3, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p3#b68", "text": "and then Android reaped it. It was searching the wrong place", "metadata": {"source": "nova-corpus-diagnostic", "page": 3, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p3#b69", "text": "regardless; see below.", "metadata": {"source": "nova-corpus-diagnostic", "page": 3, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p3#b70", "text": "Where your things actually are", "metadata": {"source": "nova-corpus-diagnostic", "page": 3, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p3#b71", "text": "Two searches that had failed repeatedly, now closed out.", "metadata": {"source": "nova-corpus-diagnostic", "page": 3, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p3#b72", "text": "FOUND & SECURED", "metadata": {"source": "nova-corpus-diagnostic", "page": 3, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p3#b73", "text": "handoff files", "metadata": {"source": "nova-corpus-diagnostic", "page": 3, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p3#b74", "text": "The handoffs were in a temp folder that wipes itself", "metadata": {"source": "nova-corpus-diagnostic", "page": 3, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p3#b75", "text": "Both exist and are intact. They were written to Termux's $TMPDIR —", "metadata": {"source": "nova-corpus-diagnostic", "page": 3, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p3#b76", "text": "home directory, not shared storage — which is exactly why every p", "metadata": {"source": "nova-corpus-diagnostic", "page": 3, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p3#b77", "text": "search missed them:", "metadata": {"source": "nova-corpus-diagnostic", "page": 3, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p3#b78", "text": "/data/data/com.termux/files/usr/tmp/handoff-nova-corpus-2026-08-10.md ", "metadata": {"source": "nova-corpus-diagnostic", "page": 3, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p3#b79", "text": "/data/data/com.termux/files/usr/tmp/handoff-nova-corpus-2026-08-11.md ", "metadata": {"source": "nova-corpus-diagnostic", "page": 3, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p3#b80", "text": "Both are now copied into the vault under NovA-Corpus/ and verifie", "metadata": {"source": "nova-corpus-diagnostic", "page": 3, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p3#b81", "text": "checksum — identical bytes, nothing overwritten, originals left in p", "metadata": {"source": "nova-corpus-diagnostic", "page": 3, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p3#b82", "text": "handoff-nova-corpus-2026-08-10.md   ab83324c…   OK", "metadata": {"source": "nova-corpus-diagnostic", "page": 3, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p3#b83", "text": "handoff-nova-corpus-2026-08-11.md   f24e6bab…   OK", "metadata": {"source": "nova-corpus-diagnostic", "page": 3, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p3#b84", "text": "Why this mattered: $TMPDIR gets cleared by Android or by Termux", "metadata": {"source": "nova-corpus-diagnostic", "page": 3, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p3#b85", "text": "housekeeping, without warning. Those two files were the only survivin", "metadata": {"source": "nova-corpus-diagnostic", "page": 3, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p3#b86", "text": "a session that cost $50+ before you checkpointed it. They were one clea", "metadata": {"source": "nova-corpus-diagnostic", "page": 3, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p3#b87", "text": "from gone.", "metadata": {"source": "nova-corpus-diagnostic", "page": 3, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p4#b88", "text": "RECORDED", "metadata": {"source": "nova-corpus-diagnostic", "page": 4, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p4#b89", "text": "vault identity", "metadata": {"source": "nova-corpus-diagnostic", "page": 4, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p4#b90", "text": "There are eight Obsidian vaults on this device", "metadata": {"source": "nova-corpus-diagnostic", "page": 4, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p4#b91", "text": "You confirmed the live one is", "metadata": {"source": "nova-corpus-diagnostic", "page": 4, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p4#b92", "text": "/storage/emulated/0/OBSIDIAN_VAULT/OBSIDIAN_VAULT.md/ — a", "metadata": {"source": "nova-corpus-diagnostic", "page": 4, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p4#b93", "text": "directory literally named OBSIDIAN_VAULT.md . The other seven", "metadata": {"source": "nova-corpus-diagnostic", "page": 4, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p4#b94", "text": "are decoys, including a sibling OBSIDIAN-WIKI.md sitting in the", "metadata": {"source": "nova-corpus-diagnostic", "page": 4, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p4#b95", "text": "very same parent folder.", "metadata": {"source": "nova-corpus-diagnostic", "page": 4, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p4#b96", "text": "That's now written to memory so no future session has to guess", "metadata": {"source": "nova-corpus-diagnostic", "page": 4, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p4#b97", "text": "or ask you again. Current contents: 421 MB, 335 markdown", "metadata": {"source": "nova-corpus-diagnostic", "page": 4, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p4#b98", "text": "files, project material under NovA-Corpus/ .", "metadata": {"source": "nova-corpus-diagnostic", "page": 4, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p4#b99", "text": "The master wiki: what's wired, what isn't", "metadata": {"source": "nova-corpus-diagnostic", "page": 4, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p4#b100", "text": "Most of it is already in place. The gap is far smaller than it has been feeling.", "metadata": {"source": "nova-corpus-diagnostic", "page": 4, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p4#b101", "text": "COMPONENT\nSTATE\nDETAIL", "metadata": {"source": "nova-corpus-diagnostic", "page": 4, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p4#b102", "text": "Obsidian app\ninstalled\nmd.obsidian", "metadata": {"source": "nova-corpus-diagnostic", "page": 4, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p4#b103", "text": "Markor\ninstalled\nnet.gsantner.markor", "metadata": {"source": "nova-corpus-diagnostic", "page": 4, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p4#b104", "text": "rclone + Drive remote\nconfigured\ngdrive: remote present", "metadata": {"source": "nova-corpus-diagnostic", "page": 4, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p4#b105", "text": "obsidian-skills fork\ncloned\n~/repos/obsidian-skills — origin your fork, upstream", "metadata": {"source": "nova-corpus-diagnostic", "page": 4, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p4#b106", "text": "kepano", "metadata": {"source": "nova-corpus-diagnostic", "page": 4, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p4#b107", "text": "Skills loaded in Claude", "metadata": {"source": "nova-corpus-diagnostic", "page": 4, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p4#b108", "text": "Code", "metadata": {"source": "nova-corpus-diagnostic", "page": 4, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p4#b109", "text": "live\nobsidian-cli, markdown, bases, json-canvas, defuddle", "metadata": {"source": "nova-corpus-diagnostic", "page": 4, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p4#b110", "text": "obsidian-cli binary\nMISSING\nthe skills call a program that isn't on the device", "metadata": {"source": "nova-corpus-diagnostic", "page": 4, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p4#b111", "text": "Vault under git\nnot a repo\nno .git anywhere in the vault", "metadata": {"source": "nova-corpus-diagnostic", "page": 4, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p4#b112", "text": "Vault ↔ Drive sync\nnothing running\nno bisync configured", "metadata": {"source": "nova-corpus-diagnostic", "page": 4, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p4#b113", "text": "ROOT CAUSE\nThis is your \"uploaded it but it never got wired up\"", "metadata": {"source": "nova-corpus-diagnostic", "page": 4, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p5#b114", "text": "obsidian-cli\nThe skill repo is fully installed and its skills are loaded and", "metadata": {"source": "nova-corpus-diagnostic", "page": 5, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p5#b115", "text": "visible. But the one that actually manipulates the vault shells", "metadata": {"source": "nova-corpus-diagnostic", "page": 5, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p5#b116", "text": "out to an obsidian-cli binary that was never installed here.", "metadata": {"source": "nova-corpus-diagnostic", "page": 5, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p5#b117", "text": "The skill loads fine, then fails the instant it tries to do anything", "metadata": {"source": "nova-corpus-diagnostic", "page": 5, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p5#b118", "text": "real.", "metadata": {"source": "nova-corpus-diagnostic", "page": 5, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p5#b119", "text": "In plain terms: you installed the instructions but not the tool the", "metadata": {"source": "nova-corpus-diagnostic", "page": 5, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p5#b120", "text": "instructions tell it to use. That's a one-package gap, not a broken", "metadata": {"source": "nova-corpus-diagnostic", "page": 5, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p5#b121", "text": "design — which is a very different problem from the one it's been", "metadata": {"source": "nova-corpus-diagnostic", "page": 5, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p5#b122", "text": "feeling like.", "metadata": {"source": "nova-corpus-diagnostic", "page": 5, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p5#b123", "text": "DECIDED", "metadata": {"source": "nova-corpus-diagnostic", "page": 5, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p5#b124", "text": "topology", "metadata": {"source": "nova-corpus-diagnostic", "page": 5, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p5#b125", "text": "The shape you asked for", "metadata": {"source": "nova-corpus-diagnostic", "page": 5, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p5#b126", "text": "Your answer — \"obviously it's the device file\" — settles the", "metadata": {"source": "nova-corpus-diagnostic", "page": 5, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p5#b127", "text": "question that's been open since the folder-naming discussion.", "metadata": {"source": "nova-corpus-diagnostic", "page": 5, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p5#b128", "text": "The on-device vault is the source of truth, and everything else", "metadata": {"source": "nova-corpus-diagnostic", "page": 5, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p5#b129", "text": "hangs off it:", "metadata": {"source": "nova-corpus-diagnostic", "page": 5, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p5#b130", "text": "SOURCE OF TRUTH", "metadata": {"source": "nova-corpus-diagnostic", "page": 5, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p5#b131", "text": "/storage/…/OBSIDIAN_VAULT.md/", "metadata": {"source": "nova-corpus-diagnostic", "page": 5, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p5#b132", "text": "Obsidian", "metadata": {"source": "nova-corpus-diagnostic", "page": 5, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p5#b133", "text": "reads directly", "metadata": {"source": "nova-corpus-diagnostic", "page": 5, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p5#b134", "text": "Markor", "metadata": {"source": "nova-corpus-diagnostic", "page": 5, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p5#b135", "text": "reads directly", "metadata": {"source": "nova-corpus-diagnostic", "page": 5, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p5#b136", "text": "GitHub", "metadata": {"source": "nova-corpus-diagnostic", "page": 5, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p5#b137", "text": "git push", "metadata": {"source": "nova-corpus-diagnostic", "page": 5, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p5#b138", "text": "Google Drive", "metadata": {"source": "nova-corpus-diagnostic", "page": 5, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p5#b139", "text": "rclone bisync", "metadata": {"source": "nova-corpus-diagnostic", "page": 5, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p5#b140", "text": "DEVICE CANONICAL · FOUR CONSUMERS · NOTHING EDITS A COPY\nThis shape is also forced by a constraint worth knowing:", "metadata": {"source": "nova-corpus-diagnostic", "page": 5, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p5#b141", "text": "Obsidian and Markor are sandboxed Android apps and cannot", "metadata": {"source": "nova-corpus-diagnostic", "page": 5, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p5#b142", "text": "read /data/data/com.termux/files/home at all. Any design that", "metadata": {"source": "nova-corpus-diagnostic", "page": 5, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p5#b143", "text": "puts the real vault inside Termux's home directory breaks both", "metadata": {"source": "nova-corpus-diagnostic", "page": 5, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p5#b144", "text": "apps immediately. That squeeze — the apps need shared", "metadata": {"source": "nova-corpus-diagnostic", "page": 5, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p5#b145", "text": "storage, git prefers a real filesystem — is very likely what broke", "metadata": {"source": "nova-corpus-diagnostic", "page": 5, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p5#b146", "text": "the earlier attempts.", "metadata": {"source": "nova-corpus-diagnostic", "page": 5, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p5#b147", "text": "One consequence to plan around: shared storage is a fuse", "metadata": {"source": "nova-corpus-diagnostic", "page": 5, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p5#b148", "text": "filesystem. Git runs there, but there are no symlinks and no", "metadata": {"source": "nova-corpus-diagnostic", "page": 5, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p5#b149", "text": "reliable permission bits, so the repo will want core.filemode", "metadata": {"source": "nova-corpus-diagnostic", "page": 5, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p6#b150", "text": "p\np", "metadata": {"source": "nova-corpus-diagnostic", "page": 6, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p6#b151", "text": "false .", "metadata": {"source": "nova-corpus-diagnostic", "page": 6, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p6#b152", "text": "Why sync is \"always a losing battle\"", "metadata": {"source": "nova-corpus-diagnostic", "page": 6, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p6#b153", "text": "You called this one correctly. Here's the evidence, and why it keeps happening.", "metadata": {"source": "nova-corpus-diagnostic", "page": 6, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p6#b154", "text": "BLOCKER", "metadata": {"source": "nova-corpus-diagnostic", "page": 6, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p6#b155", "text": "81 files\nThe vault is already full of duplicates before any sync starts", "metadata": {"source": "nova-corpus-diagnostic", "page": 6, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p6#b156", "text": "Two files in the vault root, both 30.3 MB, same checksum — byte-fo", "metadata": {"source": "nova-corpus-diagnostic", "page": 6, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p6#b157", "text": "identical copies of one arXiv paper under two different Drive-man", "metadata": {"source": "nova-corpus-diagnostic", "page": 6, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p6#b158", "text": "names:", "metadata": {"source": "nova-corpus-diagnostic", "page": 6, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p6#b159", "text": "a62ed23df49755b60a11044706c8ad74   \" Continual Harness- …2605.09998v1 ", "metadata": {"source": "nova-corpus-diagnostic", "page": 6, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p6#b160", "text": "a62ed23df49755b60a11044706c8ad74   \"2605.09998v1 (2) 1.pdf\"", "metadata": {"source": "nova-corpus-diagnostic", "page": 6, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p6#b161", "text": "That's 60.6 MB of a 421 MB vault spent storing one document twice", "metadata": {"source": "nova-corpus-diagnostic", "page": 6, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p6#b162", "text": "leading space in the first filename — it broke one of the investigati", "metadata": {"source": "nova-corpus-diagnostic", "page": 6, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p6#b163", "text": "commands mid-run.", "metadata": {"source": "nova-corpus-diagnostic", "page": 6, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p6#b164", "text": "And it isn't isolated. 81 files in the vault carry Drive-duplication na", "metadata": {"source": "nova-corpus-diagnostic", "page": 6, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p6#b165", "text": "artifacts:", "metadata": {"source": "nova-corpus-diagnostic", "page": 6, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p6#b166", "text": "Copy of overlayd-ai-technical-guide (1) (1) (2).pdf", "metadata": {"source": "nova-corpus-diagnostic", "page": 6, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p6#b167", "text": "(Preface) Multi-Corpora Ecosystem. (1).pdf", "metadata": {"source": "nova-corpus-diagnostic", "page": 6, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p6#b168", "text": "README (1).md", "metadata": {"source": "nova-corpus-diagnostic", "page": 6, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p6#b169", "text": "…Google Search (3)-compressed (2).pdf", "metadata": {"source": "nova-corpus-diagnostic", "page": 6, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p6#b170", "text": "EXPLANATION", "metadata": {"source": "nova-corpus-diagnostic", "page": 6, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p6#b171", "text": "sequencing", "metadata": {"source": "nova-corpus-diagnostic", "page": 6, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p6#b172", "text": "The sync tool isn't broken. It's being handed 81", "metadata": {"source": "nova-corpus-diagnostic", "page": 6, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p6#b173", "text": "unanswerable questions.", "metadata": {"source": "nova-corpus-diagnostic", "page": 6, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p6#b174", "text": "Every attempt so far has switched on two-way sync across a", "metadata": {"source": "nova-corpus-diagnostic", "page": 6, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p6#b175", "text": "tree that was already duplicated. rclone bisync in particular", "metadata": {"source": "nova-corpus-diagnostic", "page": 6, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p6#b176", "text": "will either abort or start fighting itself when it meets pairs like", "metadata": {"source": "nova-corpus-diagnostic", "page": 6, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p6#b177", "text": "these, because it genuinely cannot tell which side is", "metadata": {"source": "nova-corpus-diagnostic", "page": 6, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p6#b178", "text": "authoritative. So it errors out — or it picks wrong and mints a", "metadata": {"source": "nova-corpus-diagnostic", "page": 6, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p7#b179", "text": "p\ng", "metadata": {"source": "nova-corpus-diagnostic", "page": 7, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p7#b180", "text": "fresh (1) generation. Next round, there are more of them.", "metadata": {"source": "nova-corpus-diagnostic", "page": 7, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p7#b181", "text": "In plain terms: it isn't choking on a bug. It's choking on real", "metadata": {"source": "nova-corpus-diagnostic", "page": 7, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p7#b182", "text": "ambiguity it's being handed. Cleaning has to come before", "metadata": {"source": "nova-corpus-diagnostic", "page": 7, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p7#b183", "text": "connecting, and that ordering is the entire fix.", "metadata": {"source": "nova-corpus-diagnostic", "page": 7, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p7#b184", "text": "This isn't a new plan, either. Your own 2026-08-11 handoff", "metadata": {"source": "nova-corpus-diagnostic", "page": 7, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p7#b185", "text": "already lays out the correct order — and flags that the job", "metadata": {"source": "nova-corpus-diagnostic", "page": 7, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p7#b186", "text": "never started:", "metadata": {"source": "nova-corpus-diagnostic", "page": 7, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p7#b187", "text": "1\nEnumerate — what belongs in each bucket (canonical,", "metadata": {"source": "nova-corpus-diagnostic", "page": 7, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p7#b188", "text": "empirical, corporate)", "metadata": {"source": "nova-corpus-diagnostic", "page": 7, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p7#b189", "text": "2\nDedup pass — collapse the identical and near-identical", "metadata": {"source": "nova-corpus-diagnostic", "page": 7, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p7#b190", "text": "copies", "metadata": {"source": "nova-corpus-diagnostic", "page": 7, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p7#b191", "text": "3\nKeyword sweep — catch anything missed under similar", "metadata": {"source": "nova-corpus-diagnostic", "page": 7, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p7#b192", "text": "terms", "metadata": {"source": "nova-corpus-diagnostic", "page": 7, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p7#b193", "text": "Every failed attempt has been an attempt at what comes after", "metadata": {"source": "nova-corpus-diagnostic", "page": 7, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p7#b194", "text": "step 3, without ever doing step 2.", "metadata": {"source": "nova-corpus-diagnostic", "page": 7, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p7#b195", "text": "Still open", "metadata": {"source": "nova-corpus-diagnostic", "page": 7, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p7#b196", "text": "Nothing below has been started or decided.", "metadata": {"source": "nova-corpus-diagnostic", "page": 7, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p7#b197", "text": "AWAITING YOU", "metadata": {"source": "nova-corpus-diagnostic", "page": 7, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p7#b198", "text": "scope", "metadata": {"source": "nova-corpus-diagnostic", "page": 7, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p7#b199", "text": "How much to do in one go", "metadata": {"source": "nova-corpus-diagnostic", "page": 7, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p7#b200", "text": "Source of truth is settled; scope isn't. The options on the table:", "metadata": {"source": "nova-corpus-diagnostic", "page": 7, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p7#b201", "text": "fix obsidian-cli only, wire everything in verified stages, or", "metadata": {"source": "nova-corpus-diagnostic", "page": 7, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p7#b202", "text": "write the full plan first and change nothing. Given this has", "metadata": {"source": "nova-corpus-diagnostic", "page": 7, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p7#b203", "text": "fallen apart before, staged work with a check after each step is", "metadata": {"source": "nova-corpus-diagnostic", "page": 7, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p7#b204", "text": "the cautious read — but that's your call, not mine.", "metadata": {"source": "nova-corpus-diagnostic", "page": 7, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p8#b205", "text": "NOT STARTED", "metadata": {"source": "nova-corpus-diagnostic", "page": 8, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p8#b206", "text": "binaries in git", "metadata": {"source": "nova-corpus-diagnostic", "page": 8, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p8#b207", "text": "What to do with 421 MB of PDFs and an 81.6 MB zip", "metadata": {"source": "nova-corpus-diagnostic", "page": 8, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p8#b208", "text": "Raw binaries that large don't belong committed into a git repo.", "metadata": {"source": "nova-corpus-diagnostic", "page": 8, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p8#b209", "text": "Git LFS, a .gitignore that keeps them Drive-only, or simply", "metadata": {"source": "nova-corpus-diagnostic", "page": 8, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p8#b210", "text": "accepting the bloat are all legitimate choices with real trade-", "metadata": {"source": "nova-corpus-diagnostic", "page": 8, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p8#b211", "text": "offs. Not a decision to be made silently on your behalf.", "metadata": {"source": "nova-corpus-diagnostic", "page": 8, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p8#b212", "text": "OWED TO YOU", "metadata": {"source": "nova-corpus-diagnostic", "page": 8, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p8#b213", "text": "prompt caching", "metadata": {"source": "nova-corpus-diagnostic", "page": 8, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p8#b214", "text": "The prompt caching explanation", "metadata": {"source": "nova-corpus-diagnostic", "page": 8, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p8#b215", "text": "You said you read the handed-off caching doc and couldn't", "metadata": {"source": "nova-corpus-diagnostic", "page": 8, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p8#b216", "text": "make heads or tails of it. That's still outstanding, and", "metadata": {"source": "nova-corpus-diagnostic", "page": 8, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p8#b217", "text": "deliberately not attempted here — handing you a second dense", "metadata": {"source": "nova-corpus-diagnostic", "page": 8, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p8#b218", "text": "document about the first dense document would miss the point", "metadata": {"source": "nova-corpus-diagnostic", "page": 8, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p8#b219", "text": "entirely. When you want it, it gets read fresh from the current", "metadata": {"source": "nova-corpus-diagnostic", "page": 8, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p8#b220", "text": "official material and explained in the register of this report, not", "metadata": {"source": "nova-corpus-diagnostic", "page": 8, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p8#b221", "text": "that one.", "metadata": {"source": "nova-corpus-diagnostic", "page": 8, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p8#b222", "text": "Glossary", "metadata": {"source": "nova-corpus-diagnostic", "page": 8, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p8#b223", "text": "Every term used above that assumed knowledge it had no business assuming.", "metadata": {"source": "nova-corpus-diagnostic", "page": 8, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p8#b224", "text": "wake lock\nA request that stops the phone's processor from sleeping. It", "metadata": {"source": "nova-corpus-diagnostic", "page": 8, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p8#b225", "text": "does not stop Android from killing your app — which is the", "metadata": {"source": "nova-corpus-diagnostic", "page": 8, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p8#b226", "text": "whole misunderstanding behind the dropped session.", "metadata": {"source": "nova-corpus-diagnostic", "page": 8, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p8#b227", "text": "phantom process killer\nA feature in Android 12 and later that hunts down", "metadata": {"source": "nova-corpus-diagnostic", "page": 8, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p8#b228", "text": "background processes started by apps like Termux and", "metadata": {"source": "nova-corpus-diagnostic", "page": 8, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p8#b229", "text": "terminates them, wake lock or no wake lock.", "metadata": {"source": "nova-corpus-diagnostic", "page": 8, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p8#b230", "text": "$TMPDIR\nA scratch folder for temporary files. Anything in it can be", "metadata": {"source": "nova-corpus-diagnostic", "page": 8, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p8#b231", "text": "deleted at any moment without warning. Your handoffs were", "metadata": {"source": "nova-corpus-diagnostic", "page": 8, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p8#b232", "text": "living there.", "metadata": {"source": "nova-corpus-diagnostic", "page": 8, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p8#b233", "text": "md5 / checksum\nA short fingerprint calculated from a file's contents. Two files", "metadata": {"source": "nova-corpus-diagnostic", "page": 8, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p9#b234", "text": "with the same fingerprint are identical byte for byte — which", "metadata": {"source": "nova-corpus-diagnostic", "page": 9, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p9#b235", "text": "is how the duplicate PDFs were proven rather than guessed at.", "metadata": {"source": "nova-corpus-diagnostic", "page": 9, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p9#b236", "text": "fuse\nThe kind of filesystem Android uses for shared storage. It can't", "metadata": {"source": "nova-corpus-diagnostic", "page": 9, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p9#b237", "text": "store Unix permission bits or symbolic links, which is why git", "metadata": {"source": "nova-corpus-diagnostic", "page": 9, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p9#b238", "text": "needs special settings to live there.", "metadata": {"source": "nova-corpus-diagnostic", "page": 9, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p9#b239", "text": "rclone bisync\nTwo-way sync between a local folder and cloud storage,", "metadata": {"source": "nova-corpus-diagnostic", "page": 9, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p9#b240", "text": "changes flowing in both directions. It's the mode that breaks", "metadata": {"source": "nova-corpus-diagnostic", "page": 9, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p9#b241", "text": "when it finds files it can't tell apart.", "metadata": {"source": "nova-corpus-diagnostic", "page": 9, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p9#b242", "text": "source of truth\nThe one copy that wins when copies disagree. Without picking", "metadata": {"source": "nova-corpus-diagnostic", "page": 9, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p9#b243", "text": "one, every sync is a coin flip. Yours is now the on-device vault.", "metadata": {"source": "nova-corpus-diagnostic", "page": 9, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p9#b244", "text": "git LFS\nAn add-on that stores large binary files outside the main", "metadata": {"source": "nova-corpus-diagnostic", "page": 9, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p9#b245", "text": "repository so it doesn't balloon. The usual answer for PDFs", "metadata": {"source": "nova-corpus-diagnostic", "page": 9, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p9#b246", "text": "and zips in a repo.", "metadata": {"source": "nova-corpus-diagnostic", "page": 9, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p9#b247", "text": "spawn mode\nHow Remote Control handles new sessions. same-dir keeps a", "metadata": {"source": "nova-corpus-diagnostic", "page": 9, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p9#b248", "text": "server running that accepts many of them; session is single-", "metadata": {"source": "nova-corpus-diagnostic", "page": 9, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p9#b249", "text": "session and exits when that one ends.", "metadata": {"source": "nova-corpus-diagnostic", "page": 9, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p9#b250", "text": "sandboxed\nAndroid's rule that an app may only read its own files plus", "metadata": {"source": "nova-corpus-diagnostic", "page": 9, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p9#b251", "text": "shared storage. It's why Obsidian and Markor physically", "metadata": {"source": "nova-corpus-diagnostic", "page": 9, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p9#b252", "text": "cannot see anything inside Termux's home directory.", "metadata": {"source": "nova-corpus-diagnostic", "page": 9, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p9#b253", "text": "Every claim above was verified on-device rather than assumed. Where something could not be", "metadata": {"source": "nova-corpus-diagnostic", "page": 9, "type": "paragraph"}}
+{"id": "nova-corpus-diagnostic#p9#b254", "text": "verified — the two Android power settings — it's stated as unverified rather than papered over.", "metadata": {"source": "nova-corpus-diagnostic", "page": 9, "type": "paragraph"}}

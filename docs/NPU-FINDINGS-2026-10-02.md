@@ -26,7 +26,7 @@ All NPU testing was stopped on 2026-10-02 at the operator's call. This file reco
 ## 3. Never done / never verified
 - The Qualcomm reference run on this phone: their GenieX Chat app (official Android path), to get a baseline from Qualcomm's own route.
 - The ADB shell-user test (RESUME item since 2026-10-01): same binary, outside Termux's sandbox.
-- Any QAIRT bundle run (Qwen3-VL 4B, InternVL 2B/4B, SmolLM2 1.7B for 8 Elite). These are AI Hub's precompiled, chip-specific route, and our server doesn't support it yet.
+- Any QAIRT bundle run (InternVL 2B/4B, SmolLM2 1.7B for 8 Elite). These are AI Hub's precompiled, chip-specific route, and our server doesn't support it yet.
 - Any speech model run (Whisper, Zipformer, MeloTTS, Piper, DeepSpeech, Distil-Whisper).
 - Vision input (`mmproj`) for any VL model.
 - Vendor docs: about 12 of 49 read fully before today's tests. Rule now: read all docs for a model before loading it.

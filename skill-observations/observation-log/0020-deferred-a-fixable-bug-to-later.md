@@ -1,7 +1,7 @@
 ---
 id: 20
 title: "Agent reported a small fixable bug as 'fix later' instead of fixing it in the session"
-status: open
+status: actioned
 type: open-source
 skill: []
 proposes_skill: []
@@ -11,8 +11,8 @@ area: "session discipline; deferral"
 date: 2026-10-02
 session_context: "npu-serve start script hung when its output was piped; agent logged it as 'Fix later' in the summary"
 parked_until:
-resolved:
-resolution:
+resolved: 2026-10-08
+resolution: "Already applied in live ~/.claude/CLAUDE.md lines 110-111 (Fix it now); found by weekly review presence check"
 reference:
 ---
 

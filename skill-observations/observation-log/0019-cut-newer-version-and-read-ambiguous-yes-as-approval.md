@@ -1,7 +1,7 @@
 ---
 id: 19
 title: "Cleanup deleted the newer version (Kokoro v1.1) and kept the older; an ambiguous 'yeah' was read as approval of two open questions"
-status: open
+status: actioned
 type: open-source
 skill: []
 proposes_skill: []
@@ -11,8 +11,8 @@ area: "device cleanup / dedup decisions; approval interpretation"
 date: 2026-10-02
 session_context: "Model and voice-stack cleanup on the phone; cleanup table asked two questions (cut Kokoro v1.1? cut MTP Gemma + E2B?) and the operator replied 'Yeah cuz I know we're going to be deleting way more than six'"
 parked_until:
-resolved:
-resolution:
+resolved: 2026-10-08
+resolution: "Already applied in live ~/.claude/CLAUDE.md lines 103-106 (Keep the newest; Approval is per item); found by weekly review presence check"
 reference:
 ---
 

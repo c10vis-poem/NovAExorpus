@@ -1,7 +1,7 @@
 ---
 id: 4
 title: Config inspection dumped live bearer tokens into the transcript
-status: open
+status: actioned
 type: open-source
 skill: [android-termux-operator]
 proposes_skill: []
@@ -9,8 +9,8 @@ siblings_checked: none (no skill-families.md registry present on device)
 area: Safety section — read-only inspection
 date: 2026-09-25
 session_context: Reviewing MCP server config (~/.claude.json) and a systemd unit on a GCP VM during a cost/architecture audit
-resolved:
-resolution:
+resolved: 2026-10-08
+resolution: "Staged for android-termux-operator at skill-updates/2026-10-08/android-termux-operator (weekly review)"
 reference:
 ---
 

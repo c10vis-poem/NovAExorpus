@@ -3,12 +3,24 @@
 Durable cross-session backlog. Not rewritten each session — items persist until resolved or explicitly dropped.
 
 ## Routines
-last-housekeeping: 2026-10-01
+last-housekeeping: 2026-10-08
 - Roll _recaps/ older than 30 days into a monthly summary, delete the originals
 - Audit repos: uncommitted / unpushed / stray branches → merge or discard with the builder
 - Review the task-observer observation log
 - Check cloud billing (VM disks)
 - Builder reminders: (add here)
+
+## Added 2026-10-08 (session 34c3e229; the run plan is RESUME.md START HERE, as subagent workstreams)
+- **Deferred by the operator 2026-10-08 (old START HERE 3):** NPU work, one model at a time WITH the operator (`docs/NPU-FINDINGS-2026-10-02.md` §4): reboot, check the clock caps, InternVL 2B first. Carried over, not started.
+- **Deferred by the operator 2026-10-08 (old START HERE 1):** Grill session (`wiki-admin`, Pocock chain typed by the operator: `/setup-matt-pocock-skills` → `/grill-with-docs` → `/to-spec` → `/to-tickets` → `/implement`). Inputs: the PRIORITY ONE docs (`_#Repository-layout.txt` + `Master_dumbass_plan-session/`), `Documents/Session-reports/2026-10-05/`, the wiki-admin agent draft (`~/wiki-admin/AGENTS.md`), PENDING "Added 2026-10-05".
+- **Grill (RESUME item 1):** everything in `~/wiki-admin/GRILL-INPUTS.md`: vault layout, `repos/` mirrors, 2x2 converter/checker design (build `check2.py` on Poppler), OmniRoute compression + a vision plugin for non-Fable models, aesop-xi PR #18 contract, H1–H8 review, staged skill updates (`skill-updates/2026-10-08/`).
+- **NPU job queue (item 2):** build `NvAEx-Recaps/npu/` + `npu-run` + `npu-queued`; then the orchestrator runs the model queue unattended (Qwen 3.5 only).
+- **PRs/CI (item 3):** per `session-work/2026-10-08/pr-triage-report.md`. Operator action: enable Actions on the honey fork (https://github.com/c10vis-poem/NoVa-honey-for-devs/actions: 0 runs ever; required check now `test`).
+- **Repos (item 4):** `repos/` mirrors replace MASTER-*; recaps into NvAEx-Recaps; renames (NovA-/NoVa- → NvAEx-, aesop-xi → Aesop-Xi); delete NovA-Corpus + 44 old branches.
+- **Vault (item 5):** fold the 12 `*unresolved*` files into this file; 12 PDFs still failing (fused tokens); 82 exact duplicates in `clean_md/` (report only); `convert_raw_to_markdown.py` code only on Drive.
+- **Observations (item 6):** 13 open (0001, 0005–0007, 0012, 0015–0017, 0023, 0024, 0028, 0029; 0018 empty).
+- **Secrets:** add a second age key (only the phone can decrypt `NvAEx-Recaps/secrets`).
+- **Hooks:** `test-ship-v2.sh` fails 14/18 on main too; H8 should match required check names against job names.
 
 ## Added 2026-10-05
 - **Grill session (all of these are drafts/inputs, not decisions):**
@@ -17,14 +29,11 @@ last-housekeeping: 2026-10-01
   - Wiki-admin agent DRAFT in `~/wiki-admin/AGENTS.md`. The real roles of the files-admin and Oracle agents (`file_administrator.yaml` / `oracle_helpdesk.yaml` are wrong, per the operator).
   - Wiki corpus inventory to build from: `~/.claude/session-work/2026-10-05/WIKI-SYNTHESIS.md` (+ `agent-wiki-{A..K}.md`, incl. each batch's "Chat — mine later" list for extracting scripts/skills from chats).
   - Stop-hook enforcement of the subagent protocol; packaging H1–H7 as installable; the `CLAUDE.md`-trigger design (now AGENTS.md).
-- **Vault cleanups awaiting the operator's yes:** delete the 12 `MASTER-*.conflict-android-*` files (Zip has copies); remove `WebView/` (Android browser cache) from the vault and gitignore it; delete the 2 empty files (`Untitled.md`, `.md`); move `_quarantine/` (3 GB) and `qairt_/` (87 MB) out of the vault; a hook that blocks agent writes in Documents outside `01-inbox/` and the pinned root files.
-- **Missing tools named in the docs** (not on disk): `compile_manifest.py`, `doc_to_skill_and_tool.py`, `system_housekeeper.sh`, `boot.sh`, `htp_partition_calc.py`, `smart-grep-hook.sh`. The `.migrate` BM25 index uses pickle: replace it.
+- **Missing tools named in the docs** (not on disk): `compile_manifest.py`, `doc_to_skill_and_tool.py`, `system_housekeeper.sh`, `boot.sh`, `htp_partition_calc.py`, `smart-grep-hook.sh`. (BM25 pickle replaced by JSON 2026-10-08.)
 - **NvAEx-agentk:** the operator creates the GitHub org `NvAEx-agentk`; then transfer `c10vis-poem/NvAEx-agentk` in as `NvAEx-agentk/skills`, add the org front page, update the links. Branch protection after the first CI run.
 - **GCP VM:** the operator is leaning toward retiring it. Copy anything needed off first, then delete it (stops the billing; the plaintext OpenRouter key goes with it).
-- **Master-files token:** `VAULT_DISPATCH_TOKEN` can push but cannot open PRs. Re-make it with Contents + Pull requests write and re-set it in all 7 repos (RESUME item 0). Repo-history erase is operator-run (RESUME item 0b).
 - **APK session** to resume: `cd ~/agent-stack && claude --resume 125f2d23-df2c-4a1b-823c-45acfa0cf8af` (its own handoff: `~/agent-stack/RESUME.md`).
 - **Hardware brainstorm** (private): parked in `~/.claude/session-work/2026-10-04/SESSION-LOG.md` (prior-art search to do). Never into a repo.
-- **Observation review:** 0022–0025 new this session (open), on top of the older open ones.
 - **Carried from the 2026-10-04 START HERE** (deferred 2026-10-05):
   - Planning session in the wiki-admin agent (now the grill session, RESUME item 1).
   - Close the wiki-admin open decisions (guide §10): 2b–2e still open.

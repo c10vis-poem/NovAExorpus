@@ -1,2 +1,2 @@
 
-[Universal file configuration](../_res/Universal%20file%20configuration.pdf)
+[[Markor/Universal file configuration|Universal file configuration]]

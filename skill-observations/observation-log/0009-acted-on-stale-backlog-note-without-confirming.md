@@ -1,7 +1,7 @@
 ---
 id: 9
 title: "Removed content on the strength of a stale backlog note, then had to revert"
-status: open
+status: actioned
 type: open-source
 skill: [android-termux-operator]
 proposes_skill: []
@@ -11,8 +11,8 @@ area: "housekeeping edits to instruction files"
 date: 2026-09-30
 session_context: "NovAExorpus housekeeping: fixing false claims in AGENTS.md / aesop-xi"
 parked_until:
-resolved:
-resolution:
+resolved: 2026-10-08
+resolution: "Staged for android-termux-operator at skill-updates/2026-10-08/android-termux-operator (weekly review)"
 reference:
 ---
 
