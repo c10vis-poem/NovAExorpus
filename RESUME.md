@@ -12,6 +12,7 @@ Every START HERE item below is a **workstream** written so one orchestrator can 
 Parallel-safe groups: **A** = items 2, 3, 4 (GitHub + repos) · **B** = items 5, 6 (vault files; never two vault-moving agents at once) · **C** = item 1 (operator-led) · item 0 first, alone.
 
 ## NEXT SESSION — START HERE
+**Operator, 2026-10-09: items 0, 3, 4 and 5 have been carried over for more than a week. The next session finishes them FIRST, completely, as parallel subagents, before any other work (grill and NPU included). "Partly done" is not a status: each item ends done with evidence, or blocked on something only the operator can do, named exactly.**
 The Stop gate requires a status for each numbered item: `resume-item <n> done|blocked "<evidence / what's needed>"`.
 
 0. **Carry-over check (first, alone; haiku).** Open `~/.claude/session-work/2026-10-08/WRAPUP-QUEUE.md`. Every `[ ]` line not shipped at the 2026-10-08 wrap-up becomes part of items 2–6 below; mark `[x]` what the `## Shipped` section of `_recaps/2026-10-08-34c3e229.md` proves shipped. Done = each open line assigned to an item.
