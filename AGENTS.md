@@ -50,7 +50,7 @@ actually read.
    GitHub's secret scanning and push protection are the secret scan (plus
    the gitleaks CI job); an agent grepping is not a substitute.
 4. CI runs, PR opens, auto-merge into `main` on green.
-5. Leave the branch in place after merge — do not delete it.
+5. Delete the branch after merge (repo auto-delete is on).
 6. Nothing sits unmerged: every pending change, unpushed commit and open
    PR is merged or flagged as needing a fix.
 7. Never change these rules or invent exceptions when something breaks —
