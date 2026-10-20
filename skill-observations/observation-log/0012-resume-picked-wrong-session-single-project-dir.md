@@ -1,7 +1,7 @@
 ---
 id: 12
 title: "'Resume the last session' answered from one project folder; the real last session lived in another"
-status: open
+status: parked
 type: open-source
 skill: [task-observer]
 proposes_skill: []
@@ -10,7 +10,7 @@ siblings_checked: "no family registry; checked — instance-specific to session 
 area: "session start / resume"
 date: 2026-10-01
 session_context: "Operator asked to resume the last session. The agent listed transcripts only in the home-folder project dir; the actual last session was in the agent-stack project dir (sessions are stored per start directory)."
-parked_until:
+parked_until: "grill session decides"
 resolved:
 resolution:
 reference:

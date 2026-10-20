@@ -1,7 +1,7 @@
 ---
 id: 1
 title: Honey mode stayed declared-active but unenforced through a long investigation session
-status: open
+status: parked
 type: open-source
 skill: [honey]
 proposes_skill: []
@@ -9,7 +9,7 @@ siblings_checked: "no skill-families.md registry exists yet; evaluated honey-ccr
 area: activation / enforcement mechanism
 date: 2026-09-18
 session_context: "Long multi-hour infrastructure investigation session (OmniRoute/Mem0/Terrestrial Brain/GCP). A SessionStart hook declared 'Honey mode is ACTIVE (intensity: ultra)' at the very start, but responses grew into multi-paragraph recaps and citations as the session lengthened. User: 'you need to set up that honey for devs and actually start using it cuz you are producing way too many fucking words I did not need six paragraphs about something that doesn't exist.'"
-parked_until:
+parked_until: "fork branch fix/honey-enforce-obs0001 merged into NoVa-honey-for-devs main and the plugin updated on the device"
 resolved:
 resolution:
 reference:
@@ -20,3 +20,5 @@ reference:
 **Suggested improvement:** Honey's activation reminder could name the specific failure mode explicitly ("after any multi-tool investigation turn, compress the report to a list — no recap of what the user already said, no restating of internal doc paths") rather than a general intensity setting, since the general framing didn't survive contact with a long session. A structural self-check before sending a response that follows 3+ tool calls (similar to task-observer's "checkpoint after every 3rd completed todo item" pattern) would catch this without relying on remembering a session-start banner.
 
 **Principle:** A behavior declared "active" in a passive context injection is not the same as a behavior enforced — anything meant to hold across a long session needs a structural trigger tied to an event in the tool record (like task-observer's checkpoint pattern), not just a standing instruction the agent is expected to keep re-noticing on its own.
+
+**Instance 2026-10-09:** with Honey active, replies to the operator's 3 questions grew to many paragraphs plus new questions while the operator was still answering; operator: "you're going way too heavy... I didn't read a single one of them". Second instance after the 0001 fix was written but not yet merged.

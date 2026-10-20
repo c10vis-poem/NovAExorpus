@@ -1,7 +1,7 @@
 ---
 id: 30
 title: "START HERE items carried session after session as deferred or partly done"
-status: open
+status: parked
 type: internal
 skill: []
 proposes_skill: []
@@ -10,7 +10,7 @@ siblings_checked: "none: target is a hook, not a skill family"
 area: "Session wrap-up; RESUME carry-over"
 date: 2026-10-09
 session_context: "2026-10-08/09 session: workstreams 0, 3, 4, 5 (PR/CI cleanup, repo mirrors/renames/deletions, vault cleanup) moved to the next RESUME again"
-parked_until:
+parked_until: "grill session decides"
 resolved:
 resolution:
 reference: "NovAExorpus/RESUME.md START HERE; ~/.claude/session-work/2026-10-08/WRAPUP-QUEUE.md"

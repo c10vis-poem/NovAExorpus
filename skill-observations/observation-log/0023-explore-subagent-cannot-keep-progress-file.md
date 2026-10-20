@@ -1,7 +1,7 @@
 ---
 id: 23
 title: "Spawned a read-only Explore subagent under a standing order that requires a live progress file"
-status: open
+status: parked
 type: internal
 skill: []
 proposes_skill: [subagent-protocol]
@@ -10,7 +10,7 @@ siblings_checked: "none — rule lives in CLAUDE.md, not a skill family"
 area: "subagent spawning — agent type vs progress-file rule"
 date: 2026-10-05
 session_context: "Documents/vault inventory for restructure plan"
-parked_until:
+parked_until: "block B of skill-updates/2026-10-08/claude-md/CLAUDE.md.additions.md is pasted into ~/.claude/CLAUDE.md"
 resolved:
 resolution:
 reference:

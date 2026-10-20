@@ -17,10 +17,35 @@ last-housekeeping: 2026-10-08
 - **NPU job queue (item 2):** build `NvAEx-Recaps/npu/` + `npu-run` + `npu-queued`; then the orchestrator runs the model queue unattended (Qwen 3.5 only).
 - **PRs/CI (item 3):** per `session-work/2026-10-08/pr-triage-report.md`. Operator action: enable Actions on the honey fork (https://github.com/c10vis-poem/NoVa-honey-for-devs/actions: 0 runs ever; required check now `test`).
 - **Repos (item 4):** `repos/` mirrors replace MASTER-*; recaps into NvAEx-Recaps; renames (NovA-/NoVa- → NvAEx-, aesop-xi → Aesop-Xi); delete NovA-Corpus + 44 old branches.
-- **Vault (item 5):** fold the 12 `*unresolved*` files into this file; 12 PDFs still failing (fused tokens); 82 exact duplicates in `clean_md/` (report only); `convert_raw_to_markdown.py` code only on Drive.
+- **Vault (item 5):** ~~fold the `*unresolved*` files into this file~~ done 2026-10-09 (10 found, see "Folded 2026-10-09"); 12 PDFs still failing (fused tokens); 82 exact duplicates in `clean_md/` (report only); `convert_raw_to_markdown.py` code only on Drive.
 - **Observations (item 6):** 13 open (0001, 0005–0007, 0012, 0015–0017, 0023, 0024, 0028, 0029; 0018 empty).
 - **Secrets:** add a second age key (only the phone can decrypt `NvAEx-Recaps/secrets`).
 - **Hooks:** `test-ship-v2.sh` fails 14/18 on main too; H8 should match required check names against job names.
+
+## Folded 2026-10-09 from the `*unresolved*` files (item 5)
+Sources: vault `unresolved.md` (18 numbered items, dated 2026-07-17 to 2026-09-06; the copies in `clean_md/`, `02_wiki_md/vendors/qualcomm/`, `__RESUME.md/_PENDING.md/`, `Drive_sync/`, `raw_database/Dump/zip/` were this file or its first 13 items) and 4 Spark-proposal `UNRESOLVED.md` tickets. Most are 1-3 months old and unverified since: re-check before acting. Already tracked elsewhere here: PR #18 (Added 2026-10-01), ECC review, OpenWiki leftovers, the code-review-graph crash.
+- **[aesop-xi] #1 (2026-07-17):** Tailscale install, status unknown, never re-checked.
+- **[aesop-xi] #2:** T3 infra (Jetson Orin Nano, Rubik Pi) on hold, hardware not procured; deploy scripts exist in `deploy/jetson/`, `deploy/rubik-pi/`.
+- **[aesop-xi] #3:** clone `obsidian-skills` into `~/vault/.claude/skills/obsidian-skills`, never done (the plugin form is installed; see Added 2026-10-02 "Obsidian skills load twice").
+- **[aesop-xi] #4 (2026-08-28):** `notebooklm` login never authenticated (empty `profiles/`); needs a non-VNC login path or sign-off on VNC for the one-time step. Overlaps "NotebookLM: operator runs `notebooklm login`".
+- **[aesop-xi] #5:** OpenWiki fork upstream checkpointer PR: unclear if wanted; the fork diverged (NPU/voice work). OpenWiki is retired (2026-10-02): likely drop.
+- **[aesop-xi] #6 (grill):** open architecture decisions: Auditor in-stack vs out-of-band (leaning cloud GLM-5.2); Recall + Strategic memory share one vector backend or not; home executive on Jetson vs phone Qwen.
+- **[aesop-xi] #7 (deferred 2026-08-31):** HTTP/WebSocket server for the voice engine (Flask/FastAPI around `VoiceEngine`, spec in `ARCHITECTURE.md`). Not built.
+- **[aesop-xi] #8 (grill):** OmniRoute / OB1 / ReasoningBank routing (`ARCHITECTURE.md` section 10): OB1 vs OmniRoute's SQLite hybrid store, is "episodic" a 5th memory type, Postgres+vector role (continuous recall vs post-training eval store).
+- **[global] #9:** universal skill placement: apply the `obsidian-skills` directory-marketplace plugin pattern to graphify / notebooklm-py / honey-for-devs.
+- **[aesop-xi] #10:** 6 unreviewed remote commits (`aesopd.py` bridge, supervised `llamad` NPU daemon, `protocol/bridge-protocol.md`, `termux-helper` skill) from `claude/wiki-quinn-npu-local-m1crql`; read before the terminal-APK / NPU-manager work.
+- **[global] #11 (2026-08-31, "eventually"):** MASTER-SKILLS.md: concatenation vs index table; needs `projects/<name>/skills` symlinks. Likely moot once `repos/` mirrors retire MASTER-* (Repos item 4); confirm or drop.
+- **[global] #12:** ECC `unified-memory` vs hand-built #dumbass: adopt/fold decision not made. ECC is parked.
+- **[aesop-xi] #13 (2026-08-31):** ECC dashboard on tablet via SSH tunnel (sshd :8022, `ssh -L 3456:127.0.0.1:3456`), never confirmed; phone LAN IP changes.
+- **[aesop-xi] #14 (2026-09-06):** OmniRoute dev server :20128 does not run on the phone: proot-Debian Node 20.20.2 lacks `webidl.util.markAsUncloneable` (undici); needs Node 22+.
+- **[aesop-xi] #15 (2026-09-06):** terrestrial-brain Obsidian-plugin build fails `tsc: not found`, not root-caused.
+- **[global] #16 (2026-09-06):** code-review-graph MCP repointed at a proot-Debian venv (Claude user config JSON and terrestrial-brain `.mcp.json`), live connection unconfirmed.
+- **[happy-ending] #17 (2026-09-06):** plugin registered by hand-editing `known_marketplaces.json` / `installed_plugins.json` / `settings.json` (the `/plugin marketplace add` flow is broken); loading in a fresh session unconfirmed.
+- **[happy-ending] #18:** leftover `~/repos/happy-ending/.agents/skills/happy-ending.bak-preSymlink/`; operator deletes it.
+- **Spark tickets (aesop-xi; Staged/Pending):** #01 FastRPC thermal telemetry hook (Hexagon v79 HTP registers, replacing the `/sys/class/thermal` fallback in `hardware_throttler.py`); #02 sync `state/audit_ledger.db` to the #d.u.m.b.a.s.s. store on the Jetson (waits for schema); #03 24 h HMAC clearance rotation between Razr and Jetson over Tailscale.
+- **Spark tickets (novaexopia):** NX-01 HIGH automate mDNS wireless-ADB pairing in `WirelessAdbBridgeService`; NX-02 HIGH zero-copy `ASharedMemory` + SCM_RIGHTS between aesc and aeyre; NX-03 MEDIUM dual-display (22:9 / 1:1) dynamic crop bounds in `screen_vision_bounds.json`; NX-04 MEDIUM Tailscale auto-reconnect with backoff in `postgres_mcp.json` and client wrappers; NX-05 LOW profile `file_administrator.yaml` under low ionice (the operator says that yaml is wrong, see Added 2026-10-05).
+- **Spark tickets (novus-aexenti):** (1) NPU thermal throttling with Moonshine STT + Qwen 0.8B on long streams, floor 25 tok/s; (2) 9B Qwen 16k KV cache exceeds 6.2 GB on the Jetson, try `-ctk q4_0 -ctv q4_0`; (3) migrate `rolling_habits.json` to the SQLite #d.u.m.b.a.s.s. store?; (4) run the Car Wash end-to-end harness.
+- **Spark tickets (skills-and-capabilities; all PENDING):** SKILLS-01 TypeScript AST parser (babel/typescript bridge) for code-review-graph `graph_builder.py`; SKILLS-02 live NotebookLM API connector for `query_notebook.py`; SKILLS-03 Obsidian `.canvas` export from `graph_sync.py`; SKILLS-04 cron for `daily_scraper.py` feeding `trending_databank.jsonl`.
 
 ## Added 2026-10-05
 - **Grill session (all of these are drafts/inputs, not decisions):**
