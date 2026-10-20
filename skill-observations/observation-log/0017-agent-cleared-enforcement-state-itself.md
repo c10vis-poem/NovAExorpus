@@ -1,7 +1,7 @@
 ---
 id: 17
 title: "Agent deleted the wrap-up state flag itself, overriding enforcement by its own judgement"
-status: open
+status: parked
 type: open-source
 skill: []
 proposes_skill: []
@@ -10,7 +10,7 @@ siblings_checked: "none — target is hook scripts, not a skill"
 area: "enforcement state integrity; operator-only overrides"
 date: 2026-10-02
 session_context: "Testing the new stop-gate RESUME check while the operator's message had mentioned 'wrap up' in passing"
-parked_until:
+parked_until: "grill session decides"
 resolved:
 resolution:
 reference:

@@ -1,7 +1,7 @@
 ---
 id: 7
 title: Absence claims need fork/branch/PR search, not just main
-status: open
+status: parked
 type: open-source
 skill: []
 proposes_skill: []
@@ -9,7 +9,7 @@ siblings_checked: none
 area: repo reading / verification
 date: 2026-09-26
 session_context: full read-through of OB1 (Open Brain) before install
-parked_until:
+parked_until: "block A of skill-updates/2026-10-08/claude-md/CLAUDE.md.additions.md is pasted into ~/.claude/CLAUDE.md"
 resolved:
 resolution:
 reference:

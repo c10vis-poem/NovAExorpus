@@ -1,7 +1,7 @@
 ---
 id: 28
 title: "Standing order to spawn subagents ignored during a multi-repo audit"
-status: open
+status: parked
 type: internal
 skill: []
 proposes_skill: []
@@ -10,7 +10,7 @@ siblings_checked: "none: target is an instructions file, not a skill family"
 area: "Subagents standing order"
 date: 2026-10-08
 session_context: "Wrap-up straggler audit across 16 fork repos plus a uniqueness check of a repo slated for deletion"
-parked_until:
+parked_until: "block B of skill-updates/2026-10-08/claude-md/CLAUDE.md.additions.md is pasted into ~/.claude/CLAUDE.md"
 resolved:
 resolution:
 reference:

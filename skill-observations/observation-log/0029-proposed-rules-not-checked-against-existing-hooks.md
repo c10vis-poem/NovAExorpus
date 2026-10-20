@@ -1,7 +1,7 @@
 ---
 id: 29
 title: "Subagent/review output relayed without checking the operator's existing setup (hooks, forks, rules)"
-status: open
+status: parked
 type: open-source
 skill: [task-observer]
 proposes_skill: []
@@ -10,7 +10,7 @@ siblings_checked: "none: task-observer belongs to no registered family (no skill
 area: "Weekly review staging; relaying subagent results"
 date: 2026-10-08
 session_context: "Observation review dispatched to a subagent; its staged CLAUDE.md additions were presented to the operator"
-parked_until:
+parked_until: "fork branch fix/obs-0006-0015-hook-and-review-marker merged into aesop-task-observer main"
 resolved:
 resolution:
 reference: "skill-updates/2026-10-08/claude-md/CLAUDE.md.additions.md; aesop-xi hooks/README.md"
