@@ -19,3 +19,9 @@
 2026-10-18 08:55 [home] session-start scan: files=13 parsed=13 principles=unparsed
 2026-10-19 18:47 [home] session-start scan: files=15 parsed=15 principles=unparsed
 2026-10-20T01:47:46Z session 7cb1c8c0: protocol re-run post-compaction on operator prompt; 0006 extended
+2026-10-20 21:16 [home] session-start scan: files=16 parsed=16 principles=unparsed
+2026-10-20 21:18 [home] session-start scan: files=16 parsed=16 principles=unparsed
+2026-10-20 21:22 [home] session-start scan: files=16 parsed=16 principles=unparsed
+2026-10-21 01:36 [dual-handoff-dl] session-start scan: files=17 parsed=17 principles=unparsed
+2026-10-21 01:37 [NovAExorpus] session-start scan: files=17 parsed=17 principles=unparsed
+2026-10-21 08:02 [wt-recaps] session-start scan: files=18 parsed=18 principles=unparsed
