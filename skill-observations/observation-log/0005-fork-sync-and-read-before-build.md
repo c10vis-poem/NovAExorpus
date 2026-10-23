@@ -1,7 +1,7 @@
 ---
 id: 5
 title: Sync forks with upstream and read repo docs before any install/build
-status: parked
+status: actioned
 type: open-source
 skill: [android-termux-operator]
 proposes_skill: [repo-onboarding-preflight]
@@ -9,7 +9,9 @@ siblings_checked: "termux family: termux-helper, android-termux-operator — ope
 area: required workflow (inspect read-only state first)
 date: 2026-09-23
 session_context: "OpenWiki and dsh installs on Termux; 2026-09-30 Hermes reinstall on Termux"
-parked_until: "grill session decides"
+parked_until:
+resolved: 2026-10-23
+resolution: "Hook build-doc-gate.sh (Aesop-Xi PR #77) blocks install/build in a repo until its install doc was read; H2 sync-on-use does the fork sync. Installed live 2026-10-23."
 ---
 
 **Issue:** Launched an OpenWiki install 301 commits behind upstream (v0.0.1 vs 0.5.2) and started building dsh 3,009 commits behind; trial-and-errored native build failures instead of reading the repo's docs/platform notes first. A prior session set OpenWiki up bare-bones without reading its feature docs.

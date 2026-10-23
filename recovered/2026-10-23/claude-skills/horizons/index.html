@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="HORIZONS">
+  <meta name="application-name" content="HORIZONS">
+  <meta name="theme-color" content="#0a0c10">
+  <meta name="description" content="N0.V4 AI orchestration switchboard">
+  <title>HORIZONS</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{width:100%;height:100%;overflow:hidden;background:#0a0c10}
+    #root{width:100%;height:100%}
+    ::-webkit-scrollbar{width:4px}
+    ::-webkit-scrollbar-track{background:transparent}
+    ::-webkit-scrollbar-thumb{background:#1e2330;border-radius:2px}
+    @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+    @keyframes spin{to{transform:rotate(360deg)}}
+    #splash{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:16px;background:#0a0c10;z-index:99999}
+    #splash .dot{width:10px;height:10px;border-radius:50%;background:#3b82f6;box-shadow:0 0 16px #3b82f6;animation:pulse 1.4s infinite}
+    #splash .label{font-family:'JetBrains Mono',monospace;font-size:13px;color:#3b82f6;letter-spacing:.1em}
+  </style>
+</head>
+<body>
+  <div id="splash"><div class="dot"></div><div class="label">HORIZONS LOADING…</div></div>
+  <div id="root"></div>
+
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <script type="text/babel">
+    const { useState, useRef, useCallback, useEffect } = React;
+
+    // ── THEME
+    const T = {
+      bg:          '#0a0c10',
+      surface:     '#12151c',
+      surfaceHov:  '#1a1e28',
+      border:      '#1e2330',
+      text:        '#e2e8f0',
+      muted:       '#64748b',
+      accent:      '#3b82f6',
+      glow:        'rgba(59,130,246,0.14)',
+      ok:          '#22c55e',
+      warn:        '#f59e0b',
+      danger:      '#ef4444',
+      mono:        "'JetBrains Mono','Fira Code',monospace",
+      body:        "'DM Sans','Segoe UI',sans-serif",
+    };
+
+    const inp = {
+      padding:'7px 10px', borderRadius:6,
+      border:`1px solid ${T.border}`, background:T.bg,
+      color:T.text, fontFamily:T.body, fontSize:12,
+      outline:'none', width:'100%'
+    };
+
+    // ── MOBILE DETECT
+    const useMobile = () => {
+      const [mob, setMob] = useState(window.innerWidth < 768);
+      useEffect(() => {
+        const h = () => setMob(window.innerWidth < 768);
+        window.addEventListener('resize', h);
+        return () => window.removeEventListener('resize', h);
+      }, []);
+      return mob;
+    };
+
+    // ── N0.V4 ENDPOINTS
+    const DEFAULT_ENDPOINTS = [
+      { name:'N0.V4 · Edge',    type:'local',     url:'http://localhost:11434/v1/chat/completions',                                                   apiKey:'', model:'omni-neural-4b',                    badge:'edge' },
+      { name:'Pi · Hub',        type:'ollama',    url:'http://razrpi.local:11434/api/chat',                                                           apiKey:'', model:'',                                  badge:'hub'  },
+      { name:'Vertex · Sonnet', type:'anthropic', url:'https://api.anthropic.com/v1/messages',                                                        apiKey:'', model:'claude-sonnet-4-5-20251001',         badge:'gcp'  },
+      { name:'Vertex · Haiku',  type:'anthropic', url:'https://api.anthropic.com/v1/messages',                                                        apiKey:'', model:'claude-haiku-4-5-20251022',          badge:'gcp'  },
+      { name:'Gemini Flash',    type:'google',    url:'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent',      apiKey:'', model:'gemini-2.5-flash',                  badge:'gcp'  },
+      { name:'Perplexity',      type:'openai',    url:'https://api.perplexity.ai/chat/completions',                                                    apiKey:'', model:'llama-3.1-sonar-large-128k-online', badge:'web'  },
+    ];
+
+    const BADGE_COLORS = { edge: T.ok, hub: T.warn, gcp: T.accent, web: '#a78bfa' };
+
+    // ── PANEL BTN
+    function PBtn({ color, onClick, label }) {
+      const [h, setH] = useState(false);
+      return (
+        <button onClick={onClick} onMouseEnter={()=>setH(true)} onMouseLeave={()=>setH(false)}
+          style={{ width:22, height:22, borderRadius:6, border:`1px solid ${color}44`,
+            background: h?`${color}33`:'transparent', color: h?color:T.muted,
+            fontSize:14, fontWeight:700, cursor:'pointer',
+            display:'flex', alignItems:'center', justifyContent:'center', padding:0 }}>
+          {label}
+        </button>
+      );
+    }
+
+    // ── FLOATING PANEL (desktop)
+    function Panel({ id, title, icon, isActive, zIndex, position, size, isMinimized, isMaximized, onFocus, onClose, onMinimize, onMaximize, onDragStart, children }) {
+      const drag = useRef({ on:false, ox:0, oy:0 });
+      const down = (e) => {
+        if (e.target.closest('[data-nd]')) return;
+        onFocus(id);
+        drag.current = { on:true, ox:e.clientX-position.x, oy:e.clientY-position.y };
+        const mv = (ev) => { if (!drag.current.on) return; onDragStart(id, ev.clientX-drag.current.ox, ev.clientY-drag.current.oy); };
+        const up = () => { drag.current.on=false; window.removeEventListener('mousemove',mv); window.removeEventListener('mouseup',up); };
+        window.addEventListener('mousemove',mv); window.addEventListener('mouseup',up);
+      };
+      const touch = (e) => {
+        if (e.target.closest('[data-nd]')) return;
+        onFocus(id);
+        const t=e.touches[0];
+        drag.current = { on:true, ox:t.clientX-position.x, oy:t.clientY-position.y };
+        const mv = (ev) => { if(!drag.current.on)return; const tt=ev.touches[0]; onDragStart(id,tt.clientX-drag.current.ox,tt.clientY-drag.current.oy); };
+        const up = () => { drag.current.on=false; window.removeEventListener('touchmove',mv); window.removeEventListener('touchend',up); };
+        window.addEventListener('touchmove',mv,{passive:true}); window.addEventListener('touchend',up);
+      };
+      if (isMinimized) return null;
+      const s = isMaximized
+        ? { position:'fixed',top:0,left:0,width:'100vw',height:'100vh',zIndex:zIndex+1000,background:T.surface,borderRadius:0,display:'flex',flexDirection:'column',border:'none' }
+        : { position:'fixed',top:position.y,left:position.x,width:size.w,height:size.h,zIndex,background:T.surface,borderRadius:12,display:'flex',flexDirection:'column',border:`1px solid ${T.border}`,boxShadow:`0 8px 32px rgba(0,0,0,.5)`,overflow:'hidden' };
+      return (
+        <div style={s} onClick={()=>onFocus(id)}>
+          <div onMouseDown={down} onTouchStart={touch}
+            style={{ display:'flex',alignItems:'center',justifyContent:'space-between',padding:'10px 14px',
+              background:isActive?T.glow:'transparent',borderBottom:`1px solid ${T.border}`,
+              cursor:'grab',userSelect:'none',flexShrink:0 }}>
+            <div style={{display:'flex',alignItems:'center',gap:8}}>
+              <span style={{fontSize:15}}>{icon}</span>
+              <span style={{fontFamily:T.mono,fontSize:13,fontWeight:600,color:T.text,letterSpacing:'.02em'}}>{title}</span>
+            </div>
+            <div style={{display:'flex',gap:5}} data-nd>
+              <PBtn color={T.warn}   onClick={()=>onMinimize(id)} label="−" />
+              <PBtn color={T.ok}     onClick={()=>onMaximize(id)} label={isMaximized?'◇':'□'} />
+              <PBtn color={T.danger} onClick={()=>onClose(id)}    label="×" />
+            </div>
+          </div>
+          <div style={{flex:1,overflow:'auto',padding:14}} data-nd>{children}</div>
+        </div>
+      );
+    }
+
+    // ── DOCK
+    function Dock({ panels, onRestore }) {
+      const min = panels.filter(p=>p.isMinimized);
+      if (!min.length) return null;
+      return (
+        <div style={{ position:'fixed',bottom:12,left:'50%',transform:'translateX(-50%)',display:'flex',gap:8,zIndex:9999,
+          background:T.surface,border:`1px solid ${T.border}`,borderRadius:12,padding:'6px 10px',boxShadow:'0 4px 20px rgba(0,0,0,.6)' }}>
+          {min.map(p=>(
+            <button key={p.id} onClick={()=>onRestore(p.id)}
+              style={{ background:T.glow,border:`1px solid ${T.accent}44`,borderRadius:8,padding:'6px 12px',
+                color:T.text,fontFamily:T.mono,fontSize:12,cursor:'pointer',display:'flex',alignItems:'center',gap:6 }}>
+              {p.icon} {p.title}
+            </button>
+          ))}
+        </div>
+      );
+    }
+
+    // ── CHAT
+    function ChatContent({ endpoints, active, setActive, ttsOn, setTtsOn, ttsPct, setTtsPct }) {
+      const [msgs, setMsgs] = useState([{ role:'system', content:'HORIZONS online. N0.V4 ready.' }]);
+      const [inp2, setInp2] = useState('');
+      const [mic, setMic] = useState(false);
+      const [busy, setBusy] = useState(false);
+      const bottom = useRef(null);
+
+      useEffect(() => { bottom.current?.scrollIntoView({ behavior:'smooth' }); }, [msgs]);
+
+      const send = async () => {
+        if (!inp2.trim() || busy) return;
+        const ep = endpoints[active];
+        const userMsg = inp2.trim();
+        setInp2('');
+        setMsgs(m => [...m, { role:'user', content:userMsg }]);
+        setBusy(true);
+        try {
+          let res, text;
+          if (ep.type === 'anthropic') {
+            res = await fetch(ep.url, {
+              method:'POST',
+              headers:{ 'Content-Type':'application/json', 'x-api-key':ep.apiKey, 'anthropic-version':'2023-06-01' },
+              body:JSON.stringify({ model:ep.model||'claude-haiku-4-5-20251022', max_tokens:1024, messages:[{role:'user',content:userMsg}] })
+            });
+            const d = await res.json();
+            text = d?.content?.[0]?.text || JSON.stringify(d);
+          } else if (ep.type === 'google') {
+            res = await fetch(`${ep.url}?key=${ep.apiKey}`, {
+              method:'POST', headers:{'Content-Type':'application/json'},
+              body:JSON.stringify({ contents:[{parts:[{text:userMsg}]}] })
+            });
+            const d = await res.json();
+            text = d?.candidates?.[0]?.content?.parts?.[0]?.text || JSON.stringify(d);
+          } else {
+            // OpenAI-compat (local, ollama, perplexity)
+            const headers = {'Content-Type':'application/json'};
+            if (ep.apiKey) headers['Authorization'] = `Bearer ${ep.apiKey}`;
+            res = await fetch(ep.url, {
+              method:'POST', headers,
+              body:JSON.stringify({ model:ep.model||undefined, messages:[{role:'user',content:userMsg}], stream:false })
+            });
+            const d = await res.json();
+            text = d?.choices?.[0]?.message?.content || d?.message?.content || JSON.stringify(d);
+          }
+          setMsgs(m => [...m, { role:'assistant', content:text }]);
+          if (ttsOn && window.speechSynthesis) {
+            const u = new SpeechSynthesisUtterance(text.slice(0,500));
+            window.speechSynthesis.speak(u);
+          }
+        } catch(e) {
+          setMsgs(m => [...m, { role:'assistant', content:`❌ ${e.message}` }]);
+        }
+        setBusy(false);
+      };
+
+      const toggleMic = () => {
+        if (mic) { setMic(false); return; }
+        if (!window.SpeechRecognition && !window.webkitSpeechRecognition) {
+          alert('Speech recognition not available in this browser.'); return;
+        }
+        const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+        const r = new SR();
+        r.continuous = false; r.interimResults = false; r.lang = 'en-US';
+        r.onresult = (e) => { setInp2(e.results[0][0].transcript); setMic(false); };
+        r.onerror = () => setMic(false);
+        r.onend = () => setMic(false);
+        r.start();
+        setMic(true);
+      };
+
+      return (
+        <div style={{display:'flex',flexDirection:'column',height:'100%',gap:10}}>
+          {/* Endpoint pills */}
+          <div style={{display:'flex',gap:5,flexWrap:'wrap',flexShrink:0}}>
+            {endpoints.map((ep,i)=>(
+              <button key={i} onClick={()=>setActive(i)}
+                style={{ padding:'3px 9px',borderRadius:6,cursor:'pointer',fontSize:11,fontFamily:T.mono,
+                  border:`1px solid ${i===active?T.accent:T.border}`,
+                  background:i===active?T.glow:'transparent',
+                  color:i===active?T.accent:T.muted }}>
+                <span style={{display:'inline-block',width:6,height:6,borderRadius:'50%',background:BADGE_COLORS[ep.badge]||T.muted,marginRight:5,verticalAlign:'middle'}} />
+                {ep.name}
+              </button>
+            ))}
+          </div>
+          {/* Messages */}
+          <div style={{flex:1,overflowY:'auto',display:'flex',flexDirection:'column',gap:8}}>
+            {msgs.map((m,i)=>(
+              <div key={i} style={{
+                alignSelf:m.role==='user'?'flex-end':m.role==='system'?'center':'flex-start',
+                maxWidth:'88%',padding:'8px 12px',borderRadius:10,lineHeight:1.5,fontSize:13,fontFamily:T.body,color:T.text,
+                background:m.role==='user'?T.accent+'22':m.role==='system'?'transparent':T.surfaceHov,
+                border:`1px solid ${m.role==='user'?T.accent+'44':m.role==='system'?'transparent':T.border}`,
+                color:m.role==='system'?T.muted:T.text,fontStyle:m.role==='system'?'italic':'normal'
+              }}>
+                {m.content}
+                {m.role==='assistant' && (
+                  <button onClick={()=>{ if(window.speechSynthesis){ const u=new SpeechSynthesisUtterance(m.content.slice(0,500)); window.speechSynthesis.speak(u); }}}
+                    style={{marginLeft:8,background:'none',border:'none',color:T.muted,cursor:'pointer',fontSize:13}}>&#128266;</button>
+                )}
+              </div>
+            ))}
+            {busy && <div style={{alignSelf:'flex-start',padding:'8px 12px',borderRadius:10,background:T.surfaceHov,border:`1px solid ${T.border}`,color:T.muted,fontSize:12,fontFamily:T.mono,animation:'pulse 1.4s infinite'}}>thinking…</div>}
+            <div ref={bottom} />
+          </div>
+          {/* Input row */}
+          <div style={{display:'flex',gap:8,alignItems:'center',flexShrink:0}}>
+            <button onClick={toggleMic}
+              style={{ width:38,height:38,borderRadius:10,flexShrink:0,cursor:'pointer',fontSize:18,
+                border:`1px solid ${mic?T.danger:T.border}`,
+                background:mic?T.danger+'22':'transparent',
+                color:mic?T.danger:T.muted,
+                animation:mic?'pulse 1.4s infinite':'none' }}>&#127908;</button>
+            <input value={inp2} onChange={e=>setInp2(e.target.value)}
+              onKeyDown={e=>e.key==='Enter'&&!e.shiftKey&&send()}
+              placeholder={busy?'Waiting…':'Type or tap mic…'}
+              disabled={busy}
+              style={{flex:1,padding:'9px 12px',borderRadius:8,border:`1px solid ${T.border}`,background:T.bg,color:T.text,fontFamily:T.body,fontSize:13,outline:'none'}} />
+            <button onClick={send} disabled={busy}
+              style={{padding:'9px 14px',borderRadius:8,background:busy?T.border:T.accent,color:'#fff',border:'none',fontFamily:T.mono,fontSize:13,fontWeight:600,cursor:busy?'default':'pointer'}}>
+              &rarr;
+            </button>
+          </div>
+          {/* TTS controls */}
+          <div style={{display:'flex',alignItems:'center',gap:10,fontSize:11,color:T.muted,fontFamily:T.mono,flexShrink:0}}>
+            <label style={{display:'flex',alignItems:'center',gap:4,cursor:'pointer'}}>
+              <input type="checkbox" checked={ttsOn} onChange={e=>setTtsOn(e.target.checked)} style={{accentColor:T.accent}} />
+              Auto-TTS
+            </label>
+            <span>Batt floor:</span>
+            <input type="range" min={5} max={50} value={ttsPct} onChange={e=>setTtsPct(+e.target.value)} style={{width:70,accentColor:T.accent}} />
+            <span>{ttsPct}%</span>
+          </div>
+        </div>
+      );
+    }
+
+    // ── ROUTER
+    function RouterContent({ endpoints, setEndpoints }) {
+      const [showAdd, setShowAdd] = useState(false);
+      const [form, setForm] = useState({ name:'', type:'local', url:'', apiKey:'', model:'' });
+      const types = ['local','ollama','anthropic','google','openai','custom'];
+      const add = () => {
+        if (!form.name||!form.url) return;
+        setEndpoints(ep=>[...ep,{...form,badge:'custom'}]);
+        setForm({name:'',type:'local',url:'',apiKey:'',model:''});
+        setShowAdd(false);
+      };
+      return (
+        <div style={{display:'flex',flexDirection:'column',gap:12}}>
+          <div style={{fontFamily:T.mono,fontSize:11,color:T.muted,letterSpacing:'.05em',textTransform:'uppercase'}}>Model Registry</div>
+          {endpoints.map((ep,i)=>(
+            <div key={i} style={{display:'flex',justifyContent:'space-between',alignItems:'center',padding:'9px 12px',borderRadius:8,border:`1px solid ${T.border}`,background:T.bg}}>
+              <div style={{display:'flex',alignItems:'center',gap:10}}>
+                <div style={{width:8,height:8,borderRadius:'50%',background:BADGE_COLORS[ep.badge]||T.muted,flexShrink:0}} />
+                <div>
+                  <div style={{fontFamily:T.mono,fontSize:13,color:T.text}}>{ep.name}</div>
+                  <div style={{fontFamily:T.mono,fontSize:10,color:T.muted}}>{ep.type} &middot; {ep.model||'default'}</div>
+                </div>
+              </div>
+              <button onClick={()=>setEndpoints(ep2=>ep2.filter((_,j)=>j!==i))}
+                style={{background:'none',border:'none',color:T.danger,cursor:'pointer',fontSize:16,padding:'0 4px'}}>&#x2715;</button>
+            </div>
+          ))}
+          {!showAdd
+            ? <button onClick={()=>setShowAdd(true)} style={{padding:'8px',borderRadius:8,border:`1px dashed ${T.border}`,background:'transparent',color:T.accent,fontFamily:T.mono,fontSize:12,cursor:'pointer'}}>+ Add Endpoint</button>
+            : (
+              <div style={{display:'flex',flexDirection:'column',gap:7,padding:12,borderRadius:8,border:`1px solid ${T.accent}44`,background:T.glow}}>
+                {[['Name','name','text'],['URL','url','text'],['API Key','apiKey','password'],['Model ID','model','text']].map(([ph,key,type])=>(
+                  <input key={key} placeholder={ph} type={type} value={form[key]} onChange={e=>setForm(f=>({...f,[key]:e.target.value}))} style={inp} />
+                ))}
+                <select value={form.type} onChange={e=>setForm(f=>({...f,type:e.target.value}))} style={inp}>
+                  {types.map(t=><option key={t} value={t}>{t}</option>)}
+                </select>
+                <div style={{display:'flex',gap:6}}>
+                  <button onClick={add} style={{flex:1,padding:7,borderRadius:6,background:T.accent,color:'#fff',border:'none',fontFamily:T.mono,fontSize:12,cursor:'pointer'}}>Save</button>
+                  <button onClick={()=>setShowAdd(false)} style={{flex:1,padding:7,borderRadius:6,background:'transparent',color:T.muted,border:`1px solid ${T.border}`,fontFamily:T.mono,fontSize:12,cursor:'pointer'}}>Cancel</button>
+                </div>
+              </div>
+            )
+          }
+          <div style={{fontFamily:T.mono,fontSize:10,color:T.muted,marginTop:4}}>local &middot; ollama &middot; OpenAI-compat &middot; Anthropic &middot; Google &middot; Vertex AI</div>
+        </div>
+      );
+    }
+
+    // ── TERMINAL
+    function TerminalContent() {
+      const [hist, setHist] = useState(['$ horizons --init','Horizons v0.1.0  |  N0.V4 agent stack','Termux bridge: standby  |  Pi hub: scanning','']);
+      const [cmd, setCmd] = useState('');
+      const bottom = useRef(null);
+      useEffect(()=>bottom.current?.scrollIntoView({behavior:'smooth'}),[hist]);
+      const exec = () => {
+        if (!cmd.trim()) return;
+        setHist(h=>[...h,`$ ${cmd}`,'[stub] Termux bridge not yet connected — set up Android cowork stack first.','']);
+        setCmd('');
+      };
+      return (
+        <div style={{display:'flex',flexDirection:'column',height:'100%',fontFamily:T.mono,fontSize:12}}>
+          <div style={{flex:1,overflowY:'auto',lineHeight:1.8}}>
+            {hist.map((l,i)=>(
+              <div key={i} style={{color:l.startsWith('$')?T.text:l.startsWith('[')?T.warn:T.ok,whiteSpace:'pre-wrap'}}>{l||' '}</div>
+            ))}
+            <div ref={bottom}/>
+          </div>
+          <div style={{display:'flex',gap:6,marginTop:8,alignItems:'center'}}>
+            <span style={{color:T.accent}}>$</span>
+            <input value={cmd} onChange={e=>setCmd(e.target.value)} onKeyDown={e=>e.key==='Enter'&&exec()}
+              placeholder="command..." style={{...inp,fontFamily:T.mono}} />
+          </div>
+        </div>
+      );
+    }
+
+    // ── TOOLS
+    function ToolsContent() {
+      const tools = [
+        {name:'N0.V4 Status',   icon:'🧠', status:'stub', desc:'Edge agent telemetry — NPU, session log, escalation ratio'},
+        {name:'Pi · Hub Tools', icon:'🌀', status:'stub', desc:'Docker CLI, wiki compile, sharpening gate'},
+        {name:'MCP Registry',   icon:'🔌', status:'stub', desc:'Connect agentic tool servers'},
+        {name:'Prompt Lab',     icon:'🧪', status:'stub', desc:'Test & iterate prompts across endpoints'},
+        {name:'Model Bench',    icon:'📊', status:'stub', desc:'Latency & quality benchmarks'},
+        {name:'File Browser',   icon:'📁', status:'ready',desc:'Browse local & Pi filesystem'},
+      ];
+      return (
+        <div style={{display:'flex',flexDirection:'column',gap:8}}>
+          <div style={{fontFamily:T.mono,fontSize:11,color:T.muted,letterSpacing:'.05em',textTransform:'uppercase'}}>Agentic Tools</div>
+          {tools.map((t,i)=>(
+            <div key={i} style={{display:'flex',alignItems:'center',gap:10,padding:'10px 12px',borderRadius:8,border:`1px solid ${T.border}`,background:T.bg,cursor:'pointer'}}>
+              <span style={{fontSize:20}}>{t.icon}</span>
+              <div style={{flex:1}}>
+                <div style={{fontFamily:T.mono,fontSize:13,color:T.text}}>{t.name}</div>
+                <div style={{fontFamily:T.mono,fontSize:10,color:T.muted}}>{t.desc}</div>
+              </div>
+              <span style={{fontFamily:T.mono,fontSize:10,padding:'2px 8px',borderRadius:4,
+                background:t.status==='ready'?T.ok+'22':T.warn+'22',
+                color:t.status==='ready'?T.ok:T.warn,
+                border:`1px solid ${t.status==='ready'?T.ok:T.warn}33`}}>{t.status}</span>
+            </div>
+          ))}
+        </div>
+      );
+    }
+
+    // ── PANEL CONFIG
+    const PANELS = [
+      {id:'chat',     title:'Chat',     icon:'💬', position:{x:20,y:54},  size:{w:420,h:500}, isMinimized:false, isMaximized:false},
+      {id:'router',   title:'Router',   icon:'🔀', position:{x:460,y:54}, size:{w:340,h:460}, isMinimized:false, isMaximized:false},
+      {id:'terminal', title:'Terminal', icon:'⌨️',  position:{x:20,y:560}, size:{w:420,h:260}, isMinimized:true,  isMaximized:false},
+      {id:'tools',    title:'Tools',    icon:'🛠️', position:{x:460,y:520},size:{w:340,h:320}, isMinimized:true,  isMaximized:false},
+    ];
+
+    // ── APP
+    function HorizonsUI() {
+      const mob = useMobile();
+      const [panels, setPanels]   = useState(PANELS);
+      const [focus, setFocus]     = useState(['chat','router','terminal','tools']);
+      const [endpoints, setEP]    = useState(DEFAULT_ENDPOINTS);
+      const [active, setActive]   = useState(0);
+      const [ttsOn, setTtsOn]     = useState(false);
+      const [ttsPct, setTtsPct]   = useState(20);
+      const [mobileTab, setMTab]  = useState('chat');
+
+      const getZ  = id => focus.indexOf(id)+100;
+      const onFocus    = useCallback(id => setFocus(o=>[...o.filter(x=>x!==id),id]),[]);
+      const onDrag     = useCallback((id,x,y)=>setPanels(p=>p.map(pp=>pp.id===id?{...pp,position:{x:Math.max(0,x),y:Math.max(44,y)}}:pp)),[]);
+      const onMinimize = useCallback(id=>setPanels(p=>p.map(pp=>pp.id===id?{...pp,isMinimized:true,isMaximized:false}:pp)),[]);
+      const onMaximize = useCallback(id=>setPanels(p=>p.map(pp=>pp.id===id?{...pp,isMaximized:!pp.isMaximized}:pp)),[]);
+      const onRestore  = useCallback(id=>{setPanels(p=>p.map(pp=>pp.id===id?{...pp,isMinimized:false}:pp));onFocus(id);},[onFocus]);
+      const onClose    = useCallback(id=>onMinimize(id),[onMinimize]);
+
+      const content = id => {
+        const props = {endpoints,active,setActive,ttsOn,setTtsOn,ttsPct,setTtsPct};
+        switch(id){
+          case 'chat':     return <ChatContent     {...props} />;
+          case 'router':   return <RouterContent   endpoints={endpoints} setEndpoints={setEP} />;
+          case 'terminal': return <TerminalContent />;
+          case 'tools':    return <ToolsContent    />;
+        }
+      };
+
+      // ─ MOBILE LAYOUT
+      if (mob) {
+        const tabs = PANELS.map(p=>({id:p.id,icon:p.icon,title:p.title}));
+        return (
+          <div style={{width:'100vw',height:'100vh',background:T.bg,display:'flex',flexDirection:'column',overflow:'hidden'}}>
+            {/* Header */}
+            <div style={{height:44,display:'flex',alignItems:'center',justifyContent:'space-between',padding:'0 14px',background:T.surface,borderBottom:`1px solid ${T.border}`,flexShrink:0}}>
+              <div style={{display:'flex',alignItems:'center',gap:8}}>
+                <div style={{width:7,height:7,borderRadius:'50%',background:T.accent,boxShadow:`0 0 8px ${T.accent}`}} />
+                <span style={{fontFamily:T.mono,fontSize:14,fontWeight:700,color:T.text,letterSpacing:'.08em'}}>HORIZONS</span>
+                <span style={{fontFamily:T.mono,fontSize:10,color:T.muted}}>v0.1</span>
+              </div>
+              <span style={{fontFamily:T.mono,fontSize:10,color:T.ok}}>N0.V4 ●</span>
+            </div>
+            {/* Content */}
+            <div style={{flex:1,overflow:'hidden',padding:12}}>
+              {content(mobileTab)}
+            </div>
+            {/* Tab bar */}
+            <div style={{height:56,display:'flex',background:T.surface,borderTop:`1px solid ${T.border}`,flexShrink:0}}>
+              {tabs.map(t=>(
+                <button key={t.id} onClick={()=>setMTab(t.id)}
+                  style={{flex:1,display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',gap:3,
+                    background:'none',border:'none',cursor:'pointer',
+                    borderTop:`2px solid ${mobileTab===t.id?T.accent:'transparent'}`}}>
+                  <span style={{fontSize:18}}>{t.icon}</span>
+                  <span style={{fontFamily:T.mono,fontSize:9,color:mobileTab===t.id?T.accent:T.muted}}>{t.title}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+        );
+      }
+
+      // ─ DESKTOP LAYOUT
+      return (
+        <div style={{width:'100vw',height:'100vh',background:T.bg,overflow:'hidden',position:'relative'}}>
+          <div style={{position:'absolute',inset:0,backgroundImage:`radial-gradient(${T.border} 1px,transparent 1px)`,backgroundSize:'24px 24px',opacity:.5}} />
+          {/* Header */}
+          <div style={{position:'fixed',top:0,left:0,right:0,height:44,display:'flex',alignItems:'center',justifyContent:'space-between',padding:'0 16px',background:`${T.surface}ee`,borderBottom:`1px solid ${T.border}`,zIndex:10000,backdropFilter:'blur(12px)'}}>
+            <div style={{display:'flex',alignItems:'center',gap:10}}>
+              <div style={{width:8,height:8,borderRadius:'50%',background:T.accent,boxShadow:`0 0 8px ${T.accent}`}} />
+              <span style={{fontFamily:T.mono,fontSize:15,fontWeight:700,color:T.text,letterSpacing:'.08em'}}>HORIZONS</span>
+              <span style={{fontFamily:T.mono,fontSize:11,color:T.muted}}>v0.1.0</span>
+            </div>
+            <div style={{display:'flex',gap:6}}>
+              {panels.map(p=>(
+                <button key={p.id} onClick={()=>p.isMinimized?onRestore(p.id):onFocus(p.id)}
+                  style={{padding:'4px 10px',borderRadius:6,cursor:'pointer',fontFamily:T.mono,fontSize:11,
+                    border:`1px solid ${p.isMinimized?T.border:T.accent}44`,
+                    background:p.isMinimized?'transparent':T.glow,
+                    color:p.isMinimized?T.muted:T.accent}}>
+                  {p.icon} {p.title}
+                </button>
+              ))}
+            </div>
+          </div>
+          {/* Panels */}
+          {panels.map(p=>(
+            <Panel key={p.id} {...p} isActive={focus[focus.length-1]===p.id} zIndex={getZ(p.id)}
+              onFocus={onFocus} onDragStart={onDrag} onMinimize={onMinimize} onMaximize={onMaximize} onClose={onClose}>
+              {content(p.id)}
+            </Panel>
+          ))}
+          <Dock panels={panels} onRestore={onRestore} />
+        </div>
+      );
+    }
+
+    // ── MOUNT
+    document.getElementById('splash').style.display='none';
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<HorizonsUI />);
+  </script>
+</body>
+</html>

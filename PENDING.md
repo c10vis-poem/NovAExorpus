@@ -3,154 +3,74 @@
 Durable cross-session backlog. Not rewritten each session — items persist until resolved or explicitly dropped.
 
 ## Routines
-last-housekeeping: 2026-10-08
+last-housekeeping: 2026-10-23
 - Roll _recaps/ older than 30 days into a monthly summary, delete the originals
 - Audit repos: uncommitted / unpushed / stray branches → merge or discard with the builder
 - Review the task-observer observation log
 - Check cloud billing (VM disks)
 - Builder reminders: (add here)
 
-## Added 2026-10-08 (session 34c3e229; the run plan is RESUME.md START HERE, as subagent workstreams)
-- **Deferred by the operator 2026-10-08 (old START HERE 3):** NPU work, one model at a time WITH the operator (`docs/NPU-FINDINGS-2026-10-02.md` §4): reboot, check the clock caps, InternVL 2B first. Carried over, not started.
-- **Deferred by the operator 2026-10-08 (old START HERE 1):** Grill session (`wiki-admin`, Pocock chain typed by the operator: `/setup-matt-pocock-skills` → `/grill-with-docs` → `/to-spec` → `/to-tickets` → `/implement`). Inputs: the PRIORITY ONE docs (`_#Repository-layout.txt` + `Master_dumbass_plan-session/`), `Documents/Session-reports/2026-10-05/`, the wiki-admin agent draft (`~/wiki-admin/AGENTS.md`), PENDING "Added 2026-10-05".
-- **Grill (RESUME item 1):** everything in `~/wiki-admin/GRILL-INPUTS.md`: vault layout, `repos/` mirrors, 2x2 converter/checker design (build `check2.py` on Poppler), OmniRoute compression + a vision plugin for non-Fable models, aesop-xi PR #18 contract, H1–H8 review, staged skill updates (`skill-updates/2026-10-08/`).
-- **NPU job queue (item 2):** build `NvAEx-Recaps/npu/` + `npu-run` + `npu-queued`; then the orchestrator runs the model queue unattended (Qwen 3.5 only).
-- **PRs/CI (item 3):** per `session-work/2026-10-08/pr-triage-report.md`. Operator action: enable Actions on the honey fork (https://github.com/c10vis-poem/NoVa-honey-for-devs/actions: 0 runs ever; required check now `test`).
-- **Repos (item 4):** `repos/` mirrors replace MASTER-*; recaps into NvAEx-Recaps; renames (NovA-/NoVa- → NvAEx-, aesop-xi → Aesop-Xi); delete NovA-Corpus + 44 old branches.
-- **Vault (item 5):** ~~fold the `*unresolved*` files into this file~~ done 2026-10-09 (10 found, see "Folded 2026-10-09"); 12 PDFs still failing (fused tokens); 82 exact duplicates in `clean_md/` (report only); `convert_raw_to_markdown.py` code only on Drive.
-- **Observations (item 6):** 13 open (0001, 0005–0007, 0012, 0015–0017, 0023, 0024, 0028, 0029; 0018 empty).
-- **Secrets:** add a second age key (only the phone can decrypt `NvAEx-Recaps/secrets`).
-- **Hooks:** `test-ship-v2.sh` fails 14/18 on main too; H8 should match required check names against job names.
 
-## Folded 2026-10-09 from the `*unresolved*` files (item 5)
-Sources: vault `unresolved.md` (18 numbered items, dated 2026-07-17 to 2026-09-06; the copies in `clean_md/`, `02_wiki_md/vendors/qualcomm/`, `__RESUME.md/_PENDING.md/`, `Drive_sync/`, `raw_database/Dump/zip/` were this file or its first 13 items) and 4 Spark-proposal `UNRESOLVED.md` tickets. Most are 1-3 months old and unverified since: re-check before acting. Already tracked elsewhere here: PR #18 (Added 2026-10-01), ECC review, OpenWiki leftovers, the code-review-graph crash.
-- **[aesop-xi] #1 (2026-07-17):** Tailscale install, status unknown, never re-checked.
-- **[aesop-xi] #2:** T3 infra (Jetson Orin Nano, Rubik Pi) on hold, hardware not procured; deploy scripts exist in `deploy/jetson/`, `deploy/rubik-pi/`.
-- **[aesop-xi] #3:** clone `obsidian-skills` into `~/vault/.claude/skills/obsidian-skills`, never done (the plugin form is installed; see Added 2026-10-02 "Obsidian skills load twice").
-- **[aesop-xi] #4 (2026-08-28):** `notebooklm` login never authenticated (empty `profiles/`); needs a non-VNC login path or sign-off on VNC for the one-time step. Overlaps "NotebookLM: operator runs `notebooklm login`".
-- **[aesop-xi] #5:** OpenWiki fork upstream checkpointer PR: unclear if wanted; the fork diverged (NPU/voice work). OpenWiki is retired (2026-10-02): likely drop.
-- **[aesop-xi] #6 (grill):** open architecture decisions: Auditor in-stack vs out-of-band (leaning cloud GLM-5.2); Recall + Strategic memory share one vector backend or not; home executive on Jetson vs phone Qwen.
-- **[aesop-xi] #7 (deferred 2026-08-31):** HTTP/WebSocket server for the voice engine (Flask/FastAPI around `VoiceEngine`, spec in `ARCHITECTURE.md`). Not built.
-- **[aesop-xi] #8 (grill):** OmniRoute / OB1 / ReasoningBank routing (`ARCHITECTURE.md` section 10): OB1 vs OmniRoute's SQLite hybrid store, is "episodic" a 5th memory type, Postgres+vector role (continuous recall vs post-training eval store).
-- **[global] #9:** universal skill placement: apply the `obsidian-skills` directory-marketplace plugin pattern to graphify / notebooklm-py / honey-for-devs.
-- **[aesop-xi] #10:** 6 unreviewed remote commits (`aesopd.py` bridge, supervised `llamad` NPU daemon, `protocol/bridge-protocol.md`, `termux-helper` skill) from `claude/wiki-quinn-npu-local-m1crql`; read before the terminal-APK / NPU-manager work.
-- **[global] #11 (2026-08-31, "eventually"):** MASTER-SKILLS.md: concatenation vs index table; needs `projects/<name>/skills` symlinks. Likely moot once `repos/` mirrors retire MASTER-* (Repos item 4); confirm or drop.
-- **[global] #12:** ECC `unified-memory` vs hand-built #dumbass: adopt/fold decision not made. ECC is parked.
-- **[aesop-xi] #13 (2026-08-31):** ECC dashboard on tablet via SSH tunnel (sshd :8022, `ssh -L 3456:127.0.0.1:3456`), never confirmed; phone LAN IP changes.
-- **[aesop-xi] #14 (2026-09-06):** OmniRoute dev server :20128 does not run on the phone: proot-Debian Node 20.20.2 lacks `webidl.util.markAsUncloneable` (undici); needs Node 22+.
-- **[aesop-xi] #15 (2026-09-06):** terrestrial-brain Obsidian-plugin build fails `tsc: not found`, not root-caused.
-- **[global] #16 (2026-09-06):** code-review-graph MCP repointed at a proot-Debian venv (Claude user config JSON and terrestrial-brain `.mcp.json`), live connection unconfirmed.
-- **[happy-ending] #17 (2026-09-06):** plugin registered by hand-editing `known_marketplaces.json` / `installed_plugins.json` / `settings.json` (the `/plugin marketplace add` flow is broken); loading in a fresh session unconfirmed.
-- **[happy-ending] #18:** leftover `~/repos/happy-ending/.agents/skills/happy-ending.bak-preSymlink/`; operator deletes it.
-- **Spark tickets (aesop-xi; Staged/Pending):** #01 FastRPC thermal telemetry hook (Hexagon v79 HTP registers, replacing the `/sys/class/thermal` fallback in `hardware_throttler.py`); #02 sync `state/audit_ledger.db` to the #d.u.m.b.a.s.s. store on the Jetson (waits for schema); #03 24 h HMAC clearance rotation between Razr and Jetson over Tailscale.
-- **Spark tickets (novaexopia):** NX-01 HIGH automate mDNS wireless-ADB pairing in `WirelessAdbBridgeService`; NX-02 HIGH zero-copy `ASharedMemory` + SCM_RIGHTS between aesc and aeyre; NX-03 MEDIUM dual-display (22:9 / 1:1) dynamic crop bounds in `screen_vision_bounds.json`; NX-04 MEDIUM Tailscale auto-reconnect with backoff in `postgres_mcp.json` and client wrappers; NX-05 LOW profile `file_administrator.yaml` under low ionice (the operator says that yaml is wrong, see Added 2026-10-05).
-- **Spark tickets (novus-aexenti):** (1) NPU thermal throttling with Moonshine STT + Qwen 0.8B on long streams, floor 25 tok/s; (2) 9B Qwen 16k KV cache exceeds 6.2 GB on the Jetson, try `-ctk q4_0 -ctv q4_0`; (3) migrate `rolling_habits.json` to the SQLite #d.u.m.b.a.s.s. store?; (4) run the Car Wash end-to-end harness.
-- **Spark tickets (skills-and-capabilities; all PENDING):** SKILLS-01 TypeScript AST parser (babel/typescript bridge) for code-review-graph `graph_builder.py`; SKILLS-02 live NotebookLM API connector for `query_notebook.py`; SKILLS-03 Obsidian `.canvas` export from `graph_sync.py`; SKILLS-04 cron for `daily_scraper.py` feeding `trending_databank.jsonl`.
+## Open
+Moved here at the 2026-10-23 wrap-up (everything not finished). Long-term threads stay in [[BOARD-INTAKE]]; reports in `handoff/2026-10-23/`.
 
-## Added 2026-10-05
-- **Grill session (all of these are drafts/inputs, not decisions):**
-  - Vault restructure into the 00–10 layout (`_#Repository-layout.txt`, PRIORITY ONE with `Master_dumbass_plan-session/`). `__RESUME.md/` gets dissolved into it. Draft: `~/.claude/session-work/2026-10-05/VAULT-RESTRUCTURE-PLAN.md`.
-  - Where each wiki tool writes in 00–10; `OBSIDIAN_VAULT_PATH`; one manifest schema (6 conflicting ones found); where `Drive_sync/LlmWiki` lands.
-  - Wiki-admin agent DRAFT in `~/wiki-admin/AGENTS.md`. The real roles of the files-admin and Oracle agents (`file_administrator.yaml` / `oracle_helpdesk.yaml` are wrong, per the operator).
-  - Wiki corpus inventory to build from: `~/.claude/session-work/2026-10-05/WIKI-SYNTHESIS.md` (+ `agent-wiki-{A..K}.md`, incl. each batch's "Chat — mine later" list for extracting scripts/skills from chats).
-  - Stop-hook enforcement of the subagent protocol; packaging H1–H7 as installable; the `CLAUDE.md`-trigger design (now AGENTS.md).
-- **Missing tools named in the docs** (not on disk): `compile_manifest.py`, `doc_to_skill_and_tool.py`, `system_housekeeper.sh`, `boot.sh`, `htp_partition_calc.py`, `smart-grep-hook.sh`. (BM25 pickle replaced by JSON 2026-10-08.)
-- **NvAEx-agentk:** the operator creates the GitHub org `NvAEx-agentk`; then transfer `c10vis-poem/NvAEx-agentk` in as `NvAEx-agentk/skills`, add the org front page, update the links. Branch protection after the first CI run.
-- **GCP VM:** the operator is leaning toward retiring it. Copy anything needed off first, then delete it (stops the billing; the plaintext OpenRouter key goes with it).
-- **APK session** to resume: `cd ~/agent-stack && claude --resume 125f2d23-df2c-4a1b-823c-45acfa0cf8af` (its own handoff: `~/agent-stack/RESUME.md`).
-- **Hardware brainstorm** (private): parked in `~/.claude/session-work/2026-10-04/SESSION-LOG.md` (prior-art search to do). Never into a repo.
-- **Carried from the 2026-10-04 START HERE** (deferred 2026-10-05):
-  - Planning session in the wiki-admin agent (now the grill session, RESUME item 1).
-  - Close the wiki-admin open decisions (guide §10): 2b–2e still open.
-  - Restart the NPU work one model at a time with the operator (InternVL 2B first).
-  - Housekeeping (due since end of week): roll up `_recaps/`, branch audit, observation review, billing, disk.
+**Operator to run / decide**
+- Secrets (plain Termux tab, one at a time): `nvaex-secret set OPENROUTER_API_KEY` (old key lost with ~/.openwiki; make a new one at openrouter.ai/settings/keys), `HF_TOKEN`, `QAI_HUB_API_TOKEN`, `TYPESAFE_API_KEY`; then commit + push `NvAEx-Recaps` (branch, PR, auto-merge).
+- Deletes (operator): `~/storage/shared/Documents/_models/models-npu/qwen3_vl_4b_…_8_elite` (458 MB partial), `~/downloads` DeepChat / SocketSweep / llama-macos tarballs (keep or delete `Claude Setup.exe`: undecided), `~/repos/happy-ending/.agents/skills/happy-ending.bak-preSymlink` (older subset of the live skill). Drive: Qwen3-VL zip.
+- Starter principles: pick numbers to import from `handoff/2026-10-23/principles-match.md` (2 full matches, 6 partial, 21 none).
+- Hook 3 (list newest sessions across all `~/.claude/projects/*` at start; obs 0012): build or drop.
+- Small calls: task-observer upstream draft (send or drop); 4 missing tool references (`htp_partition_calc.py` etc.); OmniGlyph (switch on or drop); pick one auto-capture memory (MemVault / claude-mem / agentmemory / pmm); Gemma 4 E4B LiteRT (`litert-community/gemma-4-E4B-it-litert-lm`, no QAT/NPU file listed): download or not.
+- Answers owed: "babbly" STT name; graphify NotebookLM plugin link; tablet age public key; `~/.credential-quarantine-2026-08-17/` delete or keep; import `~/.hermes/.env` keys or not; what `NvAExinandroid` is for.
+- Infrastructure: retire the VM, second age key, NotebookLM login on the tablet (steps in BOARD-INTAKE infrastructure thread).
+- Leave alone: `Horizon-s-home-grid` PR #1 (operator 2026-10-23).
 
-## Added 2026-10-02 (afternoon)
-- ~~**[TOP] GitSync stuck in a "remote changing" loop**~~ resolved 2026-10-05: `main`, `vault-sync` and GitSync's `lastSyncedCommit` aligned on the same commit; the local index was reset to it.
-- **wiki-admin open decisions** (guide `docs/WIKI-ADMIN-GUIDE.md` §10): where obsidian-wiki writes (`OBSIDIAN_VAULT_PATH`: vault root vs a subfolder); ~~link `~/wiki-admin` memory to the main memory dir~~ (done 2026-10-04, symlink); Obsidian skills load twice (links in `~/.claude/skills/` + `obsidian@obsidian-skills` plugin) — remove the links?
-- **OpenWiki leftovers:** ~/AGENTS.md + ~/CLAUDE.md deleted by operator 2026-10-02 (backup in $TMPDIR/ow). Decide: delete `~/.openwiki/` (1.1 GB old DB) and the duplicate clone `~/openwiki`.
-- **OmniGlyph** built (`~/bin/omniglyph`, fork NvAEx-OmniGlyph v1.4.0), not switched on. Decide: user-wide `ANTHROPIC_BASE_URL` + background service, or OmniRoute's `omniglyph` engine. Fable 5 only by default; Remote Control may hide behind any proxy. Full round trip (reply text) not yet captured.
-- **Render MCP** (fork NvAEx-render-mcp-server, render.com) cloned only: needs `pkg install golang`, build, `RENDER_API_KEY`, `claude mcp add`.
-- **NotebookLM:** operator runs `notebooklm login` once (CLI 0.8.4 from fork; skill in vault `.claude/skills/notebooklm`).
-- **Disk bloat (~22 GB, read-only survey 2026-10-02):** `~/.cache/uv` 8.2 GB and `~/.npm` 5.7 GB (rebuildable caches); `~/gemma-12b/gemma-4-12b-it-qat-q4_0.gguf` same size as the `Models/gguf` copy (hash-check, then cut one); `~/gemma-e2b/` + `~/downloads/gemma-4-E2B-it-qat-UD-Q4_K_XL.gguf` (two copies of an E2B build); `~/downloads` x86/Windows installers. Dedup rule: model identity, not whole-file hash (memory feedback_same_model_bytes_differ); keep the newest version.
-- **Kokoro TTS** `tts_speak.py` fails on the multi-lang v1.0 model (needs lexicon/lang). Kokoro v1.1 was deleted by mistake (restorable: k2-fsa sherpa-onnx tts-models `kokoro-multi-lang-v1_1.tar.bz2`).
-- **Observation file `0018-resume-gate-and-enforce-gate-deadlock.md` is 0 bytes** (created 08:36 by another process) — fill or remove.
-- **npu-serve:** add InternVL 2B (X Elite bundle ran 27.5 tok/s, prefill 1,528 here); tool calls; multi-image.
+**Agent work (next session)**
+- NPU: read the proof-run summary in `~/.claude/session-work/2026-10-23/npu-proof-*.log` (script `~/tools/npu-proof.sh`, started 13:00, still running at wrap-up); then the plan's steps 8-16: Qwen3.5 2B/4B A/B, InternVL bundles vs Qwen3.5-4B vision bench, Distil-Whisper QNN vs TFLite vs ONNX (`_models/stt/distil_whisper/`, Moonshine control), K-quant placement on v0.9.3. The six smaller NPU-ON-DEVICE.md corrections need the operator's OK each (`handoff/2026-10-23/npu-install-plan.md` §5).
+- Jev: review fork `c10vis-poem/NvAEx-Jev.skills` (what it sends to TypeSafe, which key) before any install; REA fork `NvAEx-rea` likewise.
+- Observations open: 0038 (value review before delete offers), 0039 (never bundle a turn-off), 0040 (subagent scope clause), 0041 (encode delete ordering in the command). Each proposes a rule or check; build in Aesop-Xi.
 
-## Added 2026-10-02
-- **H7 classifier: automatic skill matching (grill, with H5/H6).** `classify.sh` asks `$CLASSIFY_URL` first and falls back to the ENFORCEMENTS keyword rows if there's no answer in 2 s (it falls back, it doesn't fail). Plan: point it at a model that reads the prompt plus every skill's description, so new skills are covered without hand-written rows. Raise the 2 s timeout to whatever the model needs (candidate: local `npu-serve` :18181, if the tier-1 benchmark shows it is fast enough).
-- **Post-task flagging (after the task-observer + Reasoning Bank pipeline works).** After task completion, a hook reviews which skills or rows *should* have fired and didn't. It feeds that back to the classifier and proposes new ENFORCEMENTS rows, so the list grows from real misses instead of by hand.
-- **Keyword false triggers (grill):** rows fire on mentions as well as commands ("brand new" → naming; "wrap up" mentioned in passing → wrap-up mode). Needs command-vs-mention handling.
-- **Resume the parked skill-observation review** (started 2026-10-01, 4 decision groups, never finished; `last-review-date.txt` = never).
-- **Vault code-review-graph build crashes** on a long filename under `Drive_sync/` (stat before ignore). Fix in the fork or rename the file.
-- **NPU benchmark (3 tiers + role map) in progress:** `~/tools/npu-bench/bench.py`, results in `docs/NPU-BENCHMARKS.md`. QAIRT route + vision input DONE 2026-10-02 (all 6 models). Next: TFLite/LiteRT setup, pure-Q4_0 requant of the Qwen 3.5 files.
+## Closed 2026-10-23
+- End of session 2026-10-23: hooks #67/#69/#71 installed; auditor #72 installed + fixed (#74, #75: 8-line transcript pages); AGENTS.md/CLAUDE.md split installed (MISSING: 0); absence-gate #76 and state-guard/settings-guard/build-doc-gate/agent-type-gate/delegation-tripwire #77 installed live (settings-guard verified blocking); crg #2 merged; 23 bot branches archived as `archive/*` tags then deleted; 3 salvage files in `recovered/2026-10-23/`; 11 workflows wrongly disabled then re-enabled (0 disabled, verified); Qwen3.5-4B + mmproj downloaded (sha OK); GenieX v0.9.3 downloaded (sha OK), unpacked, skel link; NPU-ON-DEVICE.md line 8 replaced; 16 cross-cutting principles written; Download duplicates (13.6 GB) and ~/openwiki deleted; forks synced (ai-hub-models, GenieX, generative-ai); Qwen3-VL removed from docs (#73). Dropped for good: OpenWiki, Terrestrial Brain, mem0, OmniRoute, Qwen3-VL, `_agents.md` installer hunt.
+- PRs merged: Aesop-Xi #66 (git-gate test), #67 (check-in list labels, obs 0037), #68 (Kokoro lexicon + WAV writer, tested 2.7 s), #69 (staged skill updates surfaced, stop-gate), #70 (aesopd auth/frame cap/localhost, llamad -fa on); ECC #7; TB #7. code-review-graph fork #2 (skip ignored paths before stat) auto-merging.
+- Later 2026-10-23: Aesop-Xi #71 (H7 mention vs command, item 23) merged; ai-hub-apps #4 (v0.39.1 + GenieX Chat workflow, item 5, no force-push) merged; forks created (MemVault, claude-mem, agentmemory, oak-memory-plugin, pmm-plugin) and synced (notebooklm-py, headroom, context7 x2) (items 9, 24); AGENTS.md split redrafted (item 20, `agents-md-v2/`); secrets inventory + import script (`secrets-report.md`); models located (`models-report.md`, item 41); voice research (item 17); remote access (item 9); Anthropic auditor/advisor/model research (items 12, 18, 19, 38).
+- android-termux-operator staged update installed (obs 0004, 0025, 0009; redaction sed fixed for JSON).
+- Reviews done: 6 remote commits (`session-work/2026-10-23/remote-commits-review.md`), NPU audit, vault PDFs/duplicates, ai-hub-apps fork (one deliberate customization: build-geniex-chat.yml), branch audit (161 repos).
+- Dropped: Render MCP (21); NvAEx-agentk org (10); Tailscale install (8, installed on phone and tablet); dsh until Acode + Jetson (34); mem0/TB re-test superseded by strip-and-judge (18); six-repo sync superseded by pointers (32); ECC unified-memory and ECC fork upkeep (31); CLAUDE.md success-tracking (33, moved to board).
+- Operator-only setup instructions given in session (6 VM retire, 7 second age key, 9 notebooklm login); tracked in [[BOARD-INTAKE]] infrastructure thread.
 
-## Added 2026-10-01
-- NPU speed gap: v0.3.14 16–23 tok/s vs ~45–50 target; v0.7.1 DSP-queue failure from Termux. ADB test steps in RESUME.md.
-- GenieX HTTP wrapper (NPU in the browser / for tools) — not built.
-- aesop-xi PR #18 (orchestration contract) — held for the grill.
-- Wiki agent home + forks decision (see RESUME grill agenda); custom skills' final home; vault-only corpus scripts' home.
-- Voice: Tab-to-talk (Android STT) stops at the first pause; offline Moonshine has a 10 s cap; VAD never wired; nothing speaks the output (speak exists). `talk` built, untested with the mic.
-- Small dead-path fixes listed in ~/.claude/INVENTORY.md (awaiting the operator's OK).
-- ECC review: stale ecc-dashboard / nanoclaw launchers; ECC CI fix ships on PR #7's branch.
-- Qwen 3.5 9B on the NPU — untested.
-- Recaps: `_recaps/` older than 30 days get rolled into a monthly summary during housekeeping.
+## Closed 2026-10-22
+- test-ship-v2 fails 14/18: done (18 passed, 0 failed; Aesop-Xi #50, #55)
+- H8 required check vs job names: done (Aesop-Xi #52)
+- Enable Actions on honey fork: done (actions enabled; honey #3, #6 merged)
+- Repo renames (Aesop-Xi, NovusAExenti, AEsc, AEyre): done (Aesop-Xi #49/#60; repo list)
+- Delete NovA-Corpus: done (not in repo list)
+- Delete 44 old branches / operator branches: done (30 operator branches cleaned 2026-10-22; Aesop-Xi 10 branches)
+- repos/ mirrors replace MASTER-*; recaps into NvAEx-Recaps: done (Aesop-Xi #50, #51; Recaps #1, #2)
+- MASTER-SKILLS concat vs index (#11): stale (MASTER-* replaced by mirrors)
+- Hooks not registered (sync-forks/ship-session): done (settings.json SessionEnd/PreToolUse/SessionStart entries)
+- Session-end discipline unenforced: done (stop-gate.sh, SubagentStop gate Aesop-Xi #59, H9 Aesop-Xi #53 merged)
+- Other six repos CLAUDE.md to AGENTS.md: done
+- Fold `*unresolved*` files: done 2026-10-09
+- Disk bloat 22 GB / gemma dup ggufs: done (uv cache 30K, npm 78M, one gguf each)
+- OpenWiki upstream PR (#5): stale (OpenWiki retired 2026-10-02)
+- ECC dashboard via SSH tunnel (#13): stale (ECC parked)
+- Rename repo to NovAEcorpus: stale (conflicts with naming canon, no such repo)
+- Obsidian Git plugin: stale (superseded by GitSync)
+- Parked skill-observation review resume / "Task-observer review outstanding": stale (review completed 2026-10-08; remaining parked files in Open)
+- sherpa-onnx 8 upstream cron workflows: done (149 fork Actions disabled)
+- Aesop-Xi clone uncommitted bootstrap.sh/aesop-tmux.sh: done (clean, main...origin/main)
+- ECC-aesop 18 unpushed commits: stale (now 1 ahead, 415 behind; decision in Open)
+- code-review-graph MCP proot venv (#16): stale (MCP tools live)
+- GitSync stuck loop; GitSync DNS retry; OpenWiki replacement; nested mirror; CLAUDE.md-to-AGENTS: done/stale (resolved 2026-09-30 to 2026-10-05)
+- Open PRs Aesop-Xi #53 #54 #61 #62, honey #3 #6, Hyperion-XI #4, NvAEx-OmniRoute #1: done (merged 2026-10-22)
+- rclone Drive migration / gdrive remote: done (remote deleted 2026-10-22; Drive-only script in Open)
+- Done 2026-09-30 section (PR #21, PR #7, branches to main, GitSync main, AGENTS.md corrections): done (history)
+- Missing tools boot.sh, smart-grep-hook.sh: done (exist)
 
-## Backlog
-
-- **RESUME.md's "PHASES 1-4 COMPLETE" is wrong.** 585 files cleaned is nowhere near real scope — the two original source folders in `Drive_sync` total 5,000+ files. Needs correction and a real re-ingestion pass, not just a status-line fix.
-- **Other 6 repos still POINTER.md stubs.** `novus-aexenti`, `NovAExopia`, `aesop-xi`, `horizons-ui`, `novus-aesc`, `novus-aeyre` haven't had their own ingestion pass — only `NovAExorpus` itself has real `clean_md`/`wiki_md` content.
-- **`NovAExopia/horizons-ui/` was built from Document 05** (the nested-repo model), which is superseded now that RFMC (flat 8-repo model, `Drive_sync/LlmWiki/Repo-Files-Map-core/`) is the actual direction. Needs reconciling once the new standalone Horizons UI repo exists.
-- **Terrestrial-brain backend location** — currently phone-local Postgres (works today via env vars in `.mcp.json`), migrating to self-hosted on the Jetson Orin Nano Super once the terminal-APK/Android-Local-Desktop work (next session) makes that device reachable and manageable.
-- **QNN-QAIRT SDK (3035 files) and canvas-ui-main (416 files)** — sitting in `__RESUME.md/whatisit-/` on device, not yet ingested.
-
-## Added 2026-09-28
-
-- **Session-end discipline isn't enforced.** RESUME.md must be rewritten top to bottom every session and unresolved items moved here — no hook checks it. Needs a structural check (grill topic 11 / launch script).
-  - *2026-10-02: partly enforced — `stop-gate.sh` blocks wrap-up until RESUME.md is rewritten. Moving unresolved items here is still unchecked.*
-- **Operator's own MEMORY.md** — enterprise-wide, separate from Claude's memory; RESUME / AGENTS / MEMORY / PENDING from the other six base repos to sync into this corpus repo (grill topic 3).
-- **Hooks not registered yet** — `sync-forks` / `ship-session` need the operator's paste (classifier blocks the agent).
-- **Old Claude memory + ECC rules** — archive line not run yet.
-- ~~**Other six repos: CLAUDE.md → AGENTS.md**~~ (done 2026-10-05; Horizons/Hyperion-OXiLm renamed to `Hyperion-XI`). Still open: GitHub renames to `NovusAExenti`, `AEsop-Xi`, `AEsc`, `AEyre` — after the grill.
-- ~~**OpenWiki replacement**~~ DONE 2026-10-02: plugin from fork NvAEx-openwiki-for-claude-code (in ~/wiki-admin), MCP removed, CLI uninstalled, vault AGENTS block removed. Leftovers in 'Added 2026-10-02 (afternoon)'.
-- **OB1 Obsidian plugin + OmniRoute Obsidian plugin** — none exist; build (grill topics 5/7).
-- **MemVault** — operator setting up; decide if its folder is public.
-- ~~**Nested `/NovAExorpus/` repo mirror in the vault (3.1 GB)**~~ moved out to `Documents/NovAExorpus-nested-mirror/` (2026-10-05).
-- **Stale VM IP `34.31.112.77`** in `tools/launch.sh`, `router-guard.sh`, `.mcp.json` defaults.
-- **OmniRoute on the VM runs the npm build, not the c10vis-poem fork.**
-- **Terrestrial Brain VM unit file has the OpenRouter key in plaintext, world-readable** — rotate the key.
-- **Recovered plugin drafts** (`recovered/2026-09-26-ob1/omni-feat/`) never pushed; orchestration contract = Æsop-Xi draft PR #18.
-- **3 diverged forks** — pm-claude-skills, trusted-firmware-a, ai-hub-apps get upstream PRs on next `sync-forks`.
-- **ECC-aesop has 18 unpushed local commits on main** — skipped by ship-session (ECC off-limits); operator to decide.
-
-## Carried from RESUME.md 2026-09-18 (not re-verified this session)
-
-- Qwen3.5-2B on phone NPU (geniex-bench, HTP v79) not wired; OmniRoute backend for it.
-- `feat/vm-lifecycle-2026-09-18` branch never pushed.
-- sherpa-onnx: 8 inherited upstream cron workflows still active.
-- dsh workspace selection; OpenRouter key on VM; passwordless sudo on VM.
-- mem0 + TB actually writing during sessions; mem0 vault export; mem0 self-hosting on VM.
-- Honey-for-devs setup wizard; Graphify integration; NotebookLM integration.
-- OmniRoute MCP round-trip test; web UI dashboards on VM; `bootstrap.sh` still points at localhost.
-- Source docs in `~/storage/shared/Documents/9-18-26/` unread.
-- `vault-ci.yml` workflow; shell alias `cc`; global `~/.claude/CLAUDE.md` rewrite.
-- "Rename repo to NovAEcorpus" — conflicts with NAMING-CANON (NovÆxorpus / `NovAExorpus`); confirm or drop.
-- "Obsidian Git plugin" — superseded by GitSync Portal; drop unless wanted.
-- **MemVault server** (carried from the 2026-09-28 session) — waits for the Jetson; fork `dreamor/MemVault` → c10vis-poem and build the image from the fork (not `ghcr.io/dreamor/memvault`). Decide in grill topic 7 whether it earns a place next to Mem0 and OB1.
-
-## Added 2026-09-29
-
-- **Continual Harness read unfinished.** See `grill/continual-harness-read-ledger.md` "Not yet read".
-- **aesop-xi CLAUDE.md:** false ReasoningBank/Continual Harness lines fixed in aesop-xi PR #20 (2026-09-30); Honey rule restored in PR #21. Its other agent-written hard rules still need the operator's review.
-- **`_dumbass_unified-config/` unread.**
-- **Task-observer review outstanding.**
-- **aesop-xi local clone:** branch `feat/memory-stack-canonical-2026-09-15` is 1 commit ahead with uncommitted `tools/bootstrap.sh` and an untracked `tools/aesop-tmux.sh`. Not this session's work; needs the operator's call.
-- **OmniRoute local clone:** uncommitted `.source/dynamic.ts`, and the clone is dated 2026-08-15. Sync the fork before relying on it.
-
-## Done 2026-09-30
-
-- PR #21 merged after adding `.gitleaksignore` (8 reviewed findings); the scan on `main` passed.
-- PR #7 closed and its branch deleted (built from Document 05; would have re-deleted `01-sources/` and `tools/check.py`).
-- GitHub branches cut to `main` only. `master` preserved as tag `archive/master-2026-09-06` (its 2026-09-05 decisions are not carried into `main`, per the operator).
-- GitSync Portal now syncs straight to `main` (`syncBranch`); push protection plus the gitleaks job on `main` still apply. First sync hit a DNS error on the phone; retry pending.
-- AGENTS.md (vault + aesop-xi): false ReasoningBank crash-recovery and Continual Harness auto-rollback claims corrected; stale VM IP removed. Honey stays (operator: leave Honey and OmniRoute alone). OmniRoute turns ReasoningBank, Continual Harness and the memory layers on and off; while running each is its own MCP server (operator, 2026-09-30).
+- pm-claude-skills fork: done/moot (fork 5 ahead = own weekly-digest ledger commits, 293 behind upstream; no PR to make)
+- trusted-firmware-a fork: moot (3 ahead qti commits, 1181 behind qcom-next; no c10vis PRs; sync only if you build it)
+- Node 22+ for OmniRoute: done (node v26.4.0; engines `>=22.22.2 <23 || >=24 <27`)
+- TB Obsidian-plugin `tsc: not found`: done (`node_modules/.bin/tsc --noEmit` rc=0 in NovA-terrestrial-brain/obsidian-plugin)
+- happy-ending plugin hand-registration: done (in installed_plugins.json, enabled, cache present, skill loads in session)
+- vault-ci.yml: stale (vault has `.github/workflows/ci.yml` + `security.yml`)
+- Obsidian skills load twice: moot for Claude Code (`~/.claude/skills` holds only `obsidian-vault`, distinct from the plugin's defuddle/json-canvas/knap/obsidian-*; the duplicate links are in `~/.agents/skills`, not read by Claude Code)

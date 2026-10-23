@@ -1,7 +1,7 @@
 ---
 id: 1
 title: Honey mode stayed declared-active but unenforced through a long investigation session
-status: parked
+status: actioned
 type: open-source
 skill: [honey]
 proposes_skill: []
@@ -9,9 +9,9 @@ siblings_checked: "no skill-families.md registry exists yet; evaluated honey-ccr
 area: activation / enforcement mechanism
 date: 2026-09-18
 session_context: "Long multi-hour infrastructure investigation session (OmniRoute/Mem0/Terrestrial Brain/GCP). A SessionStart hook declared 'Honey mode is ACTIVE (intensity: ultra)' at the very start, but responses grew into multi-paragraph recaps and citations as the session lengthened. User: 'you need to set up that honey for devs and actually start using it cuz you are producing way too many fucking words I did not need six paragraphs about something that doesn't exist.'"
-parked_until: "fork branch fix/honey-enforce-obs0001 merged into NoVa-honey-for-devs main and the plugin updated on the device"
-resolved:
-resolution:
+parked_until:
+resolved: 2026-10-23
+resolution: "honey #6 (re-inject terseness reminder every 3rd tool call) merged; installed plugin 53987b2 contains it (checked installed_plugins.json, 2026-10-23)."
 reference:
 ---
 

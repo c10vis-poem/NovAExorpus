@@ -1,7 +1,7 @@
 ---
 id: 33
 title: "Keyword ENFORCEMENTS fired on a subagent hand-back and blocked work until five unrelated reads/skills were done"
-status: open
+status: actioned
 type: internal
 skill: []
 proposes_skill: []
@@ -11,8 +11,8 @@ area: "UserPromptSubmit keyword classification"
 date: 2026-10-21
 session_context: "Drive dedup subagent returned its report; its text named naming/hooks/npu/vault/voice topics"
 parked_until:
-resolved:
-resolution:
+resolved: 2026-10-22
+resolution: "Aesop-Xi PR #57 (22381b5, branch fix/observe-skip-agent-messages): hooks/enforce-prompt.sh line 10 exits before classification on <agent-message / <task-notification> / 'Another Claude session sent a message'; observe-event.sh carries the same test. Live ~/.claude/hooks/enforce-prompt.sh has the same line. Not done: the shared helper; the test is one duplicated grep line in two hooks, judged not worth a sourced file."
 reference:
 commands_verified: none
 ---

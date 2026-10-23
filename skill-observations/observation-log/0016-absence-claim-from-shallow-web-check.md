@@ -1,7 +1,7 @@
 ---
 id: 16
 title: "Stated 'the vendor page has no file' after one summarized web fetch and two guessed repo names"
-status: parked
+status: actioned
 type: open-source
 skill: []
 proposes_skill: []
@@ -10,9 +10,9 @@ siblings_checked: "none — target is an instructions file, not a skill"
 area: "Read Before Claim; absence claims"
 date: 2026-10-01
 session_context: "NPU server work: checking whether the vendor's model hub served a different GGUF than the operator's file"
-parked_until: "block A of skill-updates/2026-10-08/claude-md/CLAUDE.md.additions.md is pasted into ~/.claude/CLAUDE.md"
-resolved:
-resolution:
+parked_until:
+resolved: 2026-10-23
+resolution: "Same CLAUDE.md rule as 0007: 'Absence claims name their probes'."
 reference:
 ---
 
