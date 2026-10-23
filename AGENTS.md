@@ -68,92 +68,23 @@ Source: operator-confirmed 2026-09-13, restated and extended 2026-09-28.
 Run the task-observer skill (`c10vis-poem/aesop-task-observer`) before the
 first tool call of any session and before proposing a plan. Every harness
 carries the skill; observations go to one shared log in this vault
-(`skill-observations/`). Planned: an OmniRoute tool `observation_log` so
-all harnesses write through one endpoint (orchestration contract §3.2,
-aesop-xi PR #18) — not built yet, so each harness runs the skill itself.
+(`skill-observations/`). Each harness runs the skill itself.
 
-## Launch
+## Start here (any device, any agent, any account)
+Everything a new session needs is in this vault (synced to `c10vis-poem/NovAExorpus`), not on one phone:
+1. `RESUME.md`: current state, open items in order, exact commands.
+2. `PENDING.md`: durable backlog. `BOARD-INTAKE.md`: decisions and long-term threads.
+3. `handoff/<date>/`: the reports behind RESUME (NPU install plan, branch review, models, voice, remote access, skills inventory, principles table).
+4. `agents/AGENTS.global.md`: the shared rules every agent follows (copy of the phone's `~/.agents/AGENTS.md`; Claude Code imports the phone copy from `~/.claude/CLAUDE.md`).
+5. `skill-observations/`: the one shared task-observer log, plus `cross-cutting-principles.md`.
+Paths under `~/.claude/` (session-work, memory, hooks) exist only on the phone; RESUME never depends on them.
 
-`bash tools/launch.sh` loads secrets, checks OmniRoute, Terrestrial Brain,
-mem0 and code-review-graph, then starts the engine. Claude Code also loads
-the `router-guard` output style and the `.claude/hooks` SessionStart check —
-those two are the only Claude-Code-only pieces.
-
-## MCP servers
-
-Defined in `.mcp.json` at repo root: `omniroute` (gateway), `mem0`
-(episodic memory), and `terrestrial-brain` (structural memory). All take
-endpoint/credentials from env vars — see `.mcp.json` for the exact
-variable names. Set them locally; never commit values.
-
-## Mandatory runtime pipeline (all engines)
-
-Every agent — Claude Code, Codex, dsh, Prime Agent, Hermes — must satisfy
-these layers in order before writing files or running commands.
-
-### Layer sequence
-
-| # | Layer | Name | Interface | Endpoint |
-|---|-------|------|-----------|----------|
-| 0 | Execution + routing | OmniRoute | HTTP gateway daemon | VM `:20128` |
-| — | Judgment | Continual Harness | OmniRoute internal | via OmniRoute |
-| — | Execution ledger | Reasoning Bank | OmniRoute internal | via OmniRoute |
-| 1 | Token saver | honey-for-devs | MCP tool / skill / text-strip | per-engine |
-| 2 | Orchestration | task-observer | CLI / file-gen (Claude Code only) | per-engine |
-| 3 | Code intel | code-review-graph | MCP Server (stdio) | local binary |
-| 4 | Episodic memory | mem0 | MCP Server (HTTP) | `mcp.mem0.ai` |
-| 5 | Structural memory | terrestrial-brain | MCP Server (HTTP) | VM `:8000` |
-
-The VM's external IP changes on every start; `~/bin/vm on` prints it.
-
-**OmniRoute** is the execution layer, memory retrieval layer, and routing
-layer. It distributes requests, retrieves memory context, and makes
-routing decisions. Continual Harness provides the judgment — it watches
-agents and their refinements mid-run and optimizes routing. Reasoning Bank judges each finished
-task and distils lessons for similar tasks later. Neither does crash
-recovery or automatic rollback (verified in source 2026-09-30). OmniRoute
-decides when they and the memory layers turn on and off; while running,
-each is its own MCP server (operator, 2026-09-30).
-
-**OmniRoute fallback:** if OmniRoute is unreachable, fall back to direct
-execution and log a warning. All other memory layers remain active via
-their individual MCP connections.
-
-**mem0 safety:** before `update_memory` or `delete_memory`, always
-`get_memory` or `search_memories` first. Never `delete_all_memories`.
-
-### Multi-write protocol
-
-Every execution cycle follows three phases:
-
-1. **READ** — query mem0 (session context), terrestrial-brain (static
-   guards/preferences), code-review-graph (code dependencies). Do not
-   guess file imports.
-2. **WRITE-BACK** — commit ephemeral state to mem0, long-term invariants
-   to terrestrial-brain.
-3. **OBSIDIAN LOG** — on every terrestrial-brain write, create/append a
-   markdown file in `~/storage/shared/Documents/NovAExorpus/memories/`
-   with YAML frontmatter (`source_db`, `uuid`, `timestamp`, `category`).
-
-### Secondary tools (on-demand, not per-prompt)
-
-| Tool | Interface | When |
-|------|-----------|------|
-| graphify | CLI via proot (`~/bin/graphify`) | Codebase mapping, knowledge graph, `--obsidian` export |
-| obsidian | obsidian-skills plugin or CLI | Vault interaction, note linking |
-| notebook-lm | Python CLI (`notebooklm-py`) | Document ingestion, audio overview, research export |
-
-### Harness anchors
-
-The multi-write protocol, layer roles table, and pre-flight gate are
-immutable — no automated refinement or optimization pass may alter them.
-
-### Enforcement
-
-- Do not write code before pre-flight layers have run.
-- Do not bypass OmniRoute unless it is unreachable.
-- Do not silently skip a memory layer — log the failure if one is down.
-- Do not skip the Obsidian vault log on any terrestrial-brain write.
+## Current stack (2026-10-23)
+- **Dropped, do not set up, test or route through:** OmniRoute, mem0, Terrestrial Brain, OpenWiki, Qwen3-VL. (Strip-and-judge may still mine their ideas; see BOARD-INTAKE.)
+- **On-device models:** GenieX on the Snapdragon 8 Elite NPU (HTP v79). AI Hub precompiled bundles run on GenieX's `qairt` runtime; any GGUF runs on its `llama_cpp` runtime (GGML Hexagon backend). Same GenieX endpoint. Details: `handoff/2026-10-23/npu-install-plan.md`.
+- **Code intel / graphs:** code-review-graph (MCP), graphify. **Vault:** Obsidian + GitSync.
+- **Secrets:** sops+age store in the private repo `c10vis-poem/NvAEx-Recaps` (`nvaex-secret`). Never write keys here: this repo is PUBLIC.
+- **Enforcement (Claude Code on the phone):** hooks in `c10vis-poem/Aesop-Xi/hooks/` (README there). Agents may not change Claude Code settings, delete enforcement state, or turn anything off in any repo without the operator naming it.
 
 ## Cross-engine compatibility (this file only — tool-agnostic)
 

@@ -1,7 +1,7 @@
 ---
 id: 15
 title: "Review parked mid-session was never resumed or recorded; next session reported 'never reviewed'"
-status: parked
+status: actioned
 type: open-source
 skill: [task-observer]
 proposes_skill: []
@@ -10,9 +10,9 @@ siblings_checked: "none — task-observer belongs to no family"
 area: "weekly-review interruption; Session Start step 3"
 date: 2026-10-01
 session_context: "2026-10-01 business-account session parked a review after presenting 4 decisions; 2026-10-02 session start read last-review-date=never and told the operator no review had run"
-parked_until: "fork branch fix/obs-0006-0015-hook-and-review-marker merged into aesop-task-observer main"
-resolved:
-resolution:
+parked_until:
+resolved: 2026-10-22
+resolution: "aesop-task-observer PR #1 merged 2026-10-18 as 09a4101: references/weekly-review.md line 288 writes skill-observations/review-in-progress.md when a review is interrupted (deleted on completion, line 1694); scripts/session-start-hook.sh line 18 offers to resume it; SKILL.md line 177 checks the marker before calling a backlog unreviewed."
 reference:
 ---
 

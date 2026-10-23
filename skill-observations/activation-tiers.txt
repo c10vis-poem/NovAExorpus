@@ -1,0 +1,4 @@
+2026-10-23 (weekly review)
+- instruction-file tier: present (~/.claude/CLAUDE.md "task-observer (front of every session)" block; names the pinned workspace root)
+- session-start hook tier: present (~/.claude/settings.json SessionStart: scripts/session-start-hook.sh with the absolute workspace path)
+- scheduled-task tier: none registered; review-source line: none quoted (CLAUDE.md does not say where reviews come from)

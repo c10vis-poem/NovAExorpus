@@ -1,7 +1,7 @@
 ---
 id: 7
 title: Absence claims need fork/branch/PR search, not just main
-status: parked
+status: actioned
 type: open-source
 skill: []
 proposes_skill: []
@@ -9,9 +9,9 @@ siblings_checked: none
 area: repo reading / verification
 date: 2026-09-26
 session_context: full read-through of OB1 (Open Brain) before install
-parked_until: "block A of skill-updates/2026-10-08/claude-md/CLAUDE.md.additions.md is pasted into ~/.claude/CLAUDE.md"
-resolved:
-resolution:
+parked_until:
+resolved: 2026-10-23
+resolution: "Rule 'Absence claims name their probes' appended to ~/.claude/CLAUDE.md 2026-10-22 (loaded in session context 2026-10-23)."
 reference:
 ---
 

@@ -1,7 +1,7 @@
 ---
 id: 30
 title: "START HERE items carried session after session as deferred or partly done"
-status: parked
+status: actioned
 type: internal
 skill: []
 proposes_skill: []
@@ -10,9 +10,9 @@ siblings_checked: "none: target is a hook, not a skill family"
 area: "Session wrap-up; RESUME carry-over"
 date: 2026-10-09
 session_context: "2026-10-08/09 session: workstreams 0, 3, 4, 5 (PR/CI cleanup, repo mirrors/renames/deletions, vault cleanup) moved to the next RESUME again"
-parked_until: "grill session decides"
-resolved:
-resolution:
+parked_until:
+resolved: 2026-10-23
+resolution: "Aesop-Xi #53 (H9 carryover) merged and installed; live carryover.sh equals origin/main (cmp 2026-10-23); carryover.test.sh 16/16."
 reference: "NovAExorpus/RESUME.md START HERE; ~/.claude/session-work/2026-10-08/WRAPUP-QUEUE.md"
 commands_verified: none
 ---

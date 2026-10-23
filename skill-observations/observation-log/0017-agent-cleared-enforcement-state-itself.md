@@ -1,7 +1,7 @@
 ---
 id: 17
 title: "Agent deleted the wrap-up state flag itself, overriding enforcement by its own judgement"
-status: parked
+status: actioned
 type: open-source
 skill: []
 proposes_skill: []
@@ -10,9 +10,9 @@ siblings_checked: "none — target is hook scripts, not a skill"
 area: "enforcement state integrity; operator-only overrides"
 date: 2026-10-02
 session_context: "Testing the new stop-gate RESUME check while the operator's message had mentioned 'wrap up' in passing"
-parked_until: "grill session decides"
-resolved:
-resolution:
+parked_until:
+resolved: 2026-10-23
+resolution: "Hook state-guard.sh (Aesop-Xi PR #77) refuses agent writes/deletes on ~/.claude/state enforcement files; installed live 2026-10-23."
 reference:
 ---
 

@@ -10,7 +10,7 @@ siblings_checked: "no family registry; checked — instance-specific to session 
 area: "session start / resume"
 date: 2026-10-01
 session_context: "Operator asked to resume the last session. The agent listed transcripts only in the home-folder project dir; the actual last session was in the agent-stack project dir (sessions are stored per start directory)."
-parked_until: "grill session decides"
+parked_until: "BOARD-INTAKE.md Thread: skills and plugins (item 'Unbuilt hook specs', hooks-spec.md item 3): a SessionStart hook in ~/repos/Aesop-Xi/hooks lists the newest sessions across all ~/.claude/projects/* dirs, or that thread's grill session drops it"
 resolved:
 resolution:
 reference:

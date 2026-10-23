@@ -1,7 +1,7 @@
 ---
 id: 31
 title: "/ok skill says 'the hook has recorded it' when the hook matched nothing; mid-prompt /ok and typos silently ignored"
-status: open
+status: actioned
 type: internal
 skill: [ok]
 proposes_skill: []
@@ -11,8 +11,8 @@ area: "operator check-in parsing and confirmation text"
 date: 2026-10-18
 session_context: "Session start check-in. Operator wrote '/ok -0' mid-sentence, then '/o 0'; neither created state/checkin-<sid>. The /ok skill's injected text still said the hook recorded it. Agent tried to spawn subagents and was blocked; operator was frustrated by the wait."
 parked_until:
-resolved:
-resolution:
+resolved: 2026-10-23
+resolution: "Aesop-Xi #64 merged: slash forms parsed anywhere, hook prints CHECK-IN recorded / NOT recorded; /ok /defer /reject text reads that line. Live enforce-prompt.sh and commands equal origin/main; checkin.test.sh 7/7."
 reference:
 commands_verified: "run: ls ~/.claude/state/checkin-7cb1c8c0* -> no matches after both prompts"
 ---

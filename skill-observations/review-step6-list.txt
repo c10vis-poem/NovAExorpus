@@ -1,0 +1,15 @@
+0001-honey-declarative-activation-not-enforced.md
+0005-fork-sync-and-read-before-build.md
+0007-absence-claims-need-fork-branch-pr-search.md
+0012-resume-picked-wrong-session-single-project-dir.md
+0016-absence-claim-from-shallow-web-check.md
+0017-agent-cleared-enforcement-state-itself.md
+0023-explore-subagent-cannot-keep-progress-file.md
+0024-claimed-no-wiki-tool-chosen-from-subagent-summaries.md
+0028-standing-order-subagents-not-used.md
+0030-start-here-items-carried-for-a-week.md
+0031-ok-skill-claims-checkin-recorded-when-hook-missed.md
+0034-jargon-relabels-operator-asks.md
+0035-hook-error-claim-ignored-open-fix-pr.md
+0036-git-gate-push-now-lost-on-mid-turn-message.md
+0037-checkin-parser-read-list-labels.md

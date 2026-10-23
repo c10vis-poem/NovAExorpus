@@ -1,7 +1,7 @@
 ---
 id: 6
 title: task-observer loaded via command but session-start protocol and logging never ran
-status: parked
+status: actioned
 type: open-source
 skill: [task-observer]
 proposes_skill: []
@@ -9,7 +9,9 @@ siblings_checked: "task-observer family: task-observer, novae-xorpus:task-observ
 area: Session Start Protocol / How to Log
 date: 2026-09-23
 session_context: "long Termux/Obsidian/OpenWiki/dsh session; 2026-10-18/20 phone housekeeping session (post-compaction)"
-parked_until: "fork branch fix/obs-0006-0015-hook-and-review-marker merged into aesop-task-observer main and scripts/session-start-hook.sh registered as a SessionStart hook in ~/.claude/settings.json"
+parked_until:
+resolved: 2026-10-22
+resolution: "Park condition met and the later-instance barriers exist. aesop-task-observer PR #1 merged 2026-10-18 as 09a4101 (scripts/session-start-hook.sh injects the scan); ~/.claude/settings.json line 182 registers it for startup|resume|clear|fork. Compaction: Aesop-Xi PR #56 hooks/observe-event.sh (SessionStart source=compact re-arms and tells the agent to re-run session-start-scan.sh); hooks/stop-gate.sh lines 58-67 require the skill loaded plus a fresh scan after RESUME and after compaction, and every friction event logged or dismissed."
 ---
 
 **Issue:** Skill content was injected at session start, but the agent never ran the Session Start Protocol, never logged an observation, and made no mem0 calls until the operator called it out hours in. Also found two forked observation workspaces (global ~/.claude/skill-observations and a project-keyed one) — the silent fork the skill warns about. Relates to existing obs 0002 (CLAUDE.md trigger not self-enforcing) in the project-keyed log.

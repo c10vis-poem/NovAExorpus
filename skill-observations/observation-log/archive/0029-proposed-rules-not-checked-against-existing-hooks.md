@@ -1,7 +1,7 @@
 ---
 id: 29
 title: "Subagent/review output relayed without checking the operator's existing setup (hooks, forks, rules)"
-status: parked
+status: actioned
 type: open-source
 skill: [task-observer]
 proposes_skill: []
@@ -10,9 +10,9 @@ siblings_checked: "none: task-observer belongs to no registered family (no skill
 area: "Weekly review staging; relaying subagent results"
 date: 2026-10-08
 session_context: "Observation review dispatched to a subagent; its staged CLAUDE.md additions were presented to the operator"
-parked_until: "fork branch fix/obs-0006-0015-hook-and-review-marker merged into aesop-task-observer main"
-resolved:
-resolution:
+parked_until:
+resolved: 2026-10-22
+resolution: "aesop-task-observer PR #1 merged 2026-10-18 as 09a4101: references/weekly-review.md lines 1065-1073 require mapping every proposed rule to the existing enforcement layer (already enforced with hook cited / partly with gap named / new) before presenting, and checking ownership claims against the fork list."
 reference: "skill-updates/2026-10-08/claude-md/CLAUDE.md.additions.md; aesop-xi hooks/README.md"
 commands_verified: none
 ---

@@ -1,7 +1,7 @@
 ---
 id: 24
 title: "Claimed 'no wiki engine chosen' from subagent summaries while the decision doc existed in the vault"
-status: parked
+status: actioned
 type: internal
 skill: []
 proposes_skill: []
@@ -10,9 +10,9 @@ siblings_checked: "none — CLAUDE.md read-before-claim rule, not a skill family
 area: "absence claims built from delegated reading"
 date: 2026-10-05
 session_context: "Synthesizing 11 reader reports on the LLM-wiki corpus"
-parked_until: "block A of skill-updates/2026-10-08/claude-md/CLAUDE.md.additions.md is pasted into ~/.claude/CLAUDE.md"
-resolved:
-resolution:
+parked_until:
+resolved: 2026-10-23
+resolution: "Same CLAUDE.md rule as 0007; also 'Subagent reports say what their batch contained'."
 reference:
 ---
 
