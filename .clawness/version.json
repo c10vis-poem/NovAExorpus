@@ -1,0 +1,11 @@
+{
+  "version": "1.19.0",
+  "covered": [
+    "bash",
+    "claude-code",
+    "java",
+    "python",
+    "rust"
+  ],
+  "updated": 1792845106.625245
+}

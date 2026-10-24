@@ -1,0 +1,12 @@
+{
+  ".claude/agents/builder.md": "3c058d0edebf53b3544c10bb05494848d000b21dd1ba5596ab3a383bff158736",
+  ".claude/agents/corpus-architect.md": "d96e4e228c5cbb932b263772a4763083de1d045fc00094562b0b7f68f912708e",
+  ".claude/skills/debug-issue/SKILL.md": "ed347c3ee7f75d4597c14c3510757db2c020196e5518e65ea6f7dd5527e15f76",
+  ".claude/skills/drive-to-obsidian-migration/SKILL.md": "3e0e1da4323437da3b21e695773e682c1f621bbbb3ffcc55bb92afbfe5582f13",
+  ".claude/skills/explore-codebase/SKILL.md": "10bc1bd838ade3cbc6cf5c1c836962e5df96f118aa3b02bc5ddfabc82c3c8737",
+  ".claude/skills/notebooklm/SKILL.md": "e15e7a0a48ada895120e046fd36b5961f304a24356e3ad2988c87740e3ae7bf9",
+  ".claude/skills/refactor-safely/SKILL.md": "ab9d9f653e7555e55e66e4c3cb0453f744d5e92fe9cb1a862ab358aa3d9736b4",
+  ".claude/skills/review-changes/SKILL.md": "715addb7bc679e02b0c12917689c108d8fab4446b4e20a3b3dc35f1de83dccc1",
+  ".claude/skills/task-observer/SKILL.md": "ef26d4e979bcba33e0082d6d0399f4d35df9bd1f3d94d15f36e993161850494c",
+  ".mcp.json": "45c6549688f749755e94c50bbc08976e4a81cbd8cdbe4e74cc940de1a148e235"
+}
