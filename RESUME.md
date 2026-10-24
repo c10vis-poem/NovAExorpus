@@ -3,9 +3,10 @@ Session files: [[AGENTS]] · [[PENDING]] · [[MEMORY]] · [[MAP]] · [[NAMING-CA
 # RESUME.md — Session Ledger (rewritten every session)
 
 Repository: NovÆxorpus (`c10vis-poem/NovAExorpus`, PUBLIC). Readable from any device, agent or account once GitSync has synced: everything this file points to is inside this vault unless marked **(phone only)**.
-**Last session: 2026-10-23** (phone, Claude Code, Opus 5.5, session `7cb1c8c0`). Pre-grill housekeeping, finished: PRs merged, branches cleaned, hooks installed, observer review done, long-term work in [[BOARD-INTAKE]].
+**Last session: 2026-10-24** (cloud, Claude Code, Fable 5.1, stopped early by the operator to save credits). Aesop-Xi hooks rebuilt for cloud sessions (draft PR Aesop-Xi #81, not merged); five reading extracts and the remaining-deliverables plan in `handoff/2026-10-24/README.md`. Previous: 2026-10-23 (phone, Opus 5.5) pre-grill housekeeping, long-term work in [[BOARD-INTAKE]].
 
 ## NEXT SESSION — START HERE
+0. **Read `handoff/2026-10-24/README.md`**: the credits/Fable answer, the five extracts (latest config, wiki-admin, on-disk docs, asset inventory, plugin audit) and the six deliverables still to build (Fable orchestrator agent, wiki-admin package, appraisal, plugin cross-comparison, 3-APK stack, cognitive pipeline + enterprise config). Review and merge Aesop-Xi #81, then install the hook copies on the phone with a `!` command.
 1. **Read** [[AGENTS]] ("Start here" + "Current stack"), then [[PENDING]] "Open". The shared agent rules are `agents/AGENTS.global.md`.
 2. **NPU proof result.** A proof run (`~/tools/npu-proof.sh`, GenieX v0.9.3, Qwen3.5 2B and 4B) was still running at wrap-up. Its log is **(phone only)** `~/.claude/session-work/2026-10-23/npu-proof-*.log`; the summary at its end says whether each model ran on the HTP (Hexagon v79), which HTP sessions opened, layers offloaded, memory per device, and npu/hybrid/cpu speeds. Then continue `handoff/2026-10-23/npu-install-plan.md` §6 from step 8, one model at a time with the operator. The permission checker blocks the agent from running freshly downloaded binaries: give the operator `!` commands.
 3. **Operator items** (exact commands in [[PENDING]] Open): secrets into the store (new OpenRouter key needed), a few deletes, decisions on starter principles / hook 3 / small calls, answers owed, infrastructure.
