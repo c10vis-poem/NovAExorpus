@@ -1,0 +1,312 @@
+{
+ "request": {
+  "model": "jev-1.14.0",
+  "state": {
+   "architecture_definition": "Architecture (operator, repeated ~10 times; logged verbatim 2026-10-23): files as infrastructure; agents as packages; plugins as configurations; repos as marketplaces; memory, workflows and data extraction designed as skills, scripts and hooks. Agent harnesses and agent packages are modular customizable setups, using Anthropic's own strategies from its customizable mod setup and its dynamic workflow logic, modifiable in session alongside Anthropic's workflows/harnesses. Names for the split beyond \"skills/capabilities\" still open. Pointers: text in AGENTS.md, enforced/injected by hooks.",
+   "options": {
+    "custom_harness": "The operator's planned system. Third-party stacks are broken into assets and only the useful parts are folded in. Claude Code is the harness, customised with hooks, skills, subagents and mods. Routing is a UserPromptSubmit hook that asks Jev typed questions and sends unsure cases to a Sonnet or Opus subagent. Episodic memory is a Stop hook where Jev decides what to keep and appends it to a markdown file in the repo. Semantic retrieval uses the vault, its manifest and per-section Jev labels, with grep and Jev relevance ranking. Graphify and code-review-graph stay as the graph layers. Everything is files in git; no extra database servers. Much of it is not built yet.",
+    "third_party_servers": "Run the third-party servers whole, as their projects ship them: OmniRoute as a localhost gateway that every prompt passes through, with its own SQLite store; mem0 for episodic memory with Postgres and Neo4j; OB1 / Terrestrial Brain on Supabase or Postgres with pgvector and LLM-based schema routing; plus Graphify and code-review-graph. Runs in Docker Compose on the GCP VM, reached from the phone over Tailscale. The operator earlier found OB1 intrusive and said it attempts to hijack prompts.",
+    "baseline_claude_code": "Plain Claude Code with no additions: it reads AGENTS.md and the files it is pointed at, uses its built-in memory files and subagents, and searches the vault with grep when asked. No Jev, no routing layer, no memory servers, no graph tools."
+   }
+  },
+  "questions": {
+   "custom_harness__files_as_infrastructure": {
+    "type": "noul",
+    "instructions": "Does `options.custom_harness` keep its state and infrastructure as files rather than in running servers or databases, as `architecture_definition` requires?"
+   },
+   "custom_harness__agents_as_packages": {
+    "type": "noul",
+    "instructions": "Does `options.custom_harness` ship agents as installable packages, as `architecture_definition` requires?"
+   },
+   "custom_harness__plugins_as_configurations": {
+    "type": "noul",
+    "instructions": "Does `options.custom_harness` use plugins as configurations rather than as whole systems that run on their own, as `architecture_definition` requires?"
+   },
+   "custom_harness__repos_as_marketplaces": {
+    "type": "noul",
+    "instructions": "Does `options.custom_harness` use repositories as marketplaces that skills, agents and plugins are installed from, as `architecture_definition` requires?"
+   },
+   "custom_harness__memory_as_skills_hooks": {
+    "type": "noul",
+    "instructions": "Does `options.custom_harness` build memory out of skills, scripts and hooks, as `architecture_definition` requires?"
+   },
+   "custom_harness__workflows_as_skills_hooks": {
+    "type": "noul",
+    "instructions": "Does `options.custom_harness` build workflows out of skills, scripts and hooks, as `architecture_definition` requires?"
+   },
+   "custom_harness__extraction_as_skills_hooks": {
+    "type": "noul",
+    "instructions": "Does `options.custom_harness` build data extraction out of skills, scripts and hooks, as `architecture_definition` requires?"
+   },
+   "custom_harness__modular_harness": {
+    "type": "noul",
+    "instructions": "Does `options.custom_harness` make the agent harness a modular setup the operator can customise, as `architecture_definition` requires?"
+   },
+   "custom_harness__anthropic_mods": {
+    "type": "noul",
+    "instructions": "Does `options.custom_harness` use Anthropic's own customisation mechanisms for Claude Code, such as plugins, mods and hooks, as `architecture_definition` requires?"
+   },
+   "custom_harness__anthropic_dynamic_workflows": {
+    "type": "noul",
+    "instructions": "Does `options.custom_harness` use Anthropic's dynamic workflow logic, such as subagents and workflows, as `architecture_definition` requires?"
+   },
+   "custom_harness__modifiable_in_session": {
+    "type": "noul",
+    "instructions": "Does `options.custom_harness` let the harness be changed during a session alongside Anthropic's own workflows, as `architecture_definition` requires?"
+   },
+   "custom_harness__agents_md_pointers_hooks": {
+    "type": "noul",
+    "instructions": "Does `options.custom_harness` keep pointers as text in AGENTS.md that hooks enforce or inject, as `architecture_definition` requires?"
+   },
+   "third_party_servers__files_as_infrastructure": {
+    "type": "noul",
+    "instructions": "Does `options.third_party_servers` keep its state and infrastructure as files rather than in running servers or databases, as `architecture_definition` requires?"
+   },
+   "third_party_servers__agents_as_packages": {
+    "type": "noul",
+    "instructions": "Does `options.third_party_servers` ship agents as installable packages, as `architecture_definition` requires?"
+   },
+   "third_party_servers__plugins_as_configurations": {
+    "type": "noul",
+    "instructions": "Does `options.third_party_servers` use plugins as configurations rather than as whole systems that run on their own, as `architecture_definition` requires?"
+   },
+   "third_party_servers__repos_as_marketplaces": {
+    "type": "noul",
+    "instructions": "Does `options.third_party_servers` use repositories as marketplaces that skills, agents and plugins are installed from, as `architecture_definition` requires?"
+   },
+   "third_party_servers__memory_as_skills_hooks": {
+    "type": "noul",
+    "instructions": "Does `options.third_party_servers` build memory out of skills, scripts and hooks, as `architecture_definition` requires?"
+   },
+   "third_party_servers__workflows_as_skills_hooks": {
+    "type": "noul",
+    "instructions": "Does `options.third_party_servers` build workflows out of skills, scripts and hooks, as `architecture_definition` requires?"
+   },
+   "third_party_servers__extraction_as_skills_hooks": {
+    "type": "noul",
+    "instructions": "Does `options.third_party_servers` build data extraction out of skills, scripts and hooks, as `architecture_definition` requires?"
+   },
+   "third_party_servers__modular_harness": {
+    "type": "noul",
+    "instructions": "Does `options.third_party_servers` make the agent harness a modular setup the operator can customise, as `architecture_definition` requires?"
+   },
+   "third_party_servers__anthropic_mods": {
+    "type": "noul",
+    "instructions": "Does `options.third_party_servers` use Anthropic's own customisation mechanisms for Claude Code, such as plugins, mods and hooks, as `architecture_definition` requires?"
+   },
+   "third_party_servers__anthropic_dynamic_workflows": {
+    "type": "noul",
+    "instructions": "Does `options.third_party_servers` use Anthropic's dynamic workflow logic, such as subagents and workflows, as `architecture_definition` requires?"
+   },
+   "third_party_servers__modifiable_in_session": {
+    "type": "noul",
+    "instructions": "Does `options.third_party_servers` let the harness be changed during a session alongside Anthropic's own workflows, as `architecture_definition` requires?"
+   },
+   "third_party_servers__agents_md_pointers_hooks": {
+    "type": "noul",
+    "instructions": "Does `options.third_party_servers` keep pointers as text in AGENTS.md that hooks enforce or inject, as `architecture_definition` requires?"
+   },
+   "baseline_claude_code__files_as_infrastructure": {
+    "type": "noul",
+    "instructions": "Does `options.baseline_claude_code` keep its state and infrastructure as files rather than in running servers or databases, as `architecture_definition` requires?"
+   },
+   "baseline_claude_code__agents_as_packages": {
+    "type": "noul",
+    "instructions": "Does `options.baseline_claude_code` ship agents as installable packages, as `architecture_definition` requires?"
+   },
+   "baseline_claude_code__plugins_as_configurations": {
+    "type": "noul",
+    "instructions": "Does `options.baseline_claude_code` use plugins as configurations rather than as whole systems that run on their own, as `architecture_definition` requires?"
+   },
+   "baseline_claude_code__repos_as_marketplaces": {
+    "type": "noul",
+    "instructions": "Does `options.baseline_claude_code` use repositories as marketplaces that skills, agents and plugins are installed from, as `architecture_definition` requires?"
+   },
+   "baseline_claude_code__memory_as_skills_hooks": {
+    "type": "noul",
+    "instructions": "Does `options.baseline_claude_code` build memory out of skills, scripts and hooks, as `architecture_definition` requires?"
+   },
+   "baseline_claude_code__workflows_as_skills_hooks": {
+    "type": "noul",
+    "instructions": "Does `options.baseline_claude_code` build workflows out of skills, scripts and hooks, as `architecture_definition` requires?"
+   },
+   "baseline_claude_code__extraction_as_skills_hooks": {
+    "type": "noul",
+    "instructions": "Does `options.baseline_claude_code` build data extraction out of skills, scripts and hooks, as `architecture_definition` requires?"
+   },
+   "baseline_claude_code__modular_harness": {
+    "type": "noul",
+    "instructions": "Does `options.baseline_claude_code` make the agent harness a modular setup the operator can customise, as `architecture_definition` requires?"
+   },
+   "baseline_claude_code__anthropic_mods": {
+    "type": "noul",
+    "instructions": "Does `options.baseline_claude_code` use Anthropic's own customisation mechanisms for Claude Code, such as plugins, mods and hooks, as `architecture_definition` requires?"
+   },
+   "baseline_claude_code__anthropic_dynamic_workflows": {
+    "type": "noul",
+    "instructions": "Does `options.baseline_claude_code` use Anthropic's dynamic workflow logic, such as subagents and workflows, as `architecture_definition` requires?"
+   },
+   "baseline_claude_code__modifiable_in_session": {
+    "type": "noul",
+    "instructions": "Does `options.baseline_claude_code` let the harness be changed during a session alongside Anthropic's own workflows, as `architecture_definition` requires?"
+   },
+   "baseline_claude_code__agents_md_pointers_hooks": {
+    "type": "noul",
+    "instructions": "Does `options.baseline_claude_code` keep pointers as text in AGENTS.md that hooks enforce or inject, as `architecture_definition` requires?"
+   }
+  }
+ },
+ "response": {
+  "model": "jev-1.14.0",
+  "answers": {
+   "custom_harness__files_as_infrastructure": {
+    "type": "noul",
+    "noul": 0.97
+   },
+   "custom_harness__agents_as_packages": {
+    "type": "noul",
+    "noul": 0.25
+   },
+   "custom_harness__plugins_as_configurations": {
+    "type": "noul",
+    "noul": 0.88
+   },
+   "custom_harness__repos_as_marketplaces": {
+    "type": "noul",
+    "noul": 0.15
+   },
+   "custom_harness__memory_as_skills_hooks": {
+    "type": "noul",
+    "noul": 0.88
+   },
+   "custom_harness__workflows_as_skills_hooks": {
+    "type": "noul",
+    "noul": 0.91
+   },
+   "custom_harness__extraction_as_skills_hooks": {
+    "type": "noul",
+    "noul": 0.69
+   },
+   "custom_harness__modular_harness": {
+    "type": "noul",
+    "noul": 0.95
+   },
+   "custom_harness__anthropic_mods": {
+    "type": "noul",
+    "noul": 0.95
+   },
+   "custom_harness__anthropic_dynamic_workflows": {
+    "type": "noul",
+    "noul": 0.87
+   },
+   "custom_harness__modifiable_in_session": {
+    "type": "noul",
+    "noul": 0.79
+   },
+   "custom_harness__agents_md_pointers_hooks": {
+    "type": "noul",
+    "noul": 0.85
+   },
+   "third_party_servers__files_as_infrastructure": {
+    "type": "noul",
+    "noul": 0.02
+   },
+   "third_party_servers__agents_as_packages": {
+    "type": "noul",
+    "noul": 0.14
+   },
+   "third_party_servers__plugins_as_configurations": {
+    "type": "noul",
+    "noul": 0.04
+   },
+   "third_party_servers__repos_as_marketplaces": {
+    "type": "noul",
+    "noul": 0.11
+   },
+   "third_party_servers__memory_as_skills_hooks": {
+    "type": "noul",
+    "noul": 0.07
+   },
+   "third_party_servers__workflows_as_skills_hooks": {
+    "type": "noul",
+    "noul": 0.12
+   },
+   "third_party_servers__extraction_as_skills_hooks": {
+    "type": "noul",
+    "noul": 0.11
+   },
+   "third_party_servers__modular_harness": {
+    "type": "noul",
+    "noul": 0.18
+   },
+   "third_party_servers__anthropic_mods": {
+    "type": "noul",
+    "noul": 0.11
+   },
+   "third_party_servers__anthropic_dynamic_workflows": {
+    "type": "noul",
+    "noul": 0.24
+   },
+   "third_party_servers__modifiable_in_session": {
+    "type": "noul",
+    "noul": 0.21
+   },
+   "third_party_servers__agents_md_pointers_hooks": {
+    "type": "noul",
+    "noul": 0.43
+   },
+   "baseline_claude_code__files_as_infrastructure": {
+    "type": "noul",
+    "noul": 0.92
+   },
+   "baseline_claude_code__agents_as_packages": {
+    "type": "noul",
+    "noul": 0.09
+   },
+   "baseline_claude_code__plugins_as_configurations": {
+    "type": "noul",
+    "noul": 0.4
+   },
+   "baseline_claude_code__repos_as_marketplaces": {
+    "type": "noul",
+    "noul": 0.1
+   },
+   "baseline_claude_code__memory_as_skills_hooks": {
+    "type": "noul",
+    "noul": 0.06
+   },
+   "baseline_claude_code__workflows_as_skills_hooks": {
+    "type": "noul",
+    "noul": 0.1
+   },
+   "baseline_claude_code__extraction_as_skills_hooks": {
+    "type": "noul",
+    "noul": 0.07
+   },
+   "baseline_claude_code__modular_harness": {
+    "type": "noul",
+    "noul": 0.14
+   },
+   "baseline_claude_code__anthropic_mods": {
+    "type": "noul",
+    "noul": 0.17
+   },
+   "baseline_claude_code__anthropic_dynamic_workflows": {
+    "type": "noul",
+    "noul": 0.71
+   },
+   "baseline_claude_code__modifiable_in_session": {
+    "type": "noul",
+    "noul": 0.34
+   },
+   "baseline_claude_code__agents_md_pointers_hooks": {
+    "type": "noul",
+    "noul": 0.38
+   }
+  },
+  "usage": {
+   "input_tokens": 2088,
+   "output_tokens": 919
+  }
+ }
+}

@@ -1,0 +1,3 @@
+# Payload logs: large, regenerable with triage.py, and they repeat corpus text
+runs/*/requests.jsonl
+__pycache__/
