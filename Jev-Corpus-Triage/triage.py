@@ -84,7 +84,11 @@ def sections(text: str):
 
 
 def ask(state):
-    body = json.dumps({"model": Q.MODEL, "state": state, "questions": Q.QUESTIONS}).encode()
+    return ask_questions(state, Q.QUESTIONS)
+
+
+def ask_questions(state, questions):
+    body = json.dumps({"model": Q.MODEL, "state": state, "questions": questions}).encode()
     headers = {"Content-Type": "application/json"}
     if os.environ.get("TYPESAFE_API_KEY"):
         headers["Authorization"] = "Bearer " + os.environ["TYPESAFE_API_KEY"]
