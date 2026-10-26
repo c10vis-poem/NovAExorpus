@@ -1,0 +1,14 @@
+{
+  "_labeller": "Claude (Opus-class) in the session, reading each section in full before any system's answers were scored. T/F/? per label; ? = a careful reader could not settle it, excluded from scoring.",
+  "_labels": "decision = states a settled choice about the operator's own system; open_task = lists work on it still to do; other_project = describes a project other than the operator's",
+  "gold": [
+    ["T", "T", "F"], ["?", "T", "F"], ["?", "F", "F"], ["?", "T", "F"], ["T", "F", "F"],
+    ["T", "T", "F"], ["T", "F", "F"], ["T", "F", "F"], ["?", "T", "F"], ["T", "T", "F"],
+    ["?", "T", "F"], ["?", "T", "F"], ["?", "T", "F"], ["F", "T", "F"], ["?", "T", "F"],
+    ["?", "T", "F"], ["F", "F", "T"], ["?", "T", "F"], ["?", "F", "F"], ["F", "F", "F"],
+    ["F", "F", "?"], ["F", "F", "F"], ["F", "F", "T"], ["T", "?", "F"], ["F", "F", "?"],
+    ["F", "F", "T"], ["F", "F", "T"], ["F", "F", "T"], ["F", "F", "T"], ["F", "F", "T"],
+    ["F", "F", "F"], ["?", "F", "F"], ["T", "F", "F"], ["F", "F", "F"], ["F", "F", "T"],
+    ["F", "F", "T"], ["F", "F", "T"], ["F", "F", "T"], ["F", "F", "T"], ["F", "F", "T"]
+  ]
+}
