@@ -1,0 +1,41 @@
+05:31:46 [dispatch] ERROR: hook failed: before_session_start/50-git-restore.sh (exit 126): /data/data/com.termux/files/home/.claude/plugins/synced/a5d13a90-190b-42eb-ad1b-69c924919b1b_b410cc73-6e72-411c-a9de-4edf62ec27d7/043db339-5d5e-45f5-9856-e8b26c6dbf84/scripts/log.sh: /data/data/com.termux/files/home/.claude/plugins/synced/a5d13a90-190b-42eb-ad1b-69c924919b1b_b410cc73-6e72-411c-a9de-4edf62ec27d7/043db339-5d5e-45f5-9856-e8b26c6dbf84/hooks.d/before_session_start/50-git-restore.sh: /b [line truncated]
+Traceback (most recent call last):
+  File "<frozen runpy>", line 203, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/data/data/com.termux/files/home/.claude/plugins/synced/a5d13a90-190b-42eb-ad1b-69c924919b1b_b410cc73-6e72-411c-a9de-4edf62ec27d7/043db339-5d5e-45f5-9856-e8b26c6dbf84/pipeline/shell.py", line 927, in <module>
+    main()
+    ~~~~^^
+  File "/data/data/com.termux/files/home/.claude/plugins/synced/a5d13a90-190b-42eb-ad1b-69c924919b1b_b410cc73-6e72-411c-a9de-4edf62ec27d7/043db339-5d5e-45f5-9856-e8b26c6dbf84/pipeline/shell.py", line 882, in main
+    cmd_extract(session_id=sys.argv[2], project_dir=sys.argv[3])
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/data/data/com.termux/files/home/.claude/plugins/synced/a5d13a90-190b-42eb-ad1b-69c924919b1b_b410cc73-6e72-411c-a9de-4edf62ec27d7/043db339-5d5e-45f5-9856-e8b26c6dbf84/pipeline/shell.py", line 93, in cmd_extract
+    r = extract_session(session_id=session_id, project_dir=project_dir, remember_dir=remember_dir)
+  File "/data/data/com.termux/files/home/.claude/plugins/synced/a5d13a90-190b-42eb-ad1b-69c924919b1b_b410cc73-6e72-411c-a9de-4edf62ec27d7/043db339-5d5e-45f5-9856-e8b26c6dbf84/pipeline/extract.py", line 666, in extract_session
+    path = find_session(session_id, project_dir)
+  File "/data/data/com.termux/files/home/.claude/plugins/synced/a5d13a90-190b-42eb-ad1b-69c924919b1b_b410cc73-6e72-411c-a9de-4edf62ec27d7/043db339-5d5e-45f5-9856-e8b26c6dbf84/pipeline/extract.py", line 309, in find_session
+    raise FileNotFoundError(f"no session files in {sdir}")
+FileNotFoundError: no session files in /data/data/com.termux/files/home/.claude/projects/-storage-emulated-0-Documents-NovAExorpus-skill-observations
+/data/data/com.termux/files/home/.claude/plugins/synced/a5d13a90-190b-42eb-ad1b-69c924919b1b_b410cc73-6e72-411c-a9de-4edf62ec27d7/043db339-5d5e-45f5-9856-e8b26c6dbf84/scripts/save-session.sh: line 435: [: : integer expected
+/data/data/com.termux/files/home/.claude/plugins/synced/a5d13a90-190b-42eb-ad1b-69c924919b1b_b410cc73-6e72-411c-a9de-4edf62ec27d7/043db339-5d5e-45f5-9856-e8b26c6dbf84/scripts/save-session.sh: line 475: [: : integer expected
+Traceback (most recent call last):
+  File "<frozen runpy>", line 203, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/data/data/com.termux/files/home/.claude/plugins/synced/a5d13a90-190b-42eb-ad1b-69c924919b1b_b410cc73-6e72-411c-a9de-4edf62ec27d7/043db339-5d5e-45f5-9856-e8b26c6dbf84/pipeline/shell.py", line 927, in <module>
+    main()
+    ~~~~^^
+  File "/data/data/com.termux/files/home/.claude/plugins/synced/a5d13a90-190b-42eb-ad1b-69c924919b1b_b410cc73-6e72-411c-a9de-4edf62ec27d7/043db339-5d5e-45f5-9856-e8b26c6dbf84/pipeline/shell.py", line 884, in main
+    cmd_build_prompt(
+    ~~~~~~~~~~~~~~~~^
+        extract_file=sys.argv[2],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+        max_extract_bytes=int(sys.argv[7]) if len(sys.argv) > 7 else 0,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/data/data/com.termux/files/home/.claude/plugins/synced/a5d13a90-190b-42eb-ad1b-69c924919b1b_b410cc73-6e72-411c-a9de-4edf62ec27d7/043db339-5d5e-45f5-9856-e8b26c6dbf84/pipeline/shell.py", line 178, in cmd_build_prompt
+    with open(extract_file, encoding="utf-8", errors="replace") as f:
+         ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: ''
+05:31:50 [session-end] WARNING: save-session.sh --force exited 1 at session end -- this session's unsaved tail may be lost. See /storage/emulated/0/Documents/NovAExorpus/skill-observations/.remember/logs/autonomous/session-end-053149-20611.log for what save-session.sh itself logged.
+05:35:58 [dispatch] ERROR: hook failed: before_session_start/50-git-restore.sh (exit 126): /data/data/com.termux/files/home/.claude/plugins/synced/a5d13a90-190b-42eb-ad1b-69c924919b1b_b410cc73-6e72-411c-a9de-4edf62ec27d7/043db339-5d5e-45f5-9856-e8b26c6dbf84/scripts/log.sh: /data/data/com.termux/files/home/.claude/plugins/synced/a5d13a90-190b-42eb-ad1b-69c924919b1b_b410cc73-6e72-411c-a9de-4edf62ec27d7/043db339-5d5e-45f5-9856-e8b26c6dbf84/hooks.d/before_session_start/50-git-restore.sh: /b [line truncated]
