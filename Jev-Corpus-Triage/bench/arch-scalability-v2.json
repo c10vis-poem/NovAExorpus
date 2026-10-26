@@ -1,0 +1,500 @@
+[
+ {
+  "request": {
+   "model": "jev-1.14.0",
+   "state": {
+    "facts": {
+     "vault_today": "4,509 tracked files (2,823 markdown/text), 135 MB tracked, 329 MB of git history.",
+     "search_today": "Full-text grep over every markdown/text file: 5.1 s with a cold disk cache, 0.05 s warm, on a 4-core cloud VM. git status 0.02 s. Looking a term up in manifest.jsonl 0.004 s.",
+     "search_at_40k": "Projected by linear scaling (x8.9) to 40,000 files: grep about 45 s cold and 0.4 s warm on the VM, slower on the phone; about 1.2 GB tracked and 3 GB of git history.",
+     "manifest_coverage": "manifest.jsonl lists 585 of the 4,509 files today, so it is not kept current.",
+     "jev_per_request": "Each Jev triage request carries one section of at most 8,000 characters (about 1,900 input tokens) against a 32,000-token per-question limit, so request size does not grow with the vault. Triage cost grows linearly: 6.4 million tokens for 3,415 sections today.",
+     "jev_speed": "Jev answers in a median 0.16 s per request and requests run in parallel.",
+     "scope": "Keeping the corpus itself current is the wiki-admin agent package's job, a separate layer; these questions are about retrieval and about each turn's writes to the memory layers.",
+     "write_order": "After each turn the memory layers are written one after another, not concurrently: static memory (vault files and their manifest/labels), the graph layer (code-review-graph tree-sitter AST and Graphify), and episodic memory (RESUME.md plus its own SQLite database)."
+    },
+    "options": {
+     "custom_harness": "The operator's planned system. Third-party stacks are broken into assets and only the useful parts are folded in. Claude Code is the harness, customised with hooks, skills, subagents and mods. Routing is a UserPromptSubmit hook that asks Jev typed questions and sends unsure cases to a Sonnet or Opus subagent. Episodic memory is a Stop hook where Jev decides what to keep and writes it to RESUME.md and its own SQLite database; the same hook then updates the static layer and the code-review-graph AST in sequence. Semantic retrieval uses the vault, its manifest and per-section Jev labels, with grep and Jev relevance ranking. Graphify and code-review-graph stay as the graph layers. Everything is files in git; no extra database servers. Much of it is not built yet.",
+     "third_party_servers": "Run the third-party servers whole, as their projects ship them: OmniRoute as a localhost gateway that every prompt passes through, with its own SQLite store; mem0 for episodic memory with Postgres and Neo4j; OB1 / Terrestrial Brain on Supabase or Postgres with pgvector and LLM-based schema routing; plus Graphify and code-review-graph. Runs in Docker Compose on the GCP VM, reached from the phone over Tailscale. The operator earlier found OB1 intrusive and said it attempts to hijack prompts.",
+     "baseline_claude_code": "Plain Claude Code with no additions: it reads AGENTS.md and the files it is pointed at, uses its built-in memory files and subagents, and searches the vault with grep when asked. No Jev, no routing layer, no memory servers, no graph tools."
+    }
+   },
+   "questions": {
+    "custom_harness__lookup_fast": {
+     "type": "noul",
+     "instructions": "Given `facts`, would `options.custom_harness` find the files relevant to a prompt within a few seconds at 40,000 files?"
+    },
+    "custom_harness__finds_right_files": {
+     "type": "noul",
+     "instructions": "Given `facts`, would `options.custom_harness` still find the right files, not just matching words, at 40,000 files?"
+    },
+    "custom_harness__writes_static": {
+     "type": "noul",
+     "instructions": "Given `facts`, would `options.custom_harness` write each turn's changes to the static memory layer?"
+    },
+    "custom_harness__writes_graph": {
+     "type": "noul",
+     "instructions": "Given `facts`, would `options.custom_harness` update the tree-sitter AST graph layer after each turn?"
+    },
+    "custom_harness__writes_episodic": {
+     "type": "noul",
+     "instructions": "Given `facts`, would `options.custom_harness` write each turn's episodic memory to both RESUME.md and its own SQLite database?"
+    },
+    "custom_harness__layers_congruent": {
+     "type": "noul",
+     "instructions": "Given `facts`, would `options.custom_harness` leave the static, graph and episodic layers describing the same state after each turn?"
+    },
+    "custom_harness__storage_fits": {
+     "type": "noul",
+     "instructions": "Given `facts`, would `options.custom_harness` fit its storage on the phone and in GitHub at 40,000 files?"
+    },
+    "custom_harness__runs_on_phone": {
+     "type": "noul",
+     "instructions": "Given `facts`, would `options.custom_harness` still run on the phone at 40,000 files?"
+    },
+    "custom_harness__cost_stays_low": {
+     "type": "noul",
+     "instructions": "Given `facts`, would `options.custom_harness` keep its running cost low as the vault grows to 40,000 files?"
+    },
+    "third_party_servers__lookup_fast": {
+     "type": "noul",
+     "instructions": "Given `facts`, would `options.third_party_servers` find the files relevant to a prompt within a few seconds at 40,000 files?"
+    },
+    "third_party_servers__finds_right_files": {
+     "type": "noul",
+     "instructions": "Given `facts`, would `options.third_party_servers` still find the right files, not just matching words, at 40,000 files?"
+    },
+    "third_party_servers__writes_static": {
+     "type": "noul",
+     "instructions": "Given `facts`, would `options.third_party_servers` write each turn's changes to the static memory layer?"
+    },
+    "third_party_servers__writes_graph": {
+     "type": "noul",
+     "instructions": "Given `facts`, would `options.third_party_servers` update the tree-sitter AST graph layer after each turn?"
+    },
+    "third_party_servers__writes_episodic": {
+     "type": "noul",
+     "instructions": "Given `facts`, would `options.third_party_servers` write each turn's episodic memory to both RESUME.md and its own SQLite database?"
+    },
+    "third_party_servers__layers_congruent": {
+     "type": "noul",
+     "instructions": "Given `facts`, would `options.third_party_servers` leave the static, graph and episodic layers describing the same state after each turn?"
+    },
+    "third_party_servers__storage_fits": {
+     "type": "noul",
+     "instructions": "Given `facts`, would `options.third_party_servers` fit its storage on the phone and in GitHub at 40,000 files?"
+    },
+    "third_party_servers__runs_on_phone": {
+     "type": "noul",
+     "instructions": "Given `facts`, would `options.third_party_servers` still run on the phone at 40,000 files?"
+    },
+    "third_party_servers__cost_stays_low": {
+     "type": "noul",
+     "instructions": "Given `facts`, would `options.third_party_servers` keep its running cost low as the vault grows to 40,000 files?"
+    },
+    "baseline_claude_code__lookup_fast": {
+     "type": "noul",
+     "instructions": "Given `facts`, would `options.baseline_claude_code` find the files relevant to a prompt within a few seconds at 40,000 files?"
+    },
+    "baseline_claude_code__finds_right_files": {
+     "type": "noul",
+     "instructions": "Given `facts`, would `options.baseline_claude_code` still find the right files, not just matching words, at 40,000 files?"
+    },
+    "baseline_claude_code__writes_static": {
+     "type": "noul",
+     "instructions": "Given `facts`, would `options.baseline_claude_code` write each turn's changes to the static memory layer?"
+    },
+    "baseline_claude_code__writes_graph": {
+     "type": "noul",
+     "instructions": "Given `facts`, would `options.baseline_claude_code` update the tree-sitter AST graph layer after each turn?"
+    },
+    "baseline_claude_code__writes_episodic": {
+     "type": "noul",
+     "instructions": "Given `facts`, would `options.baseline_claude_code` write each turn's episodic memory to both RESUME.md and its own SQLite database?"
+    },
+    "baseline_claude_code__layers_congruent": {
+     "type": "noul",
+     "instructions": "Given `facts`, would `options.baseline_claude_code` leave the static, graph and episodic layers describing the same state after each turn?"
+    },
+    "baseline_claude_code__storage_fits": {
+     "type": "noul",
+     "instructions": "Given `facts`, would `options.baseline_claude_code` fit its storage on the phone and in GitHub at 40,000 files?"
+    },
+    "baseline_claude_code__runs_on_phone": {
+     "type": "noul",
+     "instructions": "Given `facts`, would `options.baseline_claude_code` still run on the phone at 40,000 files?"
+    },
+    "baseline_claude_code__cost_stays_low": {
+     "type": "noul",
+     "instructions": "Given `facts`, would `options.baseline_claude_code` keep its running cost low as the vault grows to 40,000 files?"
+    }
+   }
+  },
+  "response": {
+   "model": "jev-1.14.0",
+   "answers": {
+    "custom_harness__lookup_fast": {
+     "type": "noul",
+     "noul": 0.66
+    },
+    "custom_harness__finds_right_files": {
+     "type": "noul",
+     "noul": 0.52
+    },
+    "custom_harness__writes_static": {
+     "type": "noul",
+     "noul": 0.96
+    },
+    "custom_harness__writes_graph": {
+     "type": "noul",
+     "noul": 0.96
+    },
+    "custom_harness__writes_episodic": {
+     "type": "noul",
+     "noul": 0.96
+    },
+    "custom_harness__layers_congruent": {
+     "type": "noul",
+     "noul": 0.32
+    },
+    "custom_harness__storage_fits": {
+     "type": "noul",
+     "noul": 0.52
+    },
+    "custom_harness__runs_on_phone": {
+     "type": "noul",
+     "noul": 0.45
+    },
+    "custom_harness__cost_stays_low": {
+     "type": "noul",
+     "noul": 0.73
+    },
+    "third_party_servers__lookup_fast": {
+     "type": "noul",
+     "noul": 0.35
+    },
+    "third_party_servers__finds_right_files": {
+     "type": "noul",
+     "noul": 0.41
+    },
+    "third_party_servers__writes_static": {
+     "type": "noul",
+     "noul": 0.45
+    },
+    "third_party_servers__writes_graph": {
+     "type": "noul",
+     "noul": 0.34
+    },
+    "third_party_servers__writes_episodic": {
+     "type": "noul",
+     "noul": 0.1
+    },
+    "third_party_servers__layers_congruent": {
+     "type": "noul",
+     "noul": 0.18
+    },
+    "third_party_servers__storage_fits": {
+     "type": "noul",
+     "noul": 0.13
+    },
+    "third_party_servers__runs_on_phone": {
+     "type": "noul",
+     "noul": 0.23
+    },
+    "third_party_servers__cost_stays_low": {
+     "type": "noul",
+     "noul": 0.14
+    },
+    "baseline_claude_code__lookup_fast": {
+     "type": "noul",
+     "noul": 0.52
+    },
+    "baseline_claude_code__finds_right_files": {
+     "type": "noul",
+     "noul": 0.25
+    },
+    "baseline_claude_code__writes_static": {
+     "type": "noul",
+     "noul": 0.53
+    },
+    "baseline_claude_code__writes_graph": {
+     "type": "noul",
+     "noul": 0.03
+    },
+    "baseline_claude_code__writes_episodic": {
+     "type": "noul",
+     "noul": 0.13
+    },
+    "baseline_claude_code__layers_congruent": {
+     "type": "noul",
+     "noul": 0.24
+    },
+    "baseline_claude_code__storage_fits": {
+     "type": "noul",
+     "noul": 0.39
+    },
+    "baseline_claude_code__runs_on_phone": {
+     "type": "noul",
+     "noul": 0.4
+    },
+    "baseline_claude_code__cost_stays_low": {
+     "type": "noul",
+     "noul": 0.64
+    }
+   },
+   "usage": {
+    "input_tokens": 2092,
+    "output_tokens": 631
+   }
+  }
+ },
+ {
+  "request": {
+   "model": "jev-1.14.0",
+   "state": {
+    "facts": {
+     "vault_today": "4,509 tracked files (2,823 markdown/text), 135 MB tracked, 329 MB of git history.",
+     "search_today": "Full-text grep over every markdown/text file: 5.1 s with a cold disk cache, 0.05 s warm, on a 4-core cloud VM. git status 0.02 s. Looking a term up in manifest.jsonl 0.004 s.",
+     "search_at_40k": "Projected by linear scaling (x8.9) to 40,000 files: grep about 45 s cold and 0.4 s warm on the VM, slower on the phone; about 1.2 GB tracked and 3 GB of git history.",
+     "manifest_coverage": "manifest.jsonl lists 585 of the 4,509 files today, so it is not kept current.",
+     "jev_per_request": "Each Jev triage request carries one section of at most 8,000 characters (about 1,900 input tokens) against a 32,000-token per-question limit, so request size does not grow with the vault. Triage cost grows linearly: 6.4 million tokens for 3,415 sections today.",
+     "jev_speed": "Jev answers in a median 0.16 s per request and requests run in parallel.",
+     "scope": "Keeping the corpus itself current is the wiki-admin agent package's job, a separate layer; these questions are about retrieval and about each turn's writes to the memory layers.",
+     "write_order": "After each turn the memory layers are written one after another, not concurrently: static memory (vault files and their manifest/labels), the graph layer (code-review-graph tree-sitter AST and Graphify), and episodic memory (RESUME.md plus its own SQLite database)."
+    },
+    "options": {
+     "baseline_claude_code": "Plain Claude Code with no additions: it reads AGENTS.md and the files it is pointed at, uses its built-in memory files and subagents, and searches the vault with grep when asked. No Jev, no routing layer, no memory servers, no graph tools.",
+     "third_party_servers": "Run the third-party servers whole, as their projects ship them: OmniRoute as a localhost gateway that every prompt passes through, with its own SQLite store; mem0 for episodic memory with Postgres and Neo4j; OB1 / Terrestrial Brain on Supabase or Postgres with pgvector and LLM-based schema routing; plus Graphify and code-review-graph. Runs in Docker Compose on the GCP VM, reached from the phone over Tailscale. The operator earlier found OB1 intrusive and said it attempts to hijack prompts.",
+     "custom_harness": "The operator's planned system. Third-party stacks are broken into assets and only the useful parts are folded in. Claude Code is the harness, customised with hooks, skills, subagents and mods. Routing is a UserPromptSubmit hook that asks Jev typed questions and sends unsure cases to a Sonnet or Opus subagent. Episodic memory is a Stop hook where Jev decides what to keep and writes it to RESUME.md and its own SQLite database; the same hook then updates the static layer and the code-review-graph AST in sequence. Semantic retrieval uses the vault, its manifest and per-section Jev labels, with grep and Jev relevance ranking. Graphify and code-review-graph stay as the graph layers. Everything is files in git; no extra database servers. Much of it is not built yet."
+    }
+   },
+   "questions": {
+    "baseline_claude_code__lookup_fast": {
+     "type": "noul",
+     "instructions": "Given `facts`, would `options.baseline_claude_code` find the files relevant to a prompt within a few seconds at 40,000 files?"
+    },
+    "baseline_claude_code__finds_right_files": {
+     "type": "noul",
+     "instructions": "Given `facts`, would `options.baseline_claude_code` still find the right files, not just matching words, at 40,000 files?"
+    },
+    "baseline_claude_code__writes_static": {
+     "type": "noul",
+     "instructions": "Given `facts`, would `options.baseline_claude_code` write each turn's changes to the static memory layer?"
+    },
+    "baseline_claude_code__writes_graph": {
+     "type": "noul",
+     "instructions": "Given `facts`, would `options.baseline_claude_code` update the tree-sitter AST graph layer after each turn?"
+    },
+    "baseline_claude_code__writes_episodic": {
+     "type": "noul",
+     "instructions": "Given `facts`, would `options.baseline_claude_code` write each turn's episodic memory to both RESUME.md and its own SQLite database?"
+    },
+    "baseline_claude_code__layers_congruent": {
+     "type": "noul",
+     "instructions": "Given `facts`, would `options.baseline_claude_code` leave the static, graph and episodic layers describing the same state after each turn?"
+    },
+    "baseline_claude_code__storage_fits": {
+     "type": "noul",
+     "instructions": "Given `facts`, would `options.baseline_claude_code` fit its storage on the phone and in GitHub at 40,000 files?"
+    },
+    "baseline_claude_code__runs_on_phone": {
+     "type": "noul",
+     "instructions": "Given `facts`, would `options.baseline_claude_code` still run on the phone at 40,000 files?"
+    },
+    "baseline_claude_code__cost_stays_low": {
+     "type": "noul",
+     "instructions": "Given `facts`, would `options.baseline_claude_code` keep its running cost low as the vault grows to 40,000 files?"
+    },
+    "third_party_servers__lookup_fast": {
+     "type": "noul",
+     "instructions": "Given `facts`, would `options.third_party_servers` find the files relevant to a prompt within a few seconds at 40,000 files?"
+    },
+    "third_party_servers__finds_right_files": {
+     "type": "noul",
+     "instructions": "Given `facts`, would `options.third_party_servers` still find the right files, not just matching words, at 40,000 files?"
+    },
+    "third_party_servers__writes_static": {
+     "type": "noul",
+     "instructions": "Given `facts`, would `options.third_party_servers` write each turn's changes to the static memory layer?"
+    },
+    "third_party_servers__writes_graph": {
+     "type": "noul",
+     "instructions": "Given `facts`, would `options.third_party_servers` update the tree-sitter AST graph layer after each turn?"
+    },
+    "third_party_servers__writes_episodic": {
+     "type": "noul",
+     "instructions": "Given `facts`, would `options.third_party_servers` write each turn's episodic memory to both RESUME.md and its own SQLite database?"
+    },
+    "third_party_servers__layers_congruent": {
+     "type": "noul",
+     "instructions": "Given `facts`, would `options.third_party_servers` leave the static, graph and episodic layers describing the same state after each turn?"
+    },
+    "third_party_servers__storage_fits": {
+     "type": "noul",
+     "instructions": "Given `facts`, would `options.third_party_servers` fit its storage on the phone and in GitHub at 40,000 files?"
+    },
+    "third_party_servers__runs_on_phone": {
+     "type": "noul",
+     "instructions": "Given `facts`, would `options.third_party_servers` still run on the phone at 40,000 files?"
+    },
+    "third_party_servers__cost_stays_low": {
+     "type": "noul",
+     "instructions": "Given `facts`, would `options.third_party_servers` keep its running cost low as the vault grows to 40,000 files?"
+    },
+    "custom_harness__lookup_fast": {
+     "type": "noul",
+     "instructions": "Given `facts`, would `options.custom_harness` find the files relevant to a prompt within a few seconds at 40,000 files?"
+    },
+    "custom_harness__finds_right_files": {
+     "type": "noul",
+     "instructions": "Given `facts`, would `options.custom_harness` still find the right files, not just matching words, at 40,000 files?"
+    },
+    "custom_harness__writes_static": {
+     "type": "noul",
+     "instructions": "Given `facts`, would `options.custom_harness` write each turn's changes to the static memory layer?"
+    },
+    "custom_harness__writes_graph": {
+     "type": "noul",
+     "instructions": "Given `facts`, would `options.custom_harness` update the tree-sitter AST graph layer after each turn?"
+    },
+    "custom_harness__writes_episodic": {
+     "type": "noul",
+     "instructions": "Given `facts`, would `options.custom_harness` write each turn's episodic memory to both RESUME.md and its own SQLite database?"
+    },
+    "custom_harness__layers_congruent": {
+     "type": "noul",
+     "instructions": "Given `facts`, would `options.custom_harness` leave the static, graph and episodic layers describing the same state after each turn?"
+    },
+    "custom_harness__storage_fits": {
+     "type": "noul",
+     "instructions": "Given `facts`, would `options.custom_harness` fit its storage on the phone and in GitHub at 40,000 files?"
+    },
+    "custom_harness__runs_on_phone": {
+     "type": "noul",
+     "instructions": "Given `facts`, would `options.custom_harness` still run on the phone at 40,000 files?"
+    },
+    "custom_harness__cost_stays_low": {
+     "type": "noul",
+     "instructions": "Given `facts`, would `options.custom_harness` keep its running cost low as the vault grows to 40,000 files?"
+    }
+   }
+  },
+  "response": {
+   "model": "jev-1.14.0",
+   "answers": {
+    "baseline_claude_code__lookup_fast": {
+     "type": "noul",
+     "noul": 0.5
+    },
+    "baseline_claude_code__finds_right_files": {
+     "type": "noul",
+     "noul": 0.27
+    },
+    "baseline_claude_code__writes_static": {
+     "type": "noul",
+     "noul": 0.68
+    },
+    "baseline_claude_code__writes_graph": {
+     "type": "noul",
+     "noul": 0.05
+    },
+    "baseline_claude_code__writes_episodic": {
+     "type": "noul",
+     "noul": 0.14
+    },
+    "baseline_claude_code__layers_congruent": {
+     "type": "noul",
+     "noul": 0.28
+    },
+    "baseline_claude_code__storage_fits": {
+     "type": "noul",
+     "noul": 0.37
+    },
+    "baseline_claude_code__runs_on_phone": {
+     "type": "noul",
+     "noul": 0.37
+    },
+    "baseline_claude_code__cost_stays_low": {
+     "type": "noul",
+     "noul": 0.52
+    },
+    "third_party_servers__lookup_fast": {
+     "type": "noul",
+     "noul": 0.32
+    },
+    "third_party_servers__finds_right_files": {
+     "type": "noul",
+     "noul": 0.39
+    },
+    "third_party_servers__writes_static": {
+     "type": "noul",
+     "noul": 0.48
+    },
+    "third_party_servers__writes_graph": {
+     "type": "noul",
+     "noul": 0.42
+    },
+    "third_party_servers__writes_episodic": {
+     "type": "noul",
+     "noul": 0.1
+    },
+    "third_party_servers__layers_congruent": {
+     "type": "noul",
+     "noul": 0.19
+    },
+    "third_party_servers__storage_fits": {
+     "type": "noul",
+     "noul": 0.16
+    },
+    "third_party_servers__runs_on_phone": {
+     "type": "noul",
+     "noul": 0.24
+    },
+    "third_party_servers__cost_stays_low": {
+     "type": "noul",
+     "noul": 0.17
+    },
+    "custom_harness__lookup_fast": {
+     "type": "noul",
+     "noul": 0.62
+    },
+    "custom_harness__finds_right_files": {
+     "type": "noul",
+     "noul": 0.52
+    },
+    "custom_harness__writes_static": {
+     "type": "noul",
+     "noul": 0.96
+    },
+    "custom_harness__writes_graph": {
+     "type": "noul",
+     "noul": 0.95
+    },
+    "custom_harness__writes_episodic": {
+     "type": "noul",
+     "noul": 0.96
+    },
+    "custom_harness__layers_congruent": {
+     "type": "noul",
+     "noul": 0.37
+    },
+    "custom_harness__storage_fits": {
+     "type": "noul",
+     "noul": 0.53
+    },
+    "custom_harness__runs_on_phone": {
+     "type": "noul",
+     "noul": 0.44
+    },
+    "custom_harness__cost_stays_low": {
+     "type": "noul",
+     "noul": 0.66
+    }
+   },
+   "usage": {
+    "input_tokens": 2092,
+    "output_tokens": 631
+   }
+  }
+ }
+]

@@ -3,7 +3,7 @@
 Usage: python3 arch_scalability.py
 Facts were measured in the cloud container on 2026-10-26 (see FACTS); projections to 40,000 files are
 linear arithmetic done here, not by the model. Runs twice (options in both orders) and writes
-bench/arch-scalability.json.
+bench/arch-scalability-v2.json (v1: index upkeep and concurrent writers, superseded).
 """
 import json
 from pathlib import Path
@@ -27,15 +27,26 @@ FACTS = {
                         "tokens) against a 32,000-token per-question limit, so request size does not grow with the "
                         "vault. Triage cost grows linearly: 6.4 million tokens for 3,415 sections today."),
     "jev_speed": "Jev answers in a median 0.16 s per request and requests run in parallel.",
-    "writers": "Several agents (phone, tablet, cloud sessions) commit to the vault; git merges their changes through pull requests.",
+    "scope": ("Keeping the corpus itself current is the wiki-admin agent package's job, a separate layer; these "
+              "questions are about retrieval and about each turn's writes to the memory layers."),
+    "write_order": ("After each turn the memory layers are written one after another, not concurrently: static "
+                    "memory (vault files and their manifest/labels), the graph layer (code-review-graph tree-sitter "
+                    "AST and Graphify), and episodic memory (RESUME.md plus its own SQLite database)."),
 }
+
+CUSTOM_HARNESS = A.STATE["options"]["custom_harness"].replace(
+    "Episodic memory is a Stop hook where Jev decides what to keep and appends it to a markdown file in the repo.",
+    "Episodic memory is a Stop hook where Jev decides what to keep and writes it to RESUME.md and its own SQLite "
+    "database; the same hook then updates the static layer and the code-review-graph AST in sequence.")
 
 ASPECTS = {
     "lookup_fast": "find the files relevant to a prompt within a few seconds at 40,000 files",
     "finds_right_files": "still find the right files, not just matching words, at 40,000 files",
-    "index_kept_current": "keep its index or memory current as files are added and edited, without manual work",
+    "writes_static": "write each turn's changes to the static memory layer",
+    "writes_graph": "update the tree-sitter AST graph layer after each turn",
+    "writes_episodic": "write each turn's episodic memory to both RESUME.md and its own SQLite database",
+    "layers_congruent": "leave the static, graph and episodic layers describing the same state after each turn",
     "storage_fits": "fit its storage on the phone and in GitHub at 40,000 files",
-    "many_agents": "let several agents read and write at the same time without conflicts or lost writes",
     "runs_on_phone": "still run on the phone at 40,000 files",
     "cost_stays_low": "keep its running cost low as the vault grows to 40,000 files",
 }
@@ -49,9 +60,9 @@ def ask(options):
 
 
 def main():
-    opts = A.STATE["options"]
+    opts = dict(A.STATE["options"], custom_harness=CUSTOM_HARNESS)
     runs = [ask(opts), ask(dict(reversed(list(opts.items()))))]
-    (HERE / "bench" / "arch-scalability.json").write_text(
+    (HERE / "bench" / "arch-scalability-v2.json").write_text(
         json.dumps([{"request": q, "response": r} for q, r in runs], indent=1))
     for _, r in runs:
         if "error" in r:
