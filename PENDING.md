@@ -74,3 +74,22 @@ Moved here at the 2026-10-23 wrap-up (everything not finished). Long-term thread
 - happy-ending plugin hand-registration: done (in installed_plugins.json, enabled, cache present, skill loads in session)
 - vault-ci.yml: stale (vault has `.github/workflows/ci.yml` + `security.yml`)
 - Obsidian skills load twice: moot for Claude Code (`~/.claude/skills` holds only `obsidian-vault`, distinct from the plugin's defuddle/json-canvas/knap/obsidian-*; the duplicate links are in `~/.agents/skills`, not read by Claude Code)
+## 2026-10-28 (sessions 5fc2c8e1 and earlier; details in handoff/2026-10-28/)
+**Operator to run / decide**
+- Secrets: `nvaex-secret set GEMINI_API_KEY` (wiki admin) and `nvaex-secret set OPENROUTER_API_KEY` (STT).
+- Pair wireless debugging for the web view tool; run the two classifier-blocked builds (`node scripts/post-build.ts` in `~/repos/NvAEx-chrome-devtools-mcp`; `npm ci && npm run build` in `~/repos/NovA-openrouter-mcp`) or add a permission rule.
+- Wiki admin: where the 140-200 file set lives; decide E6 (chunk schema) and E10 (frontmatter schema).
+- Hooks: which to re-engineer first; whether the gitleaks git hook stays on. A keyword or setting to switch gates off (Claude Code's built-in `disableAllHooks` setting was mentioned in session 6a9c6cdb, never recorded).
+- Task-observer model pin (session 5da28487): `model: claude-sonnet-5` sits in `~/repos/aesop-task-observer/SKILL.md` and the vault's `.claude/skills/task-observer/SKILL.md`; fork branch `task-observer-sonnet` (de9c313, c58839f) is not pushed, no PR, never confirmed. Keep or drop.
+- Mem0 and code-review-graph are still in `~/.claude.json` though the operator asked to remove or disable them; the removal command was given and not run.
+
+**Work**
+- Plugin-injection switch-off (session 5da28487) is half applied: `disable-injections-2.sh` did not run; settings.json still has 477 `@synced` keys.
+- plugin-fork-sync rule: sync only the operator's own forks the session touches, never Anthropic-marketplace plugins.
+- Repo-wide rule: in each repo, CLAUDE.md becomes a pointer to AGENTS.md (Aesop-Xi hook rules move to AGENTS.md); RESUME only covered `~/CLAUDE.md`.
+- Re-engineer hooks before re-enabling (resume-gate first, observation 0051).
+- Wiki admin: harvest the skills and scripts in the operator's wiki-admin file set; Gemini live run; profile YAML, housekeeper, chunker, semantic lint not built.
+- Web view tool: headless / own-Chromium mode for Hyperion-XI and AEthX-AEsc; search tool; marketplace entry.
+- STT: build OpenRouter MCP, default `qwen/qwen3-asr-1.7b`; later QAI Hub Whisper-Large-V3-Turbo on device. Lives in CloviX-AEyre.
+- Mods (spec `NovAExopia/mods/`): none built except the old plugins-panel.
+- Intake: install and live-run; build pipeline stages 1-4.
