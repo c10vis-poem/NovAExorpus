@@ -10,7 +10,7 @@ Repository: NovÆxorpus (`c10vis-poem/NovAExorpus`, PUBLIC). Readable from any d
 2. `handoff/2026-10-28/README.md`: what was built, on which branch, what was tested.
 
 ## NEXT SESSION: START HERE
-0. **Merge today's branches** (pushed with PRs at wrap-up, see Shipped below): Aesop-Xi `intake-skill`; NovAExopia `webview-and-mods` and `wiki-admin-tools`; NovusAExenti `wiki-admin`; NvAEx-Recaps `memory-as-skill`. After merge, pull on the phone.
+0. **Done 2026-10-29:** all of the session's branches merged (see Shipped). On the phone, the vault checkout holds a local commit (044d369) whose content is already on main as #61; let GitSync or the operator reconcile it, do not reset it.
 1. **Wiki admin:** find the operator's full wiki-admin file set (140 to 200 files; about three quarters are its execution orders and the corpus designs; location not confirmed, best guess vault `__RESUME.md/__Builder-Guide_Directory-`, 264 files). Read it all and harvest its converting, ingesting, verifying and skill-extraction scripts into the wiki admin, customizing overlaps. Then the operator stores `GEMINI_API_KEY`, `google-genai` is installed, one live draft runs. Operator decides E6 (chunk schema) and E10 (frontmatter schema).
 2. **Hooks:** re-engineer before turning any back on (operator order). Start with resume-gate, which looped on an unchanged file (observation 0051).
 3. **Web view tool:** operator pairs wireless debugging, then `bash ~/repos/NovAExopia/mcp_connectors/webview/bin/webview-connect --adb 127.0.0.1:<port>`; finish the Chrome DevTools MCP fork build (`node scripts/post-build.ts`, blocked by the auto-mode safety classifier) and test its tool list.
@@ -34,8 +34,9 @@ Repository: NovÆxorpus (`c10vis-poem/NovAExorpus`, PUBLIC). Readable from any d
 - Inventory what exists (packages, prior specs, branches) before building.
 - No multiple-choice menus; approval is per item.
 
-## Shipped
-(filled at the end of wrap-up)
+## Shipped (2026-10-29, merged to main)
+- Aesop-Xi #82 (intake skill), NovAExopia #15 (webview + mods spec) and #16 (wiki admin tools), NovusAExenti #11 (file-administrator wiki admin), NvAEx-Recaps #8 (shared memory + session-work archive), NovAExorpus #61 (this RESUME, PENDING, handoff, observations).
+- So item 0 of START HERE is done; the phone's Aesop-Xi, NovusAExenti and NvAEx-Recaps clones are pulled.
 
 ## SOURCES
 Read this session: listed in `handoff/2026-10-28/README.md` "Sources read this session". Not read: the 140-200 file wiki-admin set, Dynamic_workflow_guide and `_config` docs, PENDING.md "Open" in full.
