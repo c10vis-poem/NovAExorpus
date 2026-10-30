@@ -1,0 +1,7 @@
+{
+  "jobs": [
+    { "id": "aesop-bugs", "title": "Bug sweep, Aesop-Xi", "prompt": "Run a full bug sweep of Aesop-Xi and record findings in a FINDINGS.md beside the code. Commit when done.", "size": "L", "gate": "auto", "repo": "Aesop-Xi" },
+    { "id": "corpus-batch", "title": "Corpus batch into the LLM wiki", "prompt": "Ingest the next 50 raw-databank documents into the wiki with citations, per memory/layers.jsonl.", "size": "M", "gate": "ask", "repo": "NovAExorpus" },
+    { "id": "code-map-nvx", "title": "Code map, NovAExopia", "prompt": "Build a code map of NovAExopia and save it under docs/code-map/.", "size": "S", "gate": "suggest", "repo": "NovAExopia" }
+  ]
+}

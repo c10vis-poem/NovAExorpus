@@ -1,0 +1,46 @@
+{
+  "name": "nvaex-burn",
+  "version": "0.1.0",
+  "description": "Turns weekly usage that would expire unspent into pre-approved jobs: warns, suggests, starts only what you marked auto, and brakes before the limit.",
+  "author": { "name": "The Builder" },
+  "license": "MIT",
+  "userConfig": {
+    "queueFile": {
+      "type": "string",
+      "title": "Burn queue file",
+      "description": "Path to your burn-queue.json (absolute, or relative to the session's folder). Empty: ~/.nvaex/burn-queue.json.",
+      "default": ""
+    },
+    "webhookUrl": {
+      "type": "string",
+      "title": "Webhook URL",
+      "description": "Optional. Each nag is POSTed here as plain text (an ntfy.sh topic URL works, so do Telegram-bridge or automation webhooks). Empty: none.",
+      "default": "",
+      "sensitive": true
+    },
+    "appNotify": {
+      "type": "boolean",
+      "title": "Notify through Claude",
+      "description": "Raise each nag as a native notification through your own notification channel.",
+      "default": true
+    },
+    "minLeftPercent": {
+      "type": "number",
+      "title": "Minimum share of the week left",
+      "description": "Below this % of the weekly limit left, nothing nags.",
+      "default": 25
+    },
+    "brakeFiveHour": {
+      "type": "number",
+      "title": "Brake at 5-hour %",
+      "description": "While a burn job runs, wind it down once the 5-hour window reaches this %.",
+      "default": 90
+    },
+    "brakeWeekly": {
+      "type": "number",
+      "title": "Brake at weekly %",
+      "description": "While a burn job runs, wind it down once the weekly window reaches this %.",
+      "default": 95
+    }
+  }
+}
