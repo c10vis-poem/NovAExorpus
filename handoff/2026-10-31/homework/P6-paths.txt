@@ -1,0 +1,3 @@
+- rag-evaluation: /data/data/com.termux/files/home/.claude/plugins/synced/a5d13a90-190b-42eb-ad1b-69c924919b1b_b410cc73-6e72-411c-a9de-4edf62ec27d7/9bf3e930-c755-42e7-bbf0-700a654cfb63
+- llm-secure-patterns: /data/data/com.termux/files/home/.claude/plugins/synced/a5d13a90-190b-42eb-ad1b-69c924919b1b_b410cc73-6e72-411c-a9de-4edf62ec27d7/6358786b-1995-47e6-8579-3f0c0ddbf106
+- skill-gate: /data/data/com.termux/files/home/.claude/plugins/synced/a5d13a90-190b-42eb-ad1b-69c924919b1b_b410cc73-6e72-411c-a9de-4edf62ec27d7/144a7e2e-3ac5-48e6-ad3c-38e98598dfd8
