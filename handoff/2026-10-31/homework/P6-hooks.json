@@ -1,0 +1,164 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup|resume|clear|compact",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "sh \"${CLAUDE_PLUGIN_ROOT}/hooks/wa-hook.sh\" restore-context sh \"${CLAUDE_PLUGIN_ROOT}/hooks/restore-context.sh\"",
+            "timeout": 5
+          }
+        ]
+      },
+      {
+        "matcher": "startup|resume|clear",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "sh \"${CLAUDE_PLUGIN_ROOT}/hooks/wa-hook.sh\" opt-crew-agreement python3 -I \"${CLAUDE_PLUGIN_ROOT}/hooks/crewmarshal/session_context.py\"",
+            "timeout": 5
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "sh \"${CLAUDE_PLUGIN_ROOT}/hooks/wa-hook.sh\" opt-backlog-start sh \"${CLAUDE_PLUGIN_ROOT}/scripts/backlog/session-start.sh\"",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "sh \"${CLAUDE_PLUGIN_ROOT}/hooks/wa-hook.sh\" opt-cc-roster python3 -I \"${CLAUDE_PLUGIN_ROOT}/hooks/cc.py\" roster",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Write|Edit|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "sh \"${CLAUDE_PLUGIN_ROOT}/hooks/wa-hook.sh\" raw-guard python3 -I \"${CLAUDE_PLUGIN_ROOT}/hooks/guards.py\" raw",
+            "timeout": 5
+          },
+          {
+            "type": "command",
+            "command": "sh \"${CLAUDE_PLUGIN_ROOT}/hooks/wa-hook.sh\" wiki-gate python3 -I \"${CLAUDE_PLUGIN_ROOT}/hooks/guards.py\" wiki",
+            "timeout": 5
+          }
+        ]
+      },
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "sh \"${CLAUDE_PLUGIN_ROOT}/hooks/wa-hook.sh\" danger-ask sh \"${CLAUDE_PLUGIN_ROOT}/hooks/deny-dangerous.sh\"",
+            "timeout": 5
+          },
+          {
+            "type": "command",
+            "command": "sh \"${CLAUDE_PLUGIN_ROOT}/hooks/wa-hook.sh\" opt-crew-dispatch python3 -I \"${CLAUDE_PLUGIN_ROOT}/hooks/crewmarshal/dispatch_gate.py\"",
+            "timeout": 5
+          }
+        ]
+      },
+      {
+        "matcher": "Edit|Write|MultiEdit|NotebookEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "sh \"${CLAUDE_PLUGIN_ROOT}/hooks/wa-hook.sh\" opt-crew-lane python3 -I \"${CLAUDE_PLUGIN_ROOT}/hooks/crewmarshal/lane_commons_gate.py\"",
+            "timeout": 5
+          }
+        ]
+      },
+      {
+        "matcher": "Skill",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "sh \"${CLAUDE_PLUGIN_ROOT}/hooks/wa-hook.sh\" opt-skill-gate node \"${CLAUDE_PLUGIN_ROOT}/hooks/skill-gate-hook.js\"",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Read",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "sh \"${CLAUDE_PLUGIN_ROOT}/hooks/wa-hook.sh\" quarantine-notice python3 -I \"${CLAUDE_PLUGIN_ROOT}/hooks/wa_quarantine.py\" --hook",
+            "timeout": 5
+          }
+        ]
+      },
+      {
+        "matcher": "Edit|Write|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "sh \"${CLAUDE_PLUGIN_ROOT}/hooks/wa-hook.sh\" opt-cc-touch python3 -I \"${CLAUDE_PLUGIN_ROOT}/hooks/cc.py\" touch",
+            "timeout": 3
+          }
+        ]
+      }
+    ],
+    "TaskCreated": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "sh \"${CLAUDE_PLUGIN_ROOT}/hooks/wa-hook.sh\" opt-backlog-sync sh \"${CLAUDE_PLUGIN_ROOT}/scripts/backlog/sync-task-created.sh\"",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "TaskCompleted": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "sh \"${CLAUDE_PLUGIN_ROOT}/hooks/wa-hook.sh\" opt-backlog-sync sh \"${CLAUDE_PLUGIN_ROOT}/scripts/backlog/sync-task-completed.sh\"",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "SubagentStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "sh \"${CLAUDE_PLUGIN_ROOT}/hooks/wa-hook.sh\" opt-backlog-sync sh \"${CLAUDE_PLUGIN_ROOT}/scripts/backlog/sync-subagent-start.sh\"",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "sh \"${CLAUDE_PLUGIN_ROOT}/hooks/wa-hook.sh\" opt-cc-roster python3 -I \"${CLAUDE_PLUGIN_ROOT}/hooks/cc.py\" cleanup",
+            "timeout": 3
+          }
+        ]
+      }
+    ]
+  }
+}

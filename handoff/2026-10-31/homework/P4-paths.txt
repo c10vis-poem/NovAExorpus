@@ -1,0 +1,7 @@
+- llm-wiki: /data/data/com.termux/files/home/.claude/plugins/synced/a5d13a90-190b-42eb-ad1b-69c924919b1b_b410cc73-6e72-411c-a9de-4edf62ec27d7/a37bed19-f9ad-42b8-858c-cc6cd62f79d7
+- wiki-wonka: /data/data/com.termux/files/home/.claude/plugins/synced/a5d13a90-190b-42eb-ad1b-69c924919b1b_b410cc73-6e72-411c-a9de-4edf62ec27d7/cc779a20-a9da-44e2-98fd-41ec959b3415
+- create-smartfolder: /data/data/com.termux/files/home/.claude/plugins/synced/a5d13a90-190b-42eb-ad1b-69c924919b1b_b410cc73-6e72-411c-a9de-4edf62ec27d7/e40abd7f-ad14-4335-a4e2-6b25e5e21a80
+- obsidian-notes: /data/data/com.termux/files/home/.claude/plugins/synced/a5d13a90-190b-42eb-ad1b-69c924919b1b_b410cc73-6e72-411c-a9de-4edf62ec27d7/3cacb896-b02d-4989-a5d5-c71a3d264347
+- obsidian-sync: /data/data/com.termux/files/home/.claude/plugins/cache/local-zips/obsidian-sync/0.1.0
+- cut-weight: /data/data/com.termux/files/home/.claude/plugins/synced/a5d13a90-190b-42eb-ad1b-69c924919b1b_b410cc73-6e72-411c-a9de-4edf62ec27d7/5c75f9c6-06d1-45d4-84d7-13dd7d0e0598
+- project-scaffolder: /data/data/com.termux/files/home/.claude/plugins/synced/a5d13a90-190b-42eb-ad1b-69c924919b1b_b410cc73-6e72-411c-a9de-4edf62ec27d7/ed4e6728-95e8-469a-9090-cb7759a74ccc

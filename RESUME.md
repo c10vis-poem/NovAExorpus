@@ -2,41 +2,38 @@ Session files: [[AGENTS]] · [[PENDING]] · [[MEMORY]] · [[MAP]] · [[NAMING-CA
 
 # RESUME.md: Session Ledger (rewritten every session)
 
-Repository: NovÆxorpus (`c10vis-poem/NovAExorpus`, PUBLIC). **(phone only)** paths live only on the phone.
-**Last session: 2026-10-29 to 10-30** (phone, session 5fc2c8e1, Claude Code, Opus 5.5; wrapped 2026-10-31 in 07d9a60a). Built the wiki admin plugin **greedy-crane** in the vault and ran homework packets P1-P7 as `greedy-crane:corpus-ingest` workers. The 5-hour usage limit cut it off at 07:32 UTC on 10-30 with P1 and P3 unfinished.
+**Last session: 2026-10-31** (phone, 07d9a60a, resumed from 5fc2c8e1, Opus 5.5). Ended at the operator's usage limit. The operator was angry at slow, wasteful document access and work started without approval. Read this whole file before replying.
 
-## Read first
-1. Shared memory (private): `NvAEx-Recaps/memory/general.md`, then `memory/active/wiki-admin.md` (decisions, work order, operator answers, stop-hook rule).
-2. Homework folder **(phone only)**: `~/.claude/session-work/2026-10-29/wiki-admin-homework/`. `BRIEF.md`, `work-order.md`, `P*-paths.txt`, then each deliverable `P1..P7-*.md` and its `progress-P*.md`.
-3. Plugin: `plugins/greedy-crane/` on branch `session-2026-10-29` (agents, docs, scripts, skills).
+## Rules the operator gave this session (follow them)
+- **Never launch a subagent or worker without the operator's okay for that dispatch.** This overrides the CLAUDE.md "spawn subagents" order.
+- **When told to stop, stop.** No more tool calls.
+- **Read what exists before building.** Last night's P1-P7 deliverables already did the plugin inventory; P3 already designed `batch_ledger.py`. Don't redo or duplicate them.
+- **Documents: use the fastest existing route.** For Google Drive and Docs, use the operator's own Google tools first: **about 29 forked repos under c10vis-poem for MCPs, APIs and Google tools**. Not inventoried yet; START HERE item 1. File-by-file connector downloads (base64) were slow and unreadable.
 
 ## NEXT SESSION: START HERE
-1. **Finish P1** (intake/convert) second pass: read watch-video, add file:line cites, rewrite `P1-intake-convert.md` with read depth and the new findings in `progress-P1.md`.
-2. **Finish P3** (fan-out) second pass, step 4: re-check every file:line cite in `P3-fan-out.md`.
-3. **Worker stop check** (waiting on operator go): stop hook that fires only for `greedy-crane:corpus-ingest` workers; it compares files the worker opened with its paths list (skips media), requires the progress and deliverable files, switches off with an off-file or `WIKI_ADMIN_HOOKS=off`, gives up after N tries (obs 0051). Script in `plugins/greedy-crane/scripts/`. **Operator rule (2026-10-30):** the full-read requirement covers files the operator assigned. A worker stopped by the hook does nothing more unless the operator says so, and the operator's word overrides the hook. Make it subagent-specific now; the wiki admin agent will get similar stop hooks later.
-4. **Operator questions:** name of the master compilation folder; wiki links as `[[page]]` or relative links.
-5. **Final compile into greedy-crane:** wiki-admin agent definition, skills, workflows, scripts, and hooks that can be switched off. Inputs: P1-P7 deliverables. P6 drafts: `P6-hooks.json` (merged hooks, none block), `P6-quarantine.draft.py`, `P6-guards.draft.py`, `P6-wa-hook.draft.sh`.
-6. **Vault fixes from P4:** 519 of 537 `02_wiki_md` pages are copies of clean files; `manifest.jsonl` hashes the clean file, not the raw source (rebuild); create `01-inbox/`; patch `audit_staging.py` so it accepts sources listed the work-order way, and add the AKIA, `github_pat_`, Bearer and `password=` patterns (P6).
-7. **Older items** (from the 2026-10-28 ledger, not touched): Gemini key + `google-genai` + one live draft; E6/E10 schemas; re-engineer hooks before turning any on (resume-gate first, obs 0051); web view tool (adb pairing); STT OpenRouter MCP; mods; intake live run; Drive ingest wave 1 (10 of 21 batches); plugin cleanup. Details: `handoff/2026-10-28/README.md`, PENDING.md.
+1. **Inventory the Google/MCP/API forks** (`gh repo list c10vis-poem --limit 300`; filter google, drive, gmail, workspace, mcp, api, gws). Pick one that reads a whole Drive folder in bulk. Known so far: gcloud is signed in as the Drive owner, but its token lacks the Drive scope (fix: operator runs `gcloud auth login --enable-gdrive-access`); `rclone` has no remotes; `gws`/`gog`/`gdrive` aren't installed; google-multi-account MCP isn't set up. Get the operator's okay before installing anything.
+2. **Analyze the Drive wiki-admin scripts and skills**: Drive `_#agents.md` (id 10pBFnZ05JrBjEt1avyy9dd2TALrYwruR) → `_02.wiki-admn-docs` (16d721yU2A8YxjWrESKXlgJXB_KLgc-lq) → `Scripts` (1gvh7y5l_LZU8pPlC7cz62I84yAllBBPa, 17 files), `Documentation`, `GH-assets`; also `_#agents.md/_skills`, `_plugins/tools_skills_scripts_etc`, `_01.#building-the-dumbass…/_4dumbass_agent-build-tools`. Local mirror of part of it: vault `__RESUME.md/llm-wiki_/` and `__RESUME.md/llm-wiki_/Scripts/` (7 of 17 files; the Oct 5 additions are missing: concierge_prompt_compiler, MASTER_SCRIPTS_REGISTRY, cross_auditor_orchestrator, tool_call_interceptor, Local NPU Executor, a newer runtime_pipeline_server). Drive-only: "Skills, Tools, & Plugins Matrix.txt", "auditor is fixed properly this time,.txt", "Memory-as-Skill Integration.md". Deliverable the operator asked for: an honest list of the wiki admin tools and subagent tools available, what is actually built, and an analysis of these scripts.
+3. **Finish the phone cleanup** (Termux home folders only; repos get a separate overhaul later): items untouched since 2026-10-17 go to `~/ARCHIVE-2026-10-31/` with `MANIFEST.tsv`. Done: 111 home items and 2 of the downloads items (7.9 GB). Left: the rest of `~/downloads`. Kept on purpose: shell and login config, google-cloud-sdk, pgdata, gemma-12b, gemma-e2b, models-npu, .mem0, .hermes, .dsh, .code-review-graph, storage.
+4. **Rules consolidation** (operator decides each rule): rules are spread over 9 per-folder memory stores, CLAUDE.md, ~/CLAUDE.md (stale), AGENTS.md, and `handoff/2026-10-30/RESUME.md` (newer rules nothing loads). See the config page below.
+5. Wiki admin build, unchanged from 2026-10-30: finish P1 (watch-video + cites) and P3 (cite re-check), fold `plugins/greedy-crane/scripts/worker_stop_check.py` + `read_packet.py` (committed 2026-10-31, not wired into settings) into P3's `batch_ledger.py` design, then P8 assembly. Open questions are on the report page.
+
+## In the vault (launch from anywhere)
+- Homework work order, brief, P1-P7 deliverables, progress files, P6 drafts, paths lists, extraction index: `handoff/2026-10-31/homework/` (copied from the phone's `~/.claude/session-work/2026-10-29/wiki-admin-homework/`).
+- Rules from this session: `AGENTS.md` RULE 5 and RULE 6.
+- Shared memory (private repo): `NvAEx-Recaps/memory/active/wiki-admin.md`.
+- (phone only) archive `~/ARCHIVE-2026-10-31/MANIFEST.tsv`; the cleanup in item 3 is a phone task.
+
+## Published this session (private artifacts)
+- Project report (state, every packet's verdicts, pipeline, new scripts, hooks, what's broken, open questions): https://claude.ai/artifact/D6nL1mKQX1QWP8VhV9zUHD
+- Config page (every rulebook, memory store, setting, hook, plugin, skill, agent, MCP, on or off): https://claude.ai/artifact/Sj9EQWbtiJYToTdw9XJ58L
 
 ## STATE (verified 2026-10-31)
-- Packets: **done** P2 (size gate), P4 (wiki core), P5 (extract skills/tools), P6 (checks and merged hooks), P7 (MCP). **Partial** P1, P3 (see above). No workers are running; they belonged to session 5fc2c8e1 and can't be resumed from a new session.
-- P6 counted 43 hook commands in 13 plugins (40 matcher groups), not 16. Plugin hooks still sit in `hooks.off-20261028`. `read-cache.js` blocks Read (conflicts with work-order rule 8).
-- Hooks: all Claude Code hooks are still exit-0 stubs (operator order 2026-10-28). `~/.claude/hooks/ship-session.sh` is disabled too, so shipping is by hand.
-- Vault: branch `session-2026-10-29` (worktree `~/repos/.wt/vault-session`) holds greedy-crane plus this wrap-up. Phone main checkout still holds local commit 044d369 (already on main as #61); don't reset it.
-- Observations new: 0052 (workers skip full reads on first pass; fix = read ledger checked before accepting a packet), 0053 (after /clear, asked instead of recovering).
-- Secrets not stored: `GEMINI_API_KEY`, `OPENROUTER_API_KEY`.
-
-## Operator rules restated 2026-10-28 (still in force)
-- Put each build in the repo its layer names (map in shared memory); never put new builds in NvAEx-Recaps unasked.
-- Check work against the source documents, not only the operator's words.
-- Inventory what exists (packages, prior specs, branches) before building.
-- No multiple-choice menus; approval is per item.
-- Approval cards for new skills/tools go in a file, not chat (2026-10-29).
+- PR #64 merged greedy-crane and the 10-31 wrap-up; NvAEx-Recaps PR #9 merged.
+- settings.json: all 520 `enabledPlugins` are false, yet claude.ai-synced plugin skills and agents still load; all 32 hook registrations are exit-0 stubs (operator order 2026-10-28); `settings.json` was not changed this session.
+- Auto-memory for ~/downloads now has `project_current_work.md` (read first) and `feedback_no_dispatch_without_ok.md`.
 
 ## SOURCES
-Read in the wrap-up (2026-10-31): transcript tail of 5fc2c8e1 (10-30 03:00-07:33 UTC, operator and assistant text), all seven `progress-P*.md`, the homework folder listing, `memory/active/wiki-admin.md`, observation 0052, old RESUME.md, vault PENDING tail, git state of the vault and NvAEx-Recaps.
-Not read: the P1-P7 deliverables themselves, `BRIEF.md`, `work-order.md`, greedy-crane files, the 140-200 file wiki-admin set.
+Read this session: P1-P7 deliverables in full, work-order.md, BRIEF.md, progress files, last night's transcript tail, settings.json and settings.local.json, ~/.claude.json, every memory store, the instruction files, the hook headers, plugin manifests, the Drive folder listings, 8 Drive script files (as base64, not analyzed). Not read: the Drive-only files, the 10 Scripts files not mirrored locally, the forked Google/MCP repos.
 
 ## Operator dictation (2026-10-28, kept verbatim)
 THESE'L TAKE A BACK SEAT UNTIL THESE HOOKS AND STOP GATES HAND OFF AND MERGING PROTOCOLS ARE ALL RE-ENGINEERED TO ACTUALLY WORK THEN AFTER THAT WE'RE GOING TO RE-ENGINEER THESE PLUGINS SO THAT THEY CAN ACTUALLY COEXIST 

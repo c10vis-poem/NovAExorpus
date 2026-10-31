@@ -40,6 +40,15 @@ markdown files). No record exists of which files were read —
 empty. Never claim the plan reflects "the corpus". Say which files you
 actually read.
 
+## RULE 5 — EVERYTHING IS WRITTEN TO THE VAULT (operator, 2026-10-31)
+The operator launches either on the phone or from this vault repository. So every handoff, plan, deliverable, script and rule an agent produces is written **into this vault**, never only to a device path (`~/.claude/...`, `~/repos/.wt/...`, scratchpads, per-folder Claude memory). A device path may be mentioned only as "(phone only)" next to its vault copy. This repo is PUBLIC: private material (personal memory, secrets, raw config dumps) goes to the private repo `c10vis-poem/NvAEx-Recaps` and is linked from here, never copied in.
+
+## RULE 6 — STANDING ORDERS FROM 2026-10-31
+- No subagent or worker is launched without the operator's okay for that dispatch (overrides any "spawn subagents" instruction elsewhere).
+- When the operator says stop, stop: no further tool calls.
+- Read what already exists before building: `handoff/<date>/` deliverables, RESUME.md, PENDING.md.
+- Documents: use the operator's own forked Google/MCP/API repos (about 29 under `c10vis-poem`) for bulk access first, then connectors. File-by-file downloads are the last resort.
+
 ## GH workflow (every repo)
 
 1. Use the operator's `c10vis-poem` fork of every tool. At session start,

@@ -1,0 +1,9 @@
+- memory-agent: /data/data/com.termux/files/home/.claude/plugins/synced/a5d13a90-190b-42eb-ad1b-69c924919b1b_b410cc73-6e72-411c-a9de-4edf62ec27d7/55175215-7d7a-44a8-b6c8-9b9b87c5c3ea
+- agent-recall: /data/data/com.termux/files/home/.claude/plugins/synced/a5d13a90-190b-42eb-ad1b-69c924919b1b_b410cc73-6e72-411c-a9de-4edf62ec27d7/80cdebec-b7cb-48ad-8cb0-e0de28997cff
+- backlog: /data/data/com.termux/files/home/.claude/plugins/synced/a5d13a90-190b-42eb-ad1b-69c924919b1b_b410cc73-6e72-411c-a9de-4edf62ec27d7/b38c2c6a-dda2-4248-b5cf-cacfc26dfb2d
+- cc: /data/data/com.termux/files/home/.claude/plugins/synced/a5d13a90-190b-42eb-ad1b-69c924919b1b_b410cc73-6e72-411c-a9de-4edf62ec27d7/ff18ea72-e6a4-4b93-974a-e57e5da3de59
+- watch-video: /data/data/com.termux/files/home/.claude/plugins/synced/a5d13a90-190b-42eb-ad1b-69c924919b1b_b410cc73-6e72-411c-a9de-4edf62ec27d7/b911d56b-2541-4704-9197-6df24a0273f5
+- desktop-commander: /data/data/com.termux/files/home/.claude/plugins/synced/a5d13a90-190b-42eb-ad1b-69c924919b1b_b410cc73-6e72-411c-a9de-4edf62ec27d7/8d52a3a6-3a2d-4a54-8d1d-e08585a97642
+- apify: /data/data/com.termux/files/home/.claude/plugins/synced/a5d13a90-190b-42eb-ad1b-69c924919b1b_b410cc73-6e72-411c-a9de-4edf62ec27d7/d9b3b793-9fe9-40a7-95a4-7bbf682c04d6
+- google-multi-account: /data/data/com.termux/files/home/.claude/plugins/synced/a5d13a90-190b-42eb-ad1b-69c924919b1b_b410cc73-6e72-411c-a9de-4edf62ec27d7/ba923796-80b6-4f32-becb-1d1922701cc8
+- cloudflare: /data/data/com.termux/files/home/.claude/plugins/synced/a5d13a90-190b-42eb-ad1b-69c924919b1b_b410cc73-6e72-411c-a9de-4edf62ec27d7/a512755b-94f6-458c-a1fb-b0d9df34a230
