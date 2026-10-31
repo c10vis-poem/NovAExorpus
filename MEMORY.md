@@ -1,6 +1,10 @@
 # MEMORY.md — NovAExorpus (the vault)
 Durable facts about this repo. Dated; newest first. Updated at session wrap-up.
 
+## 2026-10-31
+- **greedy-crane** is the wiki admin plugin, stored at `plugins/greedy-crane/` (agents `wiki-admin` and `corpus-ingest`, skills, scripts, docs). Agent definitions use the full plugin path, because sessions don't always start in the vault root.
+- **The wiki in `02_wiki_md` is not a wiki yet:** 519 of 537 pages are byte copies of clean files, and `manifest.jsonl` hashes the clean file instead of the raw source (P4, 2026-10-30).
+
 ## 2026-10-05
 - **Private files were removed** from the public repo (PR #34); old commits still hold them until the operator runs the fresh-repo step (RESUME item 0b). `main`, `vault-sync` and GitSync's `lastSyncedCommit` were aligned 2026-10-05.
 - **Private material never goes in here.** Personal memory, legal/financial, unfiled designs, billing → `Documents/private-memory/` (outside the vault, never synced). `*BILLING*.csv` is gitignored.

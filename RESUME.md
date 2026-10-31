@@ -2,44 +2,41 @@ Session files: [[AGENTS]] · [[PENDING]] · [[MEMORY]] · [[MAP]] · [[NAMING-CA
 
 # RESUME.md: Session Ledger (rewritten every session)
 
-Repository: NovÆxorpus (`c10vis-poem/NovAExorpus`, PUBLIC). Readable from any device, agent or account once synced. Paths marked **(phone only)** live only on the phone; their copies are in the private repo `c10vis-poem/NvAEx-Recaps` under `recaps/session-work/2026-10-28/`.
-**Last session: 2026-10-28** (phone, session 5fc2c8e1, Claude Code, Opus 5.5). Built the intake prompt-engineering step, the web view tool, the wiki admin tools and agent, and the shared memory; turned every hook off by operator order. Full handoff: `handoff/2026-10-28/README.md`. Earlier sessions the same day (37dc78ed Drive ingest, 6a9c6cdb gate fixes, 5da28487 task-observer pin): `handoff/2026-10-28/earlier-sessions.md`.
+Repository: NovÆxorpus (`c10vis-poem/NovAExorpus`, PUBLIC). **(phone only)** paths live only on the phone.
+**Last session: 2026-10-29 to 10-30** (phone, session 5fc2c8e1, Claude Code, Opus 5.5; wrapped 2026-10-31 in 07d9a60a). Built the wiki admin plugin **greedy-crane** in the vault and ran homework packets P1-P7 as `greedy-crane:corpus-ingest` workers. The 5-hour usage limit cut it off at 07:32 UTC on 10-30 with P1 and P3 unfinished.
 
 ## Read first
-1. Shared memory (private): `NvAEx-Recaps/memory/general.md` (repo map, standing rules), then the one `memory/active/<project>.md` you are working on: `wiki-admin`, `intake-pipeline`, `webview-tool`, `mods`, `stt`.
-2. `handoff/2026-10-28/README.md`: what was built, on which branch, what was tested.
+1. Shared memory (private): `NvAEx-Recaps/memory/general.md`, then `memory/active/wiki-admin.md` (decisions, work order, operator answers, stop-hook rule).
+2. Homework folder **(phone only)**: `~/.claude/session-work/2026-10-29/wiki-admin-homework/`. `BRIEF.md`, `work-order.md`, `P*-paths.txt`, then each deliverable `P1..P7-*.md` and its `progress-P*.md`.
+3. Plugin: `plugins/greedy-crane/` on branch `session-2026-10-29` (agents, docs, scripts, skills).
 
 ## NEXT SESSION: START HERE
-0. **Done 2026-10-29:** all of the session's branches merged (see Shipped). On the phone, the vault checkout holds a local commit (044d369) whose content is already on main as #61; let GitSync or the operator reconcile it, do not reset it.
-1. **Wiki admin:** find the operator's full wiki-admin file set (140 to 200 files; about three quarters are its execution orders and the corpus designs; location not confirmed, best guess vault `__RESUME.md/__Builder-Guide_Directory-`, 264 files). Read it all and harvest its converting, ingesting, verifying and skill-extraction scripts into the wiki admin, customizing overlaps. Then the operator stores `GEMINI_API_KEY`, `google-genai` is installed, one live draft runs. Operator decides E6 (chunk schema) and E10 (frontmatter schema).
-2. **Hooks:** re-engineer before turning any back on (operator order). Start with resume-gate, which looped on an unchanged file (observation 0051).
-3. **Web view tool:** operator pairs wireless debugging, then `bash ~/repos/NovAExopia/mcp_connectors/webview/bin/webview-connect --adb 127.0.0.1:<port>`; finish the Chrome DevTools MCP fork build (`node scripts/post-build.ts`, blocked by the auto-mode safety classifier) and test its tool list.
-4. **STT (CloviX-AEyre):** OpenRouter key (`nvaex-secret set OPENROUTER_API_KEY`), build the OpenRouter MCP fork (`~/repos/NovA-openrouter-mcp`, build blocked by the classifier), switch its speech-to-text default to `qwen/qwen3-asr-1.7b`.
-5. **Mods** (spec `NovAExopia/mods/`): plugins panel with active/available count, agent-configs side panel, Obsidian-style config tree, context and cache-TTL gauge, browser choice cards with a prompt bar, Jev side panel.
-6. **Intake pipeline:** install `skills/intake` after merge and run it on a real dictated prompt; then stages 1-4 (`Aesop-Xi/docs/intake-pipeline-spec.md`).
-7. **Drive ingest wave 1 (session 37dc78ed):** 10 of 21 batches written; resume per `handoff/2026-10-28/earlier-sessions.md` (workflow script archived in NvAEx-Recaps `recaps/session-work/2026-10-28/workflows-37dc78ed/`). Remove the Check stage first (operator: "they just need to be read").
-8. **Older open items:** plugin cleanup (one `manifest.jsonl`, chosen plugins as a flat folder); Ctrl-to-send check; `handoff/2026-10-24/README.md` deliverables; staged updates in `skill-updates/PENDING.md` (Hook specs, Upstream draft); the eight unrecorded items now in PENDING.md under 2026-10-28.
+1. **Finish P1** (intake/convert) second pass: read watch-video, add file:line cites, rewrite `P1-intake-convert.md` with read depth and the new findings in `progress-P1.md`.
+2. **Finish P3** (fan-out) second pass, step 4: re-check every file:line cite in `P3-fan-out.md`.
+3. **Worker stop check** (waiting on operator go): stop hook that fires only for `greedy-crane:corpus-ingest` workers; it compares files the worker opened with its paths list (skips media), requires the progress and deliverable files, switches off with an off-file or `WIKI_ADMIN_HOOKS=off`, gives up after N tries (obs 0051). Script in `plugins/greedy-crane/scripts/`. **Operator rule (2026-10-30):** the full-read requirement covers files the operator assigned. A worker stopped by the hook does nothing more unless the operator says so, and the operator's word overrides the hook. Make it subagent-specific now; the wiki admin agent will get similar stop hooks later.
+4. **Operator questions:** name of the master compilation folder; wiki links as `[[page]]` or relative links.
+5. **Final compile into greedy-crane:** wiki-admin agent definition, skills, workflows, scripts, and hooks that can be switched off. Inputs: P1-P7 deliverables. P6 drafts: `P6-hooks.json` (merged hooks, none block), `P6-quarantine.draft.py`, `P6-guards.draft.py`, `P6-wa-hook.draft.sh`.
+6. **Vault fixes from P4:** 519 of 537 `02_wiki_md` pages are copies of clean files; `manifest.jsonl` hashes the clean file, not the raw source (rebuild); create `01-inbox/`; patch `audit_staging.py` so it accepts sources listed the work-order way, and add the AKIA, `github_pat_`, Bearer and `password=` patterns (P6).
+7. **Older items** (from the 2026-10-28 ledger, not touched): Gemini key + `google-genai` + one live draft; E6/E10 schemas; re-engineer hooks before turning any on (resume-gate first, obs 0051); web view tool (adb pairing); STT OpenRouter MCP; mods; intake live run; Drive ingest wave 1 (10 of 21 batches); plugin cleanup. Details: `handoff/2026-10-28/README.md`, PENDING.md.
 
-## STATE (verified 2026-10-28)
-- **Hooks: all off.** Every Claude Code hook registered in `~/.claude/settings.json` is an exit-0 stub; originals sit beside them as `~/.claude/hooks/<name>.disabled-20261028` (links into `~/repos/Aesop-Xi/hooks/`). The Stop AUDITOR agent hook and task-observer's SessionStart entry were removed from settings.json (backup `~/.claude/settings.json.bak-20261028-hooksoff`). Only the gitleaks git hooks (`~/.config/git/hooks/`) still run. Plugin hooks were already off (`hooks.off-20261028`).
-- **Auto-mode safety classifier** blocks running downloaded code (npm builds, starting MCP servers from forks). The operator runs those with `!` or adds a permission rule.
-- **No adb device** paired; Chrome's DevTools socket is reachable only through adb.
-- **Secrets not stored:** `OPENROUTER_API_KEY`, `GEMINI_API_KEY` (only `VAULT_DISPATCH_TOKEN` in `nvaex-secret list`).
-- **Observations:** 0049 (repo map and decisions not loaded across projects), 0050 (build started without the existing package and prior spec), 0051 (resume-gate loop) new.
-- Risks carried over: a claude.ai re-sync can restore plugin hooks in `synced/`; `~/CLAUDE.md` is stale and should point to `~/.agents/AGENTS.md`; lost observation `0045-read-token-limit-friction.md` (no header).
+## STATE (verified 2026-10-31)
+- Packets: **done** P2 (size gate), P4 (wiki core), P5 (extract skills/tools), P6 (checks and merged hooks), P7 (MCP). **Partial** P1, P3 (see above). No workers are running; they belonged to session 5fc2c8e1 and can't be resumed from a new session.
+- P6 counted 43 hook commands in 13 plugins (40 matcher groups), not 16. Plugin hooks still sit in `hooks.off-20261028`. `read-cache.js` blocks Read (conflicts with work-order rule 8).
+- Hooks: all Claude Code hooks are still exit-0 stubs (operator order 2026-10-28). `~/.claude/hooks/ship-session.sh` is disabled too, so shipping is by hand.
+- Vault: branch `session-2026-10-29` (worktree `~/repos/.wt/vault-session`) holds greedy-crane plus this wrap-up. Phone main checkout still holds local commit 044d369 (already on main as #61); don't reset it.
+- Observations new: 0052 (workers skip full reads on first pass; fix = read ledger checked before accepting a packet), 0053 (after /clear, asked instead of recovering).
+- Secrets not stored: `GEMINI_API_KEY`, `OPENROUTER_API_KEY`.
 
-## Operator rules restated 2026-10-28
+## Operator rules restated 2026-10-28 (still in force)
 - Put each build in the repo its layer names (map in shared memory); never put new builds in NvAEx-Recaps unasked.
 - Check work against the source documents, not only the operator's words.
 - Inventory what exists (packages, prior specs, branches) before building.
 - No multiple-choice menus; approval is per item.
-
-## Shipped (2026-10-29, merged to main)
-- Aesop-Xi #82 (intake skill), NovAExopia #15 (webview + mods spec) and #16 (wiki admin tools), NovusAExenti #11 (file-administrator wiki admin), NvAEx-Recaps #8 (shared memory + session-work archive), NovAExorpus #61 (this RESUME, PENDING, handoff, observations).
-- So item 0 of START HERE is done; the phone's Aesop-Xi, NovusAExenti and NvAEx-Recaps clones are pulled.
+- Approval cards for new skills/tools go in a file, not chat (2026-10-29).
 
 ## SOURCES
-Read this session: listed in `handoff/2026-10-28/README.md` "Sources read this session". Not read: the 140-200 file wiki-admin set, Dynamic_workflow_guide and `_config` docs, PENDING.md "Open" in full.
+Read in the wrap-up (2026-10-31): transcript tail of 5fc2c8e1 (10-30 03:00-07:33 UTC, operator and assistant text), all seven `progress-P*.md`, the homework folder listing, `memory/active/wiki-admin.md`, observation 0052, old RESUME.md, vault PENDING tail, git state of the vault and NvAEx-Recaps.
+Not read: the P1-P7 deliverables themselves, `BRIEF.md`, `work-order.md`, greedy-crane files, the 140-200 file wiki-admin set.
 
 ## Operator dictation (2026-10-28, kept verbatim)
 THESE'L TAKE A BACK SEAT UNTIL THESE HOOKS AND STOP GATES HAND OFF AND MERGING PROTOCOLS ARE ALL RE-ENGINEERED TO ACTUALLY WORK THEN AFTER THAT WE'RE GOING TO RE-ENGINEER THESE PLUGINS SO THAT THEY CAN ACTUALLY COEXIST 
