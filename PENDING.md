@@ -93,3 +93,11 @@ Moved here at the 2026-10-23 wrap-up (everything not finished). Long-term thread
 - STT: build OpenRouter MCP, default `qwen/qwen3-asr-1.7b`; later QAI Hub Whisper-Large-V3-Turbo on device. Lives in CloviX-AEyre.
 - Mods (spec `NovAExopia/mods/`): none built except the old plugins-panel.
 - Intake: install and live-run; build pipeline stages 1-4.
+
+## 2026-10-29/30 (session 5fc2c8e1, wiki-admin homework; wrapped 2026-10-31)
+- GitHub plugin for Claude Code fails to connect: "Authorization header is badly formatted" (its token setting is likely empty or malformed). The `gh` command line works, so nothing is blocked; fix the plugin's token setup.
+- Homework P1 (intake/convert): second pass unfinished. Done: google-multi-account, firecrawl, apify, desktop-commander, drunken-master, claude-bridge. Left: watch-video, then line numbers and rewrite of `P1-intake-convert.md`.
+- Homework P3 (fan-out): second pass step 4 left: re-check every file:line cite in `P3-fan-out.md`.
+- Worker stop check (stop hook for `greedy-crane:corpus-ingest`): designed, not built; waiting on operator go. Operator rule 2026-10-30 is in shared memory `active/wiki-admin.md`.
+- Operator questions open: name of the master compilation folder; wikilinks `[[page]]` or relative links for wiki pages.
+- Vault findings from P4 for the compile: 519 of 537 `02_wiki_md` pages are copies of clean files; `manifest.jsonl` hashes the clean file, not the raw source (rebuild); `01-inbox/` missing; `audit_staging.py` rejects pages that list sources the work-order way (patch).

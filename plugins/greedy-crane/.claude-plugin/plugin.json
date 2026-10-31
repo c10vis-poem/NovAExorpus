@@ -1,0 +1,6 @@
+{
+  "name": "greedy-crane",
+  "version": "0.1.0",
+  "description": "Wiki admin for the NovAExorpus corpus: the wiki-admin agent that directs extraction, the corpus-ingest worker that reads and converts, and their skills and scripts. Launch from the vault root.",
+  "author": {"name": "c10vis-poem"}
+}
