@@ -6,6 +6,7 @@ Durable facts about this repo. Dated; newest first. Updated at session wrap-up.
 - **NvAEx-Recaps is the session archive, not a startup read** (operator, 2026-11-03). It's where every session drops its scratchpad and session archive. Open it only when broader session history is needed.
 - **No CLAUDE.md is auto-loaded in cloud sessions.** The phone's `~/.claude/CLAUDE.md` isn't there, and the vault root only has `CLAUDE.md.original.md`. The operator wants startup instructions account-wide, not in a repo: the claude.ai profile preferences, plus the cloud environment setup script writing `~/.claude/CLAUDE.md`. A repo CLAUDE.md was made unasked and dropped (PR #70 closed, branch `claude/startup-claude-md` left).
 - **The "Informations folder" in the claude.ai profile preferences doesn't exist.** Don't hunt for it; it stands for the startup files above.
+- **Hooks are back on with a safety net** (operator, 2026-11-03; Aesop-Xi PR #84). In `hooks/run-hook.sh`: `#hooks-off`/`#hooks-on` master switch; override phrases in `hooks/override-phrases.txt` ("override", "I told you", "go ahead", ...) let every block through for the turn; a hook yields after 2 blocks per turn (6 for all hooks). Operator rule: no hook may hand the operator either/or choices, and the operator's word overrides any hook.
 - **Last work before this session (2026-11-03):** vault PRs #67/#68 (greedy-crane consolidation, merged) and NvAEx-Recaps PR #10 (v3.3 Master Execution Runbook recovered). Neither RESUME was updated for them.
 
 ## 2026-10-31
