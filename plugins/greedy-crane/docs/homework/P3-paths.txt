@@ -1,0 +1,7 @@
+- agent-army: /data/data/com.termux/files/home/.claude/plugins/synced/a5d13a90-190b-42eb-ad1b-69c924919b1b_b410cc73-6e72-411c-a9de-4edf62ec27d7/f90aefa8-ffa2-4609-a763-de143502c26f
+- harness: /data/data/com.termux/files/home/.claude/plugins/synced/a5d13a90-190b-42eb-ad1b-69c924919b1b_b410cc73-6e72-411c-a9de-4edf62ec27d7/9a37b89a-169b-47b1-b955-3124111faa4c
+- agent-discussion: /data/data/com.termux/files/home/.claude/plugins/synced/a5d13a90-190b-42eb-ad1b-69c924919b1b_b410cc73-6e72-411c-a9de-4edf62ec27d7/4e3163e1-72d5-41cf-b1b4-d3f7efad442f
+- crewmarshal: /data/data/com.termux/files/home/.claude/plugins/synced/a5d13a90-190b-42eb-ad1b-69c924919b1b_b410cc73-6e72-411c-a9de-4edf62ec27d7/48061658-50d3-45eb-94aa-15ec37685b94
+- cc: /data/data/com.termux/files/home/.claude/plugins/synced/a5d13a90-190b-42eb-ad1b-69c924919b1b_b410cc73-6e72-411c-a9de-4edf62ec27d7/ff18ea72-e6a4-4b93-974a-e57e5da3de59
+- noetic-control-room: /data/data/com.termux/files/home/.claude/plugins/synced/a5d13a90-190b-42eb-ad1b-69c924919b1b_b410cc73-6e72-411c-a9de-4edf62ec27d7/9dee1509-c352-4f2a-a223-cc0468d06496
+- backlog: /data/data/com.termux/files/home/.claude/plugins/synced/a5d13a90-190b-42eb-ad1b-69c924919b1b_b410cc73-6e72-411c-a9de-4edf62ec27d7/b38c2c6a-dda2-4248-b5cf-cacfc26dfb2d

@@ -1,0 +1,274 @@
+/data/data/com.termux/files/home/.claude/skills/clean-my-ai-harness/INSTALL.md
+/data/data/com.termux/files/home/.claude/skills/clean-my-ai-harness/SKILL.md
+/data/data/com.termux/files/home/.claude/skills/clean-my-ai-harness/START-HERE.md
+/data/data/com.termux/files/home/.claude/skills/clean-my-ai-harness/assets/templates/02-what-stays-and-what-changes.template.md
+/data/data/com.termux/files/home/.claude/skills/clean-my-ai-harness/assets/templates/03-what-this-model-needs.template.md
+/data/data/com.termux/files/home/.claude/skills/clean-my-ai-harness/assets/templates/04-review-before-changing-anything.template.md
+/data/data/com.termux/files/home/.claude/skills/clean-my-ai-harness/assets/templates/05-your-before-and-after.template.md
+/data/data/com.termux/files/home/.claude/skills/clean-my-ai-harness/assets/templates/06-run-receipt.template.md
+/data/data/com.termux/files/home/.claude/skills/clean-my-ai-harness/references/artifact-contract.md
+/data/data/com.termux/files/home/.claude/skills/clean-my-ai-harness/references/audit-protocol.md
+/data/data/com.termux/files/home/.claude/skills/clean-my-ai-harness/references/claude-surface-notes.md
+/data/data/com.termux/files/home/.claude/skills/clean-my-ai-harness/references/model-profile-fable5-2026-07.md
+/data/data/com.termux/files/home/.claude/skills/clean-my-ai-harness/references/semantic-review-contract.md
+/data/data/com.termux/files/home/.claude/skills/clean-my-ai-harness/scripts/build_review_packet.py
+/data/data/com.termux/files/home/.claude/skills/clean-my-ai-harness/scripts/render_harness_map.py
+/data/data/com.termux/files/home/.claude/skills/clean-my-ai-harness/scripts/scan_visible_harness.py
+/data/data/com.termux/files/home/.claude/skills/clean-my-ai-harness/scripts/validate_approval_review.py
+/data/data/com.termux/files/home/.claude/skills/clean-my-ai-harness/scripts/validate_run_trace.py
+/data/data/com.termux/files/home/.claude/skills/corpus-batch-processing/SKILL.md
+/data/data/com.termux/files/home/.claude/skills/corpus-verify/SKILL.md
+/data/data/com.termux/files/home/.claude/skills/graphify/references/extraction-spec.md
+/data/data/com.termux/files/home/.claude/skills/graphify/references/transcribe.md
+/data/data/com.termux/files/home/.claude/skills/synced/a5d13a90-190b-42eb-ad1b-69c924919b1b_b410cc73-6e72-411c-a9de-4edf62ec27d7/pdf/scripts/convert_pdf_to_images.py
+/data/data/com.termux/files/home/.claude/skills/synced/a5d13a90-190b-42eb-ad1b-69c924919b1b_b410cc73-6e72-411c-a9de-4edf62ec27d7/pdf/scripts/extract_form_field_info.py
+/data/data/com.termux/files/home/.claude/skills/synced/a5d13a90-190b-42eb-ad1b-69c924919b1b_b410cc73-6e72-411c-a9de-4edf62ec27d7/pdf/scripts/extract_form_structure.py
+/data/data/com.termux/files/home/.claude/skills/synced/a5d13a90-190b-42eb-ad1b-69c924919b1b_b410cc73-6e72-411c-a9de-4edf62ec27d7/pptx/scripts/clean.py
+/data/data/com.termux/files/home/.claude/skills/synced/bf59ea3a-5000-437b-87d6-20241bb754e6_3a64471e-06ab-454b-baf7-caf79c84e4fa/pdf/scripts/convert_pdf_to_images.py
+/data/data/com.termux/files/home/.claude/skills/synced/bf59ea3a-5000-437b-87d6-20241bb754e6_3a64471e-06ab-454b-baf7-caf79c84e4fa/pdf/scripts/extract_form_field_info.py
+/data/data/com.termux/files/home/.claude/skills/synced/bf59ea3a-5000-437b-87d6-20241bb754e6_3a64471e-06ab-454b-baf7-caf79c84e4fa/pdf/scripts/extract_form_structure.py
+/data/data/com.termux/files/home/.claude/skills/synced/bf59ea3a-5000-437b-87d6-20241bb754e6_3a64471e-06ab-454b-baf7-caf79c84e4fa/pptx/scripts/clean.py
+/data/data/com.termux/files/home/repos/Aesop-Xi/skills/corpus-batch-processing/SKILL.md
+/data/data/com.termux/files/home/repos/Aesop-Xi/skills/corpus-verify/SKILL.md
+/data/data/com.termux/files/home/repos/NovAExopia/tools/nanoclaw_router.py
+/data/data/com.termux/files/home/repos/aesop-anydoc/bench/convert.py
+/data/data/com.termux/files/home/repos/aesop-anydoc/bench/js/mammoth_convert.js
+/data/data/com.termux/files/home/repos/aesop-anydoc/examples/convert.py
+/data/data/com.termux/files/home/repos/aesop-anydoc/skills/convert-documents-to-markdown/SKILL.md
+/data/data/com.termux/files/home/repos/raw-databank/Aesc-Terminal-APK/specs/ROUTER-MONITOR-TERMINAL-SPEC.md
+/data/data/com.termux/files/home/repos/raw-databank/Dump/zip/## Part 1- Lex (1) (Drive text extract, truncated) (1).txt
+/data/data/com.termux/files/home/repos/raw-databank/Dump/zip/## Part 1- Lex (1) (Drive text extract, truncated).txt
+/data/data/com.termux/files/home/repos/raw-databank/Dump/zip/Copy of NovAEcopia (Drive text extract) (1).txt
+/data/data/com.termux/files/home/repos/raw-databank/Dump/zip/Copy of NovAEcopia (Drive text extract).txt
+/data/data/com.termux/files/home/repos/raw-databank/Dump/zip/EDIT-Clarifying Clean Text to skills and tools plus outdated architecture (Drive text extract, RED FORMATTING LOST) (1).txt
+/data/data/com.termux/files/home/repos/raw-databank/Dump/zip/EDIT-Clarifying Clean Text to skills and tools plus outdated architecture (Drive text extract, RED FORMATTING LOST).txt
+/data/data/com.termux/files/home/repos/raw-databank/Dump/zip/GRILL-MANIFEST (1).md
+/data/data/com.termux/files/home/repos/raw-databank/Dump/zip/GRILL-MANIFEST.md
+/data/data/com.termux/files/home/repos/raw-databank/Dump/zip/MANIFEST (1).md
+/data/data/com.termux/files/home/repos/raw-databank/Dump/zip/MANIFEST-sha256 (1).txt
+/data/data/com.termux/files/home/repos/raw-databank/Dump/zip/MANIFEST-sha256 (2).txt
+/data/data/com.termux/files/home/repos/raw-databank/Dump/zip/MANIFEST-sha256 (3).txt
+/data/data/com.termux/files/home/repos/raw-databank/Dump/zip/MANIFEST-sha256 (4).txt
+/data/data/com.termux/files/home/repos/raw-databank/Dump/zip/MANIFEST-sha256 (5).txt
+/data/data/com.termux/files/home/repos/raw-databank/Dump/zip/MANIFEST-sha256 (6).txt
+/data/data/com.termux/files/home/repos/raw-databank/Dump/zip/MANIFEST-sha256 (7).txt
+/data/data/com.termux/files/home/repos/raw-databank/Dump/zip/MANIFEST-sha256.txt
+/data/data/com.termux/files/home/repos/raw-databank/Dump/zip/MANIFEST.md
+/data/data/com.termux/files/home/repos/raw-databank/Dump/zip/ROUTER.md
+/data/data/com.termux/files/home/repos/raw-databank/Dump/zip/clean (1).py
+/data/data/com.termux/files/home/repos/raw-databank/Dump/zip/clean.py
+/data/data/com.termux/files/home/repos/raw-databank/Dump/zip/copy-of-novaecopia-drive-text-extract (1).md
+/data/data/com.termux/files/home/repos/raw-databank/Dump/zip/copy-of-novaecopia-drive-text-extract.check (1).md
+/data/data/com.termux/files/home/repos/raw-databank/Dump/zip/copy-of-novaecopia-drive-text-extract.check.md
+/data/data/com.termux/files/home/repos/raw-databank/Dump/zip/copy-of-novaecopia-drive-text-extract.md
+/data/data/com.termux/files/home/repos/raw-databank/Dump/zip/edit-clarifying-clean-text-to-skills-and-tools-plus-outdated-architecture-drive-text-extract-red-formatting-lost (1).md
+/data/data/com.termux/files/home/repos/raw-databank/Dump/zip/edit-clarifying-clean-text-to-skills-and-tools-plus-outdated-architecture-drive-text-extract-red-formatting-lost.check (1).md
+/data/data/com.termux/files/home/repos/raw-databank/Dump/zip/edit-clarifying-clean-text-to-skills-and-tools-plus-outdated-architecture-drive-text-extract-red-formatting-lost.check.md
+/data/data/com.termux/files/home/repos/raw-databank/Dump/zip/edit-clarifying-clean-text-to-skills-and-tools-plus-outdated-architecture-drive-text-extract-red-formatting-lost.md
+/data/data/com.termux/files/home/repos/raw-databank/Dump/zip/nova-corpus-device-stack (1).md
+/data/data/com.termux/files/home/repos/raw-databank/Dump/zip/nova-corpus-device-stack (2).md
+/data/data/com.termux/files/home/repos/raw-databank/Dump/zip/nova-corpus-device-stack (3).md
+/data/data/com.termux/files/home/repos/raw-databank/Dump/zip/nova-corpus-device-stack.check (1).md
+/data/data/com.termux/files/home/repos/raw-databank/Dump/zip/nova-corpus-device-stack.check (2).md
+/data/data/com.termux/files/home/repos/raw-databank/Dump/zip/nova-corpus-device-stack.check (3).md
+/data/data/com.termux/files/home/repos/raw-databank/Dump/zip/nova-corpus-device-stack.check.md
+/data/data/com.termux/files/home/repos/raw-databank/Dump/zip/nova-corpus-device-stack.md
+/data/data/com.termux/files/home/repos/raw-databank/Dump/zip/nova-corpus-diagnostic (1).md
+/data/data/com.termux/files/home/repos/raw-databank/Dump/zip/nova-corpus-diagnostic.check (1).md
+/data/data/com.termux/files/home/repos/raw-databank/Dump/zip/nova-corpus-diagnostic.check.md
+/data/data/com.termux/files/home/repos/raw-databank/Dump/zip/nova-corpus-diagnostic.md
+/data/data/com.termux/files/home/repos/raw-databank/Dump/zip/part-1-lex-1-drive-text-extract-truncated (1).md
+/data/data/com.termux/files/home/repos/raw-databank/Dump/zip/part-1-lex-1-drive-text-extract-truncated.check (1).md
+/data/data/com.termux/files/home/repos/raw-databank/Dump/zip/part-1-lex-1-drive-text-extract-truncated.check.md
+/data/data/com.termux/files/home/repos/raw-databank/Dump/zip/part-1-lex-1-drive-text-extract-truncated.md
+/data/data/com.termux/files/home/repos/raw-databank/MANIFEST.md
+/data/data/com.termux/files/home/repos/raw-databank/Skills-Tools-Assets/compile/compile_qwen3_5_9b.py
+/data/data/com.termux/files/home/repos/raw-databank/Skills-Tools-Assets/compile/requirements-compile.txt
+/data/data/com.termux/files/home/repos/raw-databank/Skills-Tools-Assets/rules/AAR_DECOMPILE.md
+/data/data/com.termux/files/home/repos/raw-databank/horizons-ui-full/compile/compile_qwen3_5_9b.py
+/data/data/com.termux/files/home/repos/raw-databank/horizons-ui-full/compile/requirements-compile.txt
+/data/data/com.termux/files/home/repos/raw-databank/horizons-ui-full/rules/AAR_DECOMPILE.md
+/data/data/com.termux/files/home/repos/raw-databank/horizons-ui-full/wiki/COMPILE-PIPELINE.md
+/data/data/com.termux/files/home/repos/raw-databank/horizons-ui-full/wiki/ROUTER-MONITOR-TERMINAL-SPEC.md
+/data/data/com.termux/files/home/repos/raw-databank/spark_recommendations/04_DUPLICATES_AUDITS_AND_LOGS/AUDIT_11_GITHUB_JSONL.md
+/storage/emulated/0/Documents/NovAExorpus/.claude/agents/corpus-architect.md
+/storage/emulated/0/Documents/NovAExorpus/.claude/hooks/router-guard.sh
+/storage/emulated/0/Documents/NovAExorpus/.claude/hooks/skills-corpus/Android Reverse Engineering & API Extraction — Claude__Code skil.md
+/storage/emulated/0/Documents/NovAExorpus/.claude/hooks/skills-corpus/Leaked system prompts/c10vis-poem／leaked-system-prompts- Collection of leaked system prompts.md
+/storage/emulated/0/Documents/NovAExorpus/.claude/hooks/skills-corpus/aesop-wiki.md
+/storage/emulated/0/Documents/NovAExorpus/.claude/hooks/skills-corpus/android-reverse-engineering-skill.md
+/storage/emulated/0/Documents/NovAExorpus/.claude/hooks/skills-corpus/claude-skills.md
+/storage/emulated/0/Documents/NovAExorpus/.claude/hooks/skills-corpus/horizons-repo-skill.md
+/storage/emulated/0/Documents/NovAExorpus/.claude/hooks/skills-corpus/horizons-wiki.md
+/storage/emulated/0/Documents/NovAExorpus/.claude/hooks/skills-corpus/memory-as-skill.md
+/storage/emulated/0/Documents/NovAExorpus/.claude/output-styles/router-guard.md
+/storage/emulated/0/Documents/NovAExorpus/.claude/skills/task-observer/scripts/migrate-log.py
+/storage/emulated/0/Documents/NovAExorpus/.migrate/audit.py
+/storage/emulated/0/Documents/NovAExorpus/.migrate/build_rag_chunks.py
+/storage/emulated/0/Documents/NovAExorpus/.migrate/build_rag_index.py
+/storage/emulated/0/Documents/NovAExorpus/.migrate/dedup.py
+/storage/emulated/0/Documents/NovAExorpus/.migrate/generate_jsonl_markers.py
+/storage/emulated/0/Documents/NovAExorpus/.migrate/process_folder.py
+/storage/emulated/0/Documents/NovAExorpus/.migrate/query_rag.py
+/storage/emulated/0/Documents/NovAExorpus/.migrate/verify_corpus.py
+/storage/emulated/0/Documents/NovAExorpus/01-sources/DRIVE_FILES_MGMT16/Mobile_Python_Script_Clean_JSONL_Logs.txt
+/storage/emulated/0/Documents/NovAExorpus/01-sources/DRIVE_FILES_MGMT16/Personal Wiki automatic file compiler.txt
+/storage/emulated/0/Documents/NovAExorpus/01-sources/DRIVE_FILES_MGMT16/data_dump_and_skill_extraction.md
+/storage/emulated/0/Documents/NovAExorpus/01-sources/DRIVE_FILES_MGMT16/jsonl_labeling_bootstrap_chat.md
+/storage/emulated/0/Documents/NovAExorpus/03_recall_cache/jsonl/POINTER.md
+/storage/emulated/0/Documents/NovAExorpus/04_ON_DEVICE_INGESTION_AND_W5H_FRAMEWORK.md
+/storage/emulated/0/Documents/NovAExorpus/Drive_sync/Original_Corpora/__NovÆxorpus(NÆX)/2- PRPSD-34.FILE TREE-(2-S.F.'s-15-files)/1-PRIORITY-FILES-TREE-LAYOUT-(10-files)/NovA-Corpus_ │.txt
+/storage/emulated/0/Documents/NovAExorpus/Drive_sync/Original_Corpora/__NovÆxorpus(NÆX)/3-FILES-MGMT16-SCRIPTS-(16-files)/JSONL labeling .txt
+/storage/emulated/0/Documents/NovAExorpus/Drive_sync/Original_Corpora/__NovÆxorpus(NÆX)/6- Directory Schema examples 1 through 6/3- vault_root_Distributed Manifest Map#3_.txt
+/storage/emulated/0/Documents/NovAExorpus/Drive_sync/Original_Corpora/___Lex-Novi-Æxentis-Copiæ (1)/---_📖.ReadMe_/The Manifest Taxonomy (The 5 Document Types).txt
+/storage/emulated/0/Documents/NovAExorpus/Drive_sync/Original_Corpora/___Lex-Novi-Æxentis-Copiæ (1)/---•🌐_🛠️_BUILDERS_GUIDE_📑~/~_🎯 PENDING _⏳--/___POTENTIAL_FIXES_&_PENDING_misc./Listen to what the Builder is describing in his replies/CC chat about app revisions /1. Router is.txt
+/storage/emulated/0/Documents/NovAExorpus/Drive_sync/Original_Corpora/___Lex-Novi-Æxentis-Copiæ (1)/---•🌐_🛠️_BUILDERS_GUIDE_📑~/~_🎯 PENDING _⏳--/___POTENTIAL_FIXES_&_PENDING_misc./Listen to what the Builder is describing in his replies/CC chat about app revisions /Let me verify (1).txt
+/storage/emulated/0/Documents/NovAExorpus/Drive_sync/Original_Corpora/___Lex-Novi-Æxentis-Copiæ (1)/---•🌐_🛠️_BUILDERS_GUIDE_📑~/~_🎯 PENDING _⏳--/___POTENTIAL_FIXES_&_PENDING_misc./Listen to what the Builder is describing in his replies/CC chat about app revisions /Let me verify.txt
+/storage/emulated/0/Documents/NovAExorpus/Drive_sync/Original_Corpora/___Lex-Novi-Æxentis-Copiæ (1)/---📜🪶AEsop-Xi_/__Æsop-Xi-Lex_Corpus/ Headless Ingestion_Verification _ Guardrail Layer (The Linter).md
+/storage/emulated/0/Documents/NovAExorpus/Drive_sync/Original_Corpora/___Lex-Novi-Æxentis-Copiæ (1)/---📜🪶AEsop-Xi_/__Æsop-Xi-Lex_Corpus/(Reinforcement Learning from Verifiable Rewards)/Recursive Reward Modeling Acronym - Google Search.md
+/storage/emulated/0/Documents/NovAExorpus/Drive_sync/Original_Corpora/___Lex-Novi-Æxentis-Copiæ (1)/---📜🪶AEsop-Xi_/__Æsop-Xi-Lex_Corpus/Lex•Corpus/🏛️ Repository Architecture.guide.txt
+/storage/emulated/0/Documents/NovAExorpus/Drive_sync/Original_Corpora/___Lex-Novi-Æxentis-Copiæ (1)/---📜🪶AEsop-Xi_/__Æsop-Xi-Lex_Corpus/THREE FOLDER FILE SYSTEM.txt
+/storage/emulated/0/Documents/NovAExorpus/Drive_sync/Original_Corpora/___Lex-Novi-Æxentis-Copiæ (1)/--• 🦁 NovusAEenti🌳NovAEcopia🕸️• ~ /Enterprise documentation and agent assets/namhokaist_appgen-qwen3-model-e-simplepath-sparse-s10warm-v42-h200x8-s100-20260731memfix-step60 · Hugging Face.md
+/storage/emulated/0/Documents/NovAExorpus/Drive_sync/Original_Corpora/___Lex-Novi-Æxentis-Copiæ (1)/--•🌄HORIZONS_UI_🌐/DesignXorpus/Sources Chat.txt/Part of the primary design corpus and possible code resolutions for Claude.txt
+/storage/emulated/0/Documents/NovAExorpus/Drive_sync/Original_Corpora/___Lex-Novi-Æxentis-Copiæ (1)/--•🌄HORIZONS_UI_🌐/Reference archives/COMPILE-PIPELINE.md
+/storage/emulated/0/Documents/NovAExorpus/Drive_sync/Original_Corpora/___Lex-Novi-Æxentis-Copiæ (1)/--•📱📎_GITHUB_📂💻~/#REPO.s/GitHub - pymupdf_PyMuPDF_ PyMuPDF is a high performance Python library for data extraction, analysis, conversion & manipulation of PDF (and other) documents. · GitHub.md
+/storage/emulated/0/Documents/NovAExorpus/Drive_sync/Original_Corpora/___Lex-Novi-Æxentis-Copiæ (1)/--•📱📎_GITHUB_📂💻~/#REPO.s/_Novus-nate-jones-transcripts.txt
+/storage/emulated/0/Documents/NovAExorpus/Drive_sync/Original_Corpora/___Lex-Novi-Æxentis-Copiæ (1)/--•📱📎_GITHUB_📂💻~/#REPO.s/_c10vis-crawl4ai.txt
+/storage/emulated/0/Documents/NovAExorpus/Drive_sync/Original_Corpora/___Lex-Novi-Æxentis-Copiæ (1)/--🗂️~SKILLS.md_🛠️_/AGENT.md/SKILL.md/.migrate/audit.py
+/storage/emulated/0/Documents/NovAExorpus/Drive_sync/Original_Corpora/___Lex-Novi-Æxentis-Copiæ (1)/--🗂️~SKILLS.md_🛠️_/AGENT.md/SKILL.md/.migrate/build_rag_index.py
+/storage/emulated/0/Documents/NovAExorpus/Drive_sync/Original_Corpora/___Lex-Novi-Æxentis-Copiæ (1)/--🗂️~SKILLS.md_🛠️_/AGENT.md/SKILL.md/.migrate/query_rag.py
+/storage/emulated/0/Documents/NovAExorpus/Drive_sync/Original_Corpora/___Lex-Novi-Æxentis-Copiæ (1)/--🗂️~SKILLS.md_🛠️_/Claude.md/Claude code script for installing ECC and utilizing manifest jsonl and routing plugins per required work space.txt
+/storage/emulated/0/Documents/NovAExorpus/Drive_sync/Original_Corpora/___Lex-Novi-Æxentis-Copiæ (1)/--🗂️~SKILLS.md_🛠️_/Claude.md/Current RESUME.md's entire session manuscript/Cleanest is.txt
+/storage/emulated/0/Documents/NovAExorpus/Drive_sync/Original_Corpora/___Lex-Novi-Æxentis-Copiæ (1)/--🗂️~SKILLS.md_🛠️_/Claude.md/Current RESUME.md's entire session manuscript/Let me verify (1).txt
+/storage/emulated/0/Documents/NovAExorpus/Drive_sync/Original_Corpora/___Lex-Novi-Æxentis-Copiæ (1)/--🗂️~SKILLS.md_🛠️_/Claude.md/Current RESUME.md's entire session manuscript/Let me verify.txt
+/storage/emulated/0/Documents/NovAExorpus/Drive_sync/Original_Corpora/___Lex-Novi-Æxentis-Copiæ (1)/--🗂️~SKILLS.md_🛠️_/Claude.md/Current RESUME.md's entire session manuscript/__ECC manifest.txt
+/storage/emulated/0/Documents/NovAExorpus/Drive_sync/Original_Corpora/___Lex-Novi-Æxentis-Copiæ/---📜🪶Æsop-Xi_/__Æsop-Xi-Lex_Corpus/(Reinforcement Learning from Verifiable Rewards)/Recursive Reward Modeling Acronym - Google Search.md
+/storage/emulated/0/Documents/NovAExorpus/Drive_sync/Original_Corpora/___Lex-Novi-Æxentis-Copiæ/--• 🦁 NovusÆxenti🌳NovÆcopia🕸️• ~ /Enterprise documentation and agent assets/namhokaist_appgen-qwen3-model-e-simplepath-sparse-s10warm-v42-h200x8-s100-20260731memfix-step60 · Hugging Face.md
+/storage/emulated/0/Documents/NovAExorpus/Drive_sync/Original_Corpora/___Lex-Novi-Æxentis-Copiæ/--•📱📎_GITHUB_📂💻~/#REPO.s/GitHub - pymupdf_PyMuPDF_ PyMuPDF is a high performance Python library for data extraction, analysis, conversion & manipulation of PDF (and other) documents. · GitHub.md
+/storage/emulated/0/Documents/NovAExorpus/Drive_sync/Original_Corpora/___Lex-Novi-Æxentis-Copiæ/--🗂️~SKILLS.md_🛠️_/AGENT.md/SKILL.md/.migrate/audit.py
+/storage/emulated/0/Documents/NovAExorpus/Drive_sync/Secure-Spark-Proof-Folder /aesop-xi/chunk.jsonl.md
+/storage/emulated/0/Documents/NovAExorpus/Drive_sync/Secure-Spark-Proof-Folder /aesop-xi/manifest.jsonl.md
+/storage/emulated/0/Documents/NovAExorpus/Drive_sync/Secure-Spark-Proof-Folder /novae-xorpus/03_recall_cache (1)/jsonl/POINTER.md
+/storage/emulated/0/Documents/NovAExorpus/Drive_sync/Secure-Spark-Proof-Folder /novae-xorpus/04_ON_DEVICE_INGESTION_AND_W5H_FRAMEWORK.md
+/storage/emulated/0/Documents/NovAExorpus/Drive_sync/Secure-Spark-Proof-Folder /novae-xorpus/04_skills_runtime (1)/extracted_tools/cli/corpus_verify_skill_tool_0.sh
+/storage/emulated/0/Documents/NovAExorpus/Drive_sync/Secure-Spark-Proof-Folder /novae-xorpus/04_skills_runtime (1)/prompt_skills/corpus_verify_skill_skill.md
+/storage/emulated/0/Documents/NovAExorpus/Drive_sync/Secure-Spark-Proof-Folder /novae-xorpus/04_skills_runtime/runtimes/crawl4ai_scraper.py.md
+/storage/emulated/0/Documents/NovAExorpus/Drive_sync/Secure-Spark-Proof-Folder /novae-xorpus/chunk.jsonl.md
+/storage/emulated/0/Documents/NovAExorpus/Drive_sync/Secure-Spark-Proof-Folder /novae-xorpus/clean_md (1)/POINTER.md
+/storage/emulated/0/Documents/NovAExorpus/Drive_sync/Secure-Spark-Proof-Folder /novae-xorpus/manifest.jsonl.md
+/storage/emulated/0/Documents/NovAExorpus/Drive_sync/Secure-Spark-Proof-Folder /novae-xorpus/skills (1)/corpus-verify/SKILL (1).md
+/storage/emulated/0/Documents/NovAExorpus/Drive_sync/Secure-Spark-Proof-Folder /novae-xorpus/skills/corpus-verify-SKILL.md
+/storage/emulated/0/Documents/NovAExorpus/Drive_sync/Secure-Spark-Proof-Folder /novaexopia/chunk.jsonl.md
+/storage/emulated/0/Documents/NovAExorpus/Drive_sync/Secure-Spark-Proof-Folder /novaexopia/manifest.jsonl.md
+/storage/emulated/0/Documents/NovAExorpus/Drive_sync/Secure-Spark-Proof-Folder /novus-aesc/chunk.jsonl.md
+/storage/emulated/0/Documents/NovAExorpus/Drive_sync/Secure-Spark-Proof-Folder /novus-aesc/manifest.jsonl.md
+/storage/emulated/0/Documents/NovAExorpus/Drive_sync/Secure-Spark-Proof-Folder /novus-aexenti/chunk.jsonl.md
+/storage/emulated/0/Documents/NovAExorpus/Drive_sync/Secure-Spark-Proof-Folder /novus-aexenti/dual_agent_router/POINTER.md.md
+/storage/emulated/0/Documents/NovAExorpus/Drive_sync/Secure-Spark-Proof-Folder /novus-aexenti/manifest.jsonl.md
+/storage/emulated/0/Documents/NovAExorpus/Drive_sync/Secure-Spark-Proof-Folder /raw_database/02_MY_ORIGINALS/compile_manifest.py.md
+/storage/emulated/0/Documents/NovAExorpus/Drive_sync/Secure-Spark-Proof-Folder /raw_database/02_MY_ORIGINALS/daily_scraper.py.md
+/storage/emulated/0/Documents/NovAExorpus/Drive_sync/Secure-Spark-Proof-Folder /raw_database/02_MY_ORIGINALS/🗂️ The Manifest Taxonomy (The 5 Document Types).txt
+/storage/emulated/0/Documents/NovAExorpus/Drive_sync/Secure-Spark-Proof-Folder /raw_database/chunk.jsonl.md
+/storage/emulated/0/Documents/NovAExorpus/Drive_sync/Secure-Spark-Proof-Folder /raw_database/manifest.jsonl.md
+/storage/emulated/0/Documents/NovAExorpus/Drive_sync/Secure-Spark-Proof-Folder /raw_database/spark_recommendations/01_MASTER_MIRROR_GLIDE/_dumbass_universal_memory/manifest.jsonl.md
+/storage/emulated/0/Documents/NovAExorpus/Drive_sync/Secure-Spark-Proof-Folder /raw_database/spark_recommendations/01_MASTER_MIRROR_GLIDE/_dumbass_universal_memory/sqlite/generate_jsonl_markers.py.md
+/storage/emulated/0/Documents/NovAExorpus/Drive_sync/Secure-Spark-Proof-Folder /raw_database/spark_recommendations/03_ALTERNATIVES_PROPOSAL_V1/__NÆX-OUTPUT/01-TARGET-DOCs/AUDIT-01-TARGET-DOCs-v3-GOLD-EXTRACTION.md
+/storage/emulated/0/Documents/NovAExorpus/Drive_sync/Secure-Spark-Proof-Folder /raw_database/spark_recommendations/03_ALTERNATIVES_PROPOSAL_V1/aesop-xi/manifest.jsonl.md
+/storage/emulated/0/Documents/NovAExorpus/Drive_sync/Secure-Spark-Proof-Folder /raw_database/spark_recommendations/03_ALTERNATIVES_PROPOSAL_V1/data_vault/03_recall_cache/chunk_definitions.jsonl.md
+/storage/emulated/0/Documents/NovAExorpus/Drive_sync/Secure-Spark-Proof-Folder /raw_database/spark_recommendations/03_ALTERNATIVES_PROPOSAL_V1/data_vault/03_recall_cache/chunks_plugins_tools_memory.jsonl.md
+/storage/emulated/0/Documents/NovAExorpus/Drive_sync/Secure-Spark-Proof-Folder /raw_database/spark_recommendations/03_ALTERNATIVES_PROPOSAL_V1/data_vault/03_recall_cache/file_mgmt_chunks.jsonl.md
+/storage/emulated/0/Documents/NovAExorpus/Drive_sync/Secure-Spark-Proof-Folder /raw_database/spark_recommendations/03_ALTERNATIVES_PROPOSAL_V1/data_vault/03_recall_cache/file_tree_proposals_chunks.jsonl.md
+/storage/emulated/0/Documents/NovAExorpus/Drive_sync/Secure-Spark-Proof-Folder /raw_database/spark_recommendations/03_ALTERNATIVES_PROPOSAL_V1/data_vault/03_recall_cache/proposed_workflows_chunks.jsonl.md
+/storage/emulated/0/Documents/NovAExorpus/Drive_sync/Secure-Spark-Proof-Folder /raw_database/spark_recommendations/03_ALTERNATIVES_PROPOSAL_V1/data_vault/03_recall_cache/universal_memory_chunks.jsonl.md
+/storage/emulated/0/Documents/NovAExorpus/Drive_sync/Secure-Spark-Proof-Folder /raw_database/spark_recommendations/03_ALTERNATIVES_PROPOSAL_V1/data_vault/03_recall_cache/w5h_architecture_chunks.jsonl.md
+/storage/emulated/0/Documents/NovAExorpus/Drive_sync/Secure-Spark-Proof-Folder /raw_database/spark_recommendations/03_ALTERNATIVES_PROPOSAL_V1/data_vault/04_skills_runtime/crawl4ai_scraper.py.md
+/storage/emulated/0/Documents/NovAExorpus/Drive_sync/Secure-Spark-Proof-Folder /raw_database/spark_recommendations/03_ALTERNATIVES_PROPOSAL_V1/data_vault/manifest.jsonl.md
+/storage/emulated/0/Documents/NovAExorpus/Drive_sync/Secure-Spark-Proof-Folder /raw_database/spark_recommendations/03_ALTERNATIVES_PROPOSAL_V1/novaexopia/manifest.jsonl.md
+/storage/emulated/0/Documents/NovAExorpus/Drive_sync/Secure-Spark-Proof-Folder /raw_database/spark_recommendations/03_ALTERNATIVES_PROPOSAL_V1/novus-aexenti/dual_agent_router/executor_bridge.py
+/storage/emulated/0/Documents/NovAExorpus/Drive_sync/Secure-Spark-Proof-Folder /raw_database/spark_recommendations/03_ALTERNATIVES_PROPOSAL_V1/novus-aexenti/dual_agent_router/query_analyzer.py
+/storage/emulated/0/Documents/NovAExorpus/Drive_sync/Secure-Spark-Proof-Folder /raw_database/spark_recommendations/03_ALTERNATIVES_PROPOSAL_V1/novus-aexenti/manifest.jsonl.md
+/storage/emulated/0/Documents/NovAExorpus/Drive_sync/Secure-Spark-Proof-Folder /raw_database/spark_recommendations/03_ALTERNATIVES_PROPOSAL_V1/skills-and-capabilities/manifest.jsonl.md
+/storage/emulated/0/Documents/NovAExorpus/Drive_sync/Secure-Spark-Proof-Folder /raw_database/spark_recommendations/03_ALTERNATIVES_PROPOSAL_V1/skills-and-capabilities/prompt_skills/concierge-compiler.md.md
+/storage/emulated/0/Documents/NovAExorpus/Drive_sync/Secure-Spark-Proof-Folder /raw_database/spark_recommendations/03_ALTERNATIVES_PROPOSAL_V1/skills-and-capabilities/prompt_skills/personal-wiki-compiler.md.md
+/storage/emulated/0/Documents/NovAExorpus/Drive_sync/Secure-Spark-Proof-Folder /raw_database/spark_recommendations/03_ALTERNATIVES_PROPOSAL_V1/tools/compile_manifest.py.md
+/storage/emulated/0/Documents/NovAExorpus/Drive_sync/Secure-Spark-Proof-Folder /raw_database/spark_recommendations/03_ALTERNATIVES_PROPOSAL_V1/vendor-corpora/google-android-platform/google_litert_torch_genai_converter.md
+/storage/emulated/0/Documents/NovAExorpus/Drive_sync/Secure-Spark-Proof-Folder /raw_database/spark_recommendations/03_ALTERNATIVES_PROPOSAL_V2/clean.py.txt
+/storage/emulated/0/Documents/NovAExorpus/Drive_sync/Secure-Spark-Proof-Folder /raw_database/spark_recommendations/04_DUPLICATES_LOST_AND_ARCHIVE/01_EXACT_DUPLICATES_SAFE_TO_PURGE/00_CONSOLIDATED_MASTER_SPECS/compile_manifest.py.md
+/storage/emulated/0/Documents/NovAExorpus/Drive_sync/__RESUME.md/Housekeeping/Agent-Assets&Global-Documentation_Vault/#GOOGLE _AGENTIC-AI/Deploying GEMMA4&GeminiFLASH/generative-ai_gemini_rag-engine_rag_engine_vector_search.ipynb at main · GoogleCloudPlatform_generative-ai/generative-ai_gemini_rag-engine_rag_engine_vector_search.ipynb at main · GoogleCloudPlatform_generative-ai.md
+/storage/emulated/0/Documents/NovAExorpus/Drive_sync/__RESUME.md/Housekeeping/Agent-Assets&Global-Documentation_Vault/#GOOGLE _AGENTIC-AI/Gemini Enterprise Agent Platform/generative-ai_gemini_rag-engine_rag_engine_vector_search.ipynb at main · GoogleCloudPlatform_generative-ai.md
+/storage/emulated/0/Documents/NovAExorpus/Drive_sync/__RESUME.md/_PENDING.md/Convert Google Docs to Markdown - Google Search.md
+/storage/emulated/0/Documents/NovAExorpus/Drive_sync/__RESUME.md/_PENDING.md/Corpus verify SKILL.md
+/storage/emulated/0/Documents/NovAExorpus/Drive_sync/__RESUME.md/_PENDING.md/Mobile Extraction Protocol.txt
+/storage/emulated/0/Documents/NovAExorpus/Drive_sync/__RESUME.md/_PENDING.md/clean.py
+/storage/emulated/0/Documents/NovAExorpus/Drive_sync/__RESUME.md/_PENDING.md/concierge_prompt_compiler.py.txt
+/storage/emulated/0/Documents/NovAExorpus/Drive_sync/__RESUME.md/_PENDING.md/corpus-verify.md
+/storage/emulated/0/Documents/NovAExorpus/Drive_sync/__RESUME.md/_PENDING.md/zFILE CLEANUP.txt
+/storage/emulated/0/Documents/NovAExorpus/Drive_sync/__RESUME.md/_RESUME.md(latest)/9-09 to 9-13/concierge_prompt_compiler.py.md
+/storage/emulated/0/Documents/NovAExorpus/GRILL-MANIFEST.md
+/storage/emulated/0/Documents/NovAExorpus/QAIRT-QNN/nd_verify_result.py
+/storage/emulated/0/Documents/NovAExorpus/Skills/llm-wiki-compiler-NvAEx.md
+/storage/emulated/0/Documents/NovAExorpus/__RESUME.md/_PENDING.md/Corpus verify SKILL.md
+/storage/emulated/0/Documents/NovAExorpus/__RESUME.md/__Builder-Guide_Directory-/Master_Dumbass_config/_dumbass_unified-config/_dumbass-skills-tools-scripts/Corpus verify SKILL.md
+/storage/emulated/0/Documents/NovAExorpus/__RESUME.md/__Builder-Guide_Directory-/Master_Dumbass_config/_dumbass_unified-config/_dumbass-skills-tools-scripts/claude_router_guard_configuration.md
+/storage/emulated/0/Documents/NovAExorpus/__RESUME.md/__Builder-Guide_Directory-/Master_Dumbass_config/_dumbass_unified-config/_dumbass-skills-tools-scripts/router-guard.md
+/storage/emulated/0/Documents/NovAExorpus/__RESUME.md/__Builder-Guide_Directory-/_various_repo-plan-docs-/2026-09-10_tier-1-3-and-RAG-protocol.md
+/storage/emulated/0/Documents/NovAExorpus/__RESUME.md/_inbox/c10vis-poem_C10vis-claude-video_ Give Claude the ability to watch any video. _watch downloads, extracts frames, transcribes, hands it all to Claude..md
+/storage/emulated/0/Documents/NovAExorpus/__RESUME.md/_inbox/c10vis-poem_obsidian-skills_ Agent skills for Obsidian. Teach your agent to use Obsidian CLI and open formats including Markdown, Bases, JSON Canvas..md
+/storage/emulated/0/Documents/NovAExorpus/__RESUME.md/llm-wiki_/GH-assets/c10vis-poem_AEsopXi-obsidian-tars_ Obsidian tars plugin that supports text generation based on tag suggestions, using services like DeepSeek, Claude, OpenAI, OpenRouter, SiliconFlow, Gemini, Ollama, Kimi, Doubao, Qwen, Zhipu, QianFan & more..md
+/storage/emulated/0/Documents/NovAExorpus/__RESUME.md/llm-wiki_/GH-assets/c10vis-poem_llm-wiki-compiler-NvAEx_ Claude Code plugin that compiles markdown knowledge files into a topic-based wiki. Implements Karpathy's LLM Knowledge Base pattern..md
+/storage/emulated/0/Documents/NovAExorpus/__RESUME.md/llm-wiki_/GH-assets/llm-wiki-nocode_.github_prompts_wiki-ingest.prompt.md at main · rosidotidev_llm-wiki-nocode.md
+/storage/emulated/0/Documents/NovAExorpus/__RESUME.md/llm-wiki_/Scripts/_log-schema-and-JSONL-strctr.md
+/storage/emulated/0/Documents/NovAExorpus/__RESUME.md/llm-wiki_/Scripts/chunk trajectory and rlvr.md
+/storage/emulated/0/Documents/NovAExorpus/__RESUME.md/llm-wiki_/convert-raw-to-md.py
+/storage/emulated/0/Documents/NovAExorpus/__RESUME.md/llm-wiki_/corpus-verify-SKILL.md
+/storage/emulated/0/Documents/NovAExorpus/__RESUME.md/llm-wiki_/llm-wiki_compiler/flowcharttxt.txt
+/storage/emulated/0/Documents/NovAExorpus/__RESUME.md/llm-wiki_/llm-wiki_compiler/llm-wiki-compiler.prompt.txt
+/storage/emulated/0/Documents/NovAExorpus/__RESUME.md/llm-wiki_/llm-wiki_compiler/llm-wiki-ingest.prompt.txt
+/storage/emulated/0/Documents/NovAExorpus/__RESUME.md/llm-wiki_/llm-wiki_compiler/personal-wiki-compiler.md.pdf.md
+/storage/emulated/0/Documents/NovAExorpus/__RESUME.md/llm-wiki_/w5h-extraction.md.txt
+/storage/emulated/0/Documents/NovAExorpus/__RESUME.md/llm-wiki_/wiki-reference-router.md.txt
+/storage/emulated/0/Documents/NovAExorpus/global-documentation-vault/google-dev-docs/Convert PyTorch GenAI models for on-device inference  _  Google AI Edge  _  Google for Developers (1).mht.md
+/storage/emulated/0/Documents/NovAExorpus/global-documentation-vault/qairt-docs/qairt/LiteRT CompiledModel Kotlin API  _  Google AI Edge  _  Google for Developers.mht.md
+/storage/emulated/0/Documents/NovAExorpus/global-documentation-vault/research/pdf-to-structured-markdown-jsonl.md
+/storage/emulated/0/Documents/NovAExorpus/google_agentic_ai/Deploying GEMMA4&GeminiFLASH/generative-ai_gemini_rag-engine_rag_engine_vector_search.ipynb at main · GoogleCloudPlatform_generative-ai/generative-ai_gemini_rag-engine_rag_engine_vector_search.ipynb at main · GoogleCloudPlatform_generative-ai.md
+/storage/emulated/0/Documents/NovAExorpus/google_agentic_ai/Gemini Enterprise Agent Platform/generative-ai_gemini_rag-engine_rag_engine_vector_search.ipynb at main · GoogleCloudPlatform_generative-ai.md
+/storage/emulated/0/Documents/NovAExorpus/handoff/2026-10-24/extracts/asset-inventory.md
+/storage/emulated/0/Documents/NovAExorpus/handoff/2026-10-24/extracts/latest-config-extract.md
+/storage/emulated/0/Documents/NovAExorpus/handoff/2026-10-24/extracts/ondisk-extract.md
+/storage/emulated/0/Documents/NovAExorpus/handoff/2026-10-24/extracts/plugin-skill-audit.md
+/storage/emulated/0/Documents/NovAExorpus/handoff/2026-10-24/extracts/wiki-admin-extract.md
+/storage/emulated/0/Documents/NovAExorpus/llm-wiki/c10vis-poem_llm-wiki-compiler-NvAEx_ Claude Code plugin that compiles markdown knowledge files into a topic-based wiki. Implements Karpathy's LLM Knowledge Base pattern..md
+/storage/emulated/0/Documents/NovAExorpus/raw_database/Drive/compile_manifest.py.md
+/storage/emulated/0/Documents/NovAExorpus/raw_database/Dump/zip/Copy of NovAEcopia (Drive text extract) (1).txt
+/storage/emulated/0/Documents/NovAExorpus/raw_database/Dump/zip/Copy of NovAEcopia (Drive text extract).txt
+/storage/emulated/0/Documents/NovAExorpus/raw_database/Dump/zip/EDIT-Clarifying Clean Text to skills and tools plus outdated architecture (Drive text extract, RED FORMATTING LOST) (1).txt
+/storage/emulated/0/Documents/NovAExorpus/raw_database/Dump/zip/EDIT-Clarifying Clean Text to skills and tools plus outdated architecture (Drive text extract, RED FORMATTING LOST).txt
+/storage/emulated/0/Documents/NovAExorpus/raw_database/Dump/zip/GRILL-MANIFEST (1).md
+/storage/emulated/0/Documents/NovAExorpus/raw_database/Dump/zip/GRILL-MANIFEST.md
+/storage/emulated/0/Documents/NovAExorpus/raw_database/Dump/zip/MANIFEST (1).md
+/storage/emulated/0/Documents/NovAExorpus/raw_database/Dump/zip/MANIFEST-sha256 (1).txt
+/storage/emulated/0/Documents/NovAExorpus/raw_database/Dump/zip/MANIFEST-sha256 (2).txt
+/storage/emulated/0/Documents/NovAExorpus/raw_database/Dump/zip/MANIFEST-sha256 (3).txt
+/storage/emulated/0/Documents/NovAExorpus/raw_database/Dump/zip/MANIFEST-sha256 (4).txt
+/storage/emulated/0/Documents/NovAExorpus/raw_database/Dump/zip/MANIFEST-sha256.txt
+/storage/emulated/0/Documents/NovAExorpus/raw_database/Dump/zip/MANIFEST.md
+/storage/emulated/0/Documents/NovAExorpus/raw_database/Dump/zip/ROUTER.md
+/storage/emulated/0/Documents/NovAExorpus/raw_database/Dump/zip/clean (1).py
+/storage/emulated/0/Documents/NovAExorpus/raw_database/Dump/zip/copy-of-novaecopia-drive-text-extract (1).md
+/storage/emulated/0/Documents/NovAExorpus/raw_database/Dump/zip/copy-of-novaecopia-drive-text-extract.check (1).md
+/storage/emulated/0/Documents/NovAExorpus/raw_database/Dump/zip/copy-of-novaecopia-drive-text-extract.check.md
+/storage/emulated/0/Documents/NovAExorpus/raw_database/Dump/zip/copy-of-novaecopia-drive-text-extract.md
+/storage/emulated/0/Documents/NovAExorpus/raw_database/Dump/zip/edit-clarifying-clean-text-to-skills-and-tools-plus-outdated-architecture-drive-text-extract-red-formatting-lost (1).md
+/storage/emulated/0/Documents/NovAExorpus/raw_database/Dump/zip/edit-clarifying-clean-text-to-skills-and-tools-plus-outdated-architecture-drive-text-extract-red-formatting-lost.check (1).md
+/storage/emulated/0/Documents/NovAExorpus/raw_database/Dump/zip/edit-clarifying-clean-text-to-skills-and-tools-plus-outdated-architecture-drive-text-extract-red-formatting-lost.check.md
+/storage/emulated/0/Documents/NovAExorpus/raw_database/Dump/zip/edit-clarifying-clean-text-to-skills-and-tools-plus-outdated-architecture-drive-text-extract-red-formatting-lost.md
+/storage/emulated/0/Documents/NovAExorpus/raw_database/Dump/zip/nova-corpus-diagnostic.check (1).md
+/storage/emulated/0/Documents/NovAExorpus/raw_database/Dump/zip/nova-corpus-diagnostic.check.md
+/storage/emulated/0/Documents/NovAExorpus/raw_database/Dump/zip/part-1-lex-1-drive-text-extract-truncated.check (1).md
+/storage/emulated/0/Documents/NovAExorpus/raw_database/Dump/zip/part-1-lex-1-drive-text-extract-truncated.check.md
+/storage/emulated/0/Documents/NovAExorpus/raw_database/skills/corpus-batch-processing/SKILL.md
+/storage/emulated/0/Documents/NovAExorpus/raw_database/spark_recommendations/04_DUPLICATES_AUDITS_AND_LOGS/AUDIT_11_GITHUB_JSONL.md
+/storage/emulated/0/Documents/NovAExorpus/raw_database/tools/crawl_agent_vault.py
+/storage/emulated/0/Documents/NovAExorpus/recovered/2026-10-23/ai-hub-merovingian-models-/docs/architecture-verify/2026-06-17-claude-magical-feynman-yfafcm.md
+/storage/emulated/0/Documents/NovAExorpus/tools/chunk.py
+/storage/emulated/0/Documents/NovAExorpus/tools/clean.py

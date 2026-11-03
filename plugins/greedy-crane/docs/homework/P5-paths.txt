@@ -1,0 +1,9 @@
+- agent-ingest-audit-optimize: /data/data/com.termux/files/home/.claude/plugins/synced/bf59ea3a-5000-437b-87d6-20241bb754e6_3a64471e-06ab-454b-baf7-caf79c84e4fa/7f76ffa9-8826-4a72-b51e-2b4ed031cd27
+- skill-creator: /data/data/com.termux/files/home/.claude/plugins/cache/local-zips/skill-creator/unknown
+- claude-patterns: /data/data/com.termux/files/home/.claude/plugins/synced/a5d13a90-190b-42eb-ad1b-69c924919b1b_b410cc73-6e72-411c-a9de-4edf62ec27d7/23529d87-dbcd-47cc-b976-6d422636bf02
+- compounded: /data/data/com.termux/files/home/.claude/plugins/synced/a5d13a90-190b-42eb-ad1b-69c924919b1b_b410cc73-6e72-411c-a9de-4edf62ec27d7/ab9b0379-559a-483d-80a5-baeac53298a8
+- adaptive-agent: /data/data/com.termux/files/home/.claude/plugins/synced/bf59ea3a-5000-437b-87d6-20241bb754e6_3a64471e-06ab-454b-baf7-caf79c84e4fa/1821cd61-6521-4bfa-b023-1e048ae289b5
+- skill-provenance: /data/data/com.termux/files/home/.claude/plugins/synced/a5d13a90-190b-42eb-ad1b-69c924919b1b_b410cc73-6e72-411c-a9de-4edf62ec27d7/8e385b2f-61be-4b6e-a42f-3c9dc6eb9257
+- skill-discovery: /data/data/com.termux/files/home/.claude/plugins/synced/a5d13a90-190b-42eb-ad1b-69c924919b1b_b410cc73-6e72-411c-a9de-4edf62ec27d7/03992290-72fd-4480-9dce-9a987b9f0ad6
+- tool-schemas: /data/data/com.termux/files/home/.claude/plugins/synced/a5d13a90-190b-42eb-ad1b-69c924919b1b_b410cc73-6e72-411c-a9de-4edf62ec27d7/50c218e4-94fc-4f96-b264-2c45f4c4e48a
+- claude-war-room: /data/data/com.termux/files/home/.claude/plugins/synced/a5d13a90-190b-42eb-ad1b-69c924919b1b_b410cc73-6e72-411c-a9de-4edf62ec27d7/2c68a910-a501-486d-9141-970fc9736a82
