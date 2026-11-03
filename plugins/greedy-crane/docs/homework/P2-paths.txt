@@ -1,0 +1,4 @@
+- headroom: /data/data/com.termux/files/home/.claude/plugins/synced/a5d13a90-190b-42eb-ad1b-69c924919b1b_b410cc73-6e72-411c-a9de-4edf62ec27d7/b9db7a50-7c30-4727-8358-4489e83a15bc
+- claude-context-optimizer: /data/data/com.termux/files/home/.claude/plugins/synced/a5d13a90-190b-42eb-ad1b-69c924919b1b_b410cc73-6e72-411c-a9de-4edf62ec27d7/43b5eda8-c7e6-41dc-bfa8-8ca26fdfcb09
+- cache-guard: /data/data/com.termux/files/home/.claude/plugins/synced/a5d13a90-190b-42eb-ad1b-69c924919b1b_b410cc73-6e72-411c-a9de-4edf62ec27d7/51df6eb1-9f1b-49d5-8bd3-98d19af7f212
+- mcp2cli: /data/data/com.termux/files/home/.claude/plugins/synced/a5d13a90-190b-42eb-ad1b-69c924919b1b_b410cc73-6e72-411c-a9de-4edf62ec27d7/3763173a-85f1-4ac5-9206-c24385661940

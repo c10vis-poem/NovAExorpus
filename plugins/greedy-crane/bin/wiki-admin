@@ -1,0 +1,14 @@
+#!/data/data/com.termux/files/usr/bin/bash
+# wiki-admin — start Claude Code in the wiki/document admin workspace.
+# Loads the wiki toolkit (obsidian-wiki, OpenWiki-for-Claude-Code, /llmwiki-* commands) on top of
+# everything global (hooks H1–H7, CLAUDE.md, user plugins, graphify, obsidian-skills).
+# Normal sessions started anywhere else never load the toolkit. Guide: docs/WIKI-ADMIN-GUIDE.md
+# All seven base repos are attached read/write (list in nvaex-repos.sh).
+# Also loads the greedy-crane plugin (this folder's parent) via --plugin-dir.
+# Override the plugin folder with WIKI_ADMIN_PLUGIN_DIR (default: the folder above this script).
+self="$(readlink -f "${BASH_SOURCE[0]}")"
+PLUGIN_DIR="${WIKI_ADMIN_PLUGIN_DIR:-$(dirname "$(dirname "$self")")}"
+if [ -r "$(dirname "$self")/nvaex-repos.sh" ]; then . "$(dirname "$self")/nvaex-repos.sh"
+else . "$HOME/bin/nvaex-repos.sh"; fi
+cd ~/wiki-admin || exit 1
+exec claude --plugin-dir "$PLUGIN_DIR" "${ALL_ADD[@]}" "$@"
