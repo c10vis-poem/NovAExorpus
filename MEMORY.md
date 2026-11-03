@@ -1,6 +1,12 @@
 # MEMORY.md — NovAExorpus (the vault)
 Durable facts about this repo. Dated; newest first. Updated at session wrap-up.
 
+## 2026-11-03
+- **Operator order: never tell the operator "no repo, folder or session is attached" or "I can't find it".** In a cloud session that starts with an empty `/home/user`, the vault is already cloned at `/root/storage/shared/Documents/NovAExorpus`. About 200 repos are reachable (`list_repos`), and any of them attaches with `add_repo`. Find it yourself and read the startup files (AGENTS, RESUME, PENDING, MEMORY, newest `handoff/<date>/`, then NvAEx-Recaps RESUME/MEMORY/`memory/`) before the first reply. Then run `git log -10` in both repos: the newest commits can be newer than RESUME.
+- **No CLAUDE.md is auto-loaded in cloud sessions.** The phone's `~/.claude/CLAUDE.md` isn't there, and the vault root only has `CLAUDE.md.original.md`. The operator wants startup instructions account-wide, not in a repo: the claude.ai profile preferences, plus the cloud environment setup script writing `~/.claude/CLAUDE.md`. A repo CLAUDE.md was made unasked and dropped (PR #70 closed, branch `claude/startup-claude-md` left).
+- **The "Informations folder" in the claude.ai profile preferences doesn't exist.** Don't hunt for it; it stands for the startup files above.
+- **Last work before this session (2026-11-03):** vault PRs #67/#68 (greedy-crane consolidation, merged) and NvAEx-Recaps PR #10 (v3.3 Master Execution Runbook recovered). Neither RESUME was updated for them.
+
 ## 2026-10-31
 - **greedy-crane** is the wiki admin plugin, stored at `plugins/greedy-crane/` (agents `wiki-admin` and `corpus-ingest`, skills, scripts, docs). Agent definitions use the full plugin path, because sessions don't always start in the vault root.
 - **The wiki in `02_wiki_md` is not a wiki yet:** 519 of 537 pages are byte copies of clean files, and `manifest.jsonl` hashes the clean file instead of the raw source (P4, 2026-10-30).
