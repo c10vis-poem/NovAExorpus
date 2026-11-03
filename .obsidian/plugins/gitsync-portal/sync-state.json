@@ -2,6 +2,7 @@
   "version": 1,
   "favorites": [],
   "history": [
+    "Argon reports.md",
     "PENDING.md",
     "BOARD-INTAKE.md",
     "RESUME.md",
@@ -19,7 +20,6 @@
     "02_wiki_md/architectures/03_WORKSPACE_FILE_TREES_AND_TOPOLOGY_SYNTHESIS.md",
     "01_raw_sources/POINTER.md",
     "MASTER-RESUME.md",
-    "Untitled.md",
     "__RESUME.md/_inbox/component-schemas (1).md",
     "__RESUME.md/_inbox/LLM wiki by andrej karpathyi_ Build a compounding knowledge base (tutorial).md",
     "TOOLS-SCRIPTS-HOOKS-INVENTORY.md",
