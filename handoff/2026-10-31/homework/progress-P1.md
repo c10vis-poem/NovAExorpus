@@ -28,3 +28,9 @@
 - watch-video: docstring heads of dedup/highlights/ocr/report/relabel/watch_batch/post_to_jira/fetch_attachment/smoketest (NOT full bodies). highlights.py calls Anthropic API with a key (cut). ocr.py uses tesseract (matches phone). watch_batch.py: per-item workdir + batch.json + continue-on-error + --parallel N (P3 pattern). SKILL.md cache + batch + workspace sections read. server.py outline only.
 - [x] desktop-commander (README, overview 1-200, knowledge-base+obsidian-vault heads, other 3 skill outlines), drunken-master (SKILL all 140ish lines, evals.json parsed: 13 evals), claude-bridge (SKILL all, agent all, README top). NEW: claude-bridge repo = github.com/Stigmavlc/claude-bridge (README badge). Next: grab line numbers, rewrite deliverable sections with read-depth + new findings.
 - deliverable updated with section 6 (read depth, 13 findings, citations). DONE pass 2.
+## Pass 3 (2026-11-03, cloud session 018DCykKdJ2PjJ15fAPaqeME)
+- [x] watch-video full read at upstream 124aef7 (plugin 1.0.0 / MCP 2.5.2; transcribe.py lines match the phone copy): all 16 scripts, server.py, SKILL.md. README/ROADMAP partial; docs/tests not read (bloat)
+- [x] every file:line cite re-run against pinned sources (table in P1 header); 5 corrected (config.js, scopes.js, apify gotchas, drunken-master, gdocs SKILL.md ranges)
+- [x] deliverable rewritten: section 6 folded into the plugin entries; new findings 0.2 (TOOLS.md stale rows), 0.10 (watch_batch has no --parallel)
+- Not re-checkable: firecrawl (source not pinned; current upstream lines given), phone-only LIVE facts
+- DONE
