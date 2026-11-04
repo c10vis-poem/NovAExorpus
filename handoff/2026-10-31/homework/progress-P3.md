@@ -43,3 +43,10 @@ backlog: 5 skills + task-planner agent read. next README, CLAUDE.md, src, script
 backlog: README, CLAUDE.md (to line ~200) read; multiwriter BACKLOG_AGENT_ID, task_import atomic bulk noted. next src, scripts, CI, CHANGELOG
 backlog: src index/helpers/schemas/types/task-schema read (status enum 4 values only; description max 500). next tools, engine/index.ts, scripts, CI, CHANGELOG
 backlog: engine/index.ts 60-330 read; defect: SubagentStart drain assigns ALL unassigned pending tasks to one subagent. next: engine 330-704, scripts, CI, CHANGELOG, tools, tests outline
+## Pass 3 (2026-11-03, cloud session 018DCykKdJ2PjJ15fAPaqeME)
+- [x] step 4: all file:line cites re-run against pinned sources (table in P3 header)
+- [x] backlog engine/index.ts 330-704 read; 4 hook scripts confirmed exit 0 only; new defects (modifyTask empty filter = all tasks; queue lines lost)
+- [x] cc.py exit paths read: hooks cannot block (confirmed)
+- [x] pass-2 findings (harness, CrewMarshal, corpus-ingest.md/TOOLS.md) folded into P3-fan-out.md; watch-video job-runner patterns added
+- Not read: backlog src/tools, tests, CI; noetic run-desk/start-cloud-worker/gh-desk; CrewMarshal design specs (partial)
+- DONE
