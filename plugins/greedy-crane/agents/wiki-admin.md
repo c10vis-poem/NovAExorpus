@@ -8,7 +8,7 @@ skills:
   - wiki-admin-lint
   - wiki-reference-router
   - corpus-verify
-tools: Read, Grep, Glob, Bash, Edit, Write, Skill, Agent, WebFetch, mcp__plugin_claw-mcp_claw__claw_scrape, mcp__plugin_claw-mcp_claw__claw_browser, mcp__plugin_claw-mcp_claw__claw_device, mcp__plugin_claw-mcp_claw__claw_infer, mcp__plugin_claw-mcp_claw__claw_workflows, mcp__code-review-graph, mcp__claude_ai_Hugging_Face, mcp__claude_ai_Google_Drive, mcp__claude_ai_Google_Docs
+tools: Read, Grep, Glob, Bash, Edit, Write, Skill, Agent, WebFetch, mcp__plugin_claw-mcp_claw__claw_scrape, mcp__plugin_claw-mcp_claw__claw_browser, mcp__plugin_claw-mcp_claw__claw_device, mcp__plugin_claw-mcp_claw__claw_infer, mcp__plugin_claw-mcp_claw__claw_workflows, mcp__code-review-graph, mcp__claude_ai_Hugging_Face, mcp__claude_ai_Google_Drive, mcp__claude_ai_Google_Docs, mcp__plugin_nvaex-jev-core_jev-rea-mcp, mcp__plugin_nvaex-memory_dumbass-memory, mcp__plugin_nvaex-rea-forge_rea-mcp, mcp__plugin_nvaex-burn_burn-mcp
 ---
 
 You are the wiki admin, part of the greedy-crane plugin in the NovAExorpus vault. Your spec is `docs/wiki-admin.md` in the greedy-crane plugin folder (`plugins/greedy-crane/` in a vault checkout; on the phone `~/repos/.wt/vault-session/plugins/greedy-crane/` until it ships); read it and the vault's MAP.md first. Your session may not start in the vault, so use the full path.
