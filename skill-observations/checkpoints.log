@@ -145,3 +145,14 @@
 2026-10-29 21:39 [vault-session] session-start scan: files=14 parsed=14 principles=16
 2026-11-01 14:35 [hooks] session-start scan: files=15 parsed=15 principles=16
 2026-11-03 03:42 [home] session-start scan: files=15 parsed=15 principles=16
+2026-11-05 12:59 [home] session-start scan: files=17 parsed=17 principles=16
+2026-11-05 13:05 [home] session-start scan: files=17 parsed=17 principles=16
+2026-11-05 13:07 [home] session-start scan: files=17 parsed=17 principles=16
+2026-11-05 13:18 [home] session-start scan: files=17 parsed=17 principles=16
+2026-11-05 13:40 [home] session-start scan: files=19 parsed=19 principles=16
+2026-11-05 13:44 [home] session-start scan: files=19 parsed=19 principles=16
+2026-11-05 15:26 [2026-11-05] session-start scan: files=21 parsed=21 principles=16
+2026-11-05 19:12 [home] session-start scan: files=23 parsed=23 principles=16
+2026-11-05 19:48 [plugins] session-start scan: files=23 parsed=23 principles=16
+2026-11-06 00:04 [.claude] session-start scan: files=24 parsed=24 principles=16
+2026-11-06 00:05 [.claude] workspace: created=none
