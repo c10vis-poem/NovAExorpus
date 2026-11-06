@@ -22,5 +22,3 @@ commands_verified: none
 **Suggested improvement:** Add a barrier, not more text: a PreToolUse hook on Workflow that refuses a script containing agent() calls without an explicit `model:` option (or a phase-level model), unless the operator typed an override. Also state in CLAUDE.md that the operator's sizing rule overrides the workflow-authoring "omit model" default.
 
 **Principle:** When a tool's own guidance sets a default ("inherit the session model") that conflicts with a standing operator rule, the operator rule wins, and the conflict should be checked mechanically at the call, because the tool's guidance is loaded fresh right before the call and outweighs a rule read hours earlier.
-
-**New instance (2026-11-05):** same gap at the session level. User settings pinned the main model to `opus` with an Opus advisor attached and no default subagent model, so any spawn without an explicit model inherits Opus. The agent also answered a question about the advisor from a guess before reading the vendor doc. Fix belongs in settings (main model, `advisorModel`, `CLAUDE_CODE_SUBAGENT_MODEL`), not in more instruction text.
