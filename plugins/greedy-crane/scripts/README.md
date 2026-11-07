@@ -1,4 +1,4 @@
-# tools/wiki-admin
+# greedy-crane scripts
 
 Scripts the wiki admin (NovusAExenti `executor-core/file-administrator/`) runs. Each answers one question; together they are the gate **convert -> verify -> draft -> stage -> audit -> promote**. Nothing here edits a raw source, and nothing writes the live wiki except `promote.py` on an operator approval.
 

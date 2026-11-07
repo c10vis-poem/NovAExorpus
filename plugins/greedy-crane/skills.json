@@ -1,0 +1,157 @@
+{
+ "package": "greedy-crane",
+ "skills": [
+  {
+   "id": "audit-outside-material",
+   "path": "skills/audit-outside-material/SKILL.md",
+   "kind": "skill",
+   "purpose": "Audit outside material (video, article, repo, docs) that recommends agent-setup changes. Read-only until a proposal.",
+   "triggers": [],
+   "tools": []
+  },
+  {
+   "id": "cli-tools",
+   "path": "skills/cli-tools/SKILL.md",
+   "kind": "skill",
+   "purpose": "Which command-line tool to use for web search, GitHub, Hugging Face, NotebookLM and Graphify. Read before searching the web or calling those services.",
+   "triggers": [],
+   "tools": []
+  },
+  {
+   "id": "corpus-batch-processing",
+   "path": "skills/corpus-batch-processing/SKILL.md",
+   "kind": "skill",
+   "purpose": "Convert a repo's raw/ dump into clean_md/ with orchestrator and subagents. Use for 20+ files or 'process raw'.",
+   "triggers": [],
+   "tools": []
+  },
+  {
+   "id": "corpus-verify",
+   "path": "skills/corpus-verify/SKILL.md",
+   "kind": "skill",
+   "purpose": "Independent RLVR check. Reads source and clean files with different extraction libraries than tools/clean.py used, compares by named-atom and segment containment, and reports which details are missing. Hard rule 5: the tool that cleaned a file does not get a vote on whether the cleaning was good. Use after any corpus clean pass (first run, new sources, changes to tools/clean.py) or whenever a source is suspected of losing detail through cleaning.",
+   "triggers": [],
+   "tools": []
+  },
+  {
+   "id": "gdrive-to-markdown",
+   "path": "skills/gdrive-to-markdown/SKILL.md",
+   "kind": "skill",
+   "purpose": "Pull Google Docs, Sheets, Slides or Drive files into raw/ via rclone and convert to Markdown. Use to ingest from Drive.",
+   "triggers": [],
+   "tools": []
+  },
+  {
+   "id": "llm-wiki",
+   "path": "skills/llm-wiki/SKILL.md",
+   "kind": "skill",
+   "purpose": "\"Wiki toolset: BM25 section search, structural lint, stats, evolve. Use for 'search the wiki', 'lint the wiki', stats.\"",
+   "triggers": [],
+   "tools": []
+  },
+  {
+   "id": "notebooklm",
+   "path": "skills/notebooklm/SKILL.md",
+   "kind": "skill",
+   "purpose": "Install, authenticate, troubleshoot, and operate Gemini Notebook through the notebooklm-py CLI or typed async Python API. Use for notebook and source management, grounded chat and research, and artifact generation or download when the user mentions Gemini Notebook, notebooklm-py, the notebooklm CLI, or its Python API. Do not use for the generic Gemini API or unrelated content creation.",
+   "triggers": [],
+   "tools": []
+  },
+  {
+   "id": "obsidian-markdown",
+   "path": "skills/obsidian-markdown/SKILL.md",
+   "kind": "skill",
+   "purpose": "\"Create and edit Obsidian Flavored Markdown: wikilinks, embeds, callouts, properties. Use for Obsidian notes.\"",
+   "triggers": [],
+   "tools": []
+  },
+  {
+   "id": "obsidian-notes",
+   "path": "skills/obsidian-notes/SKILL.md",
+   "kind": "skill",
+   "purpose": "Lint a Markdown folder as an Obsidian vault, write INDEX.md, convert wikilinks. Use for 'valid vault', 'link notes'.",
+   "triggers": [],
+   "tools": []
+  },
+  {
+   "id": "rag-retrieval-check",
+   "path": "skills/rag-retrieval-check/SKILL.md",
+   "kind": "skill",
+   "purpose": "Debug a wrong wiki or RAG answer by finding the earliest broken stage. Use when the page exists but the agent missed it.",
+   "triggers": [],
+   "tools": []
+  },
+  {
+   "id": "rule-learning",
+   "path": "skills/rule-learning/SKILL.md",
+   "kind": "skill",
+   "purpose": "Capture a behavioural rule from a user correction, with approval, as a staged skill. Use when a correction generalizes.",
+   "triggers": [],
+   "tools": []
+  },
+  {
+   "id": "vault-skill-factory",
+   "path": "skills/vault-skill-factory/SKILL.md",
+   "kind": "skill",
+   "purpose": "Turn mature curated wiki pages into a reviewable Agent Skill package. Writes only to a review directory; never installs.",
+   "triggers": [],
+   "tools": []
+  },
+  {
+   "id": "w5h-extraction",
+   "path": "skills/w5h-extraction/SKILL.md",
+   "kind": "skill",
+   "purpose": "\"Extracts and formats complete Who, What, When, Where, Why, and How (W5+H) operational matrices from stream-of-consciousness transcripts and unorganized architectural notes.\"",
+   "triggers": [],
+   "tools": []
+  },
+  {
+   "id": "wiki-admin-ingest",
+   "path": "skills/wiki-admin-ingest/SKILL.md",
+   "kind": "skill",
+   "purpose": "Intake of raw documents into staged wiki pages for the NovAExorpus corpus (size gate, injection scan, convert/crush, 25-file batches with a ledger, independent verify, draft, stage, audit). Use for 'ingest this', 'process the dump', 'add these files to the wiki', or files in raw/.",
+   "triggers": [],
+   "tools": []
+  },
+  {
+   "id": "wiki-admin-lint",
+   "path": "skills/wiki-admin-lint/SKILL.md",
+   "kind": "skill",
+   "purpose": "Health check and promotion gate for the wiki and 01-inbox. Use before promotion, after ingest, or 'check the wiki'.",
+   "triggers": [],
+   "tools": []
+  },
+  {
+   "id": "wiki-admin-query",
+   "path": "skills/wiki-admin-query/SKILL.md",
+   "kind": "skill",
+   "purpose": "Answer from wiki pages only, with every claim cited. Use for 'what do we know about X' or 'where is Y decided'.",
+   "triggers": [],
+   "tools": []
+  },
+  {
+   "id": "wiki-admin-repo-docs",
+   "path": "skills/wiki-admin-repo-docs/SKILL.md",
+   "kind": "skill",
+   "purpose": "Create or update a repository's agent-facing docs in its openwiki/ folder (OpenWiki format), using the session's own model with no API key. Use when the operator asks to document a repo, refresh a repo's docs, or after merges change a repo. Init writes quickstart plus at most 8 pages; update is git-diff driven, surgical, and may be a no-op.",
+   "triggers": [],
+   "tools": []
+  },
+  {
+   "id": "wiki-dedup",
+   "path": "skills/wiki-dedup/SKILL.md",
+   "kind": "skill",
+   "purpose": "Find and, with confirmation, merge wiki pages covering the same concept. Audit by default; not for link repair.",
+   "triggers": [],
+   "tools": []
+  },
+  {
+   "id": "wiki-reference-router",
+   "path": "skills/wiki-reference-router/SKILL.md",
+   "kind": "skill",
+   "purpose": "Use when an agent needs to retrieve factual knowledge, schemas, or protocols from local multi-format references without modifying raw files.",
+   "triggers": [],
+   "tools": []
+  }
+ ]
+}

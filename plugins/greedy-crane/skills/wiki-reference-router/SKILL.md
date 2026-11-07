@@ -25,6 +25,6 @@ Governs how agents locate, parse, and cite multi-format documents housed inside 
 ## In this stack
 
 - Reference folders today are each repo's `raw/` and `clean_md/`, plus the vault's `raw_database/`. They are read-only exactly like `references/`.
-- When `MAP.md` names no folder for the domain, query the manifest instead: `python3 tools/wiki-admin/manifest.py query <word> --manifest <repo>/manifest.jsonl`. Open only the paths it returns.
-- "Written to `02_wiki_md/`" means: written to the staging inbox `01-inbox/` first. A page reaches the wiki only through `tools/wiki-admin/promote.py` after the verify step passed and the operator approved it.
+- When `MAP.md` names no folder for the domain, query the manifest instead: `python3 ${CLAUDE_PLUGIN_ROOT}/scripts/manifest.py query <word> --manifest <repo>/manifest.jsonl`. Open only the paths it returns.
+- "Written to `02_wiki_md/`" means: written to the staging inbox `01-inbox/` first. A page reaches the wiki only through `${CLAUDE_PLUGIN_ROOT}/scripts/promote.py` after the verify step passed and the operator approved it.
 - Cite every extracted fact with its path (and line or heading). A fact with no path is not a fact for the wiki.

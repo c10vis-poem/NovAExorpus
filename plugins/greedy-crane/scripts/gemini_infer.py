@@ -37,7 +37,7 @@ LOG = Path(os.environ.get("WIKI_ADMIN_LOG", Path.home() / ".local/state/wiki-adm
 PRIVATE_TAGS = {"private", "pii", "personal", "secret", "confidential"}
 CRED = re.compile(r"\bsk-[A-Za-z0-9_\-]{16,}|\bm0sk_\w{8,}|\bAIza[0-9A-Za-z_\-]{30,}"
                   r"|\bgh[pousr]_[A-Za-z0-9]{30,}|BEGIN [A-Z ]*PRIVATE KEY")
-W5H_SKILL = HERE.parent.parent / "skills/wiki-admin-core/w5h-extraction/SKILL.md"
+W5H_SKILL = HERE.parent / "skills/w5h-extraction/SKILL.md"
 
 DRAFT_INSTR = """You are the wiki admin's drafting model. Turn the SOURCE below into one wiki page.
 Rules: use only facts in the SOURCE; quote full paragraphs rather than summarise when unsure;

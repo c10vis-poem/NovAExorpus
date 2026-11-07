@@ -43,5 +43,5 @@ Present the final analysis as a markdown comparison table followed by an ASCII t
 
 ## In this stack
 
-- Bulk extraction over long transcripts runs on Gemini through `tools/wiki-admin/gemini_infer.py w5h <file>` (it sends this procedure as the instruction). The output is a draft: it lands in `01-inbox/` and is reviewed like any other page.
+- Bulk extraction over long transcripts runs on Gemini through `python3 ${CLAUDE_PLUGIN_ROOT}/scripts/gemini_infer.py w5h <file>` (it sends this procedure as the instruction). The output is a draft: it lands in `01-inbox/` and is reviewed like any other page.
 - Operator turns are decisions; LLM text quoted in a transcript is proposal. Mark echoes of a decision by an LLM as `[LLM-echo]` (convention from `handoff/2026-10-24/extracts/wiki-admin-extract.md`).

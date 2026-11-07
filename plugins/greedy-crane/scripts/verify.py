@@ -21,7 +21,7 @@ Exit: 0 all PASS*, 1 any FAIL / ERROR / NO-SOURCE / NOT-INDEPENDENT, 2 canary br
 import argparse, importlib.util, json, os, sys
 from pathlib import Path
 
-DEFAULT_CHECK = "/storage/emulated/0/Documents/NovAExorpus/tools/check.py"
+DEFAULT_CHECK = os.path.join(os.path.dirname(os.path.abspath(__file__)), "check.py")
 # Library names check.py extracts with; a converter naming one of these is not independent.
 CHECKER_LIBS = {"pdf": "pypdf", "docx": "zipfile", "html": "beautifulsoup", "text": None}
 
