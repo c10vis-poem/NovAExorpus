@@ -42,6 +42,38 @@
    "tools": []
   },
   {
+   "id": "gemini-api-cli",
+   "path": "skills/gemini-api-cli/SKILL.md",
+   "kind": "skill",
+   "purpose": "Call the Gemini API from the shell with gemini-api. Use for media generation (images, TTS, music, video), file and YouTube analysis, audio/video transcription, Deep Research, and sandboxed agents.",
+   "triggers": [],
+   "tools": []
+  },
+  {
+   "id": "gemini-api-dev",
+   "path": "skills/gemini-api-dev/SKILL.md",
+   "kind": "skill",
+   "purpose": "Use this skill when writing code that calls the Gemini API for text generation, multi-turn chat, multimodal understanding, image generation, video generation, speech generation (TTS), voice design, voice replication, streaming responses, background research tasks, function calling, structured output, or migrating from the old generateContent API. Covers SDK usage and best practices for Gemini models and agents in Python and TypeScript.",
+   "triggers": [],
+   "tools": []
+  },
+  {
+   "id": "gemini-live-api-dev",
+   "path": "skills/gemini-live-api-dev/SKILL.md",
+   "kind": "skill",
+   "purpose": "Use this skill when building real-time, bidirectional streaming applications with the Gemini Live API, or migrating legacy Live models (2.0/2.5/3.1) to Gemini 3.8 Live. Covers WebSocket-based audio/video/text streaming, voice activity detection (VAD), background reasoning (extended thinking), asynchronous function calling, session management, ephemeral tokens, live transcription, and live translation. SDKs covered - google-genai (Python), @google/genai (JavaScript/TypeScript).",
+   "triggers": [],
+   "tools": []
+  },
+  {
+   "id": "gemini-omni-flash-api",
+   "path": "skills/gemini-omni-flash-api/SKILL.md",
+   "kind": "skill",
+   "purpose": "Use this skill for generative video editing, text-to-video, image- and video-referenced video generation, first-frame-to-video, first-and-last-frame transitions, and video extensions using Gemini Omni 1.2 Flash (gemini-omni-1.2-flash) via the official google-genai SDK. Includes workflows for pre-processing/optimizing high-resolution or long source videos with ffmpeg, stripping audio for full sound regeneration, and handling turn-by-turn video editing and parallel execution.",
+   "triggers": [],
+   "tools": []
+  },
+  {
    "id": "llm-wiki",
    "path": "skills/llm-wiki/SKILL.md",
    "kind": "skill",

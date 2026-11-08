@@ -39,5 +39,5 @@ docs/wiki-admin.md, .claude-plugin/plugin.json) were left untouched.
 - `~/repos/NvAEx-Recaps/memory/active/wiki-admin.md`: read for context only; private repo, not copied.
 - progress-P* and other homework files were copied as is (no PDFs/large binaries existed).
 
-## Companion plugins (loaded beside greedy-crane, never copied into it)
-- `gemini-skills` from the fork `c10vis-poem/NxAEx-gemini-skills` (synced with `google-gemini/gemini-skills`): `gemini-api-dev`, `gemini-api-cli`, `gemini-live-api-dev`, `gemini-omni-flash-api`. The wiki-admin agent lists the first two under `skills:`. One copy for every package; sync the fork, never vendor it.
+## Compiled-in skills from forks
+- `skills/gemini-api-cli`, `gemini-api-dev`, `gemini-live-api-dev`, `gemini-omni-flash-api`: copied whole from fork `c10vis-poem/NxAEx-gemini-skills` at `7cfc690ba9c8` (synced with `google-gemini/gemini-skills` 2.4.0), Apache-2.0 (`vendor/LICENSE.gemini-skills`). Update: sync the fork, then re-copy and record the new commit here (`rea-sync` / `rea-customize` for any local change).

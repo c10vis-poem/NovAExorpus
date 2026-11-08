@@ -158,7 +158,7 @@ ok "wiki_retrieval_eval hit/miss with stage reason; wiki_dedup finds the variant
 for s in "$P"/skills/*/SKILL.md; do d=$(basename "$(dirname "$s")"); head -5 "$s" | grep -q "^name: $d$" && head -8 "$s" | grep -q -E '^description: (.{20,}|>)$' || fail "skill frontmatter: $d"; done
 jq -e '[.hooks[]|length]|all(.==1)' "$P/hooks/hooks.json" >/dev/null || fail "more than one hook entry per event"
 for h in "$P"/hooks/*.sh; do sed -n 3,6p "$h" | grep -q 'killswitch.sh"* greedy-crane' || fail "kill switch not first in $h"; done
-refs=$(grep -rhoE 'scripts/[A-Za-z0-9_.-]+\.(py|js|sh)' "$P/skills" "$P/commands" "$P/agents" | sort -u); for r in $refs; do [ -f "$P/$r" ] || fail "dangling script ref $r"; done
+refs=$(grep -rhoE 'https?://[^ )`"]+|scripts/[A-Za-z0-9_.-]+\.(py|js|sh)' "$P/skills" "$P/commands" "$P/agents" | grep -v -E '^https?://' | sort -u); for r in $refs; do { [ -f "$P/$r" ] || compgen -G "$P/skills/*/$r" >/dev/null; } || fail "dangling script ref $r"; done  # URLs are matched whole and dropped, so a remote .../scripts/x.sh is not a local ref
 ok "all skills valid; one hook per event, kill switch first; no dangling script references"
 # stock-plugin and dropped-service independence
 mkdir -p fakevault; V=$(cd fakevault && pwd)

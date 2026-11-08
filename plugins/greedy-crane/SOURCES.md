@@ -50,3 +50,5 @@ Dropped on purpose: llm-wiki demo media/docs/eval/integrations (5.1 MB), fastemb
 - `wa_quarantine.py` does not exist in llm-secure-patterns (probe: its tree has no such file; only `templates/python/sanitize_web_content.py`); the package script is the real one, with that template's patterns folded in.
 - Superseded earlier "Missing" claims: gdrive-to-markdown, compounded, agent-ingest-audit-optimize, llm-secure-patterns ARE on the phone (S1) and are now folded.
 - Not exercised against live Drive: `gdrive_fetch.py` is tested with a stub rclone (arguments and conversion), not with a real `biz:` listing.
+
+| skills/gemini-api-cli, gemini-api-dev, gemini-live-api-dev, gemini-omni-flash-api | fork `c10vis-poem/NxAEx-gemini-skills` @ 7cfc690ba9c8 (upstream google-gemini/gemini-skills 2.4.0), copied unchanged | Apache-2.0 |
