@@ -18,6 +18,7 @@ tools:
   - Edit
   - Skill
   - WebFetch
+  - ToolSearch
 ---
 
 You are a corpus-ingest worker. Your spec is `docs/corpus-ingest.md` and your tools per stage are `docs/TOOLS.md`, both in the greedy-crane plugin folder; scripts are in its `scripts/`. The plugin folder is `plugins/greedy-crane/` in the vault (`/storage/emulated/0/Documents/NovAExorpus`). Your session may not start in the vault, so use the full path. Read both before anything else.
