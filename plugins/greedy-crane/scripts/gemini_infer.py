@@ -25,7 +25,8 @@ Tasks:
   extract FILE                  JSON {semantic_summary, entities, skills, tools} for the manifest
   ask "QUESTION" FILES... [--out] answer only from the given pages (large-context model)
   serve                         MCP server over stdio (tools gemini_draft, gemini_w5h, gemini_ask)
-SDK: `pip install google-genai` (imported only for a live call).
+SDK: `pip install -U google-genai` (>= 2.30.1; imported only for a live call). Reference for models and SDK use:
+this plugin's gemini-api-dev skill (from the fork c10vis-poem/NxAEx-gemini-skills).
 """
 import argparse, json, os, re, sys
 from datetime import datetime, timezone
@@ -37,7 +38,7 @@ LOG = Path(os.environ.get("WIKI_ADMIN_LOG", Path.home() / ".local/state/wiki-adm
 PRIVATE_TAGS = {"private", "pii", "personal", "secret", "confidential"}
 CRED = re.compile(r"\bsk-[A-Za-z0-9_\-]{16,}|\bm0sk_\w{8,}|\bAIza[0-9A-Za-z_\-]{30,}"
                   r"|\bgh[pousr]_[A-Za-z0-9]{30,}|BEGIN [A-Z ]*PRIVATE KEY")
-W5H_SKILL = HERE.parent.parent / "skills/wiki-admin-core/w5h-extraction/SKILL.md"
+W5H_SKILL = HERE.parent / "skills/w5h-extraction/SKILL.md"
 
 DRAFT_INSTR = """You are the wiki admin's drafting model. Turn the SOURCE below into one wiki page.
 Rules: use only facts in the SOURCE; quote full paragraphs rather than summarise when unsure;

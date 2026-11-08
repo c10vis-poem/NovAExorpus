@@ -1,6 +1,7 @@
 {
   "name": "greedy-crane",
-  "version": "0.1.0",
-  "description": "Wiki admin for the NovAExorpus corpus: the wiki-admin agent that directs extraction, the corpus-ingest worker that reads and converts, and their skills and scripts. Launch from the vault root.",
-  "author": {"name": "c10vis-poem"}
+  "version": "0.2.0",
+  "description": "Wiki admin for the NovAExorpus corpus, living in the vault: the wiki-admin agent that directs extraction, the corpus-ingest worker, and the intake pipeline (size gate, injection scan, convert/crush, 25-file batches with a ledger, independent verify, Gemini drafting, staging, audit, promotion on named approval), artifact extraction (1 to N, N to 1), BM25 search, lint, dedup, skill factory and provenance. Staging only.",
+  "author": {"name": "c10vis-poem"},
+  "license": "MIT"
 }

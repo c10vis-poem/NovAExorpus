@@ -11,5 +11,24 @@
         ]
       }
     ]
-  }
+  },
+  "extraKnownMarketplaces": {
+    "nvaex-vault": {
+      "source": {
+        "source": "directory",
+        "path": "/storage/emulated/0/Documents/NovAExorpus"
+      }
+    },
+    "novaexopia": {
+      "source": {
+        "source": "directory",
+        "path": "/data/data/com.termux/files/home/repos/NovAExopia-main"
+      }
+    }
+  },
+  "enabledPlugins": {
+    "greedy-crane@nvaex-vault": true,
+    "aesop-enforcements@novaexopia": true
+  },
+  "agent": "greedy-crane:wiki-admin"
 }

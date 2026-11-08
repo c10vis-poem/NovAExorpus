@@ -1,0 +1,8 @@
+{
+  "name": "greedy-crane",
+  "displayName": "Greedy Crane (wiki admin)",
+  "description": "Wiki admin for the NovAExorpus corpus, living in the vault: wiki-admin and corpus-ingest agents, the intake pipeline (size gate, injection scan, convert/crush, batch ledger, independent verify, drafting, staging, audit, promotion on named approval), artifact extraction, search, lint, dedup, skill factory and provenance. Staging only.",
+  "version": "0.2.0",
+  "author": {"name": "c10vis-poem"},
+  "repository": "https://github.com/c10vis-poem/NovAExorpus"
+}

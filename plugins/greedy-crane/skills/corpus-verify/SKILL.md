@@ -49,17 +49,17 @@ There is no `Repos*` level and no `01-sources/`, `02-clean/`, `03-check/` any mo
 
 ## Invocation
 
-Run from the vault root:
+Run with the vault path in `VAULT` (the checker is `${CLAUDE_PLUGIN_ROOT}/scripts/check.py`; without `VAULT` it falls back to the phone path):
 
 ```bash
 # Check every clean_md/*.md (POINTER.md excluded); writes audit/
-python3 tools/check.py
+VAULT=/path/to/vault python3 "${CLAUDE_PLUGIN_ROOT}/scripts/check.py"
 
 # Check named files only (any path; the file need not live in clean_md/)
-python3 tools/check.py clean_md/foo.md "some dir/bar.md"
+VAULT=/path/to/vault python3 "${CLAUDE_PLUGIN_ROOT}/scripts/check.py" clean_md/foo.md "some dir/bar.md"
 
 # Dry run: prints the roll-up to stdout, writes nothing
-python3 tools/check.py --dry-run [CLEAN_MD ...]
+VAULT=/path/to/vault python3 "${CLAUDE_PLUGIN_ROOT}/scripts/check.py" --dry-run [CLEAN_MD ...]
 ```
 
 Usage line: `check.py [--dry-run] [CLEAN_MD ...]`. The exit code is 1 when any file FAILs, else 0.
@@ -182,7 +182,7 @@ Constants at module level in `tools/check.py`; there are no CLI flags beyond `--
 2. Open the source and the clean file side by side.
 3. Confirm the finding is real.
 4. Fix by re-cleaning that source (delete or move the stale clean file first, since `clean.py` skips sources that already have one), or by patching the clean file directly when the cleaner cannot produce the right output.
-5. Rerun `python3 tools/check.py <clean file>`. The finding must be gone.
+5. Rerun `python3 "${CLAUDE_PLUGIN_ROOT}/scripts/check.py" <clean file>`. The finding must be gone.
 
 ### On NO-SOURCE
 
@@ -200,7 +200,7 @@ Do not repair. The source was truncated before this repo touched it. Record it a
 
 ## Extension to other corpora
 
-1. Point `find_dirs()` in `tools/check.py` at the other corpus's source, clean, and audit folders.
+1. Point `find_dirs()` in `scripts/check.py` at the other corpus's source, clean, and audit folders.
 2. Re-transcribe the furniture policy (`CHROME`, `PAGE_NUMBER`) from that corpus's README by hand; do not import it from its cleaner.
 3. Confirm the cleaner there uses different extraction libraries from the ones listed above for `check.py`, or swap the checker's extractors so they stay disjoint.
 4. Run.

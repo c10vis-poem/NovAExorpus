@@ -13,4 +13,4 @@ Skills the wiki-admin agent (NovusAExenti `executor-core/wiki-admin/`) loads. Te
 
 The last four are customized merges of overlapping tools (OpenWiki for Claude Code, openwiki-skills, llm-wiki-nocode, obsidian-wiki, llm-wiki-compiler). Each SKILL.md ends with what it was built from and which originals it replaces for the wiki admin. Operator decision: the OpenWiki TUI / LangChain `openwiki` CLI is dropped and is not wired in.
 
-The scripts these skills call live in `tools/wiki-admin/`.
+The scripts these skills call live in this plugin's `scripts/` (`${CLAUDE_PLUGIN_ROOT}/scripts`).

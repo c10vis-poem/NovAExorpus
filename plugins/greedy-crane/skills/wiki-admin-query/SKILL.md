@@ -1,6 +1,6 @@
 ---
 name: wiki-admin-query
-description: Answer a question from the corpus wiki using only wiki pages, with every claim cited. Use when the operator asks "what do we know about X", "where is Y decided", or any question the wiki should answer. Read-only on the wiki; the answer is saved for review, not filed as truth.
+description: Answer from wiki pages only, with every claim cited. Use for 'what do we know about X' or 'where is Y decided'.
 ---
 
 # wiki-admin query
@@ -11,14 +11,19 @@ description: Answer a question from the corpus wiki using only wiki pages, with 
 - Read at least 3 and at most 8 pages per question. Cite every claim with `[[path/slug]]`. Code blocks verbatim.
 
 ## Retrieval order (cheapest first; from obsidian-wiki `wiki-query`)
-1. **Index pass:** `manifest.py query <terms> --manifest <wiki>/manifest.jsonl` and the wiki `index.md`. No page reads yet.
+1. **Index pass:** `${CLAUDE_PLUGIN_ROOT}/scripts/manifest.py query <terms> --manifest <wiki>/manifest.jsonl` and the wiki `index.md`. No page reads yet.
 2. **Section pass:** grep the candidate pages for the terms; read only the matching sections.
 3. **Full read** of a page only when the section pass is inconclusive. Follow `## Connections` / wikilinks one page at a time.
 4. **Repo questions** ("how does X work in repo R"): read that repo's `openwiki/quickstart.md` first, then the linked page (from OpenWiki for Claude Code `/openwiki:ask`).
-5. **Large-context question across many pages** (more than the 8-page budget would hold): send the selected pages to Gemini with `gemini_infer.py ask "<question>" <pages...>`; it uses the large-context model and the same "only these pages" rule. Its answer is a draft like any other.
+5. **Large-context question across many pages** (more than the 8-page budget holds): `python3 ${CLAUDE_PLUGIN_ROOT}/scripts/gemini_infer.py ask "<question>" <pages...>` uses the large-context model and the same "only these pages" rule; or split into batches of <= 8 pages and answer per batch. Either answer is a draft.
 
 ## Output
 Save the answer to `questions_pending/<date>-<slug>.md` with the pages read and the citations. The operator moves it to `questions_approved/` if it should be filed back into the wiki; filing then goes through `wiki-admin-ingest` step 4 onwards.
 
 ## Built from (credit) and what this replaces
 llm-wiki-nocode `/llmwiki-query` (rules, page budget, pending/approved), obsidian-wiki `wiki-query` (index -> section -> full read order), OpenWiki for Claude Code `/openwiki:ask` (repo questions via `openwiki/`). Replaces for the wiki admin: `/llmwiki-query`, obsidian-wiki `/wiki-query`, `/openwiki:ask`, llm-wiki-compiler `/wiki-query`.
+
+## Deltas from wiki-wonka (MIT, Coopera Code)
+- **Restate the question and the expected coverage first** (covered / partial / gap) before opening pages; list the pages you will read before reading them.
+- Follow wikilinks at most 2 levels deep. **Contradictions between pages are reported with both citations, no side picked.** Gaps are named ("the wiki does not yet cover X"), never filled from memory; an uncitable claim is written "not in wiki".
+- After answering, offer to file the answer as a page (with a `Source question` block); filing goes through `wiki-admin-ingest`, never straight into the wiki.
