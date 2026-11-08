@@ -25,7 +25,8 @@ Tasks:
   extract FILE                  JSON {semantic_summary, entities, skills, tools} for the manifest
   ask "QUESTION" FILES... [--out] answer only from the given pages (large-context model)
   serve                         MCP server over stdio (tools gemini_draft, gemini_w5h, gemini_ask)
-SDK: `pip install google-genai` (imported only for a live call).
+SDK: `pip install -U google-genai` (>= 2.30.1; imported only for a live call). Reference for models and SDK use:
+the gemini-api-dev skill in the gemini-skills plugin (fork c10vis-poem/NxAEx-gemini-skills).
 """
 import argparse, json, os, re, sys
 from datetime import datetime, timezone

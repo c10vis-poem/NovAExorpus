@@ -38,3 +38,6 @@ docs/wiki-admin.md, .claude-plugin/plugin.json) were left untouched.
 - `~/wiki-admin/.claude/agents/wiki-admin.md`: symlink to the NovusAExenti file already copied.
 - `~/repos/NvAEx-Recaps/memory/active/wiki-admin.md`: read for context only; private repo, not copied.
 - progress-P* and other homework files were copied as is (no PDFs/large binaries existed).
+
+## Companion plugins (loaded beside greedy-crane, never copied into it)
+- `gemini-skills` from the fork `c10vis-poem/NxAEx-gemini-skills` (synced with `google-gemini/gemini-skills`): `gemini-api-dev`, `gemini-api-cli`, `gemini-live-api-dev`, `gemini-omni-flash-api`. The wiki-admin agent lists the first two under `skills:`. One copy for every package; sync the fork, never vendor it.
