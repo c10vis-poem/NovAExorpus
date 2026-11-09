@@ -28,7 +28,7 @@
   },
   "enabledPlugins": {
     "greedy-crane@nvaex-vault": true,
-    "aesop-enforcements@novaexopia": true
+    "aesops-enforcements@novaexopia": true
   },
   "agent": "greedy-crane:wiki-admin"
 }
