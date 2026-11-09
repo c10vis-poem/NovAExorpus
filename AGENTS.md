@@ -127,4 +127,4 @@ Default five: `needs-triage`, `needs-info`, `ready-for-agent`, `ready-for-human`
 Single-context: root `CONTEXT.md` + `docs/adr/`, created lazily by `/domain-modeling`. See `docs/agents/domain.md`.
 
 ## Plugins at this root (operator, 2026-11-08)
-A plain `claude` here launches greedy-crane, the wiki admin (`.claude/settings.json`: `greedy-crane@nvaex-vault`, agent `greedy-crane:wiki-admin`). The rules and hooks plugin `aesop-enforcements@novaexopia` is always loaded from the root settings (`~/.claude/settings.json`).
+A plain `claude` here launches greedy-crane, the wiki admin (`.claude/settings.json`: `greedy-crane@nvaex-vault`, agent `greedy-crane:wiki-admin`). The rules and hooks plugin `aesops-enforcements@novaexopia` is always loaded from the root settings (`~/.claude/settings.json`).
