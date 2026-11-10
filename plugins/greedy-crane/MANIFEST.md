@@ -42,4 +42,3 @@ docs/wiki-admin.md, .claude-plugin/plugin.json) were left untouched.
 ## Compiled-in skills from forks
 - `skills/gemini-api-cli`, `gemini-api-dev`, `gemini-live-api-dev`, `gemini-omni-flash-api`: copied whole from fork `c10vis-poem/NxAEx-gemini-skills` at `7cfc690ba9c8` (synced with `google-gemini/gemini-skills` 2.4.0), Apache-2.0 (`vendor/LICENSE.gemini-skills`). Update: sync the fork, then re-copy and record the new commit here (`rea-sync` / `rea-customize` for any local change).
 
-- 2026-11-08: greedy-crane hooks are also wired in root `~/.claude/settings.json` (via `~/.claude/hooks/greedy-crane-gate.sh`); the plugin copy steps aside.
