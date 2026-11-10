@@ -130,5 +130,5 @@ Single-context: root `CONTEXT.md` + `docs/adr/`, created lazily by `/domain-mode
 This file is the authority; `CLAUDE.md` only points here.
 - **Claude Code:** `.claude/settings.json` launches greedy-crane (the wiki admin, `plugins/greedy-crane`, marketplace `nvaex-vault` = this repo on GitHub) as the `greedy-crane:wiki-admin` agent, with the rules and hooks plugin `aesops-enforcements` and the Frankenstein plugins from NovAExopia (marketplace `novaexopia`): jev-core, memory, rea-forge, burn, claw-mcp, ui-cockpit. They bring their hooks and MCP servers.
 - **AGY:** `.agents/plugins.json` registers greedy-crane.
-- **MCP for any agent:** NovAExopia's `.mcp.json` (claw, chrome-devtools, jev-rea-mcp, dumbass-memory, rea-mcp, burn-mcp).
+- **MCP for any agent:** this repo's `.mcp.json` starts claw, chrome-devtools, jev-rea-mcp, dumbass-memory, rea-mcp and burn-mcp from NovAExopia (`$NOVAEXOPIA_ROOT`, default `~/repos/NovAExopia-main`); `.agents/plugins.json` also registers the Frankenstein plugins for AGY.
 - Marketplace sources point at branch `rules-fix-2026-11-09` until it reaches main; then they point at `main`.

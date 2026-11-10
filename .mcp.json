@@ -1,42 +1,46 @@
 {
   "mcpServers": {
-    "omniroute": {
-      "type": "http",
-      "url": "${OMNIROUTE_MCP_URL}",
-      "headers": {
-        "Authorization": "Bearer ${OMNIROUTE_API_KEY}"
-      }
-    },
-    "mem0": {
-      "type": "http",
-      "url": "${MEM0_MCP_URL}",
-      "headers": {
-        "Authorization": "Bearer ${MEM0_MCP_TOKEN}"
-      }
-    },
-    "terrestrial-brain": {
-      "type": "http",
-      "url": "${TB_MCP_URL}",
-      "headers": {
-        "x-brain-key": "${TB_MCP_KEY}"
-      }
-    },
-    "omniroute": {
-      "type": "http",
-      "url": "${OMNIROUTE_MCP_URL}",
-      "headers": {
-        "Authorization": "Bearer ${OMNIROUTE_API_KEY}"
-      }
-    },
-    "code-review-graph": {
-      "command": "proot-distro",
+    "claw": {
+      "command": "sh",
       "args": [
-        "login", "debian", "--",
-        "${HOME}/repos/NovA-code-review-graph/.venv-debian/bin/code-review-graph",
-        "serve"
-      ],
-      "cwd": "${HOME}/repos/NovAExorpus",
-      "type": "stdio"
+        "-c",
+        "R=\"${NOVAEXOPIA_ROOT:-$HOME/repos/NovAExopia-main}\"; CLAUDE_PLUGIN_ROOT=\"$R/frankenstein/mcp/claw-mcp\" exec sh \"$R/frankenstein/mcp/claw-mcp/bin/claw-mcp\""
+      ]
+    },
+    "chrome-devtools": {
+      "command": "sh",
+      "args": [
+        "-c",
+        "R=\"${NOVAEXOPIA_ROOT:-$HOME/repos/NovAExopia-main}\"; CLAUDE_PLUGIN_ROOT=\"$R/frankenstein/mcp/claw-mcp\" exec sh \"$R/frankenstein/mcp/claw-mcp/bin/chrome-devtools\""
+      ]
+    },
+    "jev-rea-mcp": {
+      "command": "sh",
+      "args": [
+        "-c",
+        "R=\"${NOVAEXOPIA_ROOT:-$HOME/repos/NovAExopia-main}\"; CLAUDE_PLUGIN_ROOT=\"$R/frankenstein/plugins/nvaex-jev-core\" exec python3 -I \"$R/frankenstein/plugins/nvaex-jev-core/mcp/jev-rea-mcp/server.py\""
+      ]
+    },
+    "dumbass-memory": {
+      "command": "sh",
+      "args": [
+        "-c",
+        "R=\"${NOVAEXOPIA_ROOT:-$HOME/repos/NovAExopia-main}\"; CLAUDE_PLUGIN_ROOT=\"$R/frankenstein/plugins/nvaex-memory\" exec env DUMBASS_DATA_DIR=\"$HOME/.nvaex/memory\" python3 -I \"$R/frankenstein/plugins/nvaex-memory/mcp/dumbass-memory-mcp/server.py\""
+      ]
+    },
+    "rea-mcp": {
+      "command": "sh",
+      "args": [
+        "-c",
+        "R=\"${NOVAEXOPIA_ROOT:-$HOME/repos/NovAExopia-main}\"; CLAUDE_PLUGIN_ROOT=\"$R/frankenstein/plugins/nvaex-rea-forge\" exec python3 -I \"$R/frankenstein/plugins/nvaex-rea-forge/mcp/rea-mcp/server.py\""
+      ]
+    },
+    "burn-mcp": {
+      "command": "sh",
+      "args": [
+        "-c",
+        "R=\"${NOVAEXOPIA_ROOT:-$HOME/repos/NovAExopia-main}\"; CLAUDE_PLUGIN_ROOT=\"$R/frankenstein/plugins/nvaex-burn\" exec python3 -I \"$R/frankenstein/plugins/nvaex-burn/mcp/burn-mcp/server.py\""
+      ]
     }
   }
 }

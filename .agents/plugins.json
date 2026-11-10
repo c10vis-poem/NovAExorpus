@@ -1,5 +1,27 @@
 {
   "entries": [
-    { "path": "plugins", "include_only": ["greedy-crane"] }
+    {
+      "path": "plugins",
+      "include_only": [
+        "greedy-crane"
+      ]
+    },
+    {
+      "path": "../../NovAExopia-main/frankenstein/plugins",
+      "include_only": [
+        "aesops-enforcements",
+        "nvaex-jev-core",
+        "nvaex-memory",
+        "nvaex-rea-forge",
+        "nvaex-burn",
+        "nvaex-ui-cockpit"
+      ]
+    },
+    {
+      "path": "../../NovAExopia-main/frankenstein/mcp",
+      "include_only": [
+        "claw-mcp"
+      ]
+    }
   ]
 }
