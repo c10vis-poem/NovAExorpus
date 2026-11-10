@@ -1,6 +1,6 @@
 ---
 id: 60
-title: "A memory note over-read the operator's words, then spread as 'dropped' through subagent briefs and write-ups"
+title: "A memory note over-read the operator's words (scope dropped: a one-off remark became a preference or ban), then spread through briefs and write-ups"
 status: open
 type: open-source
 skill: [task-observer]
@@ -22,3 +22,5 @@ commands_verified: none
 **Suggested improvement:** Record the scope of a decision in the note (what was ruled out, what stays). Keep memory claims out of subagent rules unless they match recent documents.
 
 **Principle:** A remembered decision is a claim with a scope. Check it against the newest source before making it a rule for others.
+
+**Further instance (2026-11-07):** A handoff note recorded "Not asking for audits of what exists" as a standing operator preference. The source (transcript 2026-11-06 09:22) was one remark about one moment of work. The next agent then used the note to dismiss an audit file that a session had written. Operator: being full after cake does not mean "doesn't eat ice cream". The same agent described an NPU "pin" (set aside for now) as something the operator would have to "lift". Notes should keep the moment a remark was made, and agents should not turn a remark into a preference or a ban.
