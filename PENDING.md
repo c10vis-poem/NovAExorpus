@@ -30,7 +30,7 @@ Moved here at the 2026-10-23 wrap-up (everything not finished). Long-term thread
 - Observations open: 0038 (value review before delete offers), 0039 (never bundle a turn-off), 0040 (subagent scope clause), 0041 (encode delete ordering in the command). Each proposes a rule or check; build in Aesop-Xi.
 
 ## Closed 2026-10-23
-- End of session 2026-10-23: hooks #67/#69/#71 installed; auditor #72 installed + fixed (#74, #75: 8-line transcript pages); AGENTS.md/CLAUDE.md split installed (MISSING: 0); absence-gate #76 and state-guard/settings-guard/build-doc-gate/agent-type-gate/delegation-tripwire #77 installed live (settings-guard verified blocking); crg #2 merged; 23 bot branches archived as `archive/*` tags then deleted; 3 salvage files in `recovered/2026-10-23/`; 11 workflows wrongly disabled then re-enabled (0 disabled, verified); Qwen3.5-4B + mmproj downloaded (sha OK); GenieX v0.9.3 downloaded (sha OK), unpacked, skel link; NPU-ON-DEVICE.md line 8 replaced; 16 cross-cutting principles written; Download duplicates (13.6 GB) and ~/openwiki deleted; forks synced (ai-hub-models, GenieX, generative-ai); Qwen3-VL removed from docs (#73). Dropped for good: OpenWiki, Terrestrial Brain, mem0, OmniRoute, Qwen3-VL, `_agents.md` installer hunt.
+- End of session 2026-10-23: hooks #67/#69/#71 installed; auditor #72 installed + fixed (#74, #75: 8-line transcript pages); AGENTS.md/CLAUDE.md split installed (MISSING: 0); absence-gate #76 and state-guard/settings-guard/build-doc-gate/agent-type-gate/delegation-tripwire #77 installed live (settings-guard verified blocking); crg #2 merged; 23 bot branches archived as `archive/*` tags then deleted; 3 salvage files in `recovered/2026-10-23/`; 11 workflows wrongly disabled then re-enabled (0 disabled, verified); Qwen3.5-4B + mmproj downloaded (sha OK); GenieX v0.9.3 downloaded (sha OK), unpacked, skel link; NPU-ON-DEVICE.md line 8 replaced; 16 cross-cutting principles written; Download duplicates (13.6 GB) and ~/openwiki deleted; forks synced (ai-hub-models, GenieX, generative-ai); Qwen3-VL removed from docs (#73). Dropped as stock installs (corrected 2026-11-05: OB1, mem0 and OmniRoute are reverse engineered for parts): OpenWiki, Terrestrial Brain, mem0, OmniRoute, Qwen3-VL, `_agents.md` installer hunt.
 - PRs merged: Aesop-Xi #66 (git-gate test), #67 (check-in list labels, obs 0037), #68 (Kokoro lexicon + WAV writer, tested 2.7 s), #69 (staged skill updates surfaced, stop-gate), #70 (aesopd auth/frame cap/localhost, llamad -fa on); ECC #7; TB #7. code-review-graph fork #2 (skip ignored paths before stat) auto-merging.
 - Later 2026-10-23: Aesop-Xi #71 (H7 mention vs command, item 23) merged; ai-hub-apps #4 (v0.39.1 + GenieX Chat workflow, item 5, no force-push) merged; forks created (MemVault, claude-mem, agentmemory, oak-memory-plugin, pmm-plugin) and synced (notebooklm-py, headroom, context7 x2) (items 9, 24); AGENTS.md split redrafted (item 20, `agents-md-v2/`); secrets inventory + import script (`secrets-report.md`); models located (`models-report.md`, item 41); voice research (item 17); remote access (item 9); Anthropic auditor/advisor/model research (items 12, 18, 19, 38).
 - android-termux-operator staged update installed (obs 0004, 0025, 0009; redaction sed fixed for JSON).
@@ -94,10 +94,12 @@ Moved here at the 2026-10-23 wrap-up (everything not finished). Long-term thread
 - Mods (spec `NovAExopia/mods/`): none built except the old plugins-panel.
 - Intake: install and live-run; build pipeline stages 1-4.
 
-## 2026-10-29/30 (session 5fc2c8e1, wiki-admin homework; wrapped 2026-10-31)
+## 2026-10-29 (session 5fc2c8e1, resumed)
 - GitHub plugin for Claude Code fails to connect: "Authorization header is badly formatted" (its token setting is likely empty or malformed). The `gh` command line works, so nothing is blocked; fix the plugin's token setup.
-- Homework P1 (intake/convert): second pass unfinished. Done: google-multi-account, firecrawl, apify, desktop-commander, drunken-master, claude-bridge. Left: watch-video, then line numbers and rewrite of `P1-intake-convert.md`.
-- Homework P3 (fan-out): second pass step 4 left: re-check every file:line cite in `P3-fan-out.md`.
-- Worker stop check (stop hook for `greedy-crane:corpus-ingest`): designed, not built; waiting on operator go. Operator rule 2026-10-30 is in shared memory `active/wiki-admin.md`.
-- Operator questions open: name of the master compilation folder; wikilinks `[[page]]` or relative links for wiki pages.
-- Vault findings from P4 for the compile: 519 of 537 `02_wiki_md` pages are copies of clean files; `manifest.jsonl` hashes the clean file, not the raw source (rebuild); `01-inbox/` missing; `audit_staging.py` rejects pages that list sources the work-order way (patch).
+
+## 2026-11-10 (session 437a362c)
+- Test session with `crane`: plugins, rules, hooks, MCP servers, greedy-crane as agent (operator).
+- Lab-rat study of session d1c1bec4 (Recaps handoff/2026-11-10).
+- Housekeeping overdue: run `/housekeeping`.
+- REA targets in `Assets-Index/` (mem0, terrestrial-brain, omniroute, prime-agent, ecc): manifests and clean MD when dissected.
+- `.claude/hooks/router-guard.sh` warns about omniroute/terrestrial-brain: keep or drop (operator).
