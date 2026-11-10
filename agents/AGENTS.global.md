@@ -11,6 +11,9 @@ line in ~/.claude/CLAUDE.md. Claude-Code-only rules stay in ~/.claude/CLAUDE.md.
   remove the CLAUDE.md (Claude Code reads a repo AGENTS.md only when no CLAUDE.md exists
   in that directory or above). Upstream forks' own CLAUDE.md are left alone.
 
+# Execution workflow: discuss first (operator, 2026-11-08)
+- Discuss first. After the operator approves ("yes"), plan execution, stack tool calls, and ask permission once to cover all actions.
+
 # task-observer workspace (shared by every agent)
 The task-observer workspace (ONE log shared by every agent and device: Claude Code,
 Hermes, DeepSeek harness; phone, tablet, VM) is the vault, synced by GitSync to
@@ -108,3 +111,90 @@ Before dismissing any MCP server or agent as inapplicable:
   technical term in one plain sentence the first time; confirm ("you asked X; I'll do Y"),
   never re-propose it under a new name. Unknown operator term → search local notes and
   memory before substituting a guess.
+
+# Shared memory (memory as a skill; operator, 2026-10-28)
+Cross-project memory for every agent and device lives in the private repo
+`c10vis-poem/NvAEx-Recaps`, folder `memory/` (local: ~/repos/NvAEx-Recaps/memory/).
+Session start: read `memory/general.md`, then only `memory/active/<project>.md` for the work at
+hand (never `archive/`). Respect `<!-- STOP -->` and `<!-- SCOPE -->` markers. Session end:
+update that active file (decisions, state, next step). Rules: `memory/README.md`.
+
+# Nothing permanent that can't be deleted (operator, 2026-11-05)
+- Never write, install, enable or register anything an agent cannot immediately delete
+  again. If removal is impossible or only a "switch" can work around it, do not write it.
+- A switch that hides or vetoes a thing is not removal. Anything an agent added that did
+  not exist before is deleted outright, not toggled off.
+- Never enable or add plugins, skills or marketplaces from the operator's online account
+  (no auto-sync from claude.ai). Any install is local, named by the operator, and removable.
+- Before adding anything that persists (settings keys, hooks, daemons, sync links), state
+  in one line how it is deleted. No answer, no write.
+
+# Interaction & Questions (operator, 2026-11-08)
+- Never ask a yes/no question. Always provide explicit multiple-choice options with a write-in / "Other" option.
+- Avoid triggering interactive permission popups: do not run ad-hoc unsandboxed shell commands that surface confirmation dialogs in the TUI unless explicitly requested.
+
+# Memory files and session flow (operator, 2026-11-09; there is no NOTES.md)
+- **Five session-start files, flat in the launch folder root:** AGENTS.md, MEMORY.md,
+  RESUME.md, HANDOFF.md, PENDING.md. Large stores get their own folder, pointed at from the
+  file that owns them (MEMORY.md → its memory bank folder; AGENTS.md → settings, rules and
+  the rest of its usual items). Any of them may point at session logs.
+  - **AGENTS.md:** rules, settings, governance, runtime protocols, output style, and the
+    pointers to MAP.md, manifest.jsonl, skills.json and chunk JSONL. Agent directions live
+    here, never in CLAUDE.md.
+  - **MEMORY.md:** static semantic and structural memory: memory guides, skill pointers,
+    lasting facts.
+  - **RESUME.md:** project-persistent episodic memory: the project's task list, including
+    this session's tasks. Rewritten from scratch at wrap-up.
+  - **HANDOFF.md:** session-to-session episodic memory: the specific context and direction
+    for the next session.
+  - **PENDING.md:** whatever was not done when RESUME.md is rewritten.
+- **One purpose per file.** Operator directions go only in AGENTS.md. A user guide is for
+  the user, an orchestration file only for orchestration, an output-style file only for
+  output style; no second copy of the directions under another name. Similar rules for
+  different agents in different places are intentional (this environment serves many
+  kinds of agents), not a defect.
+- **During a session** the agent keeps its running notes in its own scratchpad, with no
+  permission needed. The scratchpad, the task log and the skill log are the session's "notes".
+- **Wrap-up routes the notes:** scratchpad, task and skill logs → a session-log folder in
+  NvAEx-Recaps `session-logs/<date>-<session>/`. In the repo the work was in: structural
+  or semantic changes → MEMORY.md; changes to rules, settings, manifest.jsonl, runtime
+  protocols or output style → AGENTS.md; project memory → RESUME.md (rewritten);
+  unfinished → PENDING.md. Next-session context → the handoff in NvAEx-Recaps
+  `handoff/<date>/`, which the repo's HANDOFF.md points at.
+- **What lives where (operator, 2026-11-09 21:32):**
+  - **Every repo carries its own:** AGENTS.md, `.agents/` (agent settings and the plugins
+    that repo requires), `.claude/settings.json`, `.mcp.json`, its static memory
+    (MEMORY.md) and its project-persistent episodic memory (RESUME.md and PENDING.md).
+    Each repo has its own RESUME.md; there is no single universal one. HANDOFF.md in the
+    repo is a pointer to that repo's handoffs in NvAEx-Recaps.
+  - **NvAEx-Recaps only:** handoffs, individual session history, session and episodic logs,
+    and personal information. Project episodic memory never goes here.
+  - **Context budget:** opening reads and per-prompt loads stay small. The routing and the
+    pointers (manifest.jsonl, MAP.md, skills.json) are how agents find the rest without
+    ingesting it. Plugins and skills sit at most two folders deep.
+  - **Memory as a skill:** one agent skill per repo, loaded in that repo and covering only
+    that repo. Separate memory-as-a-skill SKILL.md files go into each agent package, for
+    that agent's own harness.
+  - **Each agent harness** gets its own SQLite, Postgres, SHA-256 store and Supabase
+    database, plus the universal memory bank across split services.
+  - **Repo level:** tree-sitter code graphs, ASR graphs and similar graphs attach to the repo.
+  - **Vault indexes (operator, 2026-11-10; the vault is public):** `Vendor-Registries/` is the
+    vendor directory: a standalone vendor document sits next to its raw files there, with its
+    manifest. `Assets-Index/` points at the forked repos not yet reverse-engineered (one folder
+    per repo: POINTER.md, manifest.jsonl, and the analyzed doc partitions) and holds the custom
+    compiled or from-scratch assets. `Marketplace-Index/` holds the pre-assembled dynamic
+    workflows, plugins and agent packages built from all of these.
+- **Read the source first (Rule 12):** before an install, a fork's feature or any claim about
+  an asset, read its source first, once per session. Deep (breakdown, full install,
+  comparison, user guide): every clean MD document in its index folder, or its tree and every
+  doc file when none exist yet. Brief (rundown, yes/no, fact check): its chunk.jsonl, or its
+  current manifest.jsonl plus a file it points to. The wiki admin's extraction writes
+  chunk.jsonl, manifest.jsonl, MAP.md and clean MD (furniture and bloat removed) per asset.
+  Training data and another model's word are not sources.
+- **Settings go to both places:** `.claude/settings.json` and the root agent settings for
+  every other agent (`.mcp.json`, `.agents/plugins.json`, ...).
+- Operational layers and the planned router build: NvAEx-Recaps `memory/general.md`.
+
+# When something blocks you (operator, 2026-11-10)
+- Stop and read the directions, and follow them; otherwise the hooks keep blocking you. Never try another tool, path
+  or phrasing to reach what was blocked.
