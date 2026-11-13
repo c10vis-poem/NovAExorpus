@@ -50,17 +50,42 @@ def rot13_lines(t):
     return "\n".join(out)
 
 
+CODE_LINE = re.compile(r"re\.compile\(|\b(?:self\.)?assert\w*\s*\(|\bexpect\s*\(|\bchk\s*\(|(?<![\w])r[\"']")
+NEGATED = re.compile(r"\b(never|not|no|without|refuse[sd]?|block(?:s|ed)?|deny|denie[sd])\b", re.I)
+
+
+def _not_an_instruction(t, m, k):
+    """HOLES-B H24 (2026-11-13): a match that is a rule or a test, not an instruction to the reader. Skipped:
+    a match on a line of pattern code (re.compile, a raw string) or a test assertion (memory.py's INJ pattern,
+    test_contract.py's `rm -rf /` refusal test), and a match negated earlier in its sentence ("the key never
+    appears in output; secrets are redacted"). Negation is the signal itself for "conceal", so not skipped there."""
+    a = t.rfind("\n", 0, m.start()) + 1
+    b = t.find("\n", m.end())
+    line = t[a:b if b >= 0 else len(t)]
+    if CODE_LINE.search(line):
+        return True
+    if k == "conceal":
+        return False
+    s = max(t.rfind(c, a, m.start()) for c in ".!?;")
+    return bool(NEGATED.search(t[max(a, s + 1):m.start() + 12]))
+
+
 def scan_text(t):
     hard, soft, ex = [], [], []
     for k, rx in HARD.items():  # raw text first: invisible characters are themselves the signal
-        m = rx.search(t)
-        if m:
+        for m in rx.finditer(t):
+            if k in ("bidi-override", "zero-width-run") and CODE_LINE.search(
+                    t[t.rfind("\n", 0, m.start()) + 1:t.find("\n", m.end()) % (len(t) + 1)]):
+                continue  # the characters inside a detection pattern (this file's own HARD table)
             hard.append(k); ex.append(f"{k}: {t[max(0,m.start()-20):m.end()+20]!r}")
+            break
     t = ZW.sub("", unicodedata.normalize("NFKC", t))  # view only: the file itself is never changed
     for k, rx in SOFT.items():
-        m = rx.search(t)
-        if m:
+        for m in rx.finditer(t):
+            if _not_an_instruction(t, m, k):
+                continue
             soft.append(k); ex.append(f"{k}: {m.group(0)[:100]!r}")
+            break
     for m in B64.finditer(t):  # encoded payload that decodes to an instruction = hard
         s = m.group(0); s += "=" * (-len(s) % 4)
         try:
