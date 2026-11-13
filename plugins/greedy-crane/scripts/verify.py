@@ -69,7 +69,7 @@ def main(argv=None):
     for cp, src, fm, body in pairs:
         if len(body) >= 400:
             v = ck.check_one(src, str(cp), body[: len(body) // 2])[0]
-            if v != "FAIL":
+            if not v.startswith("FAIL"):  # check.py also returns "FAIL + UPSTREAM DEFECT": still a FAIL
                 print(f"Canary BROKEN: half of {cp.name} got {v}, expected FAIL")
                 return 2
             canary = f"ok (half of {cp.name} -> FAIL)"
