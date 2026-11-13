@@ -48,7 +48,7 @@ def main(argv=None):
     ck = load_checker(a.check_py)
     ck.SRC, ck.CLEAN = str(raw), str(clean)
 
-    files = sorted(p for p in clean.rglob("*.md") if "_reports" not in p.parts)
+    files = sorted(p for p in clean.rglob("*.md") if "_reports" not in p.parts and p.is_file())
     pairs, rows = [], []
     for cp in files:
         fm, body = ck.read_clean(str(cp))
