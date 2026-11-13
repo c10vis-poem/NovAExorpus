@@ -103,3 +103,13 @@ Moved here at the 2026-10-23 wrap-up (everything not finished). Long-term thread
 - Housekeeping overdue: run `/housekeeping`.
 - REA targets in `Assets-Index/` (mem0, terrestrial-brain, omniroute, prime-agent, ecc): manifests and clean MD when dissected.
 - `.claude/hooks/router-guard.sh` warns about omniroute/terrestrial-brain: keep or drop (operator).
+
+## 2026-11-13 (session 8e3a65ec, memory layers)
+- R2 bucket + Cloudflare memory Worker (remote MCP over D1 `nvaex-memory`; OB1 via Supabase/Hyperdrive). Save -> D1 mirror.
+- Remaining claude-mem ports into dumbass-memory: get_tool_uses, work_state, smart_search/outline/unfold, corpora (Jev).
+- Memory layers 1 (mem0), 3 (code-review-graph), 4 (Graphify+Obsidian+NotebookLM), 5 (RLM + EmbeddingGemma 2 vectors), 0 (router).
+- Hook wiring for capture/forced memory use: owner adds to the rules plugin.
+- Browser tool: ADB wireless pairing, then auto-reconnect.
+- GCP backup bucket: owner creates it, then an adapter.
+- Six Jev mods (davila7/claude-code-templates): not installed, no fork.
+- 01-inbox/RULES-COMPARE.md, RULES-v2-draft.md, wa_quarantine.py edit + .bak, checkpoints.log: left untouched (not this session's).
