@@ -1,0 +1,5 @@
+{
+  "entries": [
+    { "path": "plugins", "include_only": ["greedy-crane"] }
+  ]
+}

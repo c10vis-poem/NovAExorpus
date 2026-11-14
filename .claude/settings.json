@@ -11,5 +11,36 @@
         ]
       }
     ]
-  }
+  },
+  "extraKnownMarketplaces": {
+    "nvaex-vault": {
+      "source": {
+        "source": "directory",
+        "path": "/storage/emulated/0/Documents/NovAExorpus"
+      }
+    },
+    "novaexopia": {
+      "source": {
+        "source": "directory",
+        "path": "/data/data/com.termux/files/home/repos/NovAExopia-main"
+      }
+    },
+    "aesop-xi": {
+      "source": {
+        "source": "directory",
+        "path": "/data/data/com.termux/files/home/repos/Aesop-Xi"
+      }
+    }
+  },
+  "enabledPlugins": {
+    "greedy-crane@nvaex-vault": true,
+    "aesops-enforcements@aesop-xi": true,
+    "nvaex-jev-core@novaexopia": true,
+    "nvaex-memory@novaexopia": true,
+    "nvaex-rea-forge@novaexopia": true,
+    "nvaex-burn@novaexopia": true,
+    "claw-mcp@novaexopia": true,
+    "nvaex-ui-cockpit@novaexopia": true
+  },
+  "agent": "greedy-crane:wiki-admin"
 }

@@ -1,0 +1,15 @@
+- [habit-tracker-cadence-build](habit-tracker-cadence-build.md): "Cadence" habit tracker built via PGE: done; code bundle in /mnt/project-files/habit-tracker/, quiet-hours decision open
+- User rule (2026-10-25): never build mods, or tell a thread to build one, unless the user explicitly asks. Don't read a question as a request to build.
+- User rule (2026-10-25): answers to questions asked in a thread stay in that thread. Don't move them to project chat. Coordinator: never answer or relay thread questions in project chat. At most, nudge a silent thread.
+- User prefers Opus over Fable (cost). Use Opus for new threads unless they say otherwise.
+- User rule (2026-10-25): PRs should be set to auto-merge once CI passes (gh pr merge --auto --squash), not left as drafts waiting for the user to merge them.
+- Toolkit thread (2026-10-25): building a research and browser toolkit meant to replace Playwright and the user's Perplexity CLI repo. "Claw hooks" means callable functions that act on the user's devices and browsers. Plan first; the user approves before any build.
+- User is building an APK to replace Termux, with an on-device agent inside it. The toolkit must be embeddable in that APK and work outside Termux (ADB, Unix sockets, WebSockets).
+- 2026-10-31: The user wants hooks off. Synced plugin hooks DO run in the cloud env; fix is a setup script setting disableAllHooks=true in ~/.claude/settings.json.
+- 2026-11-03: The user has more than one Claude account and sometimes writes here from the wrong one. On 11-03 they did, and the 3 threads started then (greedy crane, Recaps scratchpad fix, corpus rules lookup) were stopped and resolved. Which account the phone uses is unclear. No Remote Control on their Android.
+- 2026-11-03: User has 46 plugins (per user). plugins/synced-plugins.md (106, from 10-24) is stale.
+- Old session session_018DCykMPTt9zuQjPY3a9wT4 ("Cloud Code phone app name"): P1 intake/convert and P5 extract skills/tools died at the 5h limit on 10-30. P6 checks/merged hooks is done. Open question about stop hooks for the wiki admin.
+- "greedy crane" = a phone session (5fc2c8e1-...), resume from ~/downloads with `command claude --resume <id>`.
+- User rule (2026-11-03): never ask the user for context. Session state lives in files in the attached repos; read them first.
+- 2026-11-03: NvAEx-Recaps is supposed to receive each session's scratchpad/session log, but it never actually has. The vault is the source of truth.
+- User rule (2026-11-03): the master rules document (one doc overriding all skills/hooks/rules) is written by the user together with the coordinator directly in project chat. NEVER hand it to a thread.

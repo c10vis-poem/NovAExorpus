@@ -1,0 +1,3 @@
+# Supabase project NovAEcorpus, linked to this repo through Supabase's GitHub integration (working directory ".",
+# production branch main): every merge into main applies supabase/migrations/*.sql to the production database.
+project_id = "puowukldendtpmkkkjyw"

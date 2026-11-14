@@ -1,0 +1,35 @@
+{
+  "agent": "file-administrator",
+  "display": "NovusÆxenti-Housekeeper",
+  "role": "vault file administration + wiki admin (raw dump -> clean md -> reviewed wiki -> JSONL indexes)",
+  "tier": "admin",
+  "model": "Gemini via Google AI (gemini-3.8-flash; large context gemini-4-argon)",
+  "node": "Alpha (session) + Gemini API",
+  "memory_scope": "Declarative + Strategic",
+  "tool_allowance": "full vault write, git",
+  "updated": "2026-10-28",
+  "previous_binding": {
+    "model": "GLM-5.2 (cloud, OpenRouter)",
+    "node": "Delta",
+    "until": "2026-10-28",
+    "reason": "operator: wiki-admin inference runs on Gemini/Google"
+  },
+  "inference_env": [
+    "GEMINI_API_KEY",
+    "GEMINI_MODEL",
+    "GEMINI_MODEL_LARGE"
+  ],
+  "tools_repo": "c10vis-poem/NovAExopia tools/wiki-admin/",
+  "skills": [
+    "wiki-reference-router",
+    "w5h-extraction",
+    "wiki-admin-ingest",
+    "wiki-admin-query",
+    "wiki-admin-lint",
+    "wiki-admin-repo-docs",
+    "corpus-verify",
+    "corpus-batch-processing"
+  ],
+  "staging": "01-inbox/",
+  "promotion": "operator approval by name + audit_staging.py verdict"
+}

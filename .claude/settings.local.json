@@ -1,5 +1,5 @@
 {
-  "enabledMcpjsonServers": [
+  "disabledMcpjsonServers": [
     "omniroute",
     "mem0",
     "terrestrial-brain",

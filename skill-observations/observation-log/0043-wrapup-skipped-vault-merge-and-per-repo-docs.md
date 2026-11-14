@@ -9,7 +9,7 @@ target_file: ["~/.claude/WRAP-UP.md", "c10vis-poem/Aesop-Xi/hooks/stop-gate.sh"]
 siblings_checked: "none: wrap-up protocol and hooks are not a skill family; task-observer listed only for the logging part"
 area: "session wrap-up: vault shipping and step 4b per-repo docs"
 date: 2026-10-23
-session_context: "finishing the /wrapup of session 7cb1c8c0 from session ac090dde"
+session_context: "finishing the /wrapup of session 7cb1c8c0 from session ac090dde; again in session 23bcb3dc (2026-11-06)"
 parked_until:
 resolved:
 resolution:
@@ -22,3 +22,5 @@ commands_verified: "run: git log origin/main -1 = 2026-10-21; git status = 56 un
 **Suggested improvement:** WRAP-UP.md step 6 names `vault-ship` explicitly for the vault (ship-session never ships it) and step 4b says results go to the repo the work is for. stop-gate in wrap-up mode refuses to end while the vault has uncommitted changes or a touched repo lacks a dated RESUME/MEMORY update this session. Agents read the hooks README tool list before choosing a ship path.
 
 **Principle:** A wrap-up is finished when every artefact is where it is read from (the remote, the repo it belongs to), not when the local files are written. Before redoing or rerouting a step, check what the operator already finished and which tool already exists for it.
+
+**Further instance (2026-11-06/07):** The operator told the session to finish the rules and hooks and turn on every plugin before wrap-up. It loaded the plugins only as launch-time `--plugin-dir` flags (temporary), left rules 8 to 11 unbuilt, and copied only a 6-line session log to Recaps, leaving its own transcript only under `~/.claude/projects/`. Operator, 2026-11-07: the stop gate must cover every wrap-up protocol and every direction given before wrap-up; moving the logs to Recaps is part of that protocol; rules left unfinished pass only for a good reason, such as a failure loop with no resolve.

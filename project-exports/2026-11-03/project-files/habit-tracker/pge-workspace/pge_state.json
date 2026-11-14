@@ -1,0 +1,19 @@
+{
+  "phase": "DONE",
+  "evaluator_mode": "standard",
+  "eval_backend": "claude",
+  "sprint_num": 5,
+  "total_sprints": 4,
+  "fail_count": 0,
+  "max_retries": 3,
+  "last_checkpoint": "2026-10-24T14:55:47.191938+00:00",
+  "artifacts": {
+    "spec": "pge-workspace/product_spec.md",
+    "contract": "pge-workspace/sprint_4_contract_ratified.md",
+    "evaluation": "pge-workspace/sprint_4_evaluation.md",
+    "feedback": ""
+  },
+  "contract_warnings": [
+    "Sprint 3: orchestrator amended R14/F11 post-ratification so hidden tabs still deliver reminders"
+  ]
+}

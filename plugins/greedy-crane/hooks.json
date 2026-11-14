@@ -1,0 +1,10 @@
+{
+  "greedy-crane-quarantine": {
+    "PostToolUse": [
+      { "matcher": "read_file|view_file", "hooks": [ { "type": "command", "command": "sh ./hooks/agy-quarantine.sh", "timeout": 10 } ] }
+    ],
+    "PreInvocation": [
+      { "type": "command", "command": "sh ./hooks/agy-quarantine-inject.sh", "timeout": 10 }
+    ]
+  }
+}

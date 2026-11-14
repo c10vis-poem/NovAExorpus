@@ -1,0 +1,8 @@
+{
+  "name": "nvaex-vault",
+  "owner": {"name": "c10vis-poem"},
+  "description": "The NovAExorpus vault's own plugins: greedy-crane, the wiki admin.",
+  "plugins": [
+    {"name": "greedy-crane", "source": "./plugins/greedy-crane", "description": "Wiki admin for the NovAExorpus corpus (wiki-admin agent, corpus-ingest worker, intake pipeline). Launch from the vault root."}
+  ]
+}

@@ -30,7 +30,7 @@ Moved here at the 2026-10-23 wrap-up (everything not finished). Long-term thread
 - Observations open: 0038 (value review before delete offers), 0039 (never bundle a turn-off), 0040 (subagent scope clause), 0041 (encode delete ordering in the command). Each proposes a rule or check; build in Aesop-Xi.
 
 ## Closed 2026-10-23
-- End of session 2026-10-23: hooks #67/#69/#71 installed; auditor #72 installed + fixed (#74, #75: 8-line transcript pages); AGENTS.md/CLAUDE.md split installed (MISSING: 0); absence-gate #76 and state-guard/settings-guard/build-doc-gate/agent-type-gate/delegation-tripwire #77 installed live (settings-guard verified blocking); crg #2 merged; 23 bot branches archived as `archive/*` tags then deleted; 3 salvage files in `recovered/2026-10-23/`; 11 workflows wrongly disabled then re-enabled (0 disabled, verified); Qwen3.5-4B + mmproj downloaded (sha OK); GenieX v0.9.3 downloaded (sha OK), unpacked, skel link; NPU-ON-DEVICE.md line 8 replaced; 16 cross-cutting principles written; Download duplicates (13.6 GB) and ~/openwiki deleted; forks synced (ai-hub-models, GenieX, generative-ai); Qwen3-VL removed from docs (#73). Dropped for good: OpenWiki, Terrestrial Brain, mem0, OmniRoute, Qwen3-VL, `_agents.md` installer hunt.
+- End of session 2026-10-23: hooks #67/#69/#71 installed; auditor #72 installed + fixed (#74, #75: 8-line transcript pages); AGENTS.md/CLAUDE.md split installed (MISSING: 0); absence-gate #76 and state-guard/settings-guard/build-doc-gate/agent-type-gate/delegation-tripwire #77 installed live (settings-guard verified blocking); crg #2 merged; 23 bot branches archived as `archive/*` tags then deleted; 3 salvage files in `recovered/2026-10-23/`; 11 workflows wrongly disabled then re-enabled (0 disabled, verified); Qwen3.5-4B + mmproj downloaded (sha OK); GenieX v0.9.3 downloaded (sha OK), unpacked, skel link; NPU-ON-DEVICE.md line 8 replaced; 16 cross-cutting principles written; Download duplicates (13.6 GB) and ~/openwiki deleted; forks synced (ai-hub-models, GenieX, generative-ai); Qwen3-VL removed from docs (#73). Dropped as stock installs (corrected 2026-11-05: OB1, mem0 and OmniRoute are reverse engineered for parts): OpenWiki, Terrestrial Brain, mem0, OmniRoute, Qwen3-VL, `_agents.md` installer hunt.
 - PRs merged: Aesop-Xi #66 (git-gate test), #67 (check-in list labels, obs 0037), #68 (Kokoro lexicon + WAV writer, tested 2.7 s), #69 (staged skill updates surfaced, stop-gate), #70 (aesopd auth/frame cap/localhost, llamad -fa on); ECC #7; TB #7. code-review-graph fork #2 (skip ignored paths before stat) auto-merging.
 - Later 2026-10-23: Aesop-Xi #71 (H7 mention vs command, item 23) merged; ai-hub-apps #4 (v0.39.1 + GenieX Chat workflow, item 5, no force-push) merged; forks created (MemVault, claude-mem, agentmemory, oak-memory-plugin, pmm-plugin) and synced (notebooklm-py, headroom, context7 x2) (items 9, 24); AGENTS.md split redrafted (item 20, `agents-md-v2/`); secrets inventory + import script (`secrets-report.md`); models located (`models-report.md`, item 41); voice research (item 17); remote access (item 9); Anthropic auditor/advisor/model research (items 12, 18, 19, 38).
 - android-termux-operator staged update installed (obs 0004, 0025, 0009; redaction sed fixed for JSON).
@@ -74,3 +74,42 @@ Moved here at the 2026-10-23 wrap-up (everything not finished). Long-term thread
 - happy-ending plugin hand-registration: done (in installed_plugins.json, enabled, cache present, skill loads in session)
 - vault-ci.yml: stale (vault has `.github/workflows/ci.yml` + `security.yml`)
 - Obsidian skills load twice: moot for Claude Code (`~/.claude/skills` holds only `obsidian-vault`, distinct from the plugin's defuddle/json-canvas/knap/obsidian-*; the duplicate links are in `~/.agents/skills`, not read by Claude Code)
+## 2026-10-28 (sessions 5fc2c8e1 and earlier; details in handoff/2026-10-28/)
+**Operator to run / decide**
+- Secrets: `nvaex-secret set GEMINI_API_KEY` (wiki admin) and `nvaex-secret set OPENROUTER_API_KEY` (STT).
+- Pair wireless debugging for the web view tool; run the two classifier-blocked builds (`node scripts/post-build.ts` in `~/repos/NvAEx-chrome-devtools-mcp`; `npm ci && npm run build` in `~/repos/NovA-openrouter-mcp`) or add a permission rule.
+- Wiki admin: where the 140-200 file set lives; decide E6 (chunk schema) and E10 (frontmatter schema).
+- Hooks: which to re-engineer first; whether the gitleaks git hook stays on. A keyword or setting to switch gates off (Claude Code's built-in `disableAllHooks` setting was mentioned in session 6a9c6cdb, never recorded).
+- Task-observer model pin (session 5da28487): `model: claude-sonnet-5` sits in `~/repos/aesop-task-observer/SKILL.md` and the vault's `.claude/skills/task-observer/SKILL.md`; fork branch `task-observer-sonnet` (de9c313, c58839f) is not pushed, no PR, never confirmed. Keep or drop.
+- Mem0 and code-review-graph are still in `~/.claude.json` though the operator asked to remove or disable them; the removal command was given and not run.
+
+**Work**
+- Plugin-injection switch-off (session 5da28487) is half applied: `disable-injections-2.sh` did not run; settings.json still has 477 `@synced` keys.
+- plugin-fork-sync rule: sync only the operator's own forks the session touches, never Anthropic-marketplace plugins.
+- Repo-wide rule: in each repo, CLAUDE.md becomes a pointer to AGENTS.md (Aesop-Xi hook rules move to AGENTS.md); RESUME only covered `~/CLAUDE.md`.
+- Re-engineer hooks before re-enabling (resume-gate first, observation 0051).
+- Wiki admin: harvest the skills and scripts in the operator's wiki-admin file set; Gemini live run; profile YAML, housekeeper, chunker, semantic lint not built.
+- Web view tool: headless / own-Chromium mode for Hyperion-XI and AEthX-AEsc; search tool; marketplace entry.
+- STT: build OpenRouter MCP, default `qwen/qwen3-asr-1.7b`; later QAI Hub Whisper-Large-V3-Turbo on device. Lives in CloviX-AEyre.
+- Mods (spec `NovAExopia/mods/`): none built except the old plugins-panel.
+- Intake: install and live-run; build pipeline stages 1-4.
+
+## 2026-10-29 (session 5fc2c8e1, resumed)
+- GitHub plugin for Claude Code fails to connect: "Authorization header is badly formatted" (its token setting is likely empty or malformed). The `gh` command line works, so nothing is blocked; fix the plugin's token setup.
+
+## 2026-11-10 (session 437a362c)
+- Test session with `crane`: plugins, rules, hooks, MCP servers, greedy-crane as agent (operator).
+- Lab-rat study of session d1c1bec4 (Recaps handoff/2026-11-10).
+- Housekeeping overdue: run `/housekeeping`.
+- REA targets in `Assets-Index/` (mem0, terrestrial-brain, omniroute, prime-agent, ecc): manifests and clean MD when dissected.
+- `.claude/hooks/router-guard.sh` warns about omniroute/terrestrial-brain: keep or drop (operator).
+
+## 2026-11-13 (session 8e3a65ec, memory layers)
+- R2 bucket + Cloudflare memory Worker (remote MCP over D1 `nvaex-memory`; OB1 via Supabase/Hyperdrive). Save -> D1 mirror.
+- Remaining claude-mem ports into dumbass-memory: get_tool_uses, work_state, smart_search/outline/unfold, corpora (Jev).
+- Memory layers 1 (mem0), 3 (code-review-graph), 4 (Graphify+Obsidian+NotebookLM), 5 (RLM + EmbeddingGemma 2 vectors), 0 (router).
+- Hook wiring for capture/forced memory use: owner adds to the rules plugin.
+- Browser tool: ADB wireless pairing, then auto-reconnect.
+- GCP backup bucket: owner creates it, then an adapter.
+- Six Jev mods (davila7/claude-code-templates): not installed, no fork.
+- 01-inbox/RULES-COMPARE.md, RULES-v2-draft.md, wa_quarantine.py edit + .bak, checkpoints.log: left untouched (not this session's).
